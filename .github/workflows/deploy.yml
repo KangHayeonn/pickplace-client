@@ -13,9 +13,6 @@ env:
 
 
 jobs:
-  assign :
-    runs-on: ubuntu-latest
-
   build:
     runs-on: ubuntu-latest
     steps:
