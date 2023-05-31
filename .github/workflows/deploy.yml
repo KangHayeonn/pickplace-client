@@ -1,14 +1,21 @@
-name: Deploy React
+name: Frontend Deploy
 
 on:
   push:
-    branches: main
+    branches: 
+      - develop
+  pull_request:
+    branches: 
+      - develop
     
 env:
   S3_BUCKET_NAME : pick-place
 
 
 jobs:
+  assign :
+    runs-on: ubuntu-latest
+
   build:
     runs-on: ubuntu-latest
     steps:
