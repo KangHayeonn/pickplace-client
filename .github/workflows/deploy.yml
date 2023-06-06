@@ -4,30 +4,37 @@ on:
   push:
     branches: 
       - develop
+    paths:
+      - 'front/**'
   pull_request:
     branches: 
       - develop
-    
-env:
-  S3_BUCKET_NAME : pick-place
-
+    paths:
+      - 'front/**'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./front
+      S3_BUCKET_NAME : pick-place
+      
     steps:
-      - name: Checkout
+      - name: Checkout source code
         uses: actions/checkout@v3
         
-      - name: Set up Node.js
+      - name: Set up Node
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
 
       - name: Install dependencies
         run: yarn install --immutable
+        working-directory: ${{ env.working-directory }}
 
       - name: Run build
         run: yarn run build
+        working-directory: ${{ env.working-directory }}
         
       - name: Configure AWS credentials
         uses: aws-action/configure-aws-credentials@v1
