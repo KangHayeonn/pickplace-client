@@ -18,21 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Use Node.js 16.x
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
 
-      - name: Install and Build 🔧
-        run: |
-          yarn install --immutable
-          yarn run build
-          
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
-        with:
-          folder: build
-          
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run build
+        run: yarn run build
+        
       - name: Configure AWS credentials
         uses: aws-action/configure-aws-credentials@v1
         with:
