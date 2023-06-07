@@ -11,6 +11,7 @@ on:
       - develop
     paths:
       - 'front/**'
+      - .github/workflows/deploy.yml
   
 jobs:
   build:
