@@ -12,13 +12,13 @@ on:
     paths:
       - 'front/**'
       - .github/workflows/deploy.yml
+      
+env:
+  working-directory: ./front
   
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./front
-      S3_BUCKET_NAME : pick-place
       
     steps:
       - name: Checkout source code
@@ -45,8 +45,6 @@ jobs:
           aws-region: ap-northeast-2
           
       - name: Upload to S3
-        run: |
-          aws s3 cp \
-            --recursive \
-            --region ap-northeast-2 \
-            build s3://$S3_BUCKET_NAME
+        run: aws s3 cp --recursive --region ap-northeast-2 build
+            s3://pick-place
+        working-directory: ${{ env.working-directory }}
