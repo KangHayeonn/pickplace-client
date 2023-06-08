@@ -1,10 +1,10 @@
-import { instance } from "../index";
-const prefix = "/api/v1";
+// import { instance } from "../index";
+//const prefix = "/api/v1";
 
 const Sample = {
     async getSampleData() {
         try {
-            const url = `${prefix}/sample`;
+            // const url = `${prefix}/sample`;
             // const result = await instance.get(url);
             const result = {
                 success: true,
