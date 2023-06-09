@@ -35,6 +35,8 @@ jobs:
 
       - name: Run build
         run: yarn run build
+        env: 
+            CI: "" 
         working-directory: ${{ env.working-directory }}
         
       - name: Configure AWS credentials
