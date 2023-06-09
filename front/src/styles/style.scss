@@ -15,7 +15,10 @@ code {
   
 .App {
     text-align: center;
-  }
+    .page-container{
+      min-height: 620px;
+    }
+}
   
 .App-logo {
     height: 40vmin;
