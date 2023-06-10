@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import mock from "./sample";
+import { combineReducers } from 'redux';
+import mock from './sample';
 
 const rootReducer = combineReducers({
-    mock
+  mock,
 });
 
 // root reducer
