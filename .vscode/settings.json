@@ -1,3 +1,4 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "eslint.nodePath": "front/.yarn/sdks",
+    "typescript.tsdk": "front/.yarn/sdks/typescript/lib",
 }

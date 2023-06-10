@@ -8,10 +8,10 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
-        <div className="page-container"><Router /></div>
+      <Router />
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
