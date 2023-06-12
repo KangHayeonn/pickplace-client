@@ -4,6 +4,7 @@ import MainPage from '../pages/MainPage';
 import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
 import SamplePage from '../pages/SamplePage';
+import SearchPage from '../pages/SearchPage';
 import Layout from '../components/layout/Layout';
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
@@ -18,6 +19,7 @@ const Router: React.FC = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sample" element={<SamplePage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

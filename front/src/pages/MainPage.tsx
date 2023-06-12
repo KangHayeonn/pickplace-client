@@ -2,14 +2,17 @@ import React from 'react';
 import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/main.scss';
+import { useNavigate } from 'react-router-dom';
+
 const MainPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const placeList = [
     { placeName: '호텔/리조트' },
     { placeName: '펜션' },
     { placeName: '게스트하우스' },
     { placeName: '스터디룸' },
     { placeName: '파티룸' },
-    { placeName: '더보기' },
   ];
   return (
     <div className="main">
@@ -19,6 +22,7 @@ const MainPage: React.FC = () => {
           {placeList.map((item, key) => (
             <button key={key}>{item.placeName}</button>
           ))}
+          <button onClick={() => navigate('/search')}>더보기</button>
         </div>
         <hr></hr>
         <article>
