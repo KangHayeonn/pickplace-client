@@ -7,9 +7,7 @@ import Router from './router/Router';
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header />
       <Router />
-      <Footer />
     </div>
   );
 };
