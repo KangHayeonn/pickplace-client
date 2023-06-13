@@ -3,26 +3,44 @@ import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/main.scss';
 import { useNavigate } from 'react-router-dom';
+import CATEGORYLIST from '../utils/categoryList';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
+  const categoryList = CATEGORYLIST;
 
-  const placeList = [
-    { placeName: '호텔/리조트' },
-    { placeName: '펜션' },
-    { placeName: '게스트하우스' },
-    { placeName: '스터디룸' },
-    { placeName: '파티룸' },
-  ];
   return (
     <div className="main">
       <section>
         <img src={articleImg}></img>
         <div className="buttons">
-          {placeList.map((item, key) => (
-            <button key={key}>{item.placeName}</button>
+          {categoryList.map((item) => (
+            <button
+              key={item.id}
+              onClick={() =>
+                navigate('/search', {
+                  state: {
+                    categoryName: item.categoryName,
+                    id: item.id,
+                  },
+                })
+              }
+            >
+              {item.categoryName}
+            </button>
           ))}
-          <button onClick={() => navigate('/search')}>더보기</button>
+          <button
+            onClick={() =>
+              navigate('/search', {
+                state: {
+                  categoryName: categoryList[0].categoryName,
+                  id: categoryList[0].id,
+                },
+              })
+            }
+          >
+            더보기
+          </button>
         </div>
         <hr></hr>
         <article>
