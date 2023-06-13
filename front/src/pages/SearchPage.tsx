@@ -1,32 +1,33 @@
-import React, { useEffect } from 'react';
-import Sample from '../api/sample';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import starIcon from '../assets/images/star.png';
 import '../styles/search.scss';
-
-import PLACELIST from '../utils/placeList';
+import CATEGORYLIST from '../utils/categoryList';
 import TAGLIST from '../utils/tagList';
 import SEARCHRESULT from '../utils/searchList';
 
 const SearchPage: React.FC = () => {
   const tagList = TAGLIST;
-  const placeList = PLACELIST;
+  const categoryList = CATEGORYLIST;
   const searchResult = SEARCHRESULT;
 
-  useEffect(() => {
-    Sample.getSampleData()
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
-  }, []);
+  const { state } = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState(state);
+
+  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = e.target.options[e.target.options.selectedIndex];
+    setSelectedCategory({
+      id: selectedOption.value,
+      categoryName: selectedOption.innerText,
+    });
+  };
 
   return (
     <div className="search">
       <header>
         <div className="wrapper">
-          <h1>호텔∙리조트</h1>
+          <h1>{selectedCategory.categoryName}</h1>
           <div className="container inputs">
             <input
               type="text"
@@ -45,9 +46,11 @@ const SearchPage: React.FC = () => {
           <hr />
           <div className="container category">
             <h3>카테고리</h3>
-            <select>
-              {placeList.map((item, key) => (
-                <option key={key}>{item.placeName}</option>
+            <select onChange={onChangeCategory} value={selectedCategory.id}>
+              {categoryList.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.categoryName}
+                </option>
               ))}
             </select>
           </div>
