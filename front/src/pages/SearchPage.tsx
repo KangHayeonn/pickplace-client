@@ -1,71 +1,17 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/modules';
-import { increase } from '../store/modules/sample';
 import Sample from '../api/sample';
 import starIcon from '../assets/images/star.png';
 import '../styles/search.scss';
+
+import PLACELIST from '../utils/placeList';
+import TAGLIST from '../utils/tagList';
+import SEARCHRESULT from '../utils/searchList';
+
 const SearchPage: React.FC = () => {
-  const dispatch = useDispatch();
-  const placeList = [
-    { placeName: '호텔/리조트' },
-    { placeName: '펜션' },
-    { placeName: '게스트하우스' },
-    { placeName: '스터디룸' },
-    { placeName: '파티룸' },
-  ];
-  const tagList = [
-    { tagName: '애견동반' },
-    { tagName: '조용한' },
-    { tagName: '연인추천' },
-    { tagName: '신나는' },
-  ];
-  const searchResult = [
-    {
-      placeId: 0,
-      placeName: '비즈니스 호텔A',
-      placeAddress: {
-        address: '강남구',
-        latitude: 0,
-        longitude: 0,
-      },
-      placeRating: 3.5,
-      placeReviewCnt: 13,
-    },
-    {
-      placeId: 1,
-      placeName: '비즈니스 호텔B',
-      placeAddress: {
-        address: '강남구',
-        latitude: 0,
-        longitude: 0,
-      },
-      placeRating: 4.5,
-      placeReviewCnt: 5,
-    },
-    {
-      placeId: 2,
-      placeName: '비즈니스 호텔C',
-      placeAddress: {
-        address: '강남구',
-        latitude: 0,
-        longitude: 0,
-      },
-      placeRating: 3.0,
-      placeReviewCnt: 2,
-    },
-    {
-      placeId: 3,
-      placeName: '비즈니스 호텔D',
-      placeAddress: {
-        address: '강남구',
-        latitude: 0,
-        longitude: 0,
-      },
-      placeRating: 3.0,
-      placeReviewCnt: 2,
-    },
-  ];
+  const tagList = TAGLIST;
+  const placeList = PLACELIST;
+  const searchResult = SEARCHRESULT;
+
   useEffect(() => {
     Sample.getSampleData()
       .then((res) => {

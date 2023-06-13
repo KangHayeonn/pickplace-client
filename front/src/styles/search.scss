@@ -1,11 +1,10 @@
 @import "./reset.scss";
 @import "./mixin.scss";
 
-
 .search{
     header{              
         background-color: rgb(231, 231, 231);
-        min-width: 790px;
+        min-width: 700px;
 
         .wrapper{        
             width : 80%;    
@@ -39,12 +38,15 @@
 
     }
     main{
+        min-width: 600px;
+        justify-content: center;
         padding : 0 10vw;  
         margin : 0 auto;
         display: flex;
         align-items: top;  
         
         aside{
+            width : 40%;
             min-width : 250px;
             margin : 50px 0;
             hr{
@@ -60,19 +62,22 @@
                 border : 1px solid black;
             }
             .container.category{
+                margin : 30px 0;
                 h3{
-
+                    margin : 10px 0;
                 }
                 select{
                     width :90%;
                     padding : 10px 15px;
                     border-radius: 20px;
+                    border : 1px solid black;
                     option{
 
                     }
                 }   
             }
             .container.personnel{
+                margin : 40px 0;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -94,12 +99,13 @@
                 }
             }
             .container.distance{
+                margin : 40px 0;
                 h3{
 
                 }
             }
             .container.buttons{
-                margin : 20px 0 ;
+                margin : 30px 0;
                 button{
                     margin : 3px 5px;
                     padding :5px;  
@@ -108,25 +114,27 @@
             }
             .button.submit{
                 padding : 10px 20px;
-                margin : 10px 0;
+                margin : 20px 0;
             }
         }
         section{
-            padding : 10px 20px;
-            margin : 10px 30px;
+            padding : 10px 3vw;
+            margin : 10px 3vw;
             width : 60%;
-            min-width : 450px;
+            min-width : 400px;
             .buttons{
                 display: flex;
                 justify-content: center;
                 button{
                     border-radius: 20px;
-                    padding : 10px;
+                    padding : 10px 5px;
+                    font-size: 12px;
                 }
                 .buttons.filter{
                     button{
-                        width : 11vw;
-                        min-width : 90px;
+                        width : 10vw;
+                        min-width:90px;
+
                     }
                 }
                 .button.map{
@@ -136,8 +144,8 @@
             }
             article{           
                 overflow-y: auto;
-                margin : 30px 0;
-                padding : 0 20px;
+                margin : 20px 0;
+                // padding :  0 40px;;
                 .card-component{
                     color : white;
                     border-radius: 20px;
