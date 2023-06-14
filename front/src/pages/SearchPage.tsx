@@ -1,20 +1,91 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
 
-import starIcon from '../assets/images/star.png';
+import SearchApi from '../api/search';
+import SearchHeader from '../components/search/SearchHeader';
+import SearchOptionMenu from '../components/search/SearchOptionMenu';
+import SearchFilter from '../components/search/SearchFilter';
+import SearchResult from '../components/search/SearchResult';
+
 import '../styles/search.scss';
-import CATEGORYLIST from '../utils/categoryList';
-import TAGLIST from '../utils/tagList';
-import SEARCHRESULT from '../utils/searchList';
+import { HOTELSEARCHRESULT } from '../utils/searchList';
 
 const SearchPage: React.FC = () => {
-  const tagList = TAGLIST;
-  const categoryList = CATEGORYLIST;
-  const searchResult = SEARCHRESULT;
+  const [searchResult, setSearchResult] = useState(HOTELSEARCHRESULT);
 
   const { state } = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(state);
+  const [date, setDate] = useState({
+    startDate: format(new Date(), 'yyyy-MM-dd'),
+    endDate: format(new Date(), 'yyyy-MM-dd'),
+  });
+  const [address, setAddress] = useState('');
 
+  const searchform = {
+    address,
+    startDate: date.startDate,
+    endDate: date.endDate,
+    distance: 5,
+    searchType: 'recommend',
+  };
+
+  const [optionForm, setOptionForm] = useState({
+    startTime: '',
+    endTime: '',
+    category: selectedCategory,
+    userCnt: 1,
+    tagId: [],
+  });
+
+  const searchWithOptionForm = {
+    searchform,
+    optionForm,
+  };
+
+  const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(e.target.value);
+  };
+  const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDate({
+      ...date,
+      startDate: e.target.value,
+    });
+  };
+  const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (date.startDate > e.target.value) {
+      window.alert('종료일이 시작일보다 늦습니다');
+    } else {
+      setDate({
+        ...date,
+        endDate: e.target.value,
+      });
+    }
+  };
+  const onSearchBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (address == '') {
+      window.alert('주소를 입력해주세요');
+    } else {
+      SearchApi.getSearchData(searchform)
+        .then((res) => {
+          setSearchResult(res.data);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
+  const onSearchWithOptionBtnClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    SearchApi.getSearchDataWithOptions(searchWithOptionForm)
+      .then((res) => {
+        setSearchResult(res.data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
   const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = e.target.options[e.target.options.selectedIndex];
     setSelectedCategory({
@@ -25,88 +96,27 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="search">
-      <header>
-        <div className="wrapper">
-          <h1>{selectedCategory.categoryName}</h1>
-          <div className="container inputs">
-            <input
-              type="text"
-              placeholder="도로명/지번 주소를 입력해주세요"
-            ></input>
-            <div className="container date-input">
-              <h3>날짜</h3>
-              <input type="date"></input>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SearchHeader
+        categoryName={selectedCategory.categoryName}
+        onChangeAddress={onChangeAddress}
+        onChangeStartDate={onChangeStartDate}
+        date={date}
+        onChangeEndDate={onChangeEndDate}
+        onSearchBtnClick={onSearchBtnClick}
+      ></SearchHeader>
 
       <main>
-        <aside>
-          <hr />
-          <div className="container category">
-            <h3>카테고리</h3>
-            <select onChange={onChangeCategory} value={selectedCategory.id}>
-              {categoryList.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.categoryName}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="container personnel">
-            <h3>인원</h3>
-            <div className="counter">
-              <button>-</button>
-              <span>3</span>
-              <button>+</button>
-            </div>
-          </div>
-
-          <div className="container distance">
-            <h3>거리</h3>
-            <p>slider</p>
-          </div>
-          <hr />
-          <div className="container buttons">
-            {tagList.map((item, key) => (
-              <button key={key}>{item.tagName}</button>
-            ))}
-            <button>더보기</button>
-          </div>
-          <hr />
-          <button className="button submit">옵션적용</button>
-        </aside>
+        <SearchOptionMenu
+          onChangeCategory={onChangeCategory}
+          selectedCategoryId={selectedCategory.id}
+          onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
+        ></SearchOptionMenu>
         <section>
           <div className="buttons">
-            <div className="buttons filter">
-              <button>추천순</button>
-              <button>낮은가격순</button>
-              <button>높은가격순</button>
-            </div>
+            <SearchFilter></SearchFilter>
             <button className="button map">지도</button>
           </div>
-          <article>
-            {searchResult.map((item) => (
-              <div key={item.placeId} className="card-component">
-                <div className="row top">
-                  <h1 className="col-1 placeName">{item.placeName}</h1>
-                  <div className="col-2">
-                    <img src={starIcon}></img>
-                    <span className="rate">{item.placeRating}</span>
-                    <span className="review">리뷰 {item.placeReviewCnt}</span>
-                  </div>
-                </div>
-                <div className="row bottom">
-                  <span className="col-1 address">
-                    {item.placeAddress.address}
-                  </span>
-                  <span className="col-2 leftRoom">남은 객실 1개</span>
-                </div>
-              </div>
-            ))}
-          </article>
+          <SearchResult searchResult={searchResult}></SearchResult>
         </section>
       </main>
     </div>
