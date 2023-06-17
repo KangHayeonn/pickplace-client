@@ -3,11 +3,10 @@ import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/main.scss';
 import { useNavigate } from 'react-router-dom';
-import CATEGORYLIST from '../utils/categoryList';
+import categoryList from '../utils/categoryList';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
-  const categoryList = CATEGORYLIST;
 
   return (
     <div className="main">

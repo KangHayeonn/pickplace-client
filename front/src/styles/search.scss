@@ -2,7 +2,7 @@
 @import "./mixin.scss";
 
 .search{
-    header{              
+    .container.searchHeader{              
         background-color: rgb(231, 231, 231);
         min-width: 700px;
 
@@ -15,22 +15,49 @@
                 text-align : left        
             }
             .container.inputs{
-                display: flex;
+                display: flex;            
+                flex-wrap: wrap;
                 align-items :end;
                 justify-content: left;
+                margin : 20px 0 0;
 
                 input{
+                    margin : 5px 0;
                     padding : 10px;
                     border-radius: 20px;
                     height: 20px;
-                    width : 200px
+                }
+                .input.address{
+                    margin-right : 20px;                    
+                    width : 200px;
                 }
                 .container.date-input{
-                    margin : 0 10px;
                     text-align: left;
-                    h3{
-                        padding : 0 10px;
-                        margin :0;
+                    
+                    input{
+                        background: url(../assets/images/calendar.png) no-repeat white;
+                        background-position: 15px center;
+                        background-size :14px;
+                        text-indent: 13px;
+                        width: 160px;
+                    }
+
+                    input[type="date"]::-webkit-calendar-picker-indicator {
+                        display: block;
+                        background: url(../assets/images/arrow-down.png) center/80% no-repeat white;
+                        width: 10px;
+                        height: 10px;
+                        cursor: pointer;
+                    }
+                    span{
+                        margin : 0 5px;
+                    }
+                    button{
+                        background-color: white;                        
+                        margin : 0 5px;
+                        height: 40px;
+                        width : 50px;
+                        border-radius: 20px;
                     }
                 }
             }
@@ -45,7 +72,7 @@
         display: flex;
         align-items: top;  
         
-        aside{
+        .container.SearchOptionMenu{
             width : 40%;
             min-width : 250px;
             margin : 50px 0;
@@ -142,17 +169,16 @@
                     width : 60px;
                 }
             }
-            article{           
+            .container.searchResult{           
                 overflow-y: auto;
                 margin : 20px 0;
-                // padding :  0 40px;;
                 .card-component{
                     color : white;
                     border-radius: 20px;
                     height : 150px;
                     background-color: rgb(148, 153, 156);
-                    margin : 10px 5px;                            align-items: end;
                     padding : 0 20px;
+                    margin : 10px 5px;                            
 
                     h1{
                         margin : 0;
