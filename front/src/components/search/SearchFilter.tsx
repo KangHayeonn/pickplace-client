@@ -3,6 +3,7 @@ import React from 'react';
 // type searchFilterProps = {};
 const SearchFilter = () => {
   return (
+    //list 로 변경
     <div className="buttons filter">
       <button>추천순</button>
       <button>낮은가격순</button>

@@ -9,10 +9,10 @@ import SearchFilter from '../components/search/SearchFilter';
 import SearchResult from '../components/search/SearchResult';
 
 import '../styles/search.scss';
-import { HOTELSEARCHRESULT } from '../utils/searchList';
+import { hotelSearchResult } from '../utils/searchList';
 
 const SearchPage: React.FC = () => {
-  const [searchResult, setSearchResult] = useState(HOTELSEARCHRESULT);
+  const [searchResult, setSearchResult] = useState(hotelSearchResult);
 
   const { state } = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(state);
@@ -47,14 +47,18 @@ const SearchPage: React.FC = () => {
     setAddress(e.target.value);
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDate({
-      ...date,
-      startDate: e.target.value,
-    });
+    if (date.endDate < e.target.value) {
+      window.alert('시작일이 종료일보다 늦습니다.');
+    } else {
+      setDate({
+        ...date,
+        startDate: e.target.value,
+      });
+    }
   };
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (date.startDate > e.target.value) {
-      window.alert('종료일이 시작일보다 늦습니다');
+      window.alert('종료일이 시작일보다 빠릅니다.');
     } else {
       setDate({
         ...date,

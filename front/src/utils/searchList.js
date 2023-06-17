@@ -1,4 +1,4 @@
-export const HOTELSEARCHRESULT = [
+export const hotelSearchResult = [
   {
     placeId: 0,
     placeName: '비즈니스 호텔A',

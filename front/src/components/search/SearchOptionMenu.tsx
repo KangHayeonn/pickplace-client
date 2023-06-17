@@ -1,6 +1,6 @@
 import React from 'react';
-import CATEGORYLIST from '../../utils/categoryList';
-import TAGLIST from '../../utils/tagList';
+import categoryList from '../../utils/categoryList';
+import tagList from '../../utils/tagList';
 
 type searchOptionMenuProps = {
   onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -12,8 +12,6 @@ const SearchOptionMenu = ({
   selectedCategoryId,
   onSearchWithOptionBtnClick,
 }: searchOptionMenuProps) => {
-  const tagList = TAGLIST;
-  const categoryList = CATEGORYLIST;
   return (
     <div className="container SearchOptionMenu">
       <hr />

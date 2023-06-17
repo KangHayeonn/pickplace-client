@@ -1,6 +1,6 @@
 // import { instance } from "../index";
 //const prefix = "/api/v1";
-import { SPACESEARCHRESULT, HOTELSEARCHRESULT } from '../utils/searchList';
+import { SPACESEARCHRESULT, hotelSearchResult } from '../utils/searchList';
 
 type getSearchDataProps = {
   address: string;
@@ -68,7 +68,7 @@ const SearchApi = {
       const result = {
         success: true,
         code: 200,
-        data: HOTELSEARCHRESULT,
+        data: hotelSearchResult,
       };
       return result;
     } catch (error) {
