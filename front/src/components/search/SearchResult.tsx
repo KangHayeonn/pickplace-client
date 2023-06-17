@@ -1,19 +1,7 @@
 import React from 'react';
 import starIcon from '../../assets/images/star.png';
+import { searchResultProps } from './types';
 
-type searchResultProps = {
-  searchResult: {
-    placeId: number;
-    placeName: string;
-    placeAddress: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-    placeRating: number;
-    placeReviewCnt: number;
-  }[];
-};
 const SearchResult = ({ searchResult }: searchResultProps) => {
   return (
     <div className="container searchResult">

@@ -1,6 +1,16 @@
 @import "./reset.scss";
 @import "./mixin.scss";
 
+ body{
+    .rc-tooltip-placement-top .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topLeft .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+        bottom: 4px;
+        margin-left: -5px;
+        border-top-color: rgba(0,0,0,0.2);
+    }
+}
+
 .search{
     .container.searchHeader{              
         background-color: rgb(231, 231, 231);
@@ -126,9 +136,20 @@
                 }
             }
             .container.distance{
-                margin : 40px 0;
-                h3{
+                margin : 30px 0;
 
+                .container.slider{
+                    width : 23vw;
+                    min-width: 180px;
+                    margin : 0 auto;
+                    margin-top : 20px;
+                }
+
+                p{                
+                    padding : 5px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 12px;
                 }
             }
             .container.buttons{

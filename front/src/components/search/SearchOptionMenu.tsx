@@ -1,23 +1,23 @@
 import React from 'react';
 import categoryList from '../../utils/categoryList';
 import tagList from '../../utils/tagList';
+import DistanceSlider from './DistanceSlider';
+import { searchOptionMenuProps } from './types';
 
-type searchOptionMenuProps = {
-  onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  selectedCategoryId: number;
-  onSearchWithOptionBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
 const SearchOptionMenu = ({
+  optionForm,
   onChangeCategory,
-  selectedCategoryId,
   onSearchWithOptionBtnClick,
+  onDecreaseUserCount,
+  onIncreaseUserCount,
+  onChangeUserRangeInput,
 }: searchOptionMenuProps) => {
   return (
     <div className="container SearchOptionMenu">
       <hr />
       <div className="container category">
         <h3>카테고리</h3>
-        <select onChange={onChangeCategory} value={selectedCategoryId}>
+        <select onChange={onChangeCategory} value={optionForm.category.id}>
           {categoryList.map((item) => (
             <option key={item.id} value={item.id}>
               {item.categoryName}
@@ -29,15 +29,21 @@ const SearchOptionMenu = ({
       <div className="container personnel">
         <h3>인원</h3>
         <div className="counter">
-          <button>-</button>
-          <span>3</span>
-          <button>+</button>
+          <button onClick={onDecreaseUserCount}>-</button>
+          <span>{optionForm.userCnt}</span>
+          <button onClick={onIncreaseUserCount}>+</button>
         </div>
       </div>
 
       <div className="container distance">
         <h3>거리</h3>
-        <p>slider</p>
+        <DistanceSlider
+          onChangeUserRangeInput={onChangeUserRangeInput}
+        ></DistanceSlider>
+        <p>
+          <span>0km</span>
+          <span>10km</span>
+        </p>
       </div>
       <hr />
       <div className="container buttons">
