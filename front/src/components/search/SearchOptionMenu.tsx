@@ -11,6 +11,7 @@ const SearchOptionMenu = ({
   onDecreaseUserCount,
   onIncreaseUserCount,
   onChangeUserRangeInput,
+  onClickTagButton,
 }: searchOptionMenuProps) => {
   return (
     <div className="container SearchOptionMenu">
@@ -48,9 +49,10 @@ const SearchOptionMenu = ({
       <hr />
       <div className="container buttons">
         {tagList.map((item, key) => (
-          <button key={key}>{item.tagName}</button>
+          <button key={key} value={item.id} onClick={onClickTagButton}>
+            {item.tagName}
+          </button>
         ))}
-        <button>더보기</button>
       </div>
       <hr />
       <button className="button submit" onClick={onSearchWithOptionBtnClick}>

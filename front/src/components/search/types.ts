@@ -22,12 +22,13 @@ export type searchOptionMenuProps = {
       id: number;
     };
     userCnt: number;
-    tagId: never[];
+    tagId: Array<number>;
   };
   onSearchWithOptionBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDecreaseUserCount: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onIncreaseUserCount: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onChangeUserRangeInput: (value: number) => void;
+  onClickTagButton: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type searchResultProps = {

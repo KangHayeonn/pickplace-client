@@ -28,7 +28,13 @@ const SearchPage: React.FC = () => {
     searchType: 'recommend',
   });
 
-  const [optionForm, setOptionForm] = useState({
+  const [optionForm, setOptionForm] = useState<{
+    startTime: string;
+    endTime: string;
+    category: { categoryName: string; id: number };
+    userCnt: number;
+    tagId: Array<number>;
+  }>({
     startTime: '',
     endTime: '',
     category: selectedCategory,
@@ -49,7 +55,11 @@ const SearchPage: React.FC = () => {
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.endDate < e.target.value) {
-      window.alert('시작일이 종료일보다 늦습니다.');
+      setsearchForm({
+        ...searchForm,
+        startDate: e.target.value,
+        endDate: e.target.value,
+      });
     } else {
       setsearchForm({
         ...searchForm,
@@ -59,40 +69,16 @@ const SearchPage: React.FC = () => {
   };
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.startDate > e.target.value) {
-      window.alert('종료일이 시작일보다 빠릅니다.');
+      setsearchForm({
+        ...searchForm,
+        startDate: e.target.value,
+        endDate: e.target.value,
+      });
     } else {
       setsearchForm({
         ...searchForm,
         endDate: e.target.value,
       });
-    }
-  };
-  const onSearchBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (searchForm.address == '') {
-      window.alert('주소를 입력해주세요');
-    } else {
-      SearchApi.getSearchData(searchForm)
-        .then((res) => {
-          setSearchResult(res.data);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
-    }
-  };
-  const onSearchWithOptionBtnClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    if (searchForm.address == '') {
-      window.alert('주소를 입력해주세요');
-    } else {
-      SearchApi.getSearchDataWithOptions(searchWithOptionForm)
-        .then((res) => {
-          setSearchResult(res.data);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
     }
   };
   const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -127,6 +113,58 @@ const SearchPage: React.FC = () => {
       distance: value,
     });
   };
+  const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const tagId = e.currentTarget.value;
+    const clickedButton = e.currentTarget;
+    if (clickedButton.classList.contains('clicked')) {
+      e.currentTarget.classList.remove('clicked');
+      setOptionForm({
+        ...optionForm,
+        tagId: optionForm.tagId.filter((id) => id !== parseInt(tagId)),
+      });
+    } else {
+      e.currentTarget.classList.add('clicked');
+      setOptionForm({
+        ...optionForm,
+        tagId: [...optionForm.tagId, parseInt(tagId)],
+      });
+    }
+  };
+  const onClickFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const filterValue = e.currentTarget.value;
+    setsearchForm({
+      ...searchForm,
+      searchType: filterValue,
+    });
+  };
+  const onSearchBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (searchForm.address == '') {
+      window.alert('주소를 입력해주세요');
+    } else {
+      SearchApi.getSearchData(searchForm)
+        .then((res) => {
+          setSearchResult(res.data);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
+  const onSearchWithOptionBtnClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    if (searchForm.address == '') {
+      window.alert('주소를 입력해주세요');
+    } else {
+      SearchApi.getSearchDataWithOptions(searchWithOptionForm)
+        .then((res) => {
+          setSearchResult(res.data);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
   return (
     <div className="search">
       <SearchHeader
@@ -147,6 +185,7 @@ const SearchPage: React.FC = () => {
           onDecreaseUserCount={onDecreaseUserCount}
           onIncreaseUserCount={onIncreaseUserCount}
           onChangeUserRangeInput={onChangeUserRangeInput}
+          onClickTagButton={onClickTagButton}
         ></SearchOptionMenu>
         <section>
           <div className="buttons">
