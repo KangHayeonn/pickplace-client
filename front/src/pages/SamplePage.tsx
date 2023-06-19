@@ -54,15 +54,23 @@ const SamplePage: React.FC = () => {
       <h2>{count}</h2>
       <button onClick={onIncrease}>증가</button>
       <CheckBox text="숙소 이용 및 취소/환불 규정 동의 (필수)" />
-      <DropDown />
+      <div style={{ width: '300px' }}>
+        <DropDown />
+      </div>
       <NumberForm min={0} max={10} />
       <div style={{ width: '300px' }}>
         <SearchForm search={search} onChangeSearch={onChangeSearch} />
       </div>
+      <TextButton text="로그인" onClick={onClickEvent} />
       <TextButton
         text="로그아웃"
         onClick={onClickEvent}
         classType="secondary short"
+      />
+      <TextButton
+        text="동의 후 결제"
+        onClick={onClickEvent}
+        classType="secondary long"
       />
       <div style={{ width: '200px' }}>
         <TextField
