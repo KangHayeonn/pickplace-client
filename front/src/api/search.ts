@@ -54,7 +54,6 @@ const SearchApi = {
     searchForm,
     optionForm,
   }: getSearchDataWithOptionsProps) {
-    console.log({ searchForm, optionForm });
     try {
       //   const url = `${prefix}/search`;
       //   const result = await instance.post(url, {
