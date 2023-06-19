@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../store/modules';
@@ -16,6 +16,7 @@ const SamplePage: React.FC = () => {
   const navigate = useNavigate();
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();
+  const [isShowToast, setIsShowToast] = useState<boolean>(false);
   // const [count, setCount] = useState(0);
 
   const onIncrease = () => {
@@ -54,7 +55,9 @@ const SamplePage: React.FC = () => {
       <div style={{ width: '200px' }}>
         <TextField placeholder="test" />
       </div>
-      <ToastBox />
+      {isShowToast && (
+        <ToastBox text="토스트메시지" setIsShow={setIsShowToast} />
+      )}
     </div>
   );
 };
