@@ -1,4 +1,4 @@
-@import "./mixin.scss";
+@import "../../base/mixin.scss";
 
 .wrapper{
     width : 100%;    
@@ -11,7 +11,7 @@
         .content{
             display: block;
             font-weight: 300;
-            font-size: 1.1vw;
+            font-size: 14px;
         }
     }
 }

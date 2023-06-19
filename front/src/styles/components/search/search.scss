@@ -1,5 +1,5 @@
-@import "./reset.scss";
-@import "./mixin.scss";
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
 
  body{
     .rc-tooltip-placement-top .rc-tooltip-arrow, 
@@ -54,7 +54,7 @@
                     
                     input{
                         position: relative;
-                        background: url(../assets/images/calendar.png) no-repeat white;
+                        background: url(../../../assets/images/calendar.png) no-repeat white;
                         background-position: 15px center;
                         background-size :14px;
                         text-indent: 13px;

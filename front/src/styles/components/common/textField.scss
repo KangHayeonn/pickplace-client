@@ -1,0 +1,73 @@
+@import "../../base/variable.scss";
+
+.text-container {
+    width: 100%;
+    position: relative;
+}
+
+.text-field {
+    width: 100%;
+    position: relative;
+
+    img {
+      position: absolute;
+      right: -55px;
+      top: 7px;
+    }
+
+    &__input {
+      width: 100%;
+      font-size: 1rem;
+      line-height: 2.1rem;
+      letter-spacing: 0.25px;
+      height: 2.5rem;
+      background-color: $color-surface-lightgray;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+      outline: none;
+      padding-left: 20px;
+      padding-right: 50px;
+    
+      &.error {
+        border: 1px solid $color-error;
+      }
+    
+      &.white {
+        background-color: $color-surface-lightgray;
+      }
+    
+      /*
+      &:not(.error):focus {
+        border: 1px solid $color-focus;
+      }*/
+    
+      &:focus {
+        outline: none;
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    
+      &::placeholder {
+        color: $color-gray;
+      }
+    }
+
+    &__message {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 0.875rem;
+        letter-spacing: 1.5px;
+        height: 14px;
+        white-space: nowrap;
+
+        &.error {
+            color: #ff0000;
+        }
+
+        &.success {
+            color: #2a82f0;
+        }
+    }    
+}
