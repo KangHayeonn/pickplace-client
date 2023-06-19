@@ -17,7 +17,7 @@ const SamplePage: React.FC = () => {
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();
   const [message, setMessage] = useState<string>('');
-  const [isShowToast, setIsShowToast] = useState<boolean>(true);
+  const [isShowToast, setIsShowToast] = useState<boolean>(false);
   // const [count, setCount] = useState(0);
 
   const onIncrease = () => {
@@ -48,7 +48,7 @@ const SamplePage: React.FC = () => {
       <h1>Sample Page</h1>
       <h2>{count}</h2>
       <button onClick={onIncrease}>증가</button>
-      <CheckBox />
+      <CheckBox text="숙소 이용 및 취소/환불 규정 동의 (필수)" />
       <DropDown />
       <NumberForm min={0} max={10} />
       <SearchForm />

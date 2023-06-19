@@ -1,6 +1,6 @@
 // import { instance } from "../index";
 //const prefix = "/api/v1";
-import { SPACESEARCHRESULT, hotelSearchResult } from '../utils/searchList';
+import { spaceSearchResult, hotelSearchResult } from '../utils/searchList';
 
 type getSearchDataProps = {
   address: string;
@@ -11,11 +11,14 @@ type getSearchDataProps = {
 };
 
 type getSearchDataWithOptionsProps = {
-  searchform: getSearchDataProps;
+  searchForm: getSearchDataProps;
   optionForm: {
     startTime: string;
     endTime: string;
-    category: number;
+    category: {
+      categoryName: string;
+      id: number;
+    };
     userCnt: number;
     tagId: Array<number>;
   };
@@ -40,7 +43,7 @@ const SearchApi = {
       const result = {
         success: true,
         code: 200,
-        data: SPACESEARCHRESULT,
+        data: spaceSearchResult,
       };
       return result;
     } catch (error) {
@@ -48,20 +51,20 @@ const SearchApi = {
     }
   },
   async getSearchDataWithOptions({
-    searchform,
+    searchForm,
     optionForm,
   }: getSearchDataWithOptionsProps) {
     try {
       //   const url = `${prefix}/search`;
       //   const result = await instance.post(url, {
-      //     address: searchform.address,
-      //     startDate: searchform.startDate,
-      //     endDate: searchform.endDate,
-      //     distance: searchform.distance,
-      //     searchType: searchform.searchType,
+      //     address: searchForm.address,
+      //     startDate: searchForm.startDate,
+      //     endDate: searchForm.endDate,
+      //     distance: searchForm.distance,
+      //     searchType: searchForm.searchType,
       //     startTime: optionForm.startTime,
       //     endTime: optionForm.endTime,
-      //     category: optionForm.category,
+      //     category: optionForm.category.id,
       //     userCnt: optionForm.userCnt,
       //     tagId: optionForm.tagId,
       //   });
