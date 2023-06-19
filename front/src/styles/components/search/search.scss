@@ -1,5 +1,5 @@
-@import "./reset.scss";
-@import "./mixin.scss";
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
 
 .search{
     .container.searchHeader{              
@@ -35,7 +35,7 @@
                     text-align: left;
                     
                     input{
-                        background: url(../assets/images/calendar.png) no-repeat white;
+                        background: url(../../../assets/images/calendar.png) no-repeat white;
                         background-position: 15px center;
                         background-size :14px;
                         text-indent: 13px;
@@ -44,7 +44,7 @@
 
                     input[type="date"]::-webkit-calendar-picker-indicator {
                         display: block;
-                        background: url(../assets/images/arrow-down.png) center/80% no-repeat white;
+                        background: url() center/80% no-repeat white;
                         width: 10px;
                         height: 10px;
                         cursor: pointer;
