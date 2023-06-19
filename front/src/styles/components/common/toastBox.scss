@@ -1,0 +1,15 @@
+@import "../../base/variable.scss";
+
+.toast {
+    @include text-body1();
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 4rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    z-index: 999;
+}

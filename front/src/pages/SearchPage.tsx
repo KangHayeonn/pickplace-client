@@ -8,7 +8,7 @@ import SearchOptionMenu from '../components/search/SearchOptionMenu';
 import SearchFilter from '../components/search/SearchFilter';
 import SearchResult from '../components/search/SearchResult';
 
-import '../styles/search.scss';
+import '../styles/components/search/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
 import { optionFormProps, searchFormProps } from '../components/search/types';
 
