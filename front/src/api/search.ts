@@ -54,18 +54,6 @@ const SearchApi = {
     searchForm,
     optionForm,
   }: getSearchDataWithOptionsProps) {
-    console.log({
-      address: searchForm.address,
-      startDate: searchForm.startDate,
-      endDate: searchForm.endDate,
-      distance: searchForm.distance,
-      searchType: searchForm.searchType,
-      startTime: optionForm.startTime,
-      endTime: optionForm.endTime,
-      category: optionForm.category.id,
-      userCnt: optionForm.userCnt,
-      tagId: optionForm.tagId,
-    });
     try {
       //   const url = `${prefix}/search`;
       //   const result = await instance.post(url, {

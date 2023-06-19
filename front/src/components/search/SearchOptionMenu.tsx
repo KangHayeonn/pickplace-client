@@ -1,59 +1,69 @@
 import React from 'react';
-import categoryList from '../../utils/categoryList';
-import tagList from '../../utils/tagList';
-import DistanceSlider from './DistanceSlider';
+import CategorySelector from './CategorySelector';
+import DistanceInput from './DistanceInput';
+import PersonnelCounter from './PersonnelCounter';
+import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
 
 const SearchOptionMenu = ({
   optionForm,
-  onChangeCategory,
+  setOptionForm,
+  searchForm,
+  setsearchForm,
   onSearchWithOptionBtnClick,
-  onDecreaseUserCount,
-  onIncreaseUserCount,
-  onChangeUserRangeInput,
-  onClickTagButton,
 }: searchOptionMenuProps) => {
+  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = e.target.options[e.target.options.selectedIndex];
+    setOptionForm({
+      ...optionForm,
+      category: {
+        id: parseInt(selectedOption.value),
+        categoryName: selectedOption.innerText,
+      },
+    });
+  };
+  const onChangeUserRangeInput = (value: number) => {
+    setsearchForm({
+      ...searchForm,
+      distance: value,
+    });
+  };
+  const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const tagId = e.currentTarget.value;
+    const clickedButton = e.currentTarget;
+    if (clickedButton.classList.contains('clicked')) {
+      e.currentTarget.classList.remove('clicked');
+      setOptionForm({
+        ...optionForm,
+        tagId: optionForm.tagId.filter((id) => id !== parseInt(tagId)),
+      });
+    } else {
+      e.currentTarget.classList.add('clicked');
+      setOptionForm({
+        ...optionForm,
+        tagId: [...optionForm.tagId, parseInt(tagId)],
+      });
+    }
+  };
+
   return (
     <div className="container SearchOptionMenu">
       <hr />
-      <div className="container category">
-        <h3>카테고리</h3>
-        <select onChange={onChangeCategory} value={optionForm.category.id}>
-          {categoryList.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.categoryName}
-            </option>
-          ))}
-        </select>
-      </div>
+      <CategorySelector
+        optionForm={optionForm}
+        onChangeCategory={onChangeCategory}
+      ></CategorySelector>
 
-      <div className="container personnel">
-        <h3>인원</h3>
-        <div className="counter">
-          <button onClick={onDecreaseUserCount}>-</button>
-          <span>{optionForm.userCnt}</span>
-          <button onClick={onIncreaseUserCount}>+</button>
-        </div>
-      </div>
+      <PersonnelCounter
+        optionForm={optionForm}
+        setOptionForm={setOptionForm}
+      ></PersonnelCounter>
 
-      <div className="container distance">
-        <h3>거리</h3>
-        <DistanceSlider
-          onChangeUserRangeInput={onChangeUserRangeInput}
-        ></DistanceSlider>
-        <p>
-          <span>0km</span>
-          <span>10km</span>
-        </p>
-      </div>
+      <DistanceInput
+        onChangeUserRangeInput={onChangeUserRangeInput}
+      ></DistanceInput>
       <hr />
-      <div className="container buttons">
-        {tagList.map((item, key) => (
-          <button key={key} value={item.id} onClick={onClickTagButton}>
-            {item.tagName}
-          </button>
-        ))}
-      </div>
+      <TagSelector onClickTagButton={onClickTagButton}></TagSelector>
       <hr />
       <button className="button submit" onClick={onSearchWithOptionBtnClick}>
         옵션적용

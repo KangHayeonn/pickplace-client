@@ -1,7 +1,3 @@
-export type distanceSliderProps = {
-  onChangeUserRangeInput: (value: number) => void;
-};
-
 export type searchHeaderProps = {
   startDate: string;
   endDate: string;
@@ -12,23 +8,51 @@ export type searchHeaderProps = {
   onSearchBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export type searchOptionMenuProps = {
-  onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  optionForm: {
-    startTime: string;
-    endTime: string;
-    category: {
-      categoryName: string;
-      id: number;
-    };
-    userCnt: number;
-    tagId: Array<number>;
+export interface optionFormProps {
+  startTime: string;
+  endTime: string;
+  category: {
+    categoryName: string;
+    id: number;
   };
+  userCnt: number;
+  tagId: Array<number>;
+}
+export interface searchFormProps {
+  address: string;
+  startDate: string;
+  endDate: string;
+  distance: number;
+  searchType: string;
+}
+
+export type searchOptionMenuProps = {
+  optionForm: optionFormProps;
+  setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
+  searchForm: searchFormProps;
+  setsearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
   onSearchWithOptionBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onDecreaseUserCount: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onIncreaseUserCount: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onChangeUserRangeInput: (value: number) => void;
+};
+
+export type categorySelectorProps = {
+  optionForm: optionFormProps;
+  onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type personnelCounterProps = {
+  optionForm: optionFormProps;
+  setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
+};
+
+export type tagSelectorProps = {
   onClickTagButton: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export type distanceInputProps = {
+  onChangeUserRangeInput: (value: number) => void;
+};
+export type distanceSliderProps = {
+  onChangeUserRangeInput: (value: number) => void;
 };
 
 export type searchResultProps = {

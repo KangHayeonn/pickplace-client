@@ -10,17 +10,14 @@ import SearchResult from '../components/search/SearchResult';
 
 import '../styles/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
+import { optionFormProps, searchFormProps } from '../components/search/types';
 
 const SearchPage: React.FC = () => {
+  const { state } = useLocation();
+
   const [searchResult, setSearchResult] = useState(hotelSearchResult);
 
-  const { state } = useLocation();
-  const selectedCategory: {
-    categoryName: string;
-    id: number;
-  } = state;
-
-  const [searchForm, setsearchForm] = useState({
+  const [searchForm, setsearchForm] = useState<searchFormProps>({
     address: '',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
@@ -28,24 +25,13 @@ const SearchPage: React.FC = () => {
     searchType: 'recommend',
   });
 
-  const [optionForm, setOptionForm] = useState<{
-    startTime: string;
-    endTime: string;
-    category: { categoryName: string; id: number };
-    userCnt: number;
-    tagId: Array<number>;
-  }>({
+  const [optionForm, setOptionForm] = useState<optionFormProps>({
     startTime: '',
     endTime: '',
-    category: selectedCategory,
+    category: state,
     userCnt: 1,
     tagId: [],
   });
-
-  const searchWithOptionForm = {
-    searchForm,
-    optionForm,
-  };
 
   const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setsearchForm({
@@ -81,55 +67,6 @@ const SearchPage: React.FC = () => {
       });
     }
   };
-  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.options[e.target.options.selectedIndex];
-    setOptionForm({
-      ...optionForm,
-      category: {
-        id: parseInt(selectedOption.value),
-        categoryName: selectedOption.innerText,
-      },
-    });
-  };
-  const onDecreaseUserCount = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (optionForm.userCnt <= 1) {
-      window.alert('최소 인원은 1명 입니다.');
-    } else {
-      setOptionForm({
-        ...optionForm,
-        userCnt: optionForm.userCnt - 1,
-      });
-    }
-  };
-  const onIncreaseUserCount = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setOptionForm({
-      ...optionForm,
-      userCnt: optionForm.userCnt + 1,
-    });
-  };
-  const onChangeUserRangeInput = (value: number) => {
-    setsearchForm({
-      ...searchForm,
-      distance: value,
-    });
-  };
-  const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const tagId = e.currentTarget.value;
-    const clickedButton = e.currentTarget;
-    if (clickedButton.classList.contains('clicked')) {
-      e.currentTarget.classList.remove('clicked');
-      setOptionForm({
-        ...optionForm,
-        tagId: optionForm.tagId.filter((id) => id !== parseInt(tagId)),
-      });
-    } else {
-      e.currentTarget.classList.add('clicked');
-      setOptionForm({
-        ...optionForm,
-        tagId: [...optionForm.tagId, parseInt(tagId)],
-      });
-    }
-  };
   const onClickFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const filterValue = e.currentTarget.value;
     setsearchForm({
@@ -153,10 +90,12 @@ const SearchPage: React.FC = () => {
   const onSearchWithOptionBtnClick = (
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    if (searchForm.address == '') {
-      window.alert('주소를 입력해주세요');
-    } else {
-      SearchApi.getSearchDataWithOptions(searchWithOptionForm)
+    if (searchForm.address == '') window.alert('주소를 입력해주세요');
+    else {
+      SearchApi.getSearchDataWithOptions({
+        searchForm,
+        optionForm,
+      })
         .then((res) => {
           setSearchResult(res.data);
         })
@@ -180,12 +119,10 @@ const SearchPage: React.FC = () => {
       <main>
         <SearchOptionMenu
           optionForm={optionForm}
-          onChangeCategory={onChangeCategory}
+          setOptionForm={setOptionForm}
+          searchForm={searchForm}
+          setsearchForm={setsearchForm}
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
-          onDecreaseUserCount={onDecreaseUserCount}
-          onIncreaseUserCount={onIncreaseUserCount}
-          onChangeUserRangeInput={onChangeUserRangeInput}
-          onClickTagButton={onClickTagButton}
         ></SearchOptionMenu>
         <section>
           <div className="buttons">

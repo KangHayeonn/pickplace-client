@@ -17,7 +17,6 @@ const SearchHeader = ({
         <div className="container inputs">
           <input
             className="input address"
-            type="text"
             placeholder="도로명/지번 주소를 입력해주세요"
             onChange={onChangeAddress}
           ></input>
