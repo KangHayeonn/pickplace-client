@@ -50,7 +50,7 @@ const SamplePage: React.FC = () => {
       <button onClick={onIncrease}>증가</button>
       <CheckBox />
       <DropDown />
-      <NumberForm />
+      <NumberForm min={0} max={10} />
       <SearchForm />
       <TextButton
         text="로그아웃"
