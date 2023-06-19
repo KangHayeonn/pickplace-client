@@ -16,7 +16,8 @@ const SamplePage: React.FC = () => {
   const navigate = useNavigate();
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();
-  const [isShowToast, setIsShowToast] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [isShowToast, setIsShowToast] = useState<boolean>(true);
   // const [count, setCount] = useState(0);
 
   const onIncrease = () => {
@@ -26,6 +27,10 @@ const SamplePage: React.FC = () => {
 
   const onClickEvent = () => {
     navigate('/');
+  };
+
+  const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
   };
 
   useEffect(() => {
@@ -53,7 +58,11 @@ const SamplePage: React.FC = () => {
         classType="secondary short"
       />
       <div style={{ width: '200px' }}>
-        <TextField placeholder="test" />
+        <TextField
+          placeholder="test"
+          message={message}
+          onChangeText={onChangeMessage}
+        />
       </div>
       {isShowToast && (
         <ToastBox text="토스트메시지" setIsShow={setIsShowToast} />
