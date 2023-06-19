@@ -46,8 +46,14 @@ const SamplePage: React.FC = () => {
       <DropDown />
       <NumberForm />
       <SearchForm />
-      <TextButton text="로그아웃" onClick={onClickEvent} disabled={false} />
-      <TextField />
+      <TextButton
+        text="로그아웃"
+        onClick={onClickEvent}
+        classType="secondary short"
+      />
+      <div style={{ width: '200px' }}>
+        <TextField placeholder="test" />
+      </div>
       <ToastBox />
     </div>
   );
