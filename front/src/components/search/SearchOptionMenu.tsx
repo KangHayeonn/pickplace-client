@@ -4,6 +4,7 @@ import DistanceInput from './DistanceInput';
 import PersonnelCounter from './PersonnelCounter';
 import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
+import '../../styles/components/search/searchOptionMenu.scss';
 
 const SearchOptionMenu = ({
   optionForm,

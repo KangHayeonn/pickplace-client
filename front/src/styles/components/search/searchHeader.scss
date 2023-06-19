@@ -1,0 +1,71 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+.container.searchHeader{              
+    background-color: rgb(231, 231, 231);
+    min-width: 700px;
+
+    .wrapper{        
+        width : 80%;    
+        margin : 0 auto;
+        padding : 20px 0;
+        h1{
+            margin : 10px 0 0 0 ;
+            text-align : left        
+        }
+        .container.inputs{
+            display: flex;            
+            flex-wrap: wrap;
+            align-items :end;
+            justify-content: left;
+            margin : 20px 0 0;
+
+            input{
+                margin : 5px 0;
+                padding : 10px;
+                border-radius: 20px;
+                height: 20px;
+            }
+            .input.address{
+                margin-right : 20px;                    
+                width : 200px;
+            }
+            .container.date-input{
+                text-align: left;
+                
+                input{
+                    position: relative;
+                    background: url(../../../assets/images/calendar.png) no-repeat white;
+                    background-position: 15px center;
+                    background-size :14px;
+                    text-indent: 13px;
+                    width: 150px;
+                    text-align: center;
+                }
+
+                input[type="date"]::-webkit-calendar-picker-indicator {
+                    display: block;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: auto;
+                    height: auto;
+                    color: transparent;
+                    background: transparent;
+                }                    
+                span{
+                    margin : 0 5px;
+                }
+                button{
+                    background-color: white;                        
+                    margin : 0 5px;
+                    height: 40px;
+                    width : 50px;
+                    border-radius: 20px;
+                }
+            }
+        }
+    }      
+}

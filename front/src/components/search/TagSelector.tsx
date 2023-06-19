@@ -4,9 +4,14 @@ import { tagSelectorProps } from './types';
 
 const TagSelector = ({ onClickTagButton }: tagSelectorProps) => {
   return (
-    <div className="container buttons">
+    <div className="container tagBtns">
       {tagList.map((item, key) => (
-        <button key={key} value={item.id} onClick={onClickTagButton}>
+        <button
+          className="tabBtn"
+          key={key}
+          value={item.id}
+          onClick={onClickTagButton}
+        >
           {item.tagName}
         </button>
       ))}

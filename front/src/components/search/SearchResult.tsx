@@ -1,6 +1,7 @@
 import React from 'react';
 import starIcon from '../../assets/images/star.png';
 import { searchResultProps } from './types';
+import '../../styles/components/search/searchResult.scss';
 
 const SearchResult = ({ searchResult }: searchResultProps) => {
   return (

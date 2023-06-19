@@ -71,8 +71,9 @@ const SearchPage: React.FC = () => {
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const clickedLabel = e.currentTarget;
     const filterValue = clickedLabel.value;
-
-    const previousClickedLabel = document.querySelector('.clicked');
+    const previousClickedLabel = document.querySelector(
+      'div.filterBtns label.clicked',
+    );
 
     if (previousClickedLabel) {
       previousClickedLabel.classList.remove('clicked');
@@ -83,7 +84,7 @@ const SearchPage: React.FC = () => {
       ...searchForm,
       searchType: filterValue,
     });
-    getSearchDataWithOptions();
+    getSearchData();
   };
   const checkAddressExist = () => {
     if (searchForm.address == '') {
@@ -92,15 +93,17 @@ const SearchPage: React.FC = () => {
     }
     return true;
   };
+  const getSearchData = () => {
+    SearchApi.getSearchData(searchForm)
+      .then((res) => {
+        setSearchResult(res.data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
   const onSearchBtnClick = () => {
-    checkAddressExist() &&
-      SearchApi.getSearchData(searchForm)
-        .then((res) => {
-          setSearchResult(res.data);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
+    checkAddressExist() && getSearchData;
   };
   const getSearchDataWithOptions = () => {
     SearchApi.getSearchDataWithOptions({
@@ -138,7 +141,7 @@ const SearchPage: React.FC = () => {
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
         ></SearchOptionMenu>
         <section>
-          <div className="buttons">
+          <div className="filterBtns">
             <SearchFilter
               onClickFilterButton={onClickFilterButton}
             ></SearchFilter>

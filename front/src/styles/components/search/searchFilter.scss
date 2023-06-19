@@ -1,0 +1,39 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+.filterBtns{
+    display: flex;
+    justify-content: center;
+    button{
+        border-radius: 20px;
+    }
+    label{
+        background-color: rgb(231, 231, 231);
+        width : 10vw;
+        min-width:90px;
+        height: 40px;         
+        border-radius: 20px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    input[type="checkbox"] {
+        cursor: pointer;
+        -webkit-appearance: none;             
+    }
+
+    .filterBtns.filter input[type="checkbox"]:checked +label{
+        background-color: black;
+        color : white;
+    }
+      
+    .clicked {
+        background-color: black;
+        color : white;
+    }
+    
+    .button.map{
+        margin-left : 1.5vw;
+        width : 60px;
+    }
+}
