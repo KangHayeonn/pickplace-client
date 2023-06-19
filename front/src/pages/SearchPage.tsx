@@ -10,67 +10,75 @@ import SearchResult from '../components/search/SearchResult';
 
 import '../styles/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
+import { optionFormProps, searchFormProps } from '../components/search/types';
 
 const SearchPage: React.FC = () => {
+  const { state } = useLocation();
+
   const [searchResult, setSearchResult] = useState(hotelSearchResult);
 
-  const { state } = useLocation();
-  const [selectedCategory, setSelectedCategory] = useState(state);
-  const [date, setDate] = useState({
+  const [searchForm, setsearchForm] = useState<searchFormProps>({
+    address: '',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
-  });
-  const [address, setAddress] = useState('');
-
-  const searchform = {
-    address,
-    startDate: date.startDate,
-    endDate: date.endDate,
     distance: 5,
     searchType: 'recommend',
-  };
+  });
 
-  const [optionForm, setOptionForm] = useState({
+  const [optionForm, setOptionForm] = useState<optionFormProps>({
     startTime: '',
     endTime: '',
-    category: selectedCategory,
+    category: state,
     userCnt: 1,
     tagId: [],
   });
 
-  const searchWithOptionForm = {
-    searchform,
-    optionForm,
-  };
-
   const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
+    setsearchForm({
+      ...searchForm,
+      address: e.target.value,
+    });
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (date.endDate < e.target.value) {
-      window.alert('시작일이 종료일보다 늦습니다.');
+    if (searchForm.endDate < e.target.value) {
+      setsearchForm({
+        ...searchForm,
+        startDate: e.target.value,
+        endDate: e.target.value,
+      });
     } else {
-      setDate({
-        ...date,
+      setsearchForm({
+        ...searchForm,
         startDate: e.target.value,
       });
     }
   };
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (date.startDate > e.target.value) {
-      window.alert('종료일이 시작일보다 빠릅니다.');
+    if (searchForm.startDate > e.target.value) {
+      setsearchForm({
+        ...searchForm,
+        startDate: e.target.value,
+        endDate: e.target.value,
+      });
     } else {
-      setDate({
-        ...date,
+      setsearchForm({
+        ...searchForm,
         endDate: e.target.value,
       });
     }
   };
+  const onClickFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const filterValue = e.currentTarget.value;
+    setsearchForm({
+      ...searchForm,
+      searchType: filterValue,
+    });
+  };
   const onSearchBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (address == '') {
+    if (searchForm.address == '') {
       window.alert('주소를 입력해주세요');
     } else {
-      SearchApi.getSearchData(searchform)
+      SearchApi.getSearchData(searchForm)
         .then((res) => {
           setSearchResult(res.data);
         })
@@ -82,37 +90,38 @@ const SearchPage: React.FC = () => {
   const onSearchWithOptionBtnClick = (
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    SearchApi.getSearchDataWithOptions(searchWithOptionForm)
-      .then((res) => {
-        setSearchResult(res.data);
+    if (searchForm.address == '') window.alert('주소를 입력해주세요');
+    else {
+      SearchApi.getSearchDataWithOptions({
+        searchForm,
+        optionForm,
       })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+        .then((res) => {
+          setSearchResult(res.data);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
   };
-  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.options[e.target.options.selectedIndex];
-    setSelectedCategory({
-      id: selectedOption.value,
-      categoryName: selectedOption.innerText,
-    });
-  };
-
   return (
     <div className="search">
       <SearchHeader
-        categoryName={selectedCategory.categoryName}
+        startDate={searchForm.startDate}
+        endDate={searchForm.endDate}
+        categoryName={optionForm.category.categoryName}
         onChangeAddress={onChangeAddress}
         onChangeStartDate={onChangeStartDate}
-        date={date}
         onChangeEndDate={onChangeEndDate}
         onSearchBtnClick={onSearchBtnClick}
       ></SearchHeader>
 
       <main>
         <SearchOptionMenu
-          onChangeCategory={onChangeCategory}
-          selectedCategoryId={selectedCategory.id}
+          optionForm={optionForm}
+          setOptionForm={setOptionForm}
+          searchForm={searchForm}
+          setsearchForm={setsearchForm}
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
         ></SearchOptionMenu>
         <section>

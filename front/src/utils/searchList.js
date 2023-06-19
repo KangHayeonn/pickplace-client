@@ -45,7 +45,7 @@ export const hotelSearchResult = [
   },
 ];
 
-export const SPACESEARCHRESULT = [
+export const spaceSearchResult = [
   {
     placeId: 4,
     placeName: '공유 오피스 A',
