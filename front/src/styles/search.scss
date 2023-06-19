@@ -9,6 +9,14 @@
         margin-left: -5px;
         border-top-color: rgba(0,0,0,0.2);
     }
+    button{
+        &.clicked{
+            color : white;
+            background-color: black;
+            border : 1px solid white;
+        } 
+    }
+
 }
 
 .search{
@@ -59,7 +67,7 @@
                         cursor: pointer;
                         position: absolute;
                         top: 0;
-                        left: 0px;
+                        left: 0;
                         right: 0;
                         bottom: 0;
                         width: auto;
@@ -172,11 +180,6 @@
                 padding : 10px 20px;
                 margin : 20px 0;
             }
-            .clicked{
-                color : white;
-                background-color: black;
-                border : 1px solid white;
-            } 
         }
         section{
             padding : 10px 3vw;
@@ -188,16 +191,35 @@
                 justify-content: center;
                 button{
                     border-radius: 20px;
-                    padding : 10px 5px;
-                    font-size: 12px;
                 }
-                .buttons.filter{
-                    button{
-                        width : 10vw;
-                        min-width:90px;
 
-                    }
+                label{
+                    background-color: rgb(231, 231, 231);
+                    width : 10vw;
+                    min-width:90px;
+                    height: 40px;         
+                    border-radius: 20px;
+                    font-size: 12px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
+
+                input[type="checkbox"] {
+                    cursor: pointer;
+                    -webkit-appearance: none;             
+                }
+
+                .buttons.filter input[type="checkbox"]:checked +label{
+                    background-color: black;
+                    color : white;
+                }
+                  
+                .clicked {
+                    background-color: black;
+                    color : white;
+                }
+                
                 .button.map{
                     margin-left : 1.5vw;
                     width : 60px;
@@ -206,6 +228,11 @@
             .container.searchResult{           
                 overflow-y: auto;
                 margin : 20px 0;
+                .msg{
+                    margin : 100px 0;
+                    color : rgb(126, 126, 126);
+                    font-size : 1.2vw;
+                }
                 .card-component{
                     color : white;
                     border-radius: 20px;

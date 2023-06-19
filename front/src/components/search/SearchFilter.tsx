@@ -1,7 +1,7 @@
 import React from 'react';
+import { searchFilterProps } from './types';
 
-// type searchFilterProps = {};
-const SearchFilter = () => {
+const SearchFilter = ({ onClickFilterButton }: searchFilterProps) => {
   const filter = [
     { value: 'recommend', name: '추천순' },
     { value: 'asc', name: '낮은가격순' },
@@ -11,9 +11,15 @@ const SearchFilter = () => {
     //list 로 변경
     <div className="buttons filter">
       {filter.map((item, key) => (
-        <button key={key} value={item.value}>
+        <label htmlFor={item.value} key={key}>
+          <input
+            type="checkbox"
+            id={item.value}
+            value={item.value}
+            onChange={onClickFilterButton}
+          ></input>
           {item.name}
-        </button>
+        </label>
       ))}
     </div>
   );

@@ -10,14 +10,15 @@ import SearchResult from '../components/search/SearchResult';
 
 import '../styles/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
-import { optionFormProps, searchFormProps } from '../components/search/types';
+import * as type from '../components/search/types';
 
 const SearchPage: React.FC = () => {
   const { state } = useLocation();
 
-  const [searchResult, setSearchResult] = useState(hotelSearchResult);
+  const [searchResult, setSearchResult] =
+    useState<type.searchResultListProps[]>(hotelSearchResult);
 
-  const [searchForm, setsearchForm] = useState<searchFormProps>({
+  const [searchForm, setsearchForm] = useState<type.searchFormProps>({
     address: '',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
@@ -25,7 +26,7 @@ const SearchPage: React.FC = () => {
     searchType: 'recommend',
   });
 
-  const [optionForm, setOptionForm] = useState<optionFormProps>({
+  const [optionForm, setOptionForm] = useState<type.optionFormProps>({
     startTime: '',
     endTime: '',
     category: state,
@@ -67,17 +68,32 @@ const SearchPage: React.FC = () => {
       });
     }
   };
-  const onClickFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const filterValue = e.currentTarget.value;
+  const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const clickedLabel = e.currentTarget;
+    const filterValue = clickedLabel.value;
+
+    const previousClickedLabel = document.querySelector('.clicked');
+
+    if (previousClickedLabel) {
+      previousClickedLabel.classList.remove('clicked');
+    }
+    clickedLabel.parentElement?.classList.add('clicked');
+
     setsearchForm({
       ...searchForm,
       searchType: filterValue,
     });
+    getSearchDataWithOptions();
   };
-  const onSearchBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const checkAddressExist = () => {
     if (searchForm.address == '') {
       window.alert('주소를 입력해주세요');
-    } else {
+      return false;
+    }
+    return true;
+  };
+  const onSearchBtnClick = () => {
+    checkAddressExist() &&
       SearchApi.getSearchData(searchForm)
         .then((res) => {
           setSearchResult(res.data);
@@ -85,24 +101,21 @@ const SearchPage: React.FC = () => {
         .catch((err) => {
           return Promise.reject(err);
         });
-    }
   };
-  const onSearchWithOptionBtnClick = (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    if (searchForm.address == '') window.alert('주소를 입력해주세요');
-    else {
-      SearchApi.getSearchDataWithOptions({
-        searchForm,
-        optionForm,
+  const getSearchDataWithOptions = () => {
+    SearchApi.getSearchDataWithOptions({
+      searchForm,
+      optionForm,
+    })
+      .then((res) => {
+        setSearchResult(res.data);
       })
-        .then((res) => {
-          setSearchResult(res.data);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
-    }
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
+  const onSearchWithOptionBtnClick = () => {
+    checkAddressExist() && getSearchDataWithOptions;
   };
   return (
     <div className="search">
@@ -126,7 +139,9 @@ const SearchPage: React.FC = () => {
         ></SearchOptionMenu>
         <section>
           <div className="buttons">
-            <SearchFilter></SearchFilter>
+            <SearchFilter
+              onClickFilterButton={onClickFilterButton}
+            ></SearchFilter>
             <button className="button map">지도</button>
           </div>
           <SearchResult searchResult={searchResult}></SearchResult>
