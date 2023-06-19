@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../store/modules';
 import { increase } from '../store/modules/sample';
 import Sample from '../api/sample';
@@ -12,6 +13,7 @@ import TextField from '../components/common/TextField';
 import ToastBox from '../components/common/ToastBox';
 
 const SamplePage: React.FC = () => {
+  const navigate = useNavigate();
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();
   // const [count, setCount] = useState(0);
@@ -19,6 +21,10 @@ const SamplePage: React.FC = () => {
   const onIncrease = () => {
     dispatch(increase());
     // setCount(count+1);
+  };
+
+  const onClickEvent = () => {
+    navigate('/');
   };
 
   useEffect(() => {
@@ -40,7 +46,7 @@ const SamplePage: React.FC = () => {
       <DropDown />
       <NumberForm />
       <SearchForm />
-      <TextButton />
+      <TextButton text="로그아웃" onClick={onClickEvent} disabled={false} />
       <TextField />
       <ToastBox />
     </div>
