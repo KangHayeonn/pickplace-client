@@ -18,6 +18,7 @@ const SamplePage: React.FC = () => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState<string>('');
   const [isShowToast, setIsShowToast] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
   // const [count, setCount] = useState(0);
 
   const onIncrease = () => {
@@ -31,6 +32,10 @@ const SamplePage: React.FC = () => {
 
   const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
+  };
+
+  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   useEffect(() => {
@@ -51,7 +56,9 @@ const SamplePage: React.FC = () => {
       <CheckBox text="숙소 이용 및 취소/환불 규정 동의 (필수)" />
       <DropDown />
       <NumberForm min={0} max={10} />
-      <SearchForm />
+      <div style={{ width: '300px' }}>
+        <SearchForm search={search} onChangeSearch={onChangeSearch} />
+      </div>
       <TextButton
         text="로그아웃"
         onClick={onClickEvent}
