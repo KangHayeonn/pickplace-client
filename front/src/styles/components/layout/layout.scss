@@ -1,6 +1,6 @@
 @import "../../base/reset.scss";
 
 .layout-container{
-    min-height:620px;
     margin: 0 auto;
+    min-height:620px; // margin-bottom이 안먹는 이슈 발생
 }
