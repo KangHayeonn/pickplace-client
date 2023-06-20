@@ -69,20 +69,9 @@ const SearchPage: React.FC = () => {
     }
   };
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const clickedLabel = e.currentTarget;
-    const filterValue = clickedLabel.value;
-    const previousClickedLabel = document.querySelector(
-      'div.filterBtns label.clicked',
-    );
-
-    if (previousClickedLabel) {
-      previousClickedLabel.classList.remove('clicked');
-    }
-    clickedLabel.parentElement?.classList.add('clicked');
-
     setsearchForm({
       ...searchForm,
-      searchType: filterValue,
+      searchType: e.currentTarget.value,
     });
     getSearchData();
   };

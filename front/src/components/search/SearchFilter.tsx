@@ -1,6 +1,8 @@
 import React from 'react';
 import { searchFilterProps } from './types';
 import '../../styles/components/search/searchFilter.scss';
+import RadioGroup from '../common/RadioGroupContext';
+import RadioButton from '../common/RadioButton';
 
 const SearchFilter = ({ onClickFilterButton }: searchFilterProps) => {
   const filter = [
@@ -9,20 +11,13 @@ const SearchFilter = ({ onClickFilterButton }: searchFilterProps) => {
     { value: 'desc', name: '높은가격순' },
   ];
   return (
-    <div className="filterBtns">
+    <RadioGroup onRadioChange={onClickFilterButton}>
       {filter.map((item, key) => (
-        <label htmlFor={item.value} key={key}>
-          <input
-            type="checkbox"
-            className="filterBtn"
-            id={item.value}
-            value={item.value}
-            onChange={onClickFilterButton}
-          ></input>
+        <RadioButton key={key} value={item.value}>
           {item.name}
-        </label>
+        </RadioButton>
       ))}
-    </div>
+    </RadioGroup>
   );
 };
 

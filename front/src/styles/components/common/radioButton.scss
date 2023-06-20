@@ -1,19 +1,14 @@
-@import "../../base/reset.scss";
-@import "../../base/mixin.scss";
 @import "../../base/variable.scss";
-
-.filterBtns{
-    @include text-body2();
+.radioGroup{
     display: flex;
     justify-content: center;
-
-    .button.map{
-        margin-left : 1.5vw;
+    align-items:center;
+    label{   
         cursor: pointer;  
         border : $border-button;         
         border-radius: $border-radius-button;
         background-color: $color-surface-white;
-        padding: 5px 15px;
+        padding: 7px 22px;
         &:hover {
             background-color: $color-hover;
             color: $color-text-white;
@@ -21,4 +16,14 @@
             box-shadow: $shadow-button-hover;
         }
     }
+    input[type=radio] {
+        -webkit-appearance: none;            
+    }
+
+    input[type=radio]:checked +label{
+        background-color: $color-hover;
+        color: $color-text-white;
+        border: $border-button-hover;
+        box-shadow: $shadow-button-hover;
+    }  
 }
