@@ -29,7 +29,11 @@
         justify-content : end;
         margin-right: 8vw;
         .button{
-            margin : 0 1vw;
+            width: 120px;
+            
+            &:first-child {
+                margin-right: 20px;
+            }
         }
     }
 }
