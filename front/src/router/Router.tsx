@@ -11,7 +11,7 @@ import PasswordPage from '../pages/PasswordPage';
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
 // const LoginPage = lazy(() => import("../pages/LoginPage"));
 
-const Router: React.FC = () => {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>

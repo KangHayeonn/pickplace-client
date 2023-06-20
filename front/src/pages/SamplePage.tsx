@@ -12,7 +12,7 @@ import TextButton from '../components/common/TextButton';
 import TextField from '../components/common/TextField';
 import ToastBox from '../components/common/ToastBox';
 
-const SamplePage: React.FC = () => {
+const SamplePage = () => {
   const navigate = useNavigate();
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();

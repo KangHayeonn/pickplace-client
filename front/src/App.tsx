@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/style.scss';
 import Router from './router/Router';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
       <Router />

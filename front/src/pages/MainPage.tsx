@@ -5,7 +5,7 @@ import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
 import categoryList from '../utils/categoryList';
 
-const MainPage: React.FC = () => {
+const MainPage = () => {
   const navigate = useNavigate();
 
   return (
