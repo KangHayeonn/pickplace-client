@@ -4,6 +4,7 @@ import eyeOnIcon from '../../assets/images/eyeOn.svg';
 import eyeOffIcon from '../../assets/images/eyeOff.svg';
 
 interface TextProps {
+  id?: string | undefined;
   disabled?: boolean | undefined;
   className?: string | undefined;
   placeholder?: string | undefined;
@@ -16,6 +17,7 @@ interface TextProps {
 }
 
 const TextField = ({
+  id,
   disabled,
   className,
   placeholder,
@@ -37,10 +39,12 @@ const TextField = ({
       <div className="text-field">
         <input
           type={type}
+          id={id}
           className={`text-field__input ${className}`}
           placeholder={placeholder}
           onChange={onChangeText}
           disabled={disabled}
+          autoComplete="off"
         />
         {inputType === 'pw' ? (
           <img

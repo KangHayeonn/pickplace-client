@@ -11,10 +11,10 @@ import SearchForm from '../components/common/SearchForm';
 import TextButton from '../components/common/TextButton';
 import TextField from '../components/common/TextField';
 import ToastBox from '../components/common/ToastBox';
-
 import RadioGroup from '../components/common/RadioGroupContext';
 import RadioButton from '../components/common/RadioButton';
-const SamplePage: React.FC = () => {
+
+const SamplePage = () => {
   const navigate = useNavigate();
   const count = useSelector((state: RootState) => state.mock.count);
   const dispatch = useDispatch();

@@ -12,7 +12,7 @@ import '../styles/components/search/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
 import * as type from '../components/search/types';
 
-const SearchPage: React.FC = () => {
+const SearchPage = () => {
   const { state } = useLocation();
 
   const [searchResult, setSearchResult] =

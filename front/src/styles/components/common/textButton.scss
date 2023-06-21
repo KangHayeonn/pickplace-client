@@ -2,6 +2,7 @@
 
 .text-btn{
   @include text-button();
+  width: 100%;
   background-color: $color-surface-white;
   border-radius: $border-radius-button;
   color: $color-text-black;
