@@ -1,0 +1,49 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";.container.searchResult{           
+    overflow-y: auto;
+    margin : 20px 0;
+    .msg{
+        margin : 100px 0;
+        color : rgb(126, 126, 126);
+        font-size : 1.2vw;
+    }
+    .card-component{
+        color : white;
+        border-radius: 20px;
+        height : 150px;
+        background-color: rgb(148, 153, 156);
+        padding : 0 20px;
+        margin : 10px 5px;                            
+
+        h1{
+            margin : 0;
+        }
+        .row.top{   
+            min-height: 105px;      
+            position : relative;           
+            display : flex;
+            justify-content: space-between;
+            align-items: end;
+            .col-1{
+                font-size: 23px;
+            }
+            .col-2{
+                img{
+                    width : 15px;
+                }
+                .rate{
+                    margin : 0 5px
+                }
+                .review{
+                    margin-left : 8px
+                }
+            }
+        }
+        .row.bottom{  
+            margin : 5px 0;
+            display : flex;
+            justify-content: space-between;
+            align-items: end;                   
+        }
+    }
+}

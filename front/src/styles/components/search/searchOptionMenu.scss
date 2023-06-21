@@ -1,0 +1,93 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+body{
+    .rc-tooltip-placement-top .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topLeft .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+        bottom: 4px;
+        margin-left: -5px;
+        border-top-color: rgba(0,0,0,0.2);
+    }
+}
+.container.SearchOptionMenu{
+    width : 40%;
+    min-width : 250px;
+    margin : 50px 0;
+    hr{
+        border : 0.5px solid rgb(218, 218, 218);
+    }
+    h3{
+        padding : 0 20px;
+        text-align: left;
+    }
+    button{
+        border-radius: 20px;
+        border-radius: 20px;                        border : 1px solid black;
+        border : 1px solid black;
+    }
+    .container.category{
+        margin : 30px 0;
+        h3{
+            margin : 10px 0;
+        }
+        select{
+            width :90%;
+            padding : 10px 15px;
+            border-radius: 20px;
+            border : 1px solid black;
+        }   
+    }
+    .container.personnel{
+        margin : 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .counter{
+            button{
+                font-size: 20px;
+                border : none;
+                background-color: white;   
+            }
+            span{
+                margin : 0 10px;
+                background-color: rgb(235, 235, 235);
+                border-radius: 20px;
+                padding : 10px 15px;
+            }  
+        }
+    }
+    .container.distance{
+        margin : 30px 0;
+
+        .container.slider{
+            width : 23vw;
+            min-width: 180px;
+            margin : 0 auto;
+            margin-top : 20px;
+        }
+
+        p{                
+            padding : 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+    }
+    .container.tagBtns{
+        margin : 30px 5px;
+        .tabBtn{
+            margin : 3px 5px;
+            padding :5px 0;  
+            width : 70px;
+            &.clicked{
+                color : white;
+                background-color: black;
+                border : 1px solid white;
+            }
+        }
+    }
+    .button.submit{
+        padding : 10px 20px;
+        margin : 20px 0;
+    }
+}

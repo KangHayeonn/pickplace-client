@@ -1,21 +1,23 @@
 import React from 'react';
+import { searchFilterProps } from './types';
+import '../../styles/components/search/searchFilter.scss';
+import RadioGroup from '../common/RadioGroupContext';
+import RadioButton from '../common/RadioButton';
 
-// type searchFilterProps = {};
-const SearchFilter = () => {
+const SearchFilter = ({ onClickFilterButton }: searchFilterProps) => {
   const filter = [
     { value: 'recommend', name: '추천순' },
     { value: 'asc', name: '낮은가격순' },
     { value: 'desc', name: '높은가격순' },
   ];
   return (
-    //list 로 변경
-    <div className="buttons filter">
+    <RadioGroup onRadioChange={onClickFilterButton}>
       {filter.map((item, key) => (
-        <button key={key} value={item.value}>
+        <RadioButton key={key} value={item.value}>
           {item.name}
-        </button>
+        </RadioButton>
       ))}
-    </div>
+    </RadioGroup>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { searchHeaderProps } from './types';
+import '../../styles/components/search/searchHeader.scss';
 
 const SearchHeader = ({
   startDate,
