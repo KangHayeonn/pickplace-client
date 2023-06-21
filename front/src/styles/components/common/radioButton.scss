@@ -1,0 +1,29 @@
+@import "../../base/variable.scss";
+.radioGroup{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    label{   
+        cursor: pointer;  
+        border : $border-button;         
+        border-radius: $border-radius-button;
+        background-color: $color-surface-white;
+        padding: 7px 22px;
+        &:hover {
+            background-color: $color-surface-gray;
+            color: $color-text-black;
+            border: $border-button-hover;
+            box-shadow: $shadow-button-hover;
+        }
+    }
+    input[type=radio] {
+        -webkit-appearance: none;            
+    }
+
+    input[type=radio]:checked +label{
+        background-color: $color-hover;
+        color: $color-text-white;
+        border: $border-button-hover;
+        box-shadow: $shadow-button-hover;
+    }  
+}

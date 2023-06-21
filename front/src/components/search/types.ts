@@ -5,7 +5,7 @@ export type searchHeaderProps = {
   onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearchBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSearchBtnClick: () => void;
 };
 
 export interface optionFormProps {
@@ -31,7 +31,7 @@ export type searchOptionMenuProps = {
   setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
   searchForm: searchFormProps;
   setsearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
-  onSearchWithOptionBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSearchWithOptionBtnClick: () => void;
 };
 
 export type categorySelectorProps = {
@@ -54,17 +54,22 @@ export type distanceInputProps = {
 export type distanceSliderProps = {
   onChangeUserRangeInput: (value: number) => void;
 };
+export type searchFilterProps = {
+  onClickFilterButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export interface searchResultListProps {
+  placeId: number;
+  placeName: string;
+  placeAddress: {
+    address: string;
+    latitude: number;
+    longitude: number;
+  };
+  placeRating: number;
+  placeReviewCnt: number;
+}
 
 export type searchResultProps = {
-  searchResult: {
-    placeId: number;
-    placeName: string;
-    placeAddress: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-    placeRating: number;
-    placeReviewCnt: number;
-  }[];
+  searchResult: searchResultListProps[];
 };

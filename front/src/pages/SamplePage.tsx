@@ -11,6 +11,8 @@ import SearchForm from '../components/common/SearchForm';
 import TextButton from '../components/common/TextButton';
 import TextField from '../components/common/TextField';
 import ToastBox from '../components/common/ToastBox';
+import RadioGroup from '../components/common/RadioGroupContext';
+import RadioButton from '../components/common/RadioButton';
 
 const SamplePage = () => {
   const navigate = useNavigate();
@@ -48,6 +50,11 @@ const SamplePage = () => {
       });
   }, []);
 
+  const [value, setValue] = useState('radio');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+  };
+
   return (
     <div>
       <h1>Sample Page</h1>
@@ -82,6 +89,11 @@ const SamplePage = () => {
       {isShowToast && (
         <ToastBox text="토스트메시지" setIsShow={setIsShowToast} />
       )}
+      <RadioGroup onRadioChange={handleChange}>
+        <RadioButton value="radio">라디오</RadioButton>
+        <RadioButton value="button">버튼</RadioButton>
+        <RadioButton value="test">예시</RadioButton>
+      </RadioGroup>
     </div>
   );
 };
