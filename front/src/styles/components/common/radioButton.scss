@@ -10,8 +10,8 @@
         background-color: $color-surface-white;
         padding: 7px 22px;
         &:hover {
-            background-color: $color-hover;
-            color: $color-text-white;
+            background-color: $color-surface-gray;
+            color: $color-text-black;
             border: $border-button-hover;
             box-shadow: $shadow-button-hover;
         }

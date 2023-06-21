@@ -19,26 +19,7 @@ const RadioButton = ({
   onChange,
 }: RadioButtonProps) => {
   const radioGroup = useRadioGroup();
-  if (!radioGroup) {
-    return (
-      <div className="radioBtn">
-        <input
-          className="radioBtn-input"
-          type="radio"
-          checked={checked}
-          id={value}
-          value={value}
-          onChange={onChange}
-        />
-        <label className="radioBtn-label" htmlFor={value}>
-          {children}
-        </label>
-      </div>
-    );
-  }
-
   const { onRadioChange } = radioGroup;
-
   return (
     <div className="radioBtn">
       <input

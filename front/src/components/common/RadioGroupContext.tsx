@@ -10,7 +10,9 @@ interface contextProps {
   onRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const RadioGroupContext = createContext<contextProps | null>(null);
+export const RadioGroupContext = createContext<contextProps>(
+  {} as contextProps,
+);
 const RadioGroup = ({ children, onRadioChange }: RadioGroupProps) => {
   return (
     <RadioGroupContext.Provider value={{ onRadioChange }}>
