@@ -1,5 +1,7 @@
 @import "../../base/reset.scss";
 @import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
 body{
     .rc-tooltip-placement-top .rc-tooltip-arrow, 
     .rc-tooltip-placement-topLeft .rc-tooltip-arrow, 
@@ -20,41 +22,20 @@ body{
         padding : 0 20px;
         text-align: left;
     }
-    button{
-        border-radius: 20px;
-        border-radius: 20px;                        border : 1px solid black;
-        border : 1px solid black;
-    }
     .container.category{
         margin : 30px 0;
         h3{
             margin : 10px 0;
         }
-        select{
-            width :90%;
-            padding : 10px 15px;
-            border-radius: 20px;
-            border : 1px solid black;
-        }   
+        .container-dropdown{
+            margin : 0 20px;
+        }
     }
     .container.personnel{
         margin : 40px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .counter{
-            button{
-                font-size: 20px;
-                border : none;
-                background-color: white;   
-            }
-            span{
-                margin : 0 10px;
-                background-color: rgb(235, 235, 235);
-                border-radius: 20px;
-                padding : 10px 15px;
-            }  
-        }
     }
     .container.distance{
         margin : 30px 0;
@@ -79,15 +60,34 @@ body{
             margin : 3px 5px;
             padding :5px 0;  
             width : 70px;
+            border : $border-button;         
+            border-radius: $border-radius-button;
+            background-color: $color-surface-white;
             &.clicked{
-                color : white;
-                background-color: black;
-                border : 1px solid white;
+                background-color: $color-primary;
+                color: $color-text-white;
+                border-radius: $border-radius-button;
+            }
+            &:hover {
+                background-color: $color-gray;
+                color: $color-text-black;
+                border: $border-button-hover;
+                box-shadow: $shadow-button-hover;
             }
         }
     }
     .button.submit{
-        padding : 10px 20px;
-        margin : 20px 0;
+        margin : 15px 0;
+        cursor: pointer;  
+        border : $border-button;         
+        border-radius: $border-radius-button;
+        background-color: $color-surface-white;
+        padding: 5px 15px;
+        &:hover {
+            background-color: $color-gray;
+            color: $color-text-black;
+            border: $border-button-hover;
+            box-shadow: $shadow-button-hover;
+        }
     }
 }

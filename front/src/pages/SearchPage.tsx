@@ -92,7 +92,7 @@ const SearchPage = () => {
       });
   };
   const onSearchBtnClick = () => {
-    checkAddressExist() && getSearchData;
+    checkAddressExist() && getSearchData();
   };
   const getSearchDataWithOptions = () => {
     SearchApi.getSearchDataWithOptions({
@@ -107,14 +107,14 @@ const SearchPage = () => {
       });
   };
   const onSearchWithOptionBtnClick = () => {
-    checkAddressExist() && getSearchDataWithOptions;
+    checkAddressExist() && getSearchDataWithOptions();
   };
   return (
     <div className="search">
       <SearchHeader
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
-        categoryName={optionForm.category.categoryName}
+        category={optionForm.category.name}
         onChangeAddress={onChangeAddress}
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}

@@ -1,5 +1,6 @@
 import React from 'react';
-import categoryList from '../../utils/categoryList';
+import { categoryNameList } from '../../utils/categoryList';
+import DropDown from '../common/DropDown';
 import { categorySelectorProps } from './types';
 
 const CategorySelector = ({
@@ -9,13 +10,13 @@ const CategorySelector = ({
   return (
     <div className="container category">
       <h3>카테고리</h3>
-      <select onChange={onChangeCategory} value={optionForm.category.id}>
-        {categoryList.map((item) => (
-          <option key={item.id} value={item.id}>
-            {item.categoryName}
-          </option>
-        ))}
-      </select>
+      <div className="container-dropdown">
+        <DropDown
+          defaultText={optionForm.category.name}
+          dropDownList={categoryNameList}
+          onChangeCategory={onChangeCategory}
+        ></DropDown>
+      </div>
     </div>
   );
 };

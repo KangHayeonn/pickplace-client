@@ -5,15 +5,21 @@ import arrowUpIcon from '../../assets/images/arrowUp.svg';
 
 export interface DropDownProps {
   defaultText?: string | undefined;
+  dropDownList?: string[];
+  onChangeCategory?: (category: string) => void;
 }
 
-const DropDown = ({ defaultText }: DropDownProps) => {
+const DropDown = ({
+  defaultText,
+  dropDownList,
+  onChangeCategory,
+}: DropDownProps) => {
   const menuInput = useRef<HTMLInputElement>(null);
   const menuWrap = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(defaultText || '선택');
 
-  const dropDownList = [
+  const dropDownDefaultList = [
     '운동',
     '스터디',
     '맛집',
@@ -22,6 +28,13 @@ const DropDown = ({ defaultText }: DropDownProps) => {
     '봉사',
     '친목',
   ];
+
+  const onClickLi = (item: string) => {
+    return (e: React.MouseEvent<HTMLLIElement>) => {
+      setTitle(item);
+      onChangeCategory && onChangeCategory(item);
+    };
+  };
 
   const clickWrap = (e: MouseEvent) => {
     if (
@@ -50,17 +63,29 @@ const DropDown = ({ defaultText }: DropDownProps) => {
       </button>
       {isOpen ? (
         <ul className="dropdown__list">
-          {dropDownList.map((item, index) => {
-            return (
-              <li
-                key={index}
-                className="dropdown__item"
-                onClick={() => setTitle(item)}
-              >
-                {item}
-              </li>
-            );
-          })}
+          {dropDownList
+            ? dropDownList.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="dropdown__item"
+                    onClick={onClickLi(item)}
+                  >
+                    {item}
+                  </li>
+                );
+              })
+            : dropDownDefaultList.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="dropdown__item"
+                    onClick={() => setTitle(item)}
+                  >
+                    {item}
+                  </li>
+                );
+              })}
         </ul>
       ) : null}
     </div>

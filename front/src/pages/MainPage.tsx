@@ -3,7 +3,7 @@ import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
-import categoryList from '../utils/categoryList';
+import { categoryList } from '../utils/categoryList';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -19,20 +19,20 @@ const MainPage = () => {
               onClick={() =>
                 navigate('/search', {
                   state: {
-                    categoryName: item.categoryName,
+                    name: item.name,
                     id: item.id,
                   },
                 })
               }
             >
-              {item.categoryName}
+              {item.name}
             </button>
           ))}
           <button
             onClick={() =>
               navigate('/search', {
                 state: {
-                  categoryName: categoryList[0].categoryName,
+                  name: categoryList[0].name,
                   id: categoryList[0].id,
                 },
               })

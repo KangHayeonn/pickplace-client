@@ -5,6 +5,7 @@ import PersonnelCounter from './PersonnelCounter';
 import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
 import '../../styles/components/search/searchOptionMenu.scss';
+import { categoryList } from '../../utils/categoryList';
 
 const SearchOptionMenu = ({
   optionForm,
@@ -13,15 +14,18 @@ const SearchOptionMenu = ({
   setsearchForm,
   onSearchWithOptionBtnClick,
 }: searchOptionMenuProps) => {
-  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.options[e.target.options.selectedIndex];
-    setOptionForm({
-      ...optionForm,
-      category: {
-        id: parseInt(selectedOption.value),
-        categoryName: selectedOption.innerText,
-      },
-    });
+  const onChangeCategory = (category: string) => {
+    for (let i = 0; i < categoryList.length; i++) {
+      if (categoryList[i].name == category) {
+        setOptionForm({
+          ...optionForm,
+          category: {
+            id: categoryList[i].id,
+            name: categoryList[i].name,
+          },
+        });
+      }
+    }
   };
   const onChangeUserRangeInput = (value: number) => {
     setsearchForm({

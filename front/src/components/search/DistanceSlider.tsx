@@ -30,7 +30,7 @@ const DistanceSlider = ({ onChangeUserRangeInput }: distanceSliderProps) => {
               overlayStyle={{
                 padding: '5px 0',
               }}
-              visible={true}
+              visible={handleProps.dragging}
             >
               {node}
             </Tooltip>

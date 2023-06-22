@@ -1,5 +1,7 @@
 @import "../../base/reset.scss";
 @import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
 .container.searchHeader{              
     background-color: rgb(231, 231, 231);
     min-width: 700px;
@@ -15,24 +17,22 @@
         .container.inputs{
             display: flex;            
             flex-wrap: wrap;
-            align-items :end;
+            align-items : center;
             justify-content: left;
-            margin : 20px 0 0;
+            margin : 20px 0 10px;
 
-            input{
-                margin : 5px 0;
-                padding : 10px;
-                border-radius: 20px;
-                height: 20px;
-            }
-            .input.address{
+            .container-searchForm{
                 margin-right : 20px;                    
-                width : 200px;
+                width : 250px;
             }
             .container.date-input{
                 text-align: left;
                 
                 input{
+                    margin : 10px 0 0 0;
+                    padding : 10px;
+                    border-radius: 20px;
+
                     position: relative;
                     background: url(../../../assets/images/calendar.png) no-repeat white;
                     background-position: 15px center;
@@ -59,11 +59,18 @@
                     margin : 0 5px;
                 }
                 button{
-                    background-color: white;                        
                     margin : 0 5px;
-                    height: 40px;
+                    height: 35px;
                     width : 50px;
-                    border-radius: 20px;
+                    border : $border-button;         
+                    border-radius: $border-radius-button;
+                    background-color: $color-surface-white;
+                    &:hover {
+                        background-color: $color-gray;
+                        color: $color-text-black;
+                        border: $border-button-hover;
+                        box-shadow: $shadow-button-hover;
+                    }
                 }
             }
         }
