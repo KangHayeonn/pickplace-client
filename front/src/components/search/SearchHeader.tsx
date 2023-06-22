@@ -7,6 +7,7 @@ const SearchHeader = ({
   startDate,
   endDate,
   category,
+  address,
   onChangeAddress,
   onChangeStartDate,
   onChangeEndDate,
@@ -21,6 +22,7 @@ const SearchHeader = ({
             <SearchForm
               placeholder="도로명/지번 주소를 입력해주세요"
               onChangeSearch={onChangeAddress}
+              search={address}
             ></SearchForm>
           </div>
 

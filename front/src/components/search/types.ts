@@ -2,6 +2,7 @@ export type searchHeaderProps = {
   startDate: string;
   endDate: string;
   category: string;
+  address: string;
   onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;

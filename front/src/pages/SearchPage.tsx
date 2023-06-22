@@ -15,11 +15,12 @@ import * as type from '../components/search/types';
 const SearchPage = () => {
   const { state } = useLocation();
 
+  //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
   const [searchResult, setSearchResult] =
     useState<type.searchResultListProps[]>(hotelSearchResult);
 
   const [searchForm, setsearchForm] = useState<type.searchFormProps>({
-    address: '',
+    address: '서울특별시 종로구 세종대로 172',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
     distance: 5,
@@ -115,6 +116,7 @@ const SearchPage = () => {
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
         category={optionForm.category.name}
+        address={searchForm.address}
         onChangeAddress={onChangeAddress}
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}
@@ -130,7 +132,7 @@ const SearchPage = () => {
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
         ></SearchOptionMenu>
         <section>
-          <div className="filterBtns">
+          <div className="tabBtns">
             <SearchFilter
               onClickFilterButton={onClickFilterButton}
             ></SearchFilter>
