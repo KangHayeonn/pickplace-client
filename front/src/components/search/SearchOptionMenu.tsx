@@ -1,17 +1,17 @@
 import React from 'react';
 import CategorySelector from './CategorySelector';
 import DistanceInput from './DistanceInput';
-import PersonnelCounter from './PersonnelCounter';
 import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
 import '../../styles/components/search/searchOptionMenu.scss';
 import { categoryList } from '../../utils/categoryList';
+import NumberForm from '../common/NumberForm';
 
 const SearchOptionMenu = ({
   optionForm,
   setOptionForm,
   searchForm,
-  setsearchForm,
+  setSearchForm,
   onSearchWithOptionBtnClick,
 }: searchOptionMenuProps) => {
   const onChangeCategory = (category: string) => {
@@ -28,7 +28,7 @@ const SearchOptionMenu = ({
     }
   };
   const onChangeUserRangeInput = (value: number) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       distance: value,
     });
@@ -50,6 +50,12 @@ const SearchOptionMenu = ({
       });
     }
   };
+  const onChangeNum = (n: number) => {
+    setOptionForm({
+      ...optionForm,
+      userCnt: n,
+    });
+  };
 
   return (
     <div className="container SearchOptionMenu">
@@ -59,11 +65,12 @@ const SearchOptionMenu = ({
         onChangeCategory={onChangeCategory}
       ></CategorySelector>
 
-      <PersonnelCounter
-        optionForm={optionForm}
-        setOptionForm={setOptionForm}
-      ></PersonnelCounter>
-
+      <div className="container personnel">
+        <h3>인원</h3>
+        <div className="counter">
+          <NumberForm min={0} onChangeNum={onChangeNum}></NumberForm>
+        </div>
+      </div>
       <DistanceInput
         onChangeUserRangeInput={onChangeUserRangeInput}
       ></DistanceInput>

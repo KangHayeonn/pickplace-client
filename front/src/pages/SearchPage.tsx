@@ -19,7 +19,7 @@ const SearchPage = () => {
   const [searchResult, setSearchResult] =
     useState<type.searchResultListProps[]>(hotelSearchResult);
 
-  const [searchForm, setsearchForm] = useState<type.searchFormProps>({
+  const [searchForm, setSearchForm] = useState<type.searchFormProps>({
     address: '서울특별시 종로구 세종대로 172',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
@@ -36,20 +36,20 @@ const SearchPage = () => {
   });
 
   const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       address: e.target.value,
     });
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.endDate < e.target.value) {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
         endDate: e.target.value,
       });
     } else {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
       });
@@ -57,20 +57,20 @@ const SearchPage = () => {
   };
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.startDate > e.target.value) {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
         endDate: e.target.value,
       });
     } else {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         endDate: e.target.value,
       });
     }
   };
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       searchType: e.currentTarget.value,
     });
@@ -128,7 +128,7 @@ const SearchPage = () => {
           optionForm={optionForm}
           setOptionForm={setOptionForm}
           searchForm={searchForm}
-          setsearchForm={setsearchForm}
+          setSearchForm={setSearchForm}
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
         ></SearchOptionMenu>
         <section>

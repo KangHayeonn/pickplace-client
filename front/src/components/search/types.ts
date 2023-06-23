@@ -31,7 +31,7 @@ export type searchOptionMenuProps = {
   optionForm: optionFormProps;
   setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
   searchForm: searchFormProps;
-  setsearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
+  setSearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
   onSearchWithOptionBtnClick: () => void;
 };
 
