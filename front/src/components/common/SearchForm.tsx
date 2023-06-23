@@ -41,6 +41,7 @@ const SearchForm = ({ placeholder, onChangeSearch, ...props }: SearchProps) => {
             placeholder={placeholder || '주소나 동네를 검색해보세요.'}
             onChange={onChangeSearch}
             onFocus={onFocusSearch}
+            defaultValue={props.search ? props.search : ''}
             {...props}
           />
           <img src={searchIcon} width={16} height={16} alt="Search Icon" />

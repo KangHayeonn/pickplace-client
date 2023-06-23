@@ -16,7 +16,7 @@ type getSearchDataWithOptionsProps = {
     startTime: string;
     endTime: string;
     category: {
-      categoryName: string;
+      name: string;
       id: number;
     };
     userCnt: number;

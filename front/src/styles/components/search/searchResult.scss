@@ -1,12 +1,11 @@
 @import "../../base/reset.scss";
-@import "../../base/mixin.scss";.container.searchResult{           
+@import "../../base/mixin.scss";
+
+.container.searchResult{           
     overflow-y: auto;
-    margin : 20px 0;
-    .msg{
-        margin : 100px 0;
-        color : rgb(126, 126, 126);
-        font-size : 1.2vw;
-    }
+    margin : 10px 0;
+    padding : 0 10px;
+    height :490px;
     .card-component{
         color : white;
         border-radius: 20px;

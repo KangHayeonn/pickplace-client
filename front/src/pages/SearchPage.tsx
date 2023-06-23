@@ -15,11 +15,12 @@ import * as type from '../components/search/types';
 const SearchPage = () => {
   const { state } = useLocation();
 
+  //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
   const [searchResult, setSearchResult] =
     useState<type.searchResultListProps[]>(hotelSearchResult);
 
-  const [searchForm, setsearchForm] = useState<type.searchFormProps>({
-    address: '',
+  const [searchForm, setSearchForm] = useState<type.searchFormProps>({
+    address: '서울특별시 종로구 세종대로 172',
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
     distance: 5,
@@ -35,20 +36,20 @@ const SearchPage = () => {
   });
 
   const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       address: e.target.value,
     });
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.endDate < e.target.value) {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
         endDate: e.target.value,
       });
     } else {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
       });
@@ -56,20 +57,20 @@ const SearchPage = () => {
   };
   const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (searchForm.startDate > e.target.value) {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         startDate: e.target.value,
         endDate: e.target.value,
       });
     } else {
-      setsearchForm({
+      setSearchForm({
         ...searchForm,
         endDate: e.target.value,
       });
     }
   };
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       searchType: e.currentTarget.value,
     });
@@ -92,7 +93,7 @@ const SearchPage = () => {
       });
   };
   const onSearchBtnClick = () => {
-    checkAddressExist() && getSearchData;
+    checkAddressExist() && getSearchData();
   };
   const getSearchDataWithOptions = () => {
     SearchApi.getSearchDataWithOptions({
@@ -107,14 +108,15 @@ const SearchPage = () => {
       });
   };
   const onSearchWithOptionBtnClick = () => {
-    checkAddressExist() && getSearchDataWithOptions;
+    checkAddressExist() && getSearchDataWithOptions();
   };
   return (
     <div className="search">
       <SearchHeader
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
-        categoryName={optionForm.category.categoryName}
+        category={optionForm.category.name}
+        address={searchForm.address}
         onChangeAddress={onChangeAddress}
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}
@@ -126,11 +128,11 @@ const SearchPage = () => {
           optionForm={optionForm}
           setOptionForm={setOptionForm}
           searchForm={searchForm}
-          setsearchForm={setsearchForm}
+          setSearchForm={setSearchForm}
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
         ></SearchOptionMenu>
         <section>
-          <div className="filterBtns">
+          <div className="tabBtns">
             <SearchFilter
               onClickFilterButton={onClickFilterButton}
             ></SearchFilter>

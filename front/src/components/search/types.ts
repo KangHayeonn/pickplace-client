@@ -1,7 +1,8 @@
 export type searchHeaderProps = {
   startDate: string;
   endDate: string;
-  categoryName: string;
+  category: string;
+  address: string;
   onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +13,7 @@ export interface optionFormProps {
   startTime: string;
   endTime: string;
   category: {
-    categoryName: string;
+    name: string;
     id: number;
   };
   userCnt: number;
@@ -30,13 +31,13 @@ export type searchOptionMenuProps = {
   optionForm: optionFormProps;
   setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
   searchForm: searchFormProps;
-  setsearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
+  setSearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
   onSearchWithOptionBtnClick: () => void;
 };
 
 export type categorySelectorProps = {
   optionForm: optionFormProps;
-  onChangeCategory: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeCategory: (category: string) => void;
 };
 
 export type personnelCounterProps = {

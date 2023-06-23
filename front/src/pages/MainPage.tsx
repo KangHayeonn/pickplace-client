@@ -3,10 +3,25 @@ import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
-import categoryList from '../utils/categoryList';
+import { categoryList } from '../utils/categoryList';
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const onClickCategryBtn = (item?: { name: string; id: number }) => {
+    const state = item
+      ? {
+          name: item.name,
+          id: item.id,
+        }
+      : {
+          name: categoryList[0].name,
+          id: categoryList[0].id,
+        };
+
+    navigate('/search', {
+      state: state,
+    });
+  };
 
   return (
     <div className="main">
@@ -14,32 +29,11 @@ const MainPage = () => {
         <img src={articleImg}></img>
         <div className="buttons">
           {categoryList.map((item) => (
-            <button
-              key={item.id}
-              onClick={() =>
-                navigate('/search', {
-                  state: {
-                    categoryName: item.categoryName,
-                    id: item.id,
-                  },
-                })
-              }
-            >
-              {item.categoryName}
+            <button key={item.id} onClick={() => onClickCategryBtn}>
+              {item.name}
             </button>
           ))}
-          <button
-            onClick={() =>
-              navigate('/search', {
-                state: {
-                  categoryName: categoryList[0].categoryName,
-                  id: categoryList[0].id,
-                },
-              })
-            }
-          >
-            더보기
-          </button>
+          <button onClick={() => onClickCategryBtn}>더보기</button>
         </div>
         <hr></hr>
         <article>

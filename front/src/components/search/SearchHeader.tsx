@@ -1,11 +1,13 @@
 import React from 'react';
 import { searchHeaderProps } from './types';
 import '../../styles/components/search/searchHeader.scss';
+import SearchForm from '../common/SearchForm';
 
 const SearchHeader = ({
   startDate,
   endDate,
-  categoryName,
+  category,
+  address,
   onChangeAddress,
   onChangeStartDate,
   onChangeEndDate,
@@ -14,13 +16,16 @@ const SearchHeader = ({
   return (
     <div className="container searchHeader">
       <div className="wrapper">
-        <h1>{categoryName}</h1>
+        <h1>{category}</h1>
         <div className="container inputs">
-          <input
-            className="input address"
-            placeholder="도로명/지번 주소를 입력해주세요"
-            onChange={onChangeAddress}
-          ></input>
+          <div className="container-searchForm">
+            <SearchForm
+              placeholder="도로명/지번 주소를 입력해주세요"
+              onChangeSearch={onChangeAddress}
+              search={address}
+            ></SearchForm>
+          </div>
+
           <div className="container date-input">
             <input
               className="input startDate"

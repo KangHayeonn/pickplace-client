@@ -8,9 +8,10 @@ import plusDisabledIcon from '../../assets/images/plus-disabled.svg';
 interface NumberProps {
   min?: number;
   max?: number;
+  onChangeNum?: (n: number) => void;
 }
 
-const NumberForm = ({ min = 0, max = 20 }: NumberProps) => {
+const NumberForm = ({ min = 0, max = 20, onChangeNum }: NumberProps) => {
   const [number, setNumber] = useState<number>(min);
   const minNum = min;
   const maxNum = max;
@@ -18,11 +19,13 @@ const NumberForm = ({ min = 0, max = 20 }: NumberProps) => {
   const minusNumber = () => {
     if (number <= minNum) return;
     setNumber((num: number) => (num -= 1));
+    onChangeNum && onChangeNum(number - 1);
   };
 
   const plusNumber = () => {
     if (number >= maxNum) return;
     setNumber((num: number) => (num += 1));
+    onChangeNum && onChangeNum(number + 1);
   };
 
   return (

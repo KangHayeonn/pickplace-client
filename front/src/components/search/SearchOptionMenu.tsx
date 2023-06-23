@@ -1,30 +1,34 @@
 import React from 'react';
 import CategorySelector from './CategorySelector';
 import DistanceInput from './DistanceInput';
-import PersonnelCounter from './PersonnelCounter';
 import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
 import '../../styles/components/search/searchOptionMenu.scss';
+import { categoryList } from '../../utils/categoryList';
+import NumberForm from '../common/NumberForm';
 
 const SearchOptionMenu = ({
   optionForm,
   setOptionForm,
   searchForm,
-  setsearchForm,
+  setSearchForm,
   onSearchWithOptionBtnClick,
 }: searchOptionMenuProps) => {
-  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.options[e.target.options.selectedIndex];
-    setOptionForm({
-      ...optionForm,
-      category: {
-        id: parseInt(selectedOption.value),
-        categoryName: selectedOption.innerText,
-      },
-    });
+  const onChangeCategory = (category: string) => {
+    for (let i = 0; i < categoryList.length; i++) {
+      if (categoryList[i].name == category) {
+        setOptionForm({
+          ...optionForm,
+          category: {
+            id: categoryList[i].id,
+            name: categoryList[i].name,
+          },
+        });
+      }
+    }
   };
   const onChangeUserRangeInput = (value: number) => {
-    setsearchForm({
+    setSearchForm({
       ...searchForm,
       distance: value,
     });
@@ -46,6 +50,12 @@ const SearchOptionMenu = ({
       });
     }
   };
+  const onChangeNum = (n: number) => {
+    setOptionForm({
+      ...optionForm,
+      userCnt: n,
+    });
+  };
 
   return (
     <div className="container SearchOptionMenu">
@@ -55,11 +65,12 @@ const SearchOptionMenu = ({
         onChangeCategory={onChangeCategory}
       ></CategorySelector>
 
-      <PersonnelCounter
-        optionForm={optionForm}
-        setOptionForm={setOptionForm}
-      ></PersonnelCounter>
-
+      <div className="container personnel">
+        <h3>인원</h3>
+        <div className="counter">
+          <NumberForm min={0} onChangeNum={onChangeNum}></NumberForm>
+        </div>
+      </div>
       <DistanceInput
         onChangeUserRangeInput={onChangeUserRangeInput}
       ></DistanceInput>
