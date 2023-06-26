@@ -7,6 +7,7 @@ import { categoryList } from '../utils/categoryList';
 
 const MainPage = () => {
   const navigate = useNavigate();
+
   const onClickCategryBtn = (item?: { name: string; id: number }) => {
     const state = item
       ? {
@@ -17,7 +18,6 @@ const MainPage = () => {
           name: categoryList[0].name,
           id: categoryList[0].id,
         };
-
     navigate('/search', {
       state: state,
     });
@@ -29,11 +29,11 @@ const MainPage = () => {
         <img src={articleImg}></img>
         <div className="buttons">
           {categoryList.map((item) => (
-            <button key={item.id} onClick={() => onClickCategryBtn}>
+            <button key={item.id} onClick={() => onClickCategryBtn(item)}>
               {item.name}
             </button>
           ))}
-          <button onClick={() => onClickCategryBtn}>더보기</button>
+          <button onClick={() => onClickCategryBtn()}>더보기</button>
         </div>
         <hr></hr>
         <article>

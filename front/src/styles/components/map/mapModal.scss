@@ -1,0 +1,38 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+.modal-background{
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+}
+.mapmodal{
+    position : absolute;
+    width : 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .mapmodal-header{
+        background-color: black;
+        height : 30px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        .mapmodal-closeBtn{
+            width: 30px;
+            height: 30px;
+            img{
+                width: 15px;
+                height: 15px;
+            }
+            margin-right : 5px;
+            background-color: black;
+        }
+    }
+}

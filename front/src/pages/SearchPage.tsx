@@ -7,6 +7,7 @@ import SearchHeader from '../components/search/SearchHeader';
 import SearchOptionMenu from '../components/search/SearchOptionMenu';
 import SearchFilter from '../components/search/SearchFilter';
 import SearchResult from '../components/search/SearchResult';
+import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
 import { hotelSearchResult } from '../utils/searchList';
@@ -14,6 +15,7 @@ import * as type from '../components/search/types';
 
 const SearchPage = () => {
   const { state } = useLocation();
+  const [onMapOpen, setOnMapOpen] = useState(false);
 
   //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
   const [searchResult, setSearchResult] =
@@ -112,6 +114,7 @@ const SearchPage = () => {
   };
   return (
     <div className="search">
+      {onMapOpen && <MapModal setOnMapOpen={setOnMapOpen}></MapModal>}
       <SearchHeader
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
@@ -136,7 +139,12 @@ const SearchPage = () => {
             <SearchFilter
               onClickFilterButton={onClickFilterButton}
             ></SearchFilter>
-            <button className="button map">지도</button>
+            <button
+              className="button map"
+              onClick={() => setOnMapOpen(!onMapOpen)}
+            >
+              지도
+            </button>
           </div>
           <SearchResult searchResult={searchResult}></SearchResult>
         </section>
