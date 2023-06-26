@@ -5,7 +5,7 @@ interface ModalsDispatchProps {
   open: (
     Component: React.ElementType,
     props: {
-      onSubmit: () => void;
+      onSubmit: () => Promise<void>;
     },
   ) => void;
   close: (Component: React.ElementType) => void;

@@ -7,7 +7,7 @@ const useModals = () => {
   const openModal = (
     Component: React.ElementType,
     props: {
-      onSubmit: () => void;
+      onSubmit: () => Promise<void>;
     },
   ) => {
     document.body.style.overflow = 'hidden';

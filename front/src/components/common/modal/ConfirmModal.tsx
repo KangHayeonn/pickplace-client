@@ -6,7 +6,7 @@ import '../../../styles/components/common/confirmModal.scss';
 
 interface ConfirmModalProps {
   onClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: () => Promise<void>;
 }
 
 const ConfirmModal = ({ onClose, handleSubmit }: ConfirmModalProps) => {

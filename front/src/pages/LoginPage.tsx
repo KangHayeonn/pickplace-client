@@ -9,8 +9,8 @@ const LoginPage = () => {
 
   const handleClick = () => {
     openModal(ConfirmModal, {
-      onSubmit: () => {
-        console.log('로직 처리..!!');
+      onSubmit: async () => {
+        // TODO : API Logic
       },
     });
   };

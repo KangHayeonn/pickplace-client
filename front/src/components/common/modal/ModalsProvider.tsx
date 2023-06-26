@@ -8,7 +8,7 @@ export interface ModalsProviderProps {
 export interface ModalProps {
   Component: React.ElementType;
   props: {
-    onSubmit: () => void;
+    onSubmit: () => Promise<void>;
   };
 }
 
@@ -18,7 +18,7 @@ const ModalsProvider = ({ children }: ModalsProviderProps) => {
   const open = (
     Component: React.ElementType,
     props: {
-      onSubmit: () => void;
+      onSubmit: () => Promise<void>;
     },
   ) => {
     setIsOpenModals((modals) => {
