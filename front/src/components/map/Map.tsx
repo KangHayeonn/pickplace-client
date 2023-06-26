@@ -19,19 +19,31 @@ const Map = () => {
   const { naver } = window;
 
   const getMinLng = (markerList: markerListType[]) => {
-    return Math.min(markerList[0].lng, markerList[1].lng, markerList[2].lng);
+    return Math.min.apply(
+      null,
+      markerList.map((item) => item.lng),
+    );
   };
 
   const getMaxLng = (markerList: markerListType[]) => {
-    return Math.max(markerList[0].lng, markerList[1].lng, markerList[2].lng);
+    return Math.max.apply(
+      null,
+      markerList.map((item) => item.lng),
+    );
   };
 
   const getMinLat = (markerList: markerListType[]) => {
-    return Math.min(markerList[0].lat, markerList[1].lat, markerList[2].lat);
+    return Math.min.apply(
+      null,
+      markerList.map((item) => item.lat),
+    );
   };
 
   const getMaxLat = (markerList: markerListType[]) => {
-    return Math.max(markerList[0].lat, markerList[1].lat, markerList[2].lat);
+    return Math.max.apply(
+      null,
+      markerList.map((item) => item.lat),
+    );
   };
 
   useEffect(() => {
@@ -50,7 +62,6 @@ const Map = () => {
         map: mapRef.current,
         icon: {
           content: [markerHtml(item.name, item.tag)].join(''),
-          anchor: new naver.maps.Point(19, 58),
         },
       });
     });

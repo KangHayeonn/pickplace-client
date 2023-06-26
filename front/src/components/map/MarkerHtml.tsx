@@ -2,7 +2,7 @@ export const markerHtml = (name: string, tag: string[]) => {
   return `
             <div 
                 className="marker-container"
-                style="background-color:white; 
+                style="background-color:rgba(299,299,299,0.7); 
                 height : 130px; 
                 width : 100px;
                 border-radius : 10px;
@@ -17,7 +17,17 @@ export const markerHtml = (name: string, tag: string[]) => {
                     height : 50%;"
                 >
                 </div>
-                <h4 style="margin : 5px;">${name}</h4>
+                <h5 
+                    style="
+                        margin : 3px; 
+                        height : 30px; 
+                        align-items : center; 
+                        display : flex; 
+                        justify-content : center;
+                    "
+                >
+                    ${name}
+                </h5>
                 <p className="tag-container"
                     style="font-size: 12px; margin : 5px;">카테고리
                     <span style="color: cadetblue;">#${tag[0]}</span>
