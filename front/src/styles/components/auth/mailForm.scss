@@ -1,0 +1,52 @@
+@import "../../base/variable.scss";
+
+.mail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 7rem;
+}
+
+.mail-form {
+    width: 700px;
+    
+    &__title {
+        @include text-h4();
+        margin-bottom: 32px;
+    }
+
+    &__content {
+        background-color: $color-surface-lightgray;
+        padding: 110px 70px;
+    }
+}
+
+.email {
+    @include text-h5();
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.message { 
+    margin-bottom : 50px;
+}
+
+.sub-menu {
+    display: flex;
+    justify-content: center;
+
+    &__text {
+        @include text-body3();
+        color: $color-text-gray;
+        margin-right: 7px;
+    }
+
+    &__btn {
+        @include text-body3();
+        text-decoration: underline;
+        color: $color-focus;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}
