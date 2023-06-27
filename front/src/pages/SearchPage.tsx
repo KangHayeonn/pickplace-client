@@ -37,6 +37,14 @@ const SearchPage = () => {
     tagId: [],
   });
 
+  const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    document.body.style.overflow = 'unset';
+    setOnMapOpen(false);
+  };
+  const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    document.body.style.overflow = 'hidden';
+    setOnMapOpen(true);
+  };
   const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchForm({
       ...searchForm,
@@ -114,7 +122,7 @@ const SearchPage = () => {
   };
   return (
     <div className="search">
-      {onMapOpen && <MapModal setOnMapOpen={setOnMapOpen}></MapModal>}
+      {onMapOpen && <MapModal onCloseModal={onCloseModal}></MapModal>}
       <SearchHeader
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
@@ -139,10 +147,7 @@ const SearchPage = () => {
             <SearchFilter
               onClickFilterButton={onClickFilterButton}
             ></SearchFilter>
-            <button
-              className="button map"
-              onClick={() => setOnMapOpen(!onMapOpen)}
-            >
+            <button className="button map" onClick={onOpenModal}>
               지도
             </button>
           </div>

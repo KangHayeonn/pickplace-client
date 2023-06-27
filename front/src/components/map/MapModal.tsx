@@ -4,17 +4,14 @@ import '../../styles/components/map/mapModal.scss';
 import closeBtnIcon from '../../assets/images/close-btn.png';
 
 type mapModalProps = {
-  setOnMapOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onCloseModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
-const MapModal = ({ setOnMapOpen }: mapModalProps) => {
+const MapModal = ({ onCloseModal }: mapModalProps) => {
   return (
     <div className="modal-background">
       <div className="mapmodal">
         <div className="mapmodal-header">
-          <button
-            className="mapmodal-closeBtn"
-            onClick={() => setOnMapOpen(false)}
-          >
+          <button className="mapmodal-closeBtn" onClick={onCloseModal}>
             <img src={closeBtnIcon}></img>
           </button>
         </div>

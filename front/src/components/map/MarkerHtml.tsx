@@ -2,7 +2,7 @@ export const markerHtml = (name: string, tag: string[]) => {
   return `
             <div 
                 className="marker-container"
-                style="background-color:rgba(299,299,299,0.7); 
+                style="background-color:white;
                 height : 130px; 
                 width : 100px;
                 border-radius : 10px;
