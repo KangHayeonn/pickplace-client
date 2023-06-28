@@ -7,8 +7,8 @@ const SearchResult = ({ searchResult }: searchResultProps) => {
   return (
     <div className="container searchResult">
       {searchResult ? (
-        searchResult.map((item) => (
-          <div key={item.placeId} className="card-component">
+        searchResult.map((item, key) => (
+          <div key={key} className="card-component">
             <div className="row top">
               <h1 className="col-1 placeName">{item.placeName}</h1>
               <div className="col-2">
