@@ -14,8 +14,6 @@ type mapProps = {
 };
 
 const Map = () => {
-  const mapRef = useRef<HTMLElement | null | any>(null);
-  const markerRef = useRef<any | null>(null);
   const { naver } = window;
 
   const getMinLng = (markerList: markerListType[]) => {
@@ -47,7 +45,9 @@ const Map = () => {
   };
 
   useEffect(() => {
-    mapRef.current = new naver.maps.Map('map', {
+    const markers: naver.maps.Marker[] = [];
+
+    const map = new naver.maps.Map('map', {
       zoomControl: true,
       scaleControl: true,
       bounds: new naver.maps.PointBounds(
@@ -56,20 +56,30 @@ const Map = () => {
       ),
     });
 
-    markerList?.map((item: markerListType) => {
-      markerRef.current = new naver.maps.Marker({
-        position: new naver.maps.LatLng(item?.lat, item?.lng),
-        map: mapRef.current,
+    for (let i = 0; i < markerList.length; i++) {
+      const marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(markerList[i].lat, markerList[i].lng),
+        map,
         icon: {
-          content: [markerHtml(item.name, item.tag)].join(''),
+          content: [markerHtml(markerList[i].name, markerList[i].tag)].join(''),
         },
       });
-    });
-  }, [mapRef]);
+      markers.push(marker);
+    }
 
-  return (
-    <div id="map" ref={mapRef} style={{ width: '100%', height: '600px' }}></div>
-  );
+    const getClickHandler = (seq: number) => {
+      return () => {
+        console.log(markerList[seq].id);
+        // navigate(`/detail?id={markerList[seq].id}`)
+      };
+    };
+
+    for (let i = 0; i < markers.length; i++) {
+      naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+    }
+  }, []);
+
+  return <div id="map" style={{ width: '100%', height: '600px' }}></div>;
 };
 
 export default Map;

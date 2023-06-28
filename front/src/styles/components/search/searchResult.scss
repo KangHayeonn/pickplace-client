@@ -22,7 +22,7 @@
             position : relative;           
             display : flex;
             justify-content: space-between;
-            align-items: end;
+            align-items: flex-end;
             .col-1{
                 font-size: 23px;
             }
@@ -42,7 +42,6 @@
             margin : 5px 0;
             display : flex;
             justify-content: space-between;
-            align-items: end;                   
         }
     }
 }

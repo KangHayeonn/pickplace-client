@@ -9,9 +9,9 @@ type mapModalProps = {
 const MapModal = ({ onCloseModal }: mapModalProps) => {
   return (
     <div className="modal-background">
-      <div className="mapmodal">
-        <div className="mapmodal-header">
-          <button className="mapmodal-closeBtn" onClick={onCloseModal}>
+      <div className="map-modal">
+        <div className="map-modal__header">
+          <button className="map-modal__btn--close" onClick={onCloseModal}>
             <img src={closeBtnIcon}></img>
           </button>
         </div>
