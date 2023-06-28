@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/navermaps", "npm:3.6.5"],\
             ["@types/node", "npm:16.18.34"],\
             ["@types/prettier", "npm:2.7.3"],\
+            ["@types/prop-types", "npm:15.7.5"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-datepicker", "npm:4.11.2"],\
             ["@types/react-dom", "npm:18.2.4"],\
@@ -53,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:4.2.1"],\
             ["eslint-plugin-react", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:7.32.2"],\
             ["prettier", "npm:2.8.8"],\
+            ["prop-types", "npm:15.8.1"],\
             ["rc-slider", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:10.2.1"],\
             ["rc-tooltip", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:6.0.1"],\
             ["react", "npm:18.2.0"],\
@@ -10174,6 +10176,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/navermaps", "npm:3.6.5"],\
             ["@types/node", "npm:16.18.34"],\
             ["@types/prettier", "npm:2.7.3"],\
+            ["@types/prop-types", "npm:15.7.5"],\
             ["@types/react", "npm:18.2.7"],\
             ["@types/react-datepicker", "npm:4.11.2"],\
             ["@types/react-dom", "npm:18.2.4"],\
@@ -10191,6 +10194,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:4.2.1"],\
             ["eslint-plugin-react", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:7.32.2"],\
             ["prettier", "npm:2.8.8"],\
+            ["prop-types", "npm:15.8.1"],\
             ["rc-slider", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:10.2.1"],\
             ["rc-tooltip", "virtual:0487b1b8263ee74b6a800d7d32396247265bb66793913170b66fbaba014393ed5e7147a33f4bbb04ae9c659e18794d2a28c1045211d073c2ec3f37a52f31b1e7#npm:6.0.1"],\
             ["react", "npm:18.2.0"],\
