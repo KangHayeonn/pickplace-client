@@ -29,7 +29,7 @@ export const markerHtml = (name: string, tag: string[]) => {
                     ${name}
                 </h5>
                 <p className="tag-container"
-                    style="font-size: 12px; margin : 5px;">카테고리
+                    style="font-size: 12px; margin : 5px; line-height:15px;">카테고리
                     <span style="color: cadetblue;">#${tag[0]}</span>
                     <span style="color: seagreen;">#${tag[1]}</span>
                 </p>

@@ -15,7 +15,7 @@ const MapModal = ({ onCloseModal }: mapModalProps) => {
             <img src={closeBtnIcon}></img>
           </button>
         </div>
-        <Map></Map>
+        <Map width={'100%'} height={'600px'}></Map>
       </div>
     </div>
   );
