@@ -1,7 +1,7 @@
 import React from 'react';
 import Map from './Map';
 import '../../styles/components/map/mapModal.scss';
-import closeBtnIcon from '../../assets/images/close-btn.png';
+import closeBtnIcon from '../../assets/images/close_big.svg';
 
 type mapModalProps = {
   onCloseModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
