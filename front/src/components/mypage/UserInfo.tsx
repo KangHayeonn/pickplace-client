@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/components/mypage/userInfo.scss';
 import UpdateUserInfo from './UpdateUserInfo';
-
+import ShowUserInfo from './ShowUserInfo';
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({
     email: 'pickplace@gmail.com',
@@ -13,7 +13,7 @@ const UserInfo = () => {
   const [updatePhone, setUpdatePhone] = useState(false);
 
   // useEffect(() => {
-  //   Mypage.getUserInfo()
+  //   Mypage.getUserInfo(memberId)
   //     .then((res) => {
   //       return res;
   //     })
@@ -23,7 +23,7 @@ const UserInfo = () => {
   // }, []);
 
   const onUpdateNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //   Mypage.updateNickname()
+    //   Mypage.updateNickname(memberId,userInfo.nickName)
     //     .then((res) => {
     //       return res;
     //     })
@@ -33,7 +33,7 @@ const UserInfo = () => {
     setUpdateNickname(false);
   };
   const onUpdatePhone = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //   Mypage.updatePhone()
+    //   Mypage.updatePhone(memberId,userInfo.phone)
     //     .then((res) => {
     //       return res;
     //     })
@@ -57,10 +57,11 @@ const UserInfo = () => {
 
   return (
     <div className="userInfo">
-      <div className="userInfo-email">
-        <p>이메일</p>
-        <p>{userInfo.email}</p>
-      </div>
+      <ShowUserInfo
+        title={'이메일'}
+        content={userInfo.email}
+        classname={'userInfo-email'}
+      />
       <div className="userInfo-nickName">
         {updateNickname ? (
           <UpdateUserInfo
@@ -71,15 +72,11 @@ const UserInfo = () => {
             onClickUpdate={onUpdateNickname}
           />
         ) : (
-          <>
-            <div className="nickName-content">
-              <p>닉네임</p>
-              <p>{userInfo.nickName}</p>
-            </div>
-            <div className="update-btn">
-              <button onClick={() => setUpdateNickname(true)}>변경하기</button>
-            </div>
-          </>
+          <ShowUserInfo
+            title={'닉네임'}
+            content={userInfo.nickName}
+            setUpdateState={setUpdateNickname}
+          />
         )}
       </div>
       <div className="userInfo-phone">
@@ -92,15 +89,11 @@ const UserInfo = () => {
             onClickUpdate={onUpdatePhone}
           />
         ) : (
-          <>
-            <div className="phone-content">
-              <p>전화번호</p>
-              <p>{userInfo.phone}</p>
-            </div>
-            <div className="update-btn">
-              <button onClick={() => setUpdatePhone(true)}>변경하기</button>
-            </div>
-          </>
+          <ShowUserInfo
+            title={'전화번호'}
+            content={userInfo.phone}
+            setUpdateState={setUpdatePhone}
+          />
         )}
       </div>
       <div className="userInfo-btn__container">
