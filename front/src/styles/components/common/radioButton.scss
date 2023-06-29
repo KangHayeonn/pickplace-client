@@ -1,19 +1,15 @@
 @import "../../base/variable.scss";
+@import "../../base/mixin.scss";
+
 .radioGroup{
     display: flex;
-    justify-content: center;
     align-items:center;
-    label{   
+    label{  
+        @include button-white(); 
         cursor: pointer;  
-        border : $border-button;         
-        border-radius: $border-radius-button;
-        background-color: $color-surface-white;
         padding: 7px 22px;
         &:hover {
-            background-color: $color-surface-gray;
-            color: $color-text-black;
-            border: $border-button-hover;
-            box-shadow: $shadow-button-hover;
+            @include button-hover-gray();
         }
     }
     input[type=radio] {
@@ -21,9 +17,6 @@
     }
 
     input[type=radio]:checked +label{
-        background-color: $color-hover;
-        color: $color-text-white;
-        border: $border-button-hover;
-        box-shadow: $shadow-button-hover;
+        @include button-hover-black();
     }  
 }

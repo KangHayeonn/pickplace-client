@@ -13,12 +13,14 @@ interface TextProps {
   message?: string | undefined;
   textType?: string | undefined;
   inputType?: string | undefined;
+  value?: string | undefined;
   onChangeText?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const TextField = ({
   id,
   disabled,
+  value,
   className,
   placeholder,
   isError,
@@ -40,6 +42,7 @@ const TextField = ({
         <input
           type={type}
           id={id}
+          value={value}
           className={`text-field__input ${className}`}
           placeholder={placeholder}
           onChange={onChangeText}

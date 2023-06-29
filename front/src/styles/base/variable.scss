@@ -111,6 +111,28 @@ $color-dimmed: rgba(0, 0, 0, 0.4);
     letter-spacing: 1.5px;
 }
 
+
+@mixin button-white {
+    color : black;
+    border : $border-button;         
+    border-radius: $border-radius-button;
+    background-color: $color-surface-white;
+}
+
+@mixin button-hover-black {
+    background-color: $color-hover;
+    color:$color-text-white;
+    border: $border-button-hover;
+    box-shadow: $shadow-button-hover;
+}
+
+@mixin button-hover-gray {
+    background-color: $color-surface-gray;
+    color: $color-text-black;
+    border: $border-button-hover;
+    box-shadow: $shadow-button-hover;
+}
+
 // 전역으로 사용하는 그림자 스타일
 $shadow-bottom: 0 4px 4px rgba(0, 0, 0, 0.25);
 $shadow-center: 0 0 5px rgba(0, 0, 0, 0.25);
