@@ -4,7 +4,7 @@ import mapImg from '../assets/images/dummy_map.png';
 import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
 import { categoryList } from '../utils/categoryList';
-
+import Map from '../components/map/Map';
 const MainPage = () => {
   const navigate = useNavigate();
 
@@ -38,7 +38,9 @@ const MainPage = () => {
         <hr></hr>
         <article>
           <h1>나를 위한 맞춤 플레이스</h1>
-          <img src={mapImg} />
+          <div className="map-container">
+            <Map width={'70vw'} height={'500px'} />
+          </div>
         </article>
       </section>
     </div>

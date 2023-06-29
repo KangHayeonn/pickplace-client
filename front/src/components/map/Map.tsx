@@ -10,10 +10,12 @@ type markerListType = {
   tag: string[];
 };
 type mapProps = {
+  width: string;
+  height: string;
   //   markerList: markerListType[];
 };
 
-const Map = () => {
+const Map = ({ width, height }: mapProps) => {
   const { naver } = window;
 
   const getMinLng = (markerList: markerListType[]) => {
@@ -69,7 +71,6 @@ const Map = () => {
 
     const getClickHandler = (seq: number) => {
       return () => {
-        console.log(markerList[seq].id);
         // navigate(`/detail?id={markerList[seq].id}`)
       };
     };
@@ -79,7 +80,7 @@ const Map = () => {
     }
   }, []);
 
-  return <div id="map" style={{ width: '100%', height: '600px' }}></div>;
+  return <div id="map" style={{ width: width, height: height }}></div>;
 };
 
 export default Map;
