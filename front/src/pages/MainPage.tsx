@@ -39,7 +39,7 @@ const MainPage = () => {
         <article>
           <h1>나를 위한 맞춤 플레이스</h1>
           <div className="map-container">
-            <Map width={'70vw'} height={'500px'}></Map>
+            <Map width={'70vw'} height={'500px'} />
           </div>
         </article>
       </section>
