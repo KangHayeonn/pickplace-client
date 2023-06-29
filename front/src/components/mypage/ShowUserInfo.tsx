@@ -1,19 +1,13 @@
 import React from 'react';
 import '../../styles/components/mypage/userInfo.scss';
-
-type ShowUserInfo = {
-  classname?: string | undefined;
-  title: string;
-  content: string;
-  setUpdateState?: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import * as type from './types';
 
 const ShowUserInfo = ({
   classname,
   title,
   content,
   setUpdateState,
-}: ShowUserInfo) => {
+}: type.ShowUserInfo) => {
   return (
     <>
       <div className={classname}>

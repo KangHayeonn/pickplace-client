@@ -1,26 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '../common/TextField';
 import '../../styles/components/mypage/updateUserInfo.scss';
+import * as type from './types';
 
-type updateUserInfoProps = {
-  title: string;
-  search: string;
-  setUpdateState: React.Dispatch<React.SetStateAction<boolean>>;
-  onChangeSearch: React.ChangeEventHandler<HTMLInputElement>;
-  onClickUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
 const UpdateUserInfo = ({
   title,
-  search,
+  value,
   onChangeSearch,
   setUpdateState,
   onClickUpdate,
-}: updateUserInfoProps) => {
+}: type.updateUserInfoProps) => {
   return (
     <div className="updateUserInfo">
       <h4>{title}</h4>
       <div className="textField-container">
-        <TextField onChangeText={onChangeSearch} value={search} />
+        <TextField onChangeText={onChangeSearch} value={value} />
       </div>
       <div className="updateUserInfo-btn__container">
         <button onClick={() => setUpdateState(false)}>취소</button>

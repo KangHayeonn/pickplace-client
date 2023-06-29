@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/components/mypage/userInfo.scss';
 import UpdateUserInfo from './UpdateUserInfo';
 import ShowUserInfo from './ShowUserInfo';
+
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({
     email: 'pickplace@gmail.com',
@@ -66,7 +67,7 @@ const UserInfo = () => {
         {updateNickname ? (
           <UpdateUserInfo
             title={'닉네임 변경'}
-            search={userInfo.nickName}
+            value={userInfo.nickName}
             onChangeSearch={onNicknameChange}
             setUpdateState={setUpdateNickname}
             onClickUpdate={onUpdateNickname}
@@ -83,7 +84,7 @@ const UserInfo = () => {
         {updatePhone ? (
           <UpdateUserInfo
             title={'전화번호 변경'}
-            search={userInfo.phone}
+            value={userInfo.phone}
             onChangeSearch={onPhoneChange}
             setUpdateState={setUpdatePhone}
             onClickUpdate={onUpdatePhone}

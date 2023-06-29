@@ -3,8 +3,7 @@
 @import "../../base/variable.scss";
 
 .userInfo{
-    width : 80vw;
-    margin : 0 auto;
+    min-width : 500px;
     font-weight: 600;
     .userInfo-email,.userInfo-nickName,.userInfo-phone{
         padding : 40px;
@@ -22,7 +21,7 @@
         }
     }
     .userInfo-email{        
-        background-color: #E8E8E8;
+        background-color: $color-secondary;
     }
     .userInfo-nickName,.userInfo-phone{
         display : flex;
@@ -31,16 +30,13 @@
         background-color: white;
         box-shadow: $shadow-dropdown;
     }
-
     .userInfo-btn__container{
         display:flex;
         align-items: center;
         justify-content: flex-end;
-
         button{
-            cursor: pointer;  
             @include button-white(); 
-
+            cursor: pointer;  
             padding: 5px 0;
             width : 110px;
             font-size: 15px;
@@ -49,8 +45,5 @@
                 @include button-hover-black();
             }
         }
-
     }
-
 }
-

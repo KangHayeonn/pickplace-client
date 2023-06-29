@@ -1,0 +1,80 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+.reservation{
+    min-width : 530px;
+}
+.card-container{
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin : 10px 0;
+    height: 240px;
+
+    .img-container{
+        background-color: $color-secondary;
+        min-width: 230px;
+        width: 30%;
+        height : 100%;
+    }
+    .card-content{
+        width : 100%;
+        padding : 10px 30px;
+        text-align: left;
+        .card-placeName{
+            margin-top : 10px;
+            height : 30px;
+            width :100%;
+            font-weight: 800;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            word-break: keep-all;
+        }
+        .card-reservationId{
+            font-size: 15px;
+        }
+        .card-reservationStatus{
+            font-weight: 600;
+            color : $color-text-green;
+            cursor: pointer;  
+            margin-right : 1.2vw;
+            font-size: 16px;
+
+            .review{
+                margin-left : 15px;
+                &:hover {
+                    color: $color-text-darkgreen;
+                }  
+            }
+        }
+
+        .row-bottom{
+            width : 100%;
+            padding : 10px 0;
+            display : flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            .checkin,.checkout,.reservation-time{
+                display: inline-block;
+                width : 65px;
+            }
+            .bottom-left p{
+                min-width : 250px;
+            }
+            .bottom-right p{
+                min-width : 200px;
+            }
+            span{
+                font-size: 15px;
+            }
+        }
+
+    }
+}

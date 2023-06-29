@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import '../../styles/components/search/searchFilter.scss';
 import RadioGroup from '../common/RadioGroupContext';
 import RadioButton from '../common/RadioButton';
+import * as type from './types';
 
-type headerProps = {
-  onClickHeaderButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const Header = ({ onClickHeaderButton }: headerProps) => {
+const Header = ({ onClickHeaderButton }: type.headerProps) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const userHeader = [
     { value: '0', name: '예약내역' },
