@@ -1,6 +1,6 @@
-@import "../../base/reset.scss";
-@import "../../base/mixin.scss";
-@import "../../base/variable.scss";
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
 
 .userInfo{
     min-width : 500px;
@@ -15,7 +15,6 @@
             background-color: rgba(0,0,0,0);
             font-size : 17px;
             &:hover {
-                background-color: rgba(0,0,0,0);
                 color : $color-text-green;
             }
         }

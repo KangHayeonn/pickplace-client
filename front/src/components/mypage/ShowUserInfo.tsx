@@ -1,18 +1,18 @@
 import React from 'react';
-import '../../styles/components/mypage/userInfo.scss';
 import * as type from './types';
 
 const ShowUserInfo = ({
-  classname,
+  parentClassname,
+  childClassname,
   title,
   content,
   setUpdateState,
 }: type.ShowUserInfo) => {
   return (
     <>
-      <div className={classname}>
+      <div className={parentClassname}>
         <p>{title}</p>
-        <p>{content}</p>
+        <p className={childClassname}>{content}</p>
       </div>
       {setUpdateState && (
         <div>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../../styles/components/search/searchFilter.scss';
 import RadioGroup from '../common/RadioGroupContext';
 import RadioButton from '../common/RadioButton';
 import * as type from './types';
+import '../../styles/components/search/searchFilter.scss';
 
 const Header = ({ onClickHeaderButton }: type.headerProps) => {
   const [isAdmin, setIsAdmin] = useState(false);

@@ -1,0 +1,28 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.reservation-detail{
+    width : 70vw;
+    margin : 40px auto;
+    .back-btn__container{
+        display: flex;
+        justify-content: flex-start;        
+    }
+    .back-btn{
+        background-color: rgba(0,0,0,0);
+        color : $color-text-green;
+        font-size : 15px;
+        font-weight: 600;
+        cursor: pointer;  
+        &:hover {
+            color: $color-text-darkgreen;
+        }  
+    }
+    hr{
+        color: $color-text-darkgreen;
+        width : 100%;
+        border-top : 1px solid rgb(195, 195, 195);  
+        margin : 15px 0;   
+    }
+}

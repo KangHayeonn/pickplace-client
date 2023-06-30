@@ -1,7 +1,7 @@
 import React from 'react';
-import TextField from '../common/TextField';
-import '../../styles/components/mypage/updateUserInfo.scss';
-import * as type from './types';
+import TextField from '../../common/TextField';
+import '../../../styles/components/mypage/userInfo/updateUserInfo.scss';
+import * as type from '../types';
 
 const UpdateUserInfo = ({
   title,

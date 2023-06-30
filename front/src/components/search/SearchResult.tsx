@@ -12,7 +12,7 @@ const SearchResult = ({ searchResult }: searchResultProps) => {
             <div className="row top">
               <h1 className="col-1 placeName">{item.placeName}</h1>
               <div className="col-2">
-                <img src={starIcon} alt="별점"></img>
+                <img src={starIcon} alt="Star Icon"></img>
                 <span className="rate">{item.placeRating}</span>
                 <span className="review">리뷰 {item.placeReviewCnt}</span>
               </div>

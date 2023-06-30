@@ -1,6 +1,6 @@
-@import "../../base/reset.scss";
-@import "../../base/mixin.scss";
-@import "../../base/variable.scss";
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
 
 .reservation{
     min-width : 530px;
@@ -13,7 +13,6 @@
     justify-content: flex-start;
     margin : 10px 0;
     height: 240px;
-
     .img-container{
         background-color: $color-secondary;
         min-width: 230px;
@@ -53,7 +52,6 @@
                 }  
             }
         }
-
         .row-bottom{
             width : 100%;
             padding : 10px 0;
@@ -75,6 +73,5 @@
                 font-size: 15px;
             }
         }
-
     }
 }

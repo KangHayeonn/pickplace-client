@@ -13,7 +13,6 @@ export interface reservationProps {
 
 export type cardProps = {
   reservationProps: reservationProps;
-  key: number;
 };
 
 export type headerProps = {
@@ -21,10 +20,18 @@ export type headerProps = {
 };
 
 export type ShowUserInfo = {
-  classname?: string | undefined;
+  parentClassname?: string | undefined;
+  childClassname?: string | undefined;
   title: string;
-  content: string;
+  content: string | number;
   setUpdateState?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type ShowCardInfo = {
+  parentClassname?: string | undefined;
+  childClassname?: string | undefined;
+  title: string;
+  content: string | number;
 };
 
 export type updateUserInfoProps = {
@@ -33,4 +40,34 @@ export type updateUserInfoProps = {
   setUpdateState: React.Dispatch<React.SetStateAction<boolean>>;
   onChangeSearch: React.ChangeEventHandler<HTMLInputElement>;
   onClickUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export type detailCardProps = {
+  children: React.ReactNode;
+  title?: string;
+};
+
+export type reservationDetailProps = {
+  reservationId: number;
+};
+
+export type detailHeaderProps = {
+  placeRating: number;
+  placeName: string;
+  reservationStatus: string;
+  ReviewExistence: boolean;
+};
+
+export type detailContentProps = {
+  address: string;
+  placePhone: string;
+  reservationId: number;
+  reservationDate: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  nickName: string;
+  personnel: number;
+  roomPrice: number;
 };

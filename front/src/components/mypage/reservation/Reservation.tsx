@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ResevationCard from './ResevationCard';
-import { reservationList } from '../../utils/reservationList';
-import '../../styles/components/mypage/reservationCard.scss';
+import { reservationList } from '../../../utils/reservationList';
+import '../../../styles/components/mypage/reservation/reservationCard.scss';
 
 const Reservation = () => {
   return (

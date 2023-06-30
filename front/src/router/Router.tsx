@@ -9,6 +9,7 @@ import SearchPage from '../pages/SearchPage';
 import PasswordPage from '../pages/PasswordPage';
 import MailPage from '../pages/MailPage';
 import MyPage from '../pages/MyPage';
+import ReservationDetail from '../components/mypage/reservation/ReservationDetail';
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
 // const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="/pwd" element={<PasswordPage />} />
           <Route path="/mail" element={<MailPage />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/detail" element={<ReservationDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

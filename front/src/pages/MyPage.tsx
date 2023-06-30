@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/mypage/Header';
-import Reservation from '../components/mypage/Reservation';
-import UserInfo from '../components/mypage/UserInfo';
+import Reservation from '../components/mypage/reservation/Reservation';
+import UserInfo from '../components/mypage/userInfo/UserInfo';
 import '../styles/components/mypage/mypage.scss';
 
 const MyPage = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../../styles/components/mypage/userInfo.scss';
 import UpdateUserInfo from './UpdateUserInfo';
-import ShowUserInfo from './ShowUserInfo';
+import ShowUserInfo from '../ShowUserInfo';
+import '../../../styles/components/mypage/userInfo/userInfo.scss';
 
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({
@@ -61,7 +61,7 @@ const UserInfo = () => {
       <ShowUserInfo
         title={'이메일'}
         content={userInfo.email}
-        classname={'userInfo-email'}
+        parentClassname={'userInfo-email'}
       />
       <div className="userInfo-nickName">
         {updateNickname ? (
