@@ -13,16 +13,6 @@ const UserInfo = () => {
   const [updateNickname, setUpdateNickname] = useState(false);
   const [updatePhone, setUpdatePhone] = useState(false);
 
-  // useEffect(() => {
-  //   Mypage.getUserInfo(memberId)
-  //     .then((res) => {
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       return Promise.reject(err);
-  //     });
-  // }, []);
-
   const onUpdateNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     //   Mypage.updateNickname(memberId,userInfo.nickName)
     //     .then((res) => {
