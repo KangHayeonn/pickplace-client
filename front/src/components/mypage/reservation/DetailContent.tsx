@@ -4,6 +4,7 @@ import ShowUserInfo from '../ShowUserInfo';
 import ShowCardInfo from '../ShowCardInfo';
 import * as type from '../types';
 import '../../../styles/components/mypage/reservation/detailContent.scss';
+
 const DetailContent = ({
   address,
   placePhone,
