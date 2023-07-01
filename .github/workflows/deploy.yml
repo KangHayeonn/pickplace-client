@@ -15,6 +15,7 @@ on:
       
 env:
   working-directory: ./front
+  REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
   
 jobs:
   build:
