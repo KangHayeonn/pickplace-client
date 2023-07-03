@@ -1,0 +1,20 @@
+@import "../../../base/variable.scss";
+
+.reservation {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    box-shadow: $shadow-center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    &__date {
+        display: flex;
+        width: 30rem;
+    }
+
+    &__time {
+        display: flex;
+        width: 30rem;
+    }
+}

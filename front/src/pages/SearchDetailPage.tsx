@@ -13,8 +13,12 @@ const SearchDetailPage = () => {
   return (
     <SearchDetailTemplate>
       <SearchDetailTitle />
-      <SearchDetailInfo />
-      <SearchDetailReservation />
+      {currPage === 'detail' ? (
+        <>
+          <SearchDetailInfo />
+          <SearchDetailReservation />
+        </>
+      ) : null}
       <SearchDetailList listType={currPage} />
     </SearchDetailTemplate>
   );
