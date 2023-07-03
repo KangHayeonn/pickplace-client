@@ -1,0 +1,14 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.detailcard-container{
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    margin : 10px 0;
+    text-align: left;
+    padding : 30px;
+    h3{
+        margin-bottom : 10px;
+    }
+}

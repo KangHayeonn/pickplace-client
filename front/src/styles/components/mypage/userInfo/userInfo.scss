@@ -1,0 +1,48 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.userInfo{
+    min-width : 500px;
+    font-weight: 600;
+    .userInfo-email,.userInfo-nickName,.userInfo-phone{
+        padding : 40px;
+        margin : 10px 0;
+        text-align: left;
+        button{
+            font-weight: 500;
+            color : $color-text-darkgreen;
+            background-color: rgba(0,0,0,0);
+            font-size : 17px;
+            &:hover {
+                color : $color-text-green;
+            }
+        }
+    }
+    .userInfo-email{        
+        background-color: $color-secondary;
+    }
+    .userInfo-nickName,.userInfo-phone{
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        box-shadow: $shadow-dropdown;
+    }
+    .userInfo-btn__container{
+        display:flex;
+        align-items: center;
+        justify-content: flex-end;
+        button{
+            @include button-white(); 
+            cursor: pointer;  
+            padding: 5px 0;
+            width : 110px;
+            font-size: 15px;
+            margin : 5px;
+            &:hover {
+                @include button-hover-black();
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.detail-header{
+    width : 100%;
+    display: block;
+    height : 330px;
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+
+    .detail-img__container{
+        background-color: $color-secondary;
+        height : 200px;
+        width : 100%;
+    }
+    .detail-header__content{
+        padding : 20px;
+        text-align: left;
+        .detail-placeName{
+            margin-bottom : 5px;
+            font-weight: 800;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        .detail-star{
+            color : $color-text-yellow;
+            margin-bottom : 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;        
+            img{
+                width : 20px;
+                height : 20px;
+                margin-right : 3px;
+            }
+        }
+        .detail-reservationStatus{
+            display: flex;
+            justify-content: flex-start;
+            color : $color-text-green;
+            font-size : 15px;
+            font-weight: 600;
+            .review{
+                margin-left : 10px;
+                cursor: pointer; 
+                &:hover {
+                    color: $color-text-darkgreen;
+                }  
+            }
+        }
+    }
+}
