@@ -51,3 +51,10 @@ jobs:
         run: aws s3 cp --recursive --region ap-northeast-2 build
             s3://pick-place
         working-directory: ${{ env.working-directory }}
+        
+      - name: Invalidate CloudFront Cache 
+        uses: chetan/invalidate-cloudfront-action@master
+        env:
+          AWS_DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
+          PATHS: '/index.html'
+        continue-on-error: true
