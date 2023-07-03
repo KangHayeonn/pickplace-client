@@ -5,6 +5,7 @@ import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import backArrow from '../../../assets/images/back_arrow.svg';
+
 const ReservationDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();

@@ -4,8 +4,14 @@
 
 .reservation{
     max-width: 100%;
-    min-width : 530px;
+    min-width : 550px;
 }
+
+.img-container,.card-header,.card-content{
+    cursor: pointer;
+
+}
+
 .card-container{
     background-color: white;
     box-shadow: $shadow-dropdown;    
@@ -20,59 +26,56 @@
         width: 30%;
         height : 100%;
     }
-    .card-content{
-        width : 100%;
-        padding : 10px 30px;
+    .card{
         text-align: left;
+        width : 100%;
+        padding : 0 30px;
+    }
+    .card-header{
         .card-placeName{
             margin-top : 10px;
-            height : 30px;
             width :100%;
             font-weight: 800;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            word-break: keep-all;
+            @include line-clamp-ellipsis1();
         }
         .card-reservationId{
             font-size: 15px;
         }
-        .card-reservationStatus{
-            font-weight: 600;
-            color : $color-text-green;
-            cursor: pointer;  
-            margin-right : 1.2vw;
-            font-size: 16px;
-
-            .review{
-                margin-left : 15px;
-                &:hover {
-                    color: $color-text-darkgreen;
-                }  
-            }
+    }
+    .card-content{
+        text-align: left;
+        padding : 10px 0;
+        .checkin,.checkout,.reservation-time{
+            display: inline-block;
+            width : 70px;
+            padding : 2px 0;
         }
-        .row-bottom{
-            width : 100%;
-            padding : 10px 0;
-            display : flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            .checkin,.checkout,.reservation-time{
-                display: inline-block;
-                width : 65px;
-            }
-            .bottom-left p{
-                min-width : 250px;
-            }
-            .bottom-right p{
-                min-width : 200px;
-            }
-            span{
-                font-size: 15px;
-            }
+        span{
+            font-size: 15px;
+        }
+    }
+    .card-reservationStatus{
+        margin : 0 0 1vw;
+        text-align: end;
+        font-weight: 600;
+        color : $color-text-green;
+        font-size: 16px;
+        .status{
+            display: inline-block;
+            width : 60px;
+            cursor : default;
+        }
+        .reviewCompleted,.review{
+            display: inline-block;
+            max-width : 100px;
+            margin-left : 15px;
+            cursor : default;
+        }
+        .review{
+            &:hover {
+                color: $color-text-lightgreen;
+            }  
+            cursor: pointer;  
         }
     }
 }

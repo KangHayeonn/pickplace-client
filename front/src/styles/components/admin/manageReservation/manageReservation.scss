@@ -1,0 +1,65 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.manageReservation{
+    max-width: 100%;
+    min-width : 550px;
+}
+.reservedCard-container{
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    margin : 10px 0;
+    border-radius : 5px;
+    height: 150px;
+    text-align: left;
+
+    .reservedCard-header{
+        cursor: pointer;  
+        padding : 30px 30px 10px 40px;
+        .reservedCard-placeName{
+            font-weight: 800;
+            @include line-clamp-ellipsis1();
+        }
+    }
+    .reservedCard-content{
+        cursor: pointer;  
+        padding : 10px 40px;
+        font-size: 16px;
+        .checkin,.checkout{
+            display: inline-block;
+            width : 70px;
+        }
+    }
+    .reservedCard-btn__container{
+        display: flex;
+        justify-content: flex-end;
+        margin : -20px 10px 0 0;
+
+        .reservedCard-btn__complete, 
+        .reservedCard-btn__refuse,
+        .reservedCard-btn__accept{
+            margin : 0 5px;
+            display: inline-block;
+        }
+        .reservedCard-btn__complete{
+            cursor : default;
+        }
+        
+        .reservedCard-btn__complete,
+        .reservedCard-btn__accept{
+            @include button-green;
+        }
+        .reservedCard-btn__refuse{
+            @include button-lightgreen;
+        }
+
+        .reservedCard-btn__accept,
+        .reservedCard-btn__refuse{
+            cursor: pointer;  
+            &:hover {
+                @include button-hover-green
+            }
+        }
+    }
+}
