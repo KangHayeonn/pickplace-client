@@ -1,0 +1,59 @@
+@import "../../../base/variable.scss";
+
+.info {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: $shadow-center;
+    margin-bottom: 1rem;
+
+    &__content {
+        display:flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &--item {
+            display: flex;
+        }
+    }
+
+    &__map {
+        display:flex;
+
+        &--btn {
+            @include text-subtitle2();
+            display: flex;
+            align-items: center;
+            appearance: none;
+            background-color: $color-surface-lightgray;
+            padding: 7px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+
+            &:hover {
+                color: $color-text-white;
+                background-color: $color-hover;
+            }
+
+            img {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.title {
+    @include text-subtitle1();
+    display: flex;
+    width: 6rem;
+    font-weight: 600;
+}
+
+.address {
+    @include text-subtitle1();
+}
+
+.number {
+    @include text-subtitle1();
+}

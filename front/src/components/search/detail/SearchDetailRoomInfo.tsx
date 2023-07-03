@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchDetailRoomInfo = () => {
-  return <div>Room info</div>;
+  return <div>room info</div>;
 };
 
 export default SearchDetailRoomInfo;
