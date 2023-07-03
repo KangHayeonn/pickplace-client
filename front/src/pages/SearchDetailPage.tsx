@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import SearchDetailTemplate from '../components/search/detail/SearchDetailTemplate';
 import SearchDetailTitle from '../components/search/detail/SearchDetailTitle';
 import SearchDetailInfo from '../components/search/detail/SearchDetailInfo';
 import SearchDetailList from '../components/search/detail/SearchDetailList';
@@ -10,12 +11,12 @@ const SearchDetailPage = () => {
   const currPage = location.pathname.split('/').at(-1);
 
   return (
-    <div>
+    <SearchDetailTemplate>
       <SearchDetailTitle />
       <SearchDetailInfo />
       <SearchDetailReservation />
       <SearchDetailList listType={currPage} />
-    </div>
+    </SearchDetailTemplate>
   );
 };
 

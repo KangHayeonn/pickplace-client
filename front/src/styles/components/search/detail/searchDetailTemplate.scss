@@ -1,0 +1,12 @@
+.search-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
+.search-detail__form {
+    width: 70rem;
+    min-height: 80rem;
+}
