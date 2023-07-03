@@ -4,6 +4,7 @@
 .radioGroup{
     display: flex;
     align-items:center;
+    
     label{  
         @include button-white(); 
         cursor: pointer;  
@@ -11,6 +12,7 @@
         &:hover {
             @include button-hover-gray();
         }
+        margin : 0 2px;
     }
     input[type=radio] {
         -webkit-appearance: none;            

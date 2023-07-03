@@ -8,10 +8,10 @@ const ShowCardInfo = ({
   content,
 }: type.ShowCardInfo) => {
   return (
-    <p className={parentClassname}>
+    <div className={parentClassname}>
       <span className={childClassname}>{title}</span>
       <span>{content}</span>
-    </p>
+    </div>
   );
 };
 

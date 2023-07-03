@@ -5,16 +5,18 @@
 .reservation-detail{
     width : 70vw;
     margin : 40px auto;
-    .back-btn__container{
-        display: flex;
-        justify-content: flex-start;        
-    }
+
     .back-btn{
+        display: flex;
+        justify-content: flex-start;   
+        align-items: center; 
         background-color: rgba(0,0,0,0);
-        color : $color-text-green;
-        font-size : 15px;
-        font-weight: 600;
-        cursor: pointer;  
+        label{
+            color : $color-text-green;
+            font-size : 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
         &:hover {
             color: $color-text-darkgreen;
         }  

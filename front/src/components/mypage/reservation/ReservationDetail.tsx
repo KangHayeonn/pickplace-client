@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
-
+import backArrow from '../../../assets/images/back_arrow.svg';
 const ReservationDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -23,11 +23,10 @@ const ReservationDetail = () => {
   // }, []);
   return (
     <div className="reservation-detail">
-      <p className="back-btn__container">
-        <button className="back-btn" onClick={onClickBack}>
-          ← 전체 예약 내역으로 돌아가기
-        </button>
-      </p>
+      <button className="back-btn" onClick={onClickBack}>
+        <img src={backArrow} />
+        <label>전체 예약 내역으로 돌아가기</label>
+      </button>
       <DetailHeader
         placeName={reservationDetail.placeName}
         placeRating={reservationDetail.placeRating}
