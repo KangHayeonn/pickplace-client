@@ -3151,7 +3151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-datepicker@npm:^4":
+"@types/react-datepicker@npm:^4.11.2":
   version: 4.11.2
   resolution: "@types/react-datepicker@npm:4.11.2"
   dependencies:
@@ -4977,7 +4977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.x, classnames@npm:^2.2.1, classnames@npm:^2.2.5, classnames@npm:^2.3.1, classnames@npm:^2.3.2":
+"classnames@npm:2.x, classnames@npm:^2.2.1, classnames@npm:^2.2.5, classnames@npm:^2.2.6, classnames@npm:^2.3.1, classnames@npm:^2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
@@ -5640,7 +5640,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.0.1, date-fns@npm:^2.30.0":
+"date-fns@npm:^2.0.1, date-fns@npm:^2.24.0, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -7152,7 +7152,7 @@ __metadata:
     "@types/prettier": ^2
     "@types/prop-types": ^15
     "@types/react": ^18.0.0
-    "@types/react-datepicker": ^4
+    "@types/react-datepicker": ^4.11.2
     "@types/react-dom": ^18.0.0
     "@types/react-redux": ^7.1.25
     "@types/react-router-dom": ^5.3.3
@@ -7172,6 +7172,7 @@ __metadata:
     rc-slider: ^10.2.1
     rc-tooltip: ^6.0.1
     react: ^18.2.0
+    react-datepicker: ^4.15.0
     react-dom: ^18.2.0
     react-redux: ^8.0.7
     react-router-dom: ^6.11.2
@@ -11440,7 +11441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -11666,6 +11667,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-datepicker@npm:^4.15.0":
+  version: 4.15.0
+  resolution: "react-datepicker@npm:4.15.0"
+  dependencies:
+    "@popperjs/core": ^2.9.2
+    classnames: ^2.2.6
+    date-fns: ^2.24.0
+    prop-types: ^15.7.2
+    react-onclickoutside: ^6.12.2
+    react-popper: ^2.3.0
+  peerDependencies:
+    react: ^16.9.0 || ^17 || ^18
+    react-dom: ^16.9.0 || ^17 || ^18
+  checksum: 1a61a5328fcae0611f61873b5f752f9ceb4092dcce0d5c6caab70a71b8f059c7a4a4bca25ffebf5c9906947c38160e056790e0c7fd95d24d2b9a5105053dbae3
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.1":
   version: 12.0.1
   resolution: "react-dev-utils@npm:12.0.1"
@@ -11745,7 +11763,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-popper@npm:^2.2.5":
+"react-onclickoutside@npm:^6.12.2":
+  version: 6.13.0
+  resolution: "react-onclickoutside@npm:6.13.0"
+  peerDependencies:
+    react: ^15.5.x || ^16.x || ^17.x || ^18.x
+    react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
+  checksum: a7cfe62e91f7f92891cda7b885d6eec7b2854850f8703ccafcea5c04bb93a210a566a70b51b9fae0cc30c3485e04eb6a3f3ae58f495cac3ec2747b4fc44d1ad2
+  languageName: node
+  linkType: hard
+
+"react-popper@npm:^2.2.5, react-popper@npm:^2.3.0":
   version: 2.3.0
   resolution: "react-popper@npm:2.3.0"
   dependencies:

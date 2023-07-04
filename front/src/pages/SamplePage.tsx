@@ -13,6 +13,7 @@ import TextField from '../components/common/TextField';
 import ToastBox from '../components/common/ToastBox';
 import RadioGroup from '../components/common/RadioGroupContext';
 import RadioButton from '../components/common/RadioButton';
+import Calendar from '../components/common/Calendar';
 
 const SamplePage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ const SamplePage = () => {
   const [isShowToast, setIsShowToast] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
   // const [count, setCount] = useState(0);
+
+  const [date, setDate] = useState<Date | null>(null);
+  const [dateRange, setDateRange] = useState<Date | null>(null);
 
   const onIncrease = () => {
     dispatch(increase());
@@ -94,6 +98,9 @@ const SamplePage = () => {
         <RadioButton value="button">버튼</RadioButton>
         <RadioButton value="test">예시</RadioButton>
       </RadioGroup>
+      <Calendar calendarType="time" />
+      <Calendar calendarType="date" />
+      <Calendar calendarType="range" />
     </div>
   );
 };

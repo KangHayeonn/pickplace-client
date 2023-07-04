@@ -10,6 +10,7 @@
 
     &__date {
         display: flex;
+        align-items: center;
         width: 30rem;
 
         &--title {
@@ -22,6 +23,7 @@
 
     &__time {
         display: flex;
+        align-items: center;
         width: 30rem;
 
         &--title {
