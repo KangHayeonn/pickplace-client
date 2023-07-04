@@ -6,6 +6,7 @@ import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
 import SamplePage from '../pages/SamplePage';
 import SearchPage from '../pages/SearchPage';
+import SearchDetailPage from '../pages/SearchDetailPage';
 import PasswordPage from '../pages/PasswordPage';
 import MailPage from '../pages/MailPage';
 import MyPage from '../pages/MyPage';
@@ -24,6 +25,14 @@ const Router = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sample" element={<SamplePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route
+            path="/search/:searchId/detail"
+            element={<SearchDetailPage />}
+          />
+          <Route
+            path="/search/:searchId/review"
+            element={<SearchDetailPage />}
+          />
           <Route path="/pwd" element={<PasswordPage />} />
           <Route path="/mail" element={<MailPage />} />
           <Route path="/mypage" element={<MyPage />} />

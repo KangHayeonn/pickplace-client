@@ -1,0 +1,53 @@
+@import "../../../base/variable.scss";
+
+.search-detail-review {
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 30px;
+        gap: 0.5rem;
+        width: 68rem;
+        color: $color-primary;
+
+        &--rating{
+            @include text-h6();
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: $color-text-yellow;
+
+            img {
+                margin-right: 5px;
+            }
+        }
+
+        &--content {
+            @include text-body1();
+            white-space: normal;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        &--info {
+            display:flex;
+            justify-content: flex-end;
+            width: 100%;
+            gap: 1.5rem;
+
+            &__writer {
+                @include text-body2();
+                font-weight: 600;
+            }
+
+            &__date {
+                @include text-body2();
+                font-weight: 600;
+            }
+        }
+    }
+}

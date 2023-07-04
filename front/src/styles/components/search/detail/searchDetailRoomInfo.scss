@@ -1,0 +1,63 @@
+@import "../../../base/variable.scss";
+
+.search-detail-room {
+    
+    &__image {
+        background: url("../../../../assets/images/place-default-small.svg") no-repeat;
+        background-size: cover;
+        width: 16.5rem;
+        height: 8rem;
+        color: transparent;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 40px;
+        gap: 0.5rem;
+        width: 48.5rem;
+
+        &--title {
+            @include text-h6();
+            font-weight: 600;
+            line-height: 2rem;
+        }
+
+        &--info {
+            @include text-subtitle1();
+            display: flex;
+            gap: 4rem;
+        }
+
+        &--btn {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+            &__reservation {
+                @include text-subtitle1();
+                font-weight: 600;
+                color: $color-text-green;
+                appearance: none;
+                background-color: transparent;
+            }
+
+            &__closed {
+                @include text-subtitle1();
+                font-weight: 600;
+                color: $color-gray;
+                cursor: not-allowed;
+            }
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        &:last-child {
+            gap: 0;
+        }
+    }
+
+}
