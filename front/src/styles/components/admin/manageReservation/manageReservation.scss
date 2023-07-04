@@ -31,35 +31,7 @@
             width : 70px;
         }
     }
-    .reservedCard-btn__container{
-        display: flex;
-        justify-content: flex-end;
+    .reservedCard__btns{
         margin : -20px 10px 0 0;
-
-        .reservedCard-btn__complete, 
-        .reservedCard-btn__refuse,
-        .reservedCard-btn__accept{
-            margin : 0 5px;
-            display: inline-block;
-        }
-        .reservedCard-btn__complete{
-            cursor : default;
-        }
-        
-        .reservedCard-btn__complete,
-        .reservedCard-btn__accept{
-            @include button-green;
-        }
-        .reservedCard-btn__refuse{
-            @include button-lightgreen;
-        }
-
-        .reservedCard-btn__accept,
-        .reservedCard-btn__refuse{
-            cursor: pointer;  
-            &:hover {
-                @include button-hover-green
-            }
-        }
     }
 }

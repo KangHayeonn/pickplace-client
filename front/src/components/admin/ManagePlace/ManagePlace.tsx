@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../styles/components/admin/managePlace/managePlace.scss';
-import { adminPlaceList } from '../../utils/mock/adminPlaceList';
+import '../../../styles/components/admin/managePlace/managePlace.scss';
+import { adminPlaceList } from '../../../utils/mock/adminPlaceList';
 import PlaceCard from './PlaceCard';
 
 const ManagePlace = () => {

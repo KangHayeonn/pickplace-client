@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ShowCardInfo from '../mypage/ShowCardInfo';
+import ShowCardInfo from '../../mypage/ShowCardInfo';
 
 type placeCardProps = {
   adminPlaceProps: {

@@ -3,26 +3,18 @@
 @import "../../../base/variable.scss";
 
 .reservation-detail{
-    width : 70vw;
+    width : 60%;
+    min-width: 550px;    
     margin : 40px auto;
 
-    .back-btn{
+    .reservation-detail__back--btn{
         display: flex;
         justify-content: flex-start;   
         align-items: center; 
+        margin : 0 0 -30px 10px;
         background-color: rgba(0,0,0,0);
-        label{
-            color : $color-text-green;
-            font-size : 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        &:hover {
-            color: $color-text-lightgreen;
-        }  
     }
     hr{
-        color: $color-text-lightgreen;
         width : 100%;
         border-top : 1px solid rgb(195, 195, 195);  
         margin : 15px 0;   

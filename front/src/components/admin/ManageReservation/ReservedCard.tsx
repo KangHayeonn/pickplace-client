@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ShowCardInfo from '../mypage/ShowCardInfo';
+import ShowCardInfo from '../../mypage/ShowCardInfo';
+import ReservationBtns from '../ReservationBtns';
 
 type reservedCardProps = {
   adminReservationProps: {
@@ -21,10 +22,14 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
     const state = {
       id: adminReservationProps.reservationId,
     };
-    navigate('/reservationDetail', {
-      state: state,
-    });
+    navigate(
+      `/manage/reservation/detail/${adminReservationProps.reservationId}`,
+      {
+        state: state,
+      },
+    );
   };
+
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('수락완료');
   };
@@ -56,28 +61,12 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
           }
         />
       </div>
-      <div className="reservedCard-btn__container">
-        {adminReservationProps.reservationStatus == '수락완료' && (
-          <button className="reservedCard-btn__complete" disabled>
-            수락완료
-          </button>
-        )}
-        {adminReservationProps.reservationStatus == '수락대기' && (
-          <>
-            <button
-              className="reservedCard-btn__refuse"
-              onClick={onClickRefuseBtn}
-            >
-              예약거절
-            </button>
-            <button
-              className="reservedCard-btn__accept"
-              onClick={onClickAcceptBtn}
-            >
-              예약수락
-            </button>
-          </>
-        )}
+      <div className="reservedCard__btns">
+        <ReservationBtns
+          reservationStatus={adminReservationProps.reservationStatus}
+          onClickAcceptBtn={onClickAcceptBtn}
+          onClickRefuseBtn={onClickRefuseBtn}
+        />
       </div>
     </div>
   );

@@ -24,9 +24,8 @@ const ReservationDetail = () => {
   // }, []);
   return (
     <div className="reservation-detail">
-      <button className="back-btn" onClick={onClickBack}>
+      <button className="reservation-detail__back--btn" onClick={onClickBack}>
         <img src={backArrow} />
-        <label>전체 예약 내역으로 돌아가기</label>
       </button>
       <DetailHeader
         placeName={reservationDetail.placeName}

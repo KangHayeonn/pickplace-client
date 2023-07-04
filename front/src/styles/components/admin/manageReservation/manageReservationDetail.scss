@@ -1,0 +1,42 @@
+@import "../../../base/reset.scss";
+@import "../../../base/mixin.scss";
+@import "../../../base/variable.scss";
+
+.manageReservation-detail{
+    width : 60%;
+    min-width: 550px;
+    margin : 40px auto;
+    .manageReservation-detail__back--btn{
+        cursor: pointer;
+        display: flex;
+        justify-content: flex-start;
+        margin : 0 0 -30px 10px;
+        background-color: rgba(0,0,0,0);
+    }
+    .manageReservation-detail__header{
+        width : 100%;
+        display: block;
+        background-color: white;
+        box-shadow: $shadow-dropdown;   
+        .manageReservation-detail__img--container{
+            background-color: $color-secondary;
+            height : 200px;
+            width : 100%;
+        }
+        .manageReservation-detail__header--content{
+            padding : 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .manageReservation-detail__placeName{
+                font-weight: 800;
+                @include line-clamp-ellipsis1();
+            }
+        }
+    }
+    hr{
+        width : 100%;
+        border-top : 1px solid rgb(195, 195, 195);  
+        margin : 15px 0;   
+    }
+}
