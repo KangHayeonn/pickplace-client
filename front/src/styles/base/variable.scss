@@ -15,7 +15,8 @@ $color-toast-background: rgba(0, 0, 0, 0.8);
 $color-text-white: #fff;
 $color-text-black: #000;
 $color-text-green: #63B224;
-$color-text-darkgreen: #ABC09B;
+$color-text-lightgreen: #ABC09B;
+$color-text-darkgreen: #577142;
 $color-text-gray: #a0a0a0;
 $color-text-yellow: #F9C74F;
 $color-placeholder: rgba(0, 0, 0, 0.3);
@@ -131,6 +132,36 @@ $color-dimmed: rgba(0, 0, 0, 0.4);
     color: $color-text-black;
     border: $border-button-hover;
     box-shadow: $shadow-button-hover;
+}
+
+@mixin button-green {
+    background-color: $color-surface-lightgray;
+    color: $color-text-green;
+    border-radius: $border-radius-button;
+    padding: 8px 16px;
+    font-weight: 700
+}
+
+@mixin button-lightgreen {
+    background-color: $color-surface-lightgray;
+    color: $color-text-lightgreen;
+    border-radius: $border-radius-button;
+    padding: 8px 16px;
+    font-weight: 700
+}
+
+@mixin button-hover-green {
+    background-color: $color-lightgray;
+    color : $color-text-darkgreen;
+}
+
+@mixin line-clamp-ellipsis1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
 }
 
 // 전역으로 사용하는 그림자 스타일

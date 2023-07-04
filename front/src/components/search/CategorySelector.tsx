@@ -1,5 +1,5 @@
 import React from 'react';
-import { categoryNameList } from '../../utils/categoryList';
+import { categoryNameList } from '../../utils/mock/categoryList';
 import DropDown from '../common/DropDown';
 import { categorySelectorProps } from './types';
 

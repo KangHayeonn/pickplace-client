@@ -10,7 +10,8 @@ import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
-import { hotelSearchResult } from '../utils/searchList';
+import { hotelSearchResult } from '../utils/mock/searchList';
+import { categoryList } from '../utils/mock/categoryList';
 import * as type from '../components/search/types';
 
 const SearchPage = () => {
@@ -32,7 +33,9 @@ const SearchPage = () => {
   const [optionForm, setOptionForm] = useState<type.optionFormProps>({
     startTime: '',
     endTime: '',
-    category: state,
+    category: state
+      ? state
+      : { name: categoryList[0].name, id: categoryList[0].id },
     userCnt: 1,
     tagId: [],
   });
