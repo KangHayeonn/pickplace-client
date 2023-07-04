@@ -9,7 +9,7 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
     const state = {
       id: reservationProps.reservationId,
     };
-    navigate('/detail', {
+    navigate(`/reservation/detail/${reservationProps.reservationId}`, {
       state: state,
     });
   };

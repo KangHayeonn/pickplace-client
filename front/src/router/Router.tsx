@@ -27,7 +27,10 @@ const Router = () => {
           <Route path="/pwd" element={<PasswordPage />} />
           <Route path="/mail" element={<MailPage />} />
           <Route path="/mypage" element={<MyPage />} />
-          <Route path="/detail" element={<ReservationDetail />} />
+          <Route
+            path="/reservation/detail/:reservationId"
+            element={<ReservationDetail />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
