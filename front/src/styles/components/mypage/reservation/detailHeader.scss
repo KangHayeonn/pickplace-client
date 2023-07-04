@@ -20,11 +20,7 @@
         .detail-placeName{
             margin-bottom : 5px;
             font-weight: 800;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
+            @include line-clamp-ellipsis1();
         }
         .detail-star{
             color : $color-text-yellow;
@@ -45,11 +41,14 @@
             color : $color-text-green;
             font-size : 15px;
             font-weight: 600;
+            .reviewCompleted{
+                margin-left : 10px;
+            }
             .review{
                 margin-left : 10px;
                 cursor: pointer; 
                 &:hover {
-                    color: $color-text-darkgreen;
+                    color: $color-text-lightgreen;
                 }  
             }
         }

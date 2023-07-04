@@ -1,10 +1,11 @@
 import React from 'react';
-import { reservationDetail } from '../../../utils/reservationDetail';
+import { reservationDetail } from '../../../utils/mock/reservationDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import backArrow from '../../../assets/images/back_arrow.svg';
+
 const ReservationDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();

@@ -9,6 +9,9 @@ const DetailHeader = ({
   reservationStatus,
   ReviewExistence,
 }: type.detailHeaderProps) => {
+  const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
+    window.alert('리뷰작성');
+  };
   return (
     <div className="detail-header">
       <div className="detail-img__container">{/* <img /> */}</div>
@@ -22,9 +25,11 @@ const DetailHeader = ({
           {reservationStatus}
           {reservationStatus == '이용 완료' &&
             (ReviewExistence ? (
-              <span className="review">리뷰 작성 완료</span>
+              <span className="reviewCompleted">리뷰 작성 완료</span>
             ) : (
-              <span className="review">리뷰 작성하기</span>
+              <span className="review" onClick={onClickCreateReview}>
+                리뷰 작성하기
+              </span>
             ))}
           {reservationStatus == '이용 전' && (
             <span className="review">예약 취소</span>

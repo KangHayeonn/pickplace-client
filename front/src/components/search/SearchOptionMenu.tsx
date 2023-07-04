@@ -4,7 +4,7 @@ import DistanceInput from './DistanceInput';
 import TagSelector from './TagSelector';
 import { searchOptionMenuProps } from './types';
 import '../../styles/components/search/searchOptionMenu.scss';
-import { categoryList } from '../../utils/categoryList';
+import { categoryList } from '../../utils/mock/categoryList';
 import NumberForm from '../common/NumberForm';
 
 const SearchOptionMenu = ({

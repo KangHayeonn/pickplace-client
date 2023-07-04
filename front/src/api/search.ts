@@ -1,6 +1,6 @@
 // import { instance } from "../index";
 //const prefix = "/api/v1";
-import { spaceSearchResult, hotelSearchResult } from '../utils/searchList';
+import { spaceSearchResult, hotelSearchResult } from '../utils/mock/searchList';
 
 type getSearchDataProps = {
   address: string;

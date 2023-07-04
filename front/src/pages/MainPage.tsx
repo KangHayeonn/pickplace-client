@@ -3,7 +3,7 @@ import articleImg from '../assets/images/main-article.png';
 import mapImg from '../assets/images/dummy_map.png';
 import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
-import { categoryList } from '../utils/categoryList';
+import { categoryList } from '../utils/mock/categoryList';
 import Map from '../components/map/Map';
 const MainPage = () => {
   const navigate = useNavigate();

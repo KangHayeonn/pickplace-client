@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef, useEffect } from 'react';
 import { markerHtml } from './MarkerHtml';
-import { markerList } from '../../utils/markerList';
+import { markerList } from '../../utils/mock/markerList';
 
 type markerListType = {
   lat: number;

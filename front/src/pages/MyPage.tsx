@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Header from '../components/mypage/Header';
 import Reservation from '../components/mypage/reservation/Reservation';
 import UserInfo from '../components/mypage/userInfo/UserInfo';
+import ManagePlace from '../components/admin/ManagePlace';
+import ManageReservation from '../components/admin/ManageReservation';
 import '../styles/components/mypage/mypage.scss';
 
 const MyPage = () => {
@@ -17,8 +19,10 @@ const MyPage = () => {
         <Header onClickHeaderButton={onClickHeaderButton} />
       </div>
       <div className="mypage-content">
-        {clickedMenu == 0 && <Reservation></Reservation>}
-        {clickedMenu == 1 && <UserInfo></UserInfo>}
+        {clickedMenu === 0 && <Reservation />}
+        {clickedMenu === 1 && <UserInfo />}
+        {clickedMenu === 2 && <ManagePlace />}
+        {clickedMenu === 3 && <ManageReservation />}
       </div>
     </div>
   );
