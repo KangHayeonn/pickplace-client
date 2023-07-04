@@ -1,5 +1,5 @@
 import React from 'react';
-import tagList from '../../utils/tagList';
+import tagList from '../../utils/mock/tagList';
 import { tagSelectorProps } from './types';
 
 const TagSelector = ({ onClickTagButton }: tagSelectorProps) => {

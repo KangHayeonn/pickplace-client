@@ -19,10 +19,10 @@ const MyPage = () => {
         <Header onClickHeaderButton={onClickHeaderButton} />
       </div>
       <div className="mypage-content">
-        {clickedMenu == 0 && <Reservation />}
-        {clickedMenu == 1 && <UserInfo />}
-        {clickedMenu == 2 && <ManagePlace />}
-        {clickedMenu == 3 && <ManageReservation />}
+        {clickedMenu === 0 && <Reservation />}
+        {clickedMenu === 1 && <UserInfo />}
+        {clickedMenu === 2 && <ManagePlace />}
+        {clickedMenu === 3 && <ManageReservation />}
       </div>
     </div>
   );

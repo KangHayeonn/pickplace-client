@@ -1,6 +1,6 @@
 import React from 'react';
 import ResevationCard from './ResevationCard';
-import { reservationList } from '../../../utils/reservationList';
+import { reservationList } from '../../../utils/mock/reservationList';
 import '../../../styles/components/mypage/reservation/reservationCard.scss';
 
 const Reservation = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { reservationDetail } from '../../../utils/reservationDetail';
+import { reservationDetail } from '../../../utils/mock/reservationDetail';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';

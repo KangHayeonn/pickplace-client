@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/components/admin/manageReservation/manageReservation.scss';
-import { adminReservationList } from '../../utils/adminReservationList';
+import { adminReservationList } from '../../utils/mock/adminReservationList';
 import ReservedCard from './ReservedCard';
 
 const ManageReservation = () => {

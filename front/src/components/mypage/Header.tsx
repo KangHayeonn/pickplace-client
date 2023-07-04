@@ -5,7 +5,7 @@ import * as type from './types';
 import '../../styles/components/search/searchFilter.scss';
 
 const Header = ({ onClickHeaderButton }: type.headerProps) => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState<boolean>(true);
   const userHeader = [
     { value: '0', name: '예약내역' },
     { value: '1', name: '회원정보' },
