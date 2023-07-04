@@ -1,4 +1,4 @@
-export const markerHtml = (name: string, tag: string[]) => {
+export const markerHtml = (name: string, category: string, tag: string[]) => {
   // parameter로 이미지 src 받기
   return `
             <div 
@@ -45,7 +45,7 @@ export const markerHtml = (name: string, tag: string[]) => {
                         margin : 5px; 
                         line-height:15px;
                     ">
-                    카테고리
+                    ${category}
                     <span style="color: cadetblue;">#${tag[0]}</span>
                     <span style="color: seagreen;">#${tag[1]}</span>
                 </p>
