@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../styles/components/search/detail/searchDetailList.scss';
+import '../../../styles/components/search/detail/searchDetailRoomInfo.scss';
 
 interface SearchDetailRoomInfoProps {
   roomItem?: {
@@ -15,22 +16,27 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
     <>
       {roomItem ? (
         <li className="search-list__container--item">
-          <div className="image">image</div>
-          <div className="content">
-            <div className="content__title">
+          <div className="search-detail-room__image">image</div>
+          <div className="search-detail-room__content">
+            <div className="search-detail-room__content--title">
               {roomItem?.roomName} (최대 8인)
             </div>
-            <div className="content__info">
+            <div className="search-detail-room__content--info">
               <span>가격</span>
               <span>{roomItem?.roomPrice}원</span>
             </div>
-            <div className="content__btn">
+            <div className="search-detail-room__content--btn">
               {roomItem?.roomStatus === 'progress' ? (
-                <button type="button" className="content__btn--reservation">
+                <button
+                  type="button"
+                  className="search-detail-room__content--btn__reservation"
+                >
                   예약하기
                 </button>
               ) : (
-                <div className="content__btn--closed">예약마감</div>
+                <div className="search-detail-room__content--btn__closed">
+                  예약마감
+                </div>
               )}
             </div>
           </div>

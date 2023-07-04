@@ -8,19 +8,19 @@ const SearchDetailInfo = () => {
   };
 
   return (
-    <div className="info">
-      <div className="info__content">
-        <div className="info__content--item">
-          <div className="title">주소</div>
+    <div className="search-detail-info">
+      <div className="search-detail-info__content">
+        <div className="search-detail-info__content--item">
+          <div className="search-detail__title">주소</div>
           <div className="address">서울특별시 중구 345-34</div>
         </div>
-        <div className="info__content--item">
-          <div className="title">연락처</div>
-          <div className="number">02-0000-0000</div>
+        <div className="search-detail-info__content--item">
+          <div className="search-detail__title">연락처</div>
+          <div className="search-detail__number">02-0000-0000</div>
         </div>
       </div>
-      <div className="info__map">
-        <button className="info__map--btn">
+      <div className="search-detail-info__map">
+        <button className="search-detail-info__map--btn">
           <img
             src={mapIcon}
             width={14}

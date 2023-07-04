@@ -21,8 +21,8 @@ const SearchDetailTitle = () => {
   };
 
   return (
-    <div className="top">
-      <div className="top__image">
+    <div className="search-detail-top">
+      <div className="search-detail-top__image">
         <img
           src={arrowLeftIcon}
           width={20}
@@ -32,16 +32,25 @@ const SearchDetailTitle = () => {
         />
         검색 상세 이미지
       </div>
-      <div className="top__content">
-        <div className="top__content--title" onClick={goDetailPage}>
+      <div className="search-detail-top__content">
+        <div
+          className="search-detail-top__content--title"
+          onClick={goDetailPage}
+        >
           서울역 공유 오피스
         </div>
-        <div className="top__content--link">
-          <div className="star" onClick={goReviewPage}>
+        <div className="search-detail-top__content--link">
+          <div
+            className="search-detail-top__content--link__star"
+            onClick={goReviewPage}
+          >
             <img src={starIcon} width={20} height={20} alt="Star Icon" />
             3.5
           </div>
-          <span className="review" onClick={goReviewPage}>
+          <span
+            className="search-detail-top__content--link__review"
+            onClick={goReviewPage}
+          >
             리뷰 23
           </span>
         </div>

@@ -1,6 +1,6 @@
 @import "../../../base/variable.scss";
 
-.top {
+.search-detail-top {
     display:flex;
     flex-direction: column;
     width: 100%;
@@ -50,30 +50,30 @@
             letter-spacing: 0.25px;
             gap: 1rem;
             cursor: pointer;
+
+            &__star {
+                display: flex;
+                align-items: center;
+                font-weight: 600;
+                color: $color-text-yellow;
+            
+                &:hover {
+                    opacity: 0.5;
+                }
+            
+                img {
+                    margin-right: 7px;
+                }
+            }
+            
+            &__review {
+                font-weight: 600;
+                color: $color-text-green;
+            
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
         }
-    }
-}
-
-.star {
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    color: $color-text-yellow;
-
-    &:hover {
-        opacity: 0.5;
-    }
-
-    img {
-        margin-right: 7px;
-    }
-}
-
-.review {
-    font-weight: 600;
-    color: $color-text-green;
-
-    &:hover {
-        opacity: 0.5;
     }
 }
