@@ -4,7 +4,6 @@
 .radioGroup{
     display: flex;
     align-items:center;
-    
     label{  
         @include button-white(); 
         cursor: pointer;  

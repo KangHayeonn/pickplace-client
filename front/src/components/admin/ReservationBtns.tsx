@@ -1,10 +1,5 @@
 import React from 'react';
-
-type reservationBtnsProps = {
-  reservationStatus: string;
-  onClickRefuseBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onClickAcceptBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
+import { reservationBtnsProps } from './types';
 
 const ReservationBtns = ({
   reservationStatus,
@@ -13,12 +8,12 @@ const ReservationBtns = ({
 }: reservationBtnsProps) => {
   return (
     <div className="reservedCard-btn__container">
-      {reservationStatus == '수락완료' && (
+      {reservationStatus == 'Approval' && (
         <button className="reservedCard-btn__complete" disabled>
           수락완료
         </button>
       )}
-      {reservationStatus == '수락대기' && (
+      {reservationStatus == 'Payment' && (
         <>
           <button
             className="reservedCard-btn__refuse"

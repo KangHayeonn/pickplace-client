@@ -7,17 +7,6 @@
     min-width: 550px;    
     margin : 40px auto;
 
-    .reservation-detail__back--btn{
-        display: flex;
-        justify-content: flex-start;   
-        align-items: center; 
-        margin : 0 0 -30px 10px;
-        background-color: rgba(0,0,0,0);
-        .reservation-detail__leftArrow{
-            width : 20px;
-            height : 20px;
-        }
-    }
     hr{
         width : 100%;
         border-top : 1px solid rgb(195, 195, 195);  

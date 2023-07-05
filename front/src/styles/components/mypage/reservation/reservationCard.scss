@@ -20,9 +20,7 @@
     margin : 10px 0;
     height: 240px;
     .img-container{
-        background-image: url("../../../../assets//images/place-default-small.svg");
-        background-repeat : no-repeat;
-        background-size : cover; 
+        @include background-default-small();
         min-width: 230px;
         width : 30%;
         height : 240px;

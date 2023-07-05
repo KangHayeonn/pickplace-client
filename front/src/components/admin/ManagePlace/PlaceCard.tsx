@@ -1,27 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ShowCardInfo from '../../mypage/ShowCardInfo';
-
-type placeCardProps = {
-  adminPlaceProps: {
-    placeId: number;
-    placeName: string;
-    placePhone: string;
-    placeAddress: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-    placeRating: number;
-    placeReviewCnt: number;
-    roomList: {
-      roomId: number;
-      roomName: string;
-      roomPrice: number;
-      roomStatus: string;
-    }[];
-  };
-};
+import PlaceHeader from './PlaceHeader';
+import { placeCardProps } from '../types';
 
 const PlaceCard = ({ adminPlaceProps }: placeCardProps) => {
   const navigate = useNavigate();
@@ -29,7 +9,7 @@ const PlaceCard = ({ adminPlaceProps }: placeCardProps) => {
     const state = {
       id: adminPlaceProps.placeId,
     };
-    navigate('/placeDetail', {
+    navigate(`/mypage/managePlace/detail/${adminPlaceProps.placeId}`, {
       state: state,
     });
   };
@@ -40,23 +20,11 @@ const PlaceCard = ({ adminPlaceProps }: placeCardProps) => {
       onClick={onClickPlaceCard}
     >
       <div className="placeCard-img__container" />
-      <div>
-        <div className="placeCard-header">
-          <h2 className="placeCard-placeName">{adminPlaceProps.placeName}</h2>
-        </div>
-        <div className="placeCard-content">
-          <ShowCardInfo
-            childClassname={'address'}
-            title={'주소'}
-            content={adminPlaceProps.placeAddress.address}
-          />
-          <ShowCardInfo
-            childClassname={'phone'}
-            title={'연락처'}
-            content={adminPlaceProps.placePhone}
-          />
-        </div>
-      </div>
+      <PlaceHeader
+        placeName={adminPlaceProps.placeName}
+        placePhone={adminPlaceProps.placePhone}
+        address={adminPlaceProps.placeAddress.address}
+      />
     </div>
   );
 };

@@ -8,14 +8,21 @@
     height : 330px;
     background-color: white;
     box-shadow: $shadow-dropdown;    
+    text-align: left;
 
     .detail-img__container{
-        background-image: url("../../../../assets//images/place-default-small.svg");
-        background-repeat : no-repeat;
-        background-size : cover;  
-        background-position: center;       
+        @include background-default-small();     
         height : 200px;
         width : 100%;
+        .reservation-detail__back--btn{
+            cursor: pointer;
+            background-color: rgba(0,0,0,0);
+            .reservation-detail__leftArrow{
+                width : 20px;
+                height : 20px;
+                margin : 10px;
+            }
+        }
     }
     .detail-header__content{
         padding : 20px;

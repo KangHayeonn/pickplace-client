@@ -1,0 +1,50 @@
+@import "../../../base/variable.scss";
+
+.managePlace-detail{
+    width : 60%;
+    min-width: 550px;
+    margin : 40px auto;
+
+    .managePlace-detail__header{
+        background-color: white;
+        box-shadow: $shadow-dropdown;    
+        display: flex;
+        align-items: center;
+        margin : 10px 0;
+        height: 150px;
+        text-align: left;
+        
+        .managePlace-detail__img--container{
+            @include background-default-small();
+            min-width: 220px;
+            width: 30%;
+            height : 100%;
+            
+            .managePlace-detail__back--btn{
+                cursor: pointer;
+                background-color: rgba(0,0,0,0);
+                .managePlace-detail__leftArrow{
+                    width : 20px;
+                    height: 20px;
+                    margin : 10px;
+                }
+            }
+        }
+    }
+    .managePlace-detail__btn--container{
+        margin :20px 0;
+        display : flex;
+        justify-content: space-between;
+        .addPlace-btn{
+            @include button-white;
+            cursor: pointer;  
+            padding: 7px 22px;
+            font-size : 16px;
+            &:hover{
+                @include button-hover-black
+            }
+        }
+    }
+    .managePlace-detail__content{
+    }
+}

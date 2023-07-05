@@ -12,6 +12,7 @@ import MailPage from '../pages/MailPage';
 import MyPage from '../pages/MyPage';
 import ReservationDetail from '../components/mypage/reservation/ReservationDetail';
 import ManageReservationDetail from '../components/admin/ManageReservation/ManageReservationDetail';
+import ManagePlaceDetail from '../components/admin/ManagePlace/ManagePlaceDetail';
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
 // const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -38,12 +39,16 @@ const Router = () => {
           <Route path="/mail" element={<MailPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route
-            path="/reservation/detail/:reservationId"
+            path="mypage/reservationDetail/:reservationId"
             element={<ReservationDetail />}
           />
           <Route
-            path="/manage/reservation/detail/:reservationId"
+            path="mypage/manageReservation/detail/:reservationId"
             element={<ManageReservationDetail />}
+          />
+          <Route
+            path="mypage/managePlace/detail/:placeId"
+            element={<ManagePlaceDetail />}
           />
         </Route>
       </Routes>
