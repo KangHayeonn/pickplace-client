@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Header from '../components/mypage/Header';
 import Reservation from '../components/mypage/reservation/Reservation';
 import UserInfo from '../components/mypage/userInfo/UserInfo';
-import ManagePlace from '../components/admin/ManagePlace';
-import ManageReservation from '../components/admin/ManageReservation';
+import ManagePlace from '../components/admin/ManagePlace/ManagePlace';
+import ManageReservation from '../components/admin/ManageReservation/ManageReservation';
 import '../styles/components/mypage/mypage.scss';
 
 const MyPage = () => {

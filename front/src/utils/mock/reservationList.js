@@ -1,6 +1,6 @@
 export const reservationList = [
   {
-    reservationId: 1433297443,
+    reservationId: 1234512345,
     placeId: 10,
     placeName: '포시즌스호텔',
     startDate: '2023년 7월 5일',
@@ -12,7 +12,7 @@ export const reservationList = [
     reservationDate: '2023년 6월 11일',
   },
   {
-    reservationId: 1363541043,
+    reservationId: 5432198765,
     placeId: 20,
     placeName: '공유 오피스 - 회의실 201호 (최대 12명 최소 4명)',
     startDate: '2023년 5월 30일',
