@@ -12,6 +12,10 @@
         justify-content: flex-start;
         margin : 0 0 -30px 10px;
         background-color: rgba(0,0,0,0);
+        .manageReservation-detail__leftArrow{
+            width : 20px;
+            height: 20px;
+        }
     }
     .manageReservation-detail__header{
         width : 100%;
@@ -19,8 +23,10 @@
         background-color: white;
         box-shadow: $shadow-dropdown;   
         .manageReservation-detail__img--container{
-            background-color: $color-secondary;
-            height : 200px;
+            background-image: url("../../../../assets//images/place-default-small.svg");
+            background-repeat : no-repeat;
+            background-size : cover;  
+            background-position: center;             height : 200px;
             width : 100%;
         }
         .manageReservation-detail__header--content{

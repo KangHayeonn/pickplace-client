@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
-import backArrow from '../../../assets/images/back_arrow.svg';
+import leftArrow from '../../../assets/images/arrow-left.svg';
 
 const ReservationDetail = () => {
   const { state } = useLocation();
@@ -25,7 +25,7 @@ const ReservationDetail = () => {
   return (
     <div className="reservation-detail">
       <button className="reservation-detail__back--btn" onClick={onClickBack}>
-        <img src={backArrow} />
+        <img src={leftArrow} className="reservation-detail__leftArrow" />
       </button>
       <DetailHeader
         placeName={reservationDetail.placeName}

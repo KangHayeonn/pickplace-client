@@ -16,8 +16,11 @@
     height: 150px;
     text-align: left;
 
-    .img-container{
-        background-color: $color-secondary;
+    .placeCard-img__container{
+        background-image: url("../../../../assets//images/place-default-small.svg");
+        background-repeat : no-repeat;
+        background-size : cover;  
+        background-position: center; 
         min-width: 220px;
         width: 30%;
         height : 100%;

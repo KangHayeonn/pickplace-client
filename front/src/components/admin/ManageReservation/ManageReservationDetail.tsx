@@ -6,7 +6,7 @@ import DetailContent from '../../mypage/reservation/DetailContent';
 import ReservationBtns from '../ReservationBtns';
 import '../../../styles/components/admin/manageReservation/manageReservationDetail.scss';
 import '../../../styles/components/admin/reservationBtn.scss';
-import backArrow from '../../../assets/images/back_arrow.svg';
+import leftArrow from '../../../assets/images/arrow-left.svg';
 
 const ManageReservationDetail = () => {
   const { state } = useLocation();
@@ -36,12 +36,10 @@ const ManageReservationDetail = () => {
         className="manageReservation-detail__back--btn"
         onClick={onClickBack}
       >
-        <img src={backArrow} />
+        <img className="manageReservation-detail__leftArrow" src={leftArrow} />
       </button>
       <div className="manageReservation-detail__header">
-        <div className="manageReservation-detail__img--container">
-          {/* <img src={}/> */}
-        </div>
+        <div className="manageReservation-detail__img--container" />
         <div className="manageReservation-detail__header--content">
           <h2 className="manageReservation-detail__placeName">
             {adminReservationDetail.placeName}

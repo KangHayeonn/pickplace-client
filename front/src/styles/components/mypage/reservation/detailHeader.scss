@@ -10,7 +10,10 @@
     box-shadow: $shadow-dropdown;    
 
     .detail-img__container{
-        background-color: $color-secondary;
+        background-image: url("../../../../assets//images/place-default-small.svg");
+        background-repeat : no-repeat;
+        background-size : cover;  
+        background-position: center;       
         height : 200px;
         width : 100%;
     }

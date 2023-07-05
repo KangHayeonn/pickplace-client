@@ -22,11 +22,13 @@ const DetailContent = ({
     <>
       <DetailCard>
         <ShowCardInfo
+          parentClassname={'detail-address__container'}
           childClassname={'detail-address'}
           title={'주소'}
           content={address}
         />
         <ShowCardInfo
+          parentClassname={'detail-phone__container'}
           childClassname={'detail-phone'}
           title={'연락처'}
           content={placePhone}

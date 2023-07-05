@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../ShowCardInfo';
 import * as type from '../types';
-
+import placeSmallImg from '../../../assets/images/place-default-small.svg';
 const ResevationCard = ({ reservationProps }: type.cardProps) => {
   const navigate = useNavigate();
   const onClickResevationCard = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -20,18 +20,19 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
     window.alert('예약취소');
   };
   return (
-    <div className="card-container" key={reservationProps.placeId}>
-      <div className="img-container" onClick={onClickResevationCard}>
-        {/* <img/> */}
-      </div>
-      <div className="card">
-        <div className="card-header" onClick={onClickResevationCard}>
+    <div className="reservationCard-container" key={reservationProps.placeId}>
+      <div className="img-container" onClick={onClickResevationCard}></div>
+      <div className="reservationCard">
+        <div className="reservationCard-header" onClick={onClickResevationCard}>
           <h2 className="card-placeName">{reservationProps.placeName}</h2>
           <p className="card-reservationId">
             예약 번호 : {reservationProps.reservationId}
           </p>
         </div>
-        <div className="card-content" onClick={onClickResevationCard}>
+        <div
+          className="reservationCard-content"
+          onClick={onClickResevationCard}
+        >
           <ShowCardInfo
             childClassname={'checkin'}
             title={'체크인'}
@@ -50,18 +51,25 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
             content={reservationProps.reservationDate}
           />
         </div>
-        <div className="card-reservationStatus">
-          <span className="status">{reservationProps.reservationStatus}</span>
+        <div className="reservationCard-reservationStatus">
+          <span className="reservationCard-status">
+            {reservationProps.reservationStatus}
+          </span>
           {reservationProps.reservationStatus == '이용 완료' &&
             (reservationProps.ReviewExistence ? (
-              <span className="reviewCompleted">리뷰 작성 완료</span>
+              <span className="reservationCard-reviewCompleted">
+                리뷰 작성 완료
+              </span>
             ) : (
-              <span className="review" onClick={onClickCreateReview}>
+              <span
+                className="reservationCard-review"
+                onClick={onClickCreateReview}
+              >
                 리뷰 작성하기
               </span>
             ))}
           {reservationProps.reservationStatus == '이용 전' && (
-            <span className="review" onClick={onClickRefuseBtn}>
+            <span className="reservationCard-review" onClick={onClickRefuseBtn}>
               예약 취소
             </span>
           )}

@@ -3,16 +3,15 @@
 @import "../../../base/variable.scss";
 
 .reservation{
-    max-width: 100%;
+    // max-width: 100%;
     min-width : 550px;
 }
 
-.img-container,.card-header,.card-content{
+.img-container,.reservationCard-header,.reservationCard-content{
     cursor: pointer;
-
 }
 
-.card-container{
+.reservationCard-container{
     background-color: white;
     box-shadow: $shadow-dropdown;    
     display: flex;
@@ -21,28 +20,30 @@
     margin : 10px 0;
     height: 240px;
     .img-container{
-        background-color: $color-secondary;
+        background-image: url("../../../../assets//images/place-default-small.svg");
+        background-repeat : no-repeat;
+        background-size : cover; 
         min-width: 230px;
-        width: 30%;
-        height : 100%;
+        width : 30%;
+        height : 240px;
     }
-    .card{
+    .reservationCard{
         text-align: left;
         width : 100%;
         padding : 0 30px;
     }
-    .card-header{
+    .reservationCard-header{
         .card-placeName{
             margin-top : 10px;
             width :100%;
             font-weight: 800;
             @include line-clamp-ellipsis1();
         }
-        .card-reservationId{
+        .reservationCard-reservationId{
             font-size: 15px;
         }
     }
-    .card-content{
+    .reservationCard-content{
         text-align: left;
         padding : 10px 0;
         .checkin,.checkout,.reservation-time{
@@ -54,24 +55,24 @@
             font-size: 15px;
         }
     }
-    .card-reservationStatus{
+    .reservationCard-reservationStatus{
         margin : 0 0 1vw;
         text-align: end;
         font-weight: 600;
         color : $color-text-green;
         font-size: 16px;
-        .status{
+        .reservationCard-status{
             display: inline-block;
             width : 60px;
             cursor : default;
         }
-        .reviewCompleted,.review{
+        .reservationCard-reviewCompleted,.reservationCard-review{
             display: inline-block;
             max-width : 100px;
             margin-left : 15px;
             cursor : default;
         }
-        .review{
+        .reservationCard-review{
             &:hover {
                 color: $color-text-lightgreen;
             }  

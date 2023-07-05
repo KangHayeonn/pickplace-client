@@ -14,7 +14,7 @@ const DetailHeader = ({
   };
   return (
     <div className="detail-header">
-      <div className="detail-img__container">{/* <img /> */}</div>
+      <div className="detail-img__container"></div>
       <div className="detail-header__content">
         <h2 className="detail-placeName">{placeName}</h2>
         <p className="detail-star">

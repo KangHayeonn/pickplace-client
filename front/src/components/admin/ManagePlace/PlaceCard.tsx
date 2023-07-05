@@ -39,7 +39,7 @@ const PlaceCard = ({ adminPlaceProps }: placeCardProps) => {
       key={adminPlaceProps.placeId}
       onClick={onClickPlaceCard}
     >
-      <div className="img-container">{/* <img/> */}</div>
+      <div className="placeCard-img__container" />
       <div>
         <div className="placeCard-header">
           <h2 className="placeCard-placeName">{adminPlaceProps.placeName}</h2>
