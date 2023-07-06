@@ -1,0 +1,168 @@
+@import "../../base/variable.scss";
+
+.calendar-wrapper {
+    width: 12rem;
+    position: relative;
+}
+
+.react-datepicker {
+
+    &__input {
+        &-container {
+            input {
+                width: 8rem;
+                height: 100%;
+                font-size: 0.9rem;
+                padding : 10px 10px 10px 43px;
+                background-color: $color-surface-white;
+                border: 3px solid $color-primary;
+                box-shadow: 1px 3px 3px rgb(0, 0, 0);
+                border-radius: 1.25rem;
+                cursor: pointer;
+
+                &:hover {
+                    border: 3px solid $color-surface-darkgray;
+                };
+
+                &.calendar-range {
+                    width: 10.5rem;
+                }
+            }
+        }
+    }
+
+    &-ignore-onclickoutside {
+        height: 100%;
+        font-size: 0.875rem;
+        padding : 10px;
+        background-color: $color-surface-white;
+        border: 3px solid $color-primary;
+        box-shadow: 1px 3px 3px rgb(0, 0, 0);
+        border-radius: 1.25rem;
+        cursor: pointer;
+    }
+
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 1px rgb(0, 0, 0, 0.25);
+
+    .react-datepicker__header {
+        background-color: $color-primary;
+        color: $color-surface-white;
+        border-bottom: none;
+        border-radius: 1.25rem 1.25rem 0 0;
+
+        .react-datepicker__day-names {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            color: $color-text-white;
+        }
+    
+        .react-datepicker__current-month {
+            color: $color-text-white;
+        }
+    }
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {
+    border-bottom-color: $color-primary;
+}
+
+.react-datepicker__day-name {
+    color: $color-text-white;
+}
+
+.react-datepicker__day {
+    &--selected {
+        background-color: $color-primary;
+        border-radius: 50%;
+    }
+
+    &:hover {
+        border-radius: 50%;
+        background-color: $color-surface-gray;
+        color: $color-text-white;
+    }
+}
+
+.react-datepicker__day--outside-month {
+    cursor: default;
+    visibility: hidden;
+}
+
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+    position: absolute;
+    padding: 0.8rem 1.2rem;
+}
+
+.react-datepicker__day--keyboard-selected {
+    color: $color-text-white;
+    background-color: $color-surface-darkgray;
+    border-radius: 50%;
+}
+
+.react-datepicker__day--in-range {
+    color: $color-text-white;
+    background-color: $color-surface-darkgray;
+    border-radius: 50%;
+}
+
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
+    color: $color-text-white;
+    background-color: $color-surface-gray;
+    border-radius: 50%;
+}
+
+// 시간
+
+.react-datepicker__time-container .react-datepicker__time {
+    border-radius: 1.25rem;
+}
+
+.react-datepicker__time-container {
+    width: 11.5rem;
+}
+
+.react-datepicker-time__header {
+    color: $color-text-white;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+    display: flex;
+    width: 11.5rem;
+}
+
+.react-datepicker__time-list {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        margin: 8px;
+    }
+}
+
+.react-datepicker__time-list-item {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    &--disabled {
+        display: none;
+    }
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+    background-color: $color-primary;
+    color: $color-text-white;
+    font-weight: bold;
+}

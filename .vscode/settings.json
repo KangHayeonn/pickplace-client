@@ -1,4 +1,8 @@
 {
     "eslint.nodePath": "front/.yarn/sdks",
     "typescript.tsdk": "front/.yarn/sdks/typescript/lib",
+    "search.exclude": {
+        "front/.yarn": true,
+        "front/.pnp.*": true
+    },
 }
