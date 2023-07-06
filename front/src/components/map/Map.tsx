@@ -1,21 +1,15 @@
 import React from 'react';
 import { useRef, useEffect } from 'react';
 import { markerHtml } from './MarkerHtml';
-import { markerList } from '../../utils/mock/markerList';
+import { markerListType } from './types';
 
-type markerListType = {
-  lat: number;
-  lng: number;
-  name: string;
-  tag: string[];
-};
 type mapProps = {
   width: string;
   height: string;
-  //   markerList: markerListType[];
+  markerList: markerListType[];
 };
 
-const Map = ({ width, height }: mapProps) => {
+const Map = ({ width, height, markerList }: mapProps) => {
   const { naver } = window;
 
   const getMinLng = (markerList: markerListType[]) => {
@@ -63,7 +57,13 @@ const Map = ({ width, height }: mapProps) => {
         position: new naver.maps.LatLng(markerList[i].lat, markerList[i].lng),
         map,
         icon: {
-          content: [markerHtml(markerList[i].name, markerList[i].tag)].join(''),
+          content: [
+            markerHtml(
+              markerList[i].name,
+              markerList[i].category,
+              markerList[i].tag,
+            ),
+          ].join(''),
         },
       });
       markers.push(marker);

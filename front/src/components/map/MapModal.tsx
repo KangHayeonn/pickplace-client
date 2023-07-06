@@ -2,11 +2,14 @@ import React from 'react';
 import Map from './Map';
 import '../../styles/components/map/mapModal.scss';
 import closeBtnIcon from '../../assets/images/close_big.svg';
+import { markerListType } from './types';
 
 type mapModalProps = {
   onCloseModal: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  mapList: markerListType[];
 };
-const MapModal = ({ onCloseModal }: mapModalProps) => {
+
+const MapModal = ({ onCloseModal, mapList }: mapModalProps) => {
   return (
     <div className="modal-background">
       <div className="map-modal">
@@ -15,7 +18,7 @@ const MapModal = ({ onCloseModal }: mapModalProps) => {
             <img src={closeBtnIcon}></img>
           </button>
         </div>
-        <Map width={'100%'} height={'600px'} />
+        <Map width={'100%'} height={'700px'} markerList={mapList} />
       </div>
     </div>
   );

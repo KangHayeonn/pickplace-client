@@ -5,6 +5,8 @@ import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
 import { categoryList } from '../utils/mock/categoryList';
 import Map from '../components/map/Map';
+import { markerList } from '../utils/mock/markerList';
+
 const MainPage = () => {
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ const MainPage = () => {
         <article>
           <h1>나를 위한 맞춤 플레이스</h1>
           <div className="map-container">
-            <Map width={'70vw'} height={'500px'} />
+            <Map width={'70vw'} height={'500px'} markerList={markerList} />
           </div>
         </article>
       </section>

@@ -34,10 +34,22 @@
             &:hover {
                 color: $color-text-white;
                 background-color: $color-hover;
+
+                .map-icon {
+                    display:none;
+                }
+
+                .map-white-icon {
+                    display: block;
+                }
             }
 
             img {
                 margin-right: 5px;
+            
+                &.map-white-icon {
+                    display: none;
+                }
             }
         }
     }
