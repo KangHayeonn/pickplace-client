@@ -1,0 +1,61 @@
+@import "../../../base/variable.scss";
+
+.roomCard-container{
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    margin : 10px 0;
+    border-radius : 5px;
+    height: 200px;
+    text-align: left;
+    display : flex;
+    align-items: center;
+
+    .roomCard-img__container{
+        @include background-default-small();
+        min-width: 220px;
+        width: 30%;
+        height : 100%;
+        border-radius : 5px 0 0 5px;
+    }
+    .roomCard-right__container{
+        width :100%;
+        .roomCard-header{
+            padding : 15px 30px 20px 30px;
+            .roomCard-placeName{
+                font-weight: 800;
+                @include line-clamp-ellipsis1();
+            }
+        }
+        .roomCard-content{
+            padding : 0 30px;
+            font-size: 16px;
+            .price{
+                display: inline-block;
+                width : 45px;
+            }
+        }
+        .managePlace-detail__btn--container{ 
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; 
+            margin : 0 1vw -20px 0;
+
+            .managePlace-detail__delete--btn,
+            .managePlace-detail__update--btn{
+                cursor: pointer;  
+                width :60px;
+                &:hover {
+                    @include button-hover-green();
+                }
+            }
+            .managePlace-detail__delete--btn{
+                @include button-lightgreen();
+                margin-right : 5px;
+            }
+            .managePlace-detail__update--btn{
+                @include button-green();
+                margin-right : 10px;
+            }
+        }
+    }
+}

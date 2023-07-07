@@ -1,7 +1,8 @@
 import React from 'react';
+import ReservedCard from './ReservedCard';
+
 import '../../../styles/components/admin/manageReservation/manageReservation.scss';
 import { adminReservationList } from '../../../utils/mock/adminReservationList';
-import ReservedCard from './ReservedCard';
 
 const ManageReservation = () => {
   return (

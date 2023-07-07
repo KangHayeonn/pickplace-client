@@ -1,5 +1,3 @@
-@import "../../../base/reset.scss";
-@import "../../../base/mixin.scss";
 @import "../../../base/variable.scss";
 
 .managePlace{
@@ -7,6 +5,7 @@
     min-width : 550px;
 }
 .placeCard-container{
+    cursor : pointer;
     background-color: white;
     box-shadow: $shadow-dropdown;    
     display: flex;
@@ -16,21 +15,15 @@
     height: 150px;
     text-align: left;
 
-    .img-container{
-        background-color: $color-secondary;
+    .placeCard-img__container{
+        @include background-default-small();
         min-width: 220px;
         width: 30%;
         height : 100%;
     }
 
-    .placeCard-header,.placeCard-content{
+    .placeCard-content{
         padding : 10px 30px;
-    }
-    .placeCard-header{
-        .placeCard-placeName{
-            font-weight: 800;
-            @include line-clamp-ellipsis1();
-        }
     }
     .placeCard-content{
         .address,.phone{

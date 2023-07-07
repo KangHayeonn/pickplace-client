@@ -3,13 +3,14 @@
 .reservedCard-btn__container{
     display: flex;
     justify-content: flex-end;
+    margin-left : 5px;
 
     .reservedCard-btn__complete, 
     .reservedCard-btn__refuse,
     .reservedCard-btn__accept{
-        margin : 0 5px;
+        margin : 0 3px;
         display: inline-block;
-        width : 80px;
+        width : 90px;
     }
     .reservedCard-btn__complete{
         cursor : default;

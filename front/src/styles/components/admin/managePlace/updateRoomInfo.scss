@@ -1,0 +1,38 @@
+@import "../../../base/variable.scss";
+
+.updateRoomInfo{
+    width :100%;
+    .updateRoomInfo-header{
+        margin : 13px 25px;
+        font-size: 18px;
+    }
+    .updateRoomInfo-textField__container{
+        width : 70%;
+        min-width: 265px;
+        margin : 0px 20px;
+        input{
+            font-weight: 500;
+            height: 35px;
+            font-size: 14px;
+            padding : 0 0 0 15px;
+        }
+    }
+    .updateRoomInfo-btn__container{
+        display:flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin : -20px 1.5vw 0 0;
+        .updateRoomInfo-btn{
+            width : 45px;
+            text-align: right;
+            background-color: rgba(0,0,0,0);
+            font-weight: 500;
+            color: $color-text-lightgreen;
+            cursor: pointer;  
+            font-size: 16px;
+            &:hover {
+                color : $color-text-green;
+            }
+        } 
+    }
+}

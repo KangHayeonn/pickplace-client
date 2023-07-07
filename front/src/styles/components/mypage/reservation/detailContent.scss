@@ -1,7 +1,8 @@
-@import "../../../base/reset.scss";
-@import "../../../base/mixin.scss";
 @import "../../../base/variable.scss";
 
+.detail-address{
+    margin-bottom : 10px;
+}
 .detail-address,
 .detail-phone{
     display: inline-block;
@@ -19,6 +20,7 @@
 
 .detail-checkin,
 .detail-checkout{
+    margin-bottom : 10px;
     display: inline-block;
     width : 70px;
 }

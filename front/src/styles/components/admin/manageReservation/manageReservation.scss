@@ -1,5 +1,3 @@
-@import "../../../base/reset.scss";
-@import "../../../base/mixin.scss";
 @import "../../../base/variable.scss";
 
 .manageReservation{
@@ -11,7 +9,7 @@
     box-shadow: $shadow-dropdown;    
     margin : 10px 0;
     border-radius : 5px;
-    height: 150px;
+    height: 160px;
     text-align: left;
 
     .reservedCard-header{
@@ -27,6 +25,7 @@
         padding : 10px 40px;
         font-size: 16px;
         .checkin,.checkout{
+            margin : 3px 0;
             display: inline-block;
             width : 70px;
         }

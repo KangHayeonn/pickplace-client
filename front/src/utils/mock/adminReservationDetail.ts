@@ -23,7 +23,7 @@ export const adminReservationDetail = {
   roomId: 12,
   roomName: '201호',
   roomPrice: 15000,
-  reservationStatus: '수락대기',
+  reservationStatus: 'Payment',
   ReviewExistence: false,
   reservationDate: '2023년 5월 1일',
 };

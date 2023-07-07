@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import StarIcon from '../../../assets/images/star.png';
 import * as type from '../types';
 import '../../../styles/components/mypage/reservation/detailHeader.scss';
+import leftArrow from '../../../assets/images/arrow-left.svg';
 
 const DetailHeader = ({
   placeName,
@@ -9,12 +11,21 @@ const DetailHeader = ({
   reservationStatus,
   ReviewExistence,
 }: type.detailHeaderProps) => {
+  const navigate = useNavigate();
+
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('리뷰작성');
   };
+  const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
+    navigate('/mypage');
+  };
   return (
     <div className="detail-header">
-      <div className="detail-img__container">{/* <img /> */}</div>
+      <div className="detail-img__container">
+        <button className="reservation-detail__back--btn" onClick={onClickBack}>
+          <img src={leftArrow} className="reservation-detail__leftArrow" />
+        </button>
+      </div>
       <div className="detail-header__content">
         <h2 className="detail-placeName">{placeName}</h2>
         <p className="detail-star">

@@ -2,19 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../../mypage/ShowCardInfo';
 import ReservationBtns from '../ReservationBtns';
-
-type reservedCardProps = {
-  adminReservationProps: {
-    reservationId: number;
-    placeId: number;
-    placeName: string;
-    startDate: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    reservationStatus: string;
-  };
-};
+import { reservedCardProps } from '../types';
 
 const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   const navigate = useNavigate();
@@ -23,7 +11,7 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
       id: adminReservationProps.reservationId,
     };
     navigate(
-      `/manage/reservation/detail/${adminReservationProps.reservationId}`,
+      `/mypage/manageReservation/detail/${adminReservationProps.reservationId}`,
       {
         state: state,
       },
@@ -31,7 +19,7 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   };
 
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('수락완료');
+    window.alert('예약수락');
   };
   const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('예약취소');
