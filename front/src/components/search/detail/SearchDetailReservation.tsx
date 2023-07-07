@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../styles/components/search/detail/searchDetailReservation.scss';
+import Calendar from '../../../components/common/Calendar';
 
 const SearchDetailReservation = () => {
   return (
@@ -8,13 +9,17 @@ const SearchDetailReservation = () => {
         <span className="search-detail-reservation__date--title">
           예약 날짜
         </span>
-        <span className="search-detail-reservation__info">calendar</span>
+        <span className="search-detail-reservation__info">
+          <Calendar calendarType="date" />
+        </span>
       </div>
       <div className="search-detail-reservation__time">
         <span className="search-detail-reservation__time--title">
           예약 시간
         </span>
-        <span className="search-detail-reservation__info">calendar</span>
+        <span className="search-detail-reservation__info">
+          <Calendar calendarType="time" />
+        </span>
       </div>
     </div>
   );

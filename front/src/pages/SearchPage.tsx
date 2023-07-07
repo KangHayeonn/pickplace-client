@@ -12,6 +12,7 @@ import MapModal from '../components/map/MapModal';
 import '../styles/components/search/search.scss';
 import { hotelSearchResult } from '../utils/mock/searchList';
 import { categoryList } from '../utils/mock/categoryList';
+import { markerList } from '../utils/mock/markerList';
 import * as type from '../components/search/types';
 
 const SearchPage = () => {
@@ -125,7 +126,9 @@ const SearchPage = () => {
   };
   return (
     <div className="search">
-      {onMapOpen && <MapModal onCloseModal={onCloseModal}></MapModal>}
+      {onMapOpen && (
+        <MapModal onCloseModal={onCloseModal} mapList={markerList}></MapModal>
+      )}
       <SearchHeader
         startDate={searchForm.startDate}
         endDate={searchForm.endDate}
