@@ -3,16 +3,22 @@
 .updateRoomInfo{
     width :100%;
     .updateRoomInfo-header{
-        margin : 13px 25px;
+        margin : 20px 25px;
         font-size: 18px;
     }
     .updateRoomInfo-textField__container{
+        display: flex;
+        align-items: baseline;
         width : 70%;
-        min-width: 265px;
-        margin : 0px 20px;
+        min-width: 320px;
+        margin : 0px 30px;
+
+        .updateRoomInfo-textField__label{
+            width : 80px;
+        }
         input{
             font-weight: 500;
-            height: 35px;
+            height: 28px;
             font-size: 14px;
             padding : 0 0 0 15px;
         }
@@ -21,8 +27,8 @@
         display:flex;
         align-items: center;
         justify-content: flex-end;
-        margin : -20px 1.5vw 0 0;
-        .updateRoomInfo-btn{
+        margin : 10px 80px 0 0;
+        .deleteRoomInfo-btn,.updateRoomInfo-btn{
             width : 45px;
             text-align: right;
             background-color: rgba(0,0,0,0);

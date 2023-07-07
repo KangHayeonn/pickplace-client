@@ -35,7 +35,7 @@
         margin :20px 0;
         display : flex;
         justify-content: space-between;
-        .addPlace-btn{
+        .updatePlace-btn{
             @include button-white;
             cursor: pointer;  
             padding: 7px 22px;

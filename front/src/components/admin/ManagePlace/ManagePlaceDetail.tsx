@@ -41,6 +41,14 @@ const ManagePlaceDetail = () => {
     navigate('/mypage');
   };
 
+  const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/mypage/managePlace/updatePlace/${state.placeId}`, {
+      state: {
+        placeId: state.placeId,
+      },
+    });
+  };
+
   return (
     <div className="managePlace-detail">
       <div className="managePlace-detail__header">
@@ -66,7 +74,9 @@ const ManagePlaceDetail = () => {
             </RadioButton>
           ))}
         </RadioGroup>
-        <button className="addPlace-btn">공간 추가</button>
+        <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
+          공간 수정
+        </button>
       </div>
       <div className="managePlace-detail__content">
         {clickedMenu === 0 &&

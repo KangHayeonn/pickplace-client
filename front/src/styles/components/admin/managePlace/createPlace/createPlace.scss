@@ -1,0 +1,28 @@
+@import "../../../../base/variable.scss";
+
+.createPlace-container{
+    width : 40%;
+    min-width: 500px;
+    margin : 40px auto;
+    background-color: white;
+    box-shadow: $shadow-dropdown;  
+    text-align: left;
+    padding : 40px 70px;
+    .createPlace-btn__container{
+        margin : 40px -30px 0 0;
+        display : flex;
+        justify-content: flex-end;
+        .createPlace-cancelBtn,
+        .createPlace-createBtn{
+            @include button-white;
+            cursor: pointer;  
+            padding: 7px 20px;
+            width : 100px;
+            margin-left : 5px;
+            font-size : 15px;
+            &:hover{
+                @include button-hover-black
+            }
+        }
+    }
+}

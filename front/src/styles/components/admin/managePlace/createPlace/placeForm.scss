@@ -1,0 +1,26 @@
+@import "../../../../base/variable.scss";
+
+.PlaceForm-container{
+    .PlaceForm-header{
+        font-size: 19px;
+        font-weight: 800;
+        margin : 20px 0 30px 0;
+    }
+    .PlaceForm-textField__container{
+        font-size: 17px;
+        display: flex;
+        align-items: baseline;
+        .PlaceForm-textField__label{
+            font-weight: 600;
+            width : 90px;
+            margin-right : 10px;
+            text-align: center;
+        }
+        input{
+            height : 38px;
+            padding : 0 0 0 20px;
+            width : 50%;
+            min-width : 350px;
+        }
+    }
+}

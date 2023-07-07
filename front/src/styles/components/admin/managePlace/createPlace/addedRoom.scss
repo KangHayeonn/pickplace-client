@@ -1,0 +1,41 @@
+@import "../../../../base/variable.scss";
+
+.AddedRoom-container{
+    .AddedRoom-header{
+        font-size: 19px;
+        font-weight: 700;
+        margin : 30px 0 10px 0;
+    }
+    .AddedRoom-content{
+        display : flex;
+        justify-content: space-between;
+        align-items: center;
+        margin : 5px 0;
+        height : 60px;
+        .AddedRoom-Info{
+            width : 85%;
+            display : flex;
+            flex-wrap: wrap;
+            word-break: keep-all;
+            align-items: center;
+            .AddedRoom-roomName, .AddedRoom-roomPrice,
+            .AddedRoom-roomPersonnel, .AddedRoom-roomCount{
+                font-size : 18px;
+                padding : 0 10px;
+                text-align: center;
+            }
+        }
+        .AddedRoom-deleteBtn{
+            font-size: 16px;
+            padding : 0 5px;
+            background-color: rgba(0,0,0,0);
+            color: $color-text-green;
+            &:hover {
+                color: $color-text-darkgreen;
+            }
+        }
+    }
+    .AddedRoom-noList{
+        color: $color-text-gray;
+    }
+}
