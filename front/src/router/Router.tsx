@@ -13,6 +13,7 @@ import MyPage from '../pages/MyPage';
 import ReservationDetail from '../components/mypage/reservation/ReservationDetail';
 import ManageReservationDetail from '../components/admin/ManageReservation/ManageReservationDetail';
 import ManagePlaceDetail from '../components/admin/ManagePlace/ManagePlaceDetail';
+import ReservationPage from '../pages/ReservationPage';
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
 // const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -35,6 +36,7 @@ const Router = () => {
             path="/search/:searchId/review"
             element={<SearchDetailPage />}
           />
+          <Route path="/reservation" element={<ReservationPage />} />
           <Route path="/pwd" element={<PasswordPage />} />
           <Route path="/mail" element={<MailPage />} />
           <Route path="/mypage" element={<MyPage />} />
