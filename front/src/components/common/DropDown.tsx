@@ -19,16 +19,6 @@ const DropDown = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(defaultText || '선택');
 
-  const dropDownDefaultList = [
-    '운동',
-    '스터디',
-    '맛집',
-    '취미',
-    '여행',
-    '봉사',
-    '친목',
-  ];
-
   const onClickLi = (item: string) => {
     return (e: React.MouseEvent<HTMLLIElement>) => {
       setTitle(item);
@@ -63,29 +53,18 @@ const DropDown = ({
       </button>
       {isOpen ? (
         <ul className="dropdown__list">
-          {dropDownList
-            ? dropDownList.map((item, index) => {
-                return (
-                  <li
-                    key={index}
-                    className="dropdown__item"
-                    onClick={onClickLi(item)}
-                  >
-                    {item}
-                  </li>
-                );
-              })
-            : dropDownDefaultList.map((item, index) => {
-                return (
-                  <li
-                    key={index}
-                    className="dropdown__item"
-                    onClick={() => setTitle(item)}
-                  >
-                    {item}
-                  </li>
-                );
-              })}
+          {dropDownList &&
+            dropDownList.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  className="dropdown__item"
+                  onClick={onClickLi(item)}
+                >
+                  {item}
+                </li>
+              );
+            })}
         </ul>
       ) : null}
     </div>
