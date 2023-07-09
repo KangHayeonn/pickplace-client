@@ -24,9 +24,9 @@
     }
 
     &__text {
-        @include text-body3();
+        @include text-body2();
         min-width: fit-content;
-        margin-left: 0.313rem;
+        margin-left: 0.7rem;
         cursor: pointer;
     }
 }
