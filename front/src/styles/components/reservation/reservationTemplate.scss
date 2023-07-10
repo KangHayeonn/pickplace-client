@@ -1,0 +1,67 @@
+@import "../../base/variable.scss";
+
+.reservation {
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 5rem;
+        margin-bottom: 15rem;
+
+        &__form {
+            width: 70rem;
+            min-height: 80rem;
+        }
+    }
+
+    &__btn {
+        @include text-title-bar();
+        width: 100%;
+        height: 55px;
+        background-color: $color-primary;
+        appearance: none;
+        border-radius: 12px;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 5rem;
+
+        &--title {
+            @include text-title-bar();
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 55px;
+            background-color: $color-surface-gray;
+            appearance: none;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+    
+            &.secondary {
+                background-color: $color-surface-darkgray;
+            }
+
+            & > span {
+                margin-left: 2rem;
+            }
+        }
+
+        &--check {
+            display: flex;
+            margin-left: 2rem;
+
+            & > span {
+                margin-left: 0.2rem;
+            }
+        }
+    }
+}
