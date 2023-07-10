@@ -1,9 +1,16 @@
 @import "../../../../base/variable.scss";
 
 .createPlace-container{
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
     width : 40%;
     min-width: 500px;
-    margin : 40px auto;
+    margin : 5vh auto 25vh;
     background-color: white;
     box-shadow: $shadow-dropdown;  
     text-align: left;
@@ -16,8 +23,8 @@
         .createPlace-createBtn{
             @include button-white;
             cursor: pointer;  
-            padding: 7px 20px;
-            width : 100px;
+            padding: 7px 0;
+            width : 110px;
             margin-left : 5px;
             font-size : 15px;
             &:hover{

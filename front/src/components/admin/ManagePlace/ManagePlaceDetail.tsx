@@ -18,7 +18,7 @@ const ManagePlaceDetail = () => {
   const navigate = useNavigate();
 
   const managePlaceTabs = [
-    { value: '0', name: '방조회' },
+    { value: '0', name: '방조회', defualtcheck: true },
     { value: '1', name: '예약조회' },
   ];
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -69,7 +69,11 @@ const ManagePlaceDetail = () => {
       <div className="managePlace-detail__btn--container">
         <RadioGroup onRadioChange={onClickHeaderBtn}>
           {managePlaceTabs.map((item, key) => (
-            <RadioButton key={key} value={item.value}>
+            <RadioButton
+              key={key}
+              value={item.value}
+              defaultChecked={item.defualtcheck}
+            >
               {item.name}
             </RadioButton>
           ))}
