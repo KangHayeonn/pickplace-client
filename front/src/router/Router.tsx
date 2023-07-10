@@ -14,6 +14,9 @@ import ReservationDetail from '../components/mypage/reservation/ReservationDetai
 import ManageReservationDetail from '../components/admin/ManageReservation/ManageReservationDetail';
 import ManagePlaceDetail from '../components/admin/ManagePlace/ManagePlaceDetail';
 import ReservationPage from '../pages/ReservationPage';
+import CreatePlace from '../components/admin/ManagePlace/CreatePlace/CreatePlace';
+import UpdatePlace from '../components/admin/ManagePlace/UpdatePlace';
+
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
 // const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -51,6 +54,14 @@ const Router = () => {
           <Route
             path="mypage/managePlace/detail/:placeId"
             element={<ManagePlaceDetail />}
+          />
+          <Route
+            path="/mypage/managePlace/createPlace"
+            element={<CreatePlace />}
+          />
+          <Route
+            path="/mypage/managePlace/updatePlace/:placeId"
+            element={<UpdatePlace />}
           />
         </Route>
       </Routes>

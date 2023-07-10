@@ -13,7 +13,7 @@ interface TextProps {
   message?: string | undefined;
   textType?: string | undefined;
   inputType?: string | undefined;
-  value?: string | undefined;
+  value?: string | number | undefined;
   onChangeText?: React.ChangeEventHandler<HTMLInputElement>;
 }
 

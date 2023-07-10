@@ -1,0 +1,42 @@
+@import "../../../../base/variable.scss";
+
+.RoomForm-container{
+    width : 60%;
+    min-width : 500px;
+    .RoomForm-header{
+        font-weight: 800;
+        margin : 40px 0 20px 0;
+    }
+    .RoomForm-textField__container{
+        font-size: 17px;
+        display: flex;
+        align-items: baseline;
+        .RoomForm-textField__label{
+            font-weight: 600;
+            width : 90px;
+            margin-right : 10px;
+            text-align: center;
+        }
+        input{
+            height : 35px;
+            padding : 0 0 0 20px;
+            width : 40%;
+            min-width : 250px;
+        }
+    }
+    .RoomForm-btn__container{
+        z-index : 100;
+        display: flex;
+        justify-content: flex-end;
+        margin-right : 60px;
+        .RoomForm-addBtn{
+            cursor: pointer;  
+            min-width : 80px;
+            font-size : 14px;
+            @include button-green();
+            &:hover {
+                @include button-hover-green();
+            }
+        }
+    }
+}
