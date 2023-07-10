@@ -5,7 +5,7 @@ import '../../styles/components/common/radioButton.scss';
 interface RadioButtonProps {
   children: React.ReactNode;
   value: string;
-  checked?: boolean | undefined;
+  defaultChecked?: boolean | undefined;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 function useRadioGroup() {
@@ -15,7 +15,7 @@ function useRadioGroup() {
 const RadioButton = ({
   children,
   value,
-  checked,
+  defaultChecked,
   onChange,
 }: RadioButtonProps) => {
   const radioGroup = useRadioGroup();
@@ -25,7 +25,7 @@ const RadioButton = ({
       <input
         className="radioBtn-input"
         type="radio"
-        checked={checked}
+        defaultChecked={defaultChecked}
         onChange={onRadioChange}
         name="radio"
         id={value}

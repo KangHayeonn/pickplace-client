@@ -35,3 +35,16 @@
         }
     }
 }
+.managePlace-btn__container{
+    display: flex;
+    justify-content: flex-end;
+    .addPlace-btn{
+        @include button-white;
+        cursor: pointer;  
+        padding: 7px 20px;
+        font-size : 16px;
+        &:hover{
+            @include button-hover-black
+        }
+    }
+}

@@ -7,7 +7,7 @@ const PlaceCard = ({ adminPlaceProps }: placeCardProps) => {
   const navigate = useNavigate();
   const onClickPlaceCard = (e: React.MouseEvent<HTMLDivElement>) => {
     const state = {
-      id: adminPlaceProps.placeId,
+      placeId: adminPlaceProps.placeId,
     };
     navigate(`/mypage/managePlace/detail/${adminPlaceProps.placeId}`, {
       state: state,

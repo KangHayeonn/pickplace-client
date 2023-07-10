@@ -3,6 +3,7 @@
 .managePlace-detail{
     width : 60%;
     min-width: 550px;
+    min-height: 90vh;
     margin : 40px auto;
 
     .managePlace-detail__header{
@@ -35,7 +36,7 @@
         margin :20px 0;
         display : flex;
         justify-content: space-between;
-        .addPlace-btn{
+        .updatePlace-btn{
             @include button-white;
             cursor: pointer;  
             padding: 7px 22px;

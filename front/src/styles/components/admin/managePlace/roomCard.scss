@@ -1,22 +1,31 @@
 @import "../../../base/variable.scss";
 
-.roomCard-container{
+
+.roomCard-update__container
+,.roomCard-show__container{
     background-color: white;
     box-shadow: $shadow-dropdown;    
     margin : 10px 0;
     border-radius : 5px;
-    height: 200px;
     text-align: left;
     display : flex;
     align-items: center;
+}
 
-    .roomCard-img__container{
-        @include background-default-small();
-        min-width: 220px;
-        width: 30%;
-        height : 100%;
-        border-radius : 5px 0 0 5px;
-    }
+.roomCard-img__container{
+    @include background-default-small();
+    min-width: 220px;
+    width: 30%;
+    height : 100%;
+    border-radius : 5px 0 0 5px;
+}
+
+.roomCard-update__container{
+    height: 350px;
+}
+.roomCard-show__container{
+    height: 220px;
+
     .roomCard-right__container{
         width :100%;
         .roomCard-header{
@@ -29,9 +38,10 @@
         .roomCard-content{
             padding : 0 30px;
             font-size: 16px;
-            .price{
+            .price, .personnel, .count{
                 display: inline-block;
-                width : 45px;
+                width : 60px;
+                margin : 2px 0;
             }
         }
         .managePlace-detail__btn--container{ 

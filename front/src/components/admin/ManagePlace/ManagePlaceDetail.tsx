@@ -18,7 +18,7 @@ const ManagePlaceDetail = () => {
   const navigate = useNavigate();
 
   const managePlaceTabs = [
-    { value: '0', name: '방조회' },
+    { value: '0', name: '방조회', defualtcheck: true },
     { value: '1', name: '예약조회' },
   ];
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -41,6 +41,14 @@ const ManagePlaceDetail = () => {
     navigate('/mypage');
   };
 
+  const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/mypage/managePlace/updatePlace/${state.placeId}`, {
+      state: {
+        placeId: state.placeId,
+      },
+    });
+  };
+
   return (
     <div className="managePlace-detail">
       <div className="managePlace-detail__header">
@@ -61,12 +69,18 @@ const ManagePlaceDetail = () => {
       <div className="managePlace-detail__btn--container">
         <RadioGroup onRadioChange={onClickHeaderBtn}>
           {managePlaceTabs.map((item, key) => (
-            <RadioButton key={key} value={item.value}>
+            <RadioButton
+              key={key}
+              value={item.value}
+              defaultChecked={item.defualtcheck}
+            >
               {item.name}
             </RadioButton>
           ))}
         </RadioGroup>
-        <button className="addPlace-btn">공간 추가</button>
+        <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
+          공간 수정
+        </button>
       </div>
       <div className="managePlace-detail__content">
         {clickedMenu === 0 &&
