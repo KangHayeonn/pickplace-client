@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '../../../common/TextField';
 import { placeFormProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/placeForm.scss';
+import '../../../../styles/components/search/searchOptionMenu.scss';
 import CategorySelector from '../../../../components/search/CategorySelector';
 import TagSelector from '../../../../components/search/TagSelector';
 import { categoryList } from '../../../../utils/mock/categoryList';
@@ -72,10 +73,12 @@ const PlaceForm = ({
           placeholder={'010-1234-5678'}
         />
       </div>
-      <CategorySelector
-        categoryName={placeOptions.category.name}
-        onChangeCategory={onChangeCategory}
-      />
+      <div className="PlaceForm-categorySelector__container">
+        <CategorySelector
+          categoryName={placeOptions.category.name}
+          onChangeCategory={onChangeCategory}
+        />
+      </div>
       <div className="PlaceForm-tagSelector__container">
         <h3 className="PlaceForm-tagSelector__header">태그</h3>
         <TagSelector onClickTagButton={onClickTagButton} />
