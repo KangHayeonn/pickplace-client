@@ -24,3 +24,47 @@
         }
     }
 }
+
+.container.category{
+    width : 60%;
+    margin : 30px 0;
+    h3{
+        margin : 10px 0;
+    }
+    .container-dropdown{
+        margin : 0 20px;
+    }
+}
+.PlaceForm-tagSelector__container{
+    .PlaceForm-tagSelector__header{
+        font-size : 18px;
+        font-weight: 600;
+        margin : 10px 0;
+    }
+    .container.tagBtns{
+        width : 60%;
+        display : grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+        margin-left : 20px;
+        .tabBtn{
+            margin : 3px 5px;
+            padding :5px 0;  
+            width : 70px;
+            border : $border-button;         
+            border-radius: $border-radius-button;
+            background-color: $color-surface-white;
+            &.clicked{
+                background-color: $color-primary;
+                color: $color-text-white;
+                border-radius: $border-radius-button;
+            }
+            &:hover {
+                background-color: $color-gray;
+                color: $color-text-black;
+                border: $border-button-hover;
+                box-shadow: $shadow-button-hover;
+            }
+        }
+    }
+
+}

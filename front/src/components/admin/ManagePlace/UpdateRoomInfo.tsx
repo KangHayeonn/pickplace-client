@@ -80,7 +80,6 @@ const UpdateRoomInfo = ({
         <button
           className="deleteRoomInfo-btn"
           onClick={() => {
-            console.log('취소');
             setUpdateState(false);
           }}
         >

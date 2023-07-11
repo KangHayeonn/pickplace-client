@@ -66,6 +66,14 @@ export type updateRoomInfoProps = {
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
+export type newRoomProps = {
+  roomName: string;
+  roomPrice: string;
+  roomPersonnel: string;
+  roomCount: string;
+  roomId: undefined | number;
+};
+
 export type roomProps = {
   roomName: string;
   roomPrice: number;
@@ -88,7 +96,7 @@ export type addedRoomProps = {
 };
 
 export type roomFormProps = {
-  newRoomInfo: roomProps;
+  newRoomInfo: newRoomProps;
   onRoomNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRoomPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPersonnelChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -103,7 +111,17 @@ export type placeFormProps = {
     address: string;
     phone: string;
   };
+  placeOptions: placeOptionsProps;
+  setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
+export interface placeOptionsProps {
+  category: {
+    name: string;
+    id: number;
+  };
+  tagId: Array<number>;
+}

@@ -2,14 +2,49 @@ import React from 'react';
 import TextField from '../../../common/TextField';
 import { placeFormProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/placeForm.scss';
+import CategorySelector from '../../../../components/search/CategorySelector';
+import TagSelector from '../../../../components/search/TagSelector';
+import { categoryList } from '../../../../utils/mock/categoryList';
 
 const PlaceForm = ({
   header,
   newPlaceInfo,
+  placeOptions,
+  setPlaceOptions,
   onPlaceNameChange,
   onAddressChange,
   onPhoneChange,
 }: placeFormProps) => {
+  const onChangeCategory = (category: string) => {
+    for (let i = 0; i < categoryList.length; i++) {
+      if (categoryList[i].name == category) {
+        setPlaceOptions({
+          ...placeOptions,
+          category: {
+            id: categoryList[i].id,
+            name: categoryList[i].name,
+          },
+        });
+      }
+    }
+  };
+  const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const tagId = e.currentTarget.value;
+    const clickedButton = e.currentTarget;
+    if (clickedButton.classList.contains('clicked')) {
+      e.currentTarget.classList.remove('clicked');
+      setPlaceOptions({
+        ...placeOptions,
+        tagId: placeOptions.tagId.filter((id) => id !== parseInt(tagId)),
+      });
+    } else {
+      e.currentTarget.classList.add('clicked');
+      setPlaceOptions({
+        ...placeOptions,
+        tagId: [...placeOptions.tagId, parseInt(tagId)],
+      });
+    }
+  };
   return (
     <div className="PlaceForm-container">
       <h3 className="PlaceForm-header">{header}</h3>
@@ -36,6 +71,14 @@ const PlaceForm = ({
           value={newPlaceInfo.phone}
           placeholder={'010-1234-5678'}
         />
+      </div>
+      <CategorySelector
+        categoryName={placeOptions.category.name}
+        onChangeCategory={onChangeCategory}
+      />
+      <div className="PlaceForm-tagSelector__container">
+        <h3 className="PlaceForm-tagSelector__header">태그</h3>
+        <TagSelector onClickTagButton={onClickTagButton} />
       </div>
     </div>
   );
