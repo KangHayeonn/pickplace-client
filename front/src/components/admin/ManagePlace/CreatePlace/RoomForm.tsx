@@ -1,5 +1,4 @@
 import React from 'react';
-
 import TextField from '../../../common/TextField';
 import { roomFormProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/roomForm.scss';

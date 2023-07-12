@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { addedRoomProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/addedRoom.scss';
 

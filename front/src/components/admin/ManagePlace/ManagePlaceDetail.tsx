@@ -27,15 +27,7 @@ const ManagePlaceDetail = () => {
     setClickedMenu(parseInt(e.currentTarget.value));
   };
 
-  // useEffect(() => {
-  //   Mypage.getAdmiPlaceDetail(state.id)
-  //     .then((res) => {
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       return Promise.reject(err);
-  //     });
-  // }, []);
+  // getAdmiPlaceDetail api
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');

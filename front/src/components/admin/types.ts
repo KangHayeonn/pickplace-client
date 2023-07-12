@@ -111,17 +111,26 @@ export type placeFormProps = {
     address: string;
     phone: string;
   };
-  placeOptions: placeOptionsProps;
-  setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
+  setAddressModal: React.Dispatch<React.SetStateAction<boolean>>;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onAddressChange: (address: string) => void;
   onPhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export interface placeOptionsProps {
+export type placeOptionsProps = {
   category: {
     name: string;
     id: number;
   };
   tagId: Array<number>;
-}
+};
+
+export type optionFormProps = {
+  placeOptions: placeOptionsProps;
+  setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
+};
+
+export type addressModalProps = {
+  onAddressChange: (address: string) => void;
+  setAddressModal: React.Dispatch<React.SetStateAction<boolean>>;
+};

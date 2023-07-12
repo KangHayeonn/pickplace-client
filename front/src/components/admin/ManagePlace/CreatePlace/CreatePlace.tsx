@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PlaceForm from './PlaceForm';
 import RoomForm from './RoomForm';
+import OptionForm from './OptionForm';
 import AddedRoom from './AddedRoom';
+import AddressModal from '../AddressModal';
 import '../../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
 import {
   roomProps,
@@ -11,6 +13,7 @@ import {
   placeOptionsProps,
 } from '../../types';
 import { categoryList } from '../../../../utils/mock/categoryList';
+import { confirmToAddRoom, confirmToPost } from '../PlaceManageFunc';
 
 const CreatePlace = () => {
   const navigate = useNavigate();
@@ -21,6 +24,8 @@ const CreatePlace = () => {
     roomCount: '1',
     roomId: undefined,
   };
+
+  const [openAddressModal, setAddressModal] = useState(false);
 
   const [newPlaceInfo, setNewPlaceInfo] = useState<placeProps>({
     placeName: '',
@@ -43,10 +48,10 @@ const CreatePlace = () => {
       placeName: e.currentTarget.value,
     });
   };
-  const onAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onAddressChange = (address: string) => {
     setNewPlaceInfo({
       ...newPlaceInfo,
-      address: e.currentTarget.value,
+      address: address,
     });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,20 +85,7 @@ const CreatePlace = () => {
     });
   };
   const onAddNewRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (newRoomInfo.roomName == '') window.alert('방 이름을 입력해주세요');
-    else if (newRoomInfo.roomPrice == '')
-      window.alert('방 가격을 입력해주세요');
-    else if (newRoomInfo.roomPersonnel == '')
-      window.alert('방 인원을 입력해주세요');
-    else if (newRoomInfo.roomCount == '')
-      window.alert('방 개수를 입력해주세요');
-    else if (isNaN(parseInt(newRoomInfo.roomPrice))) {
-      window.alert('방 가격을 숫자로 입력해주세요');
-    } else if (isNaN(parseInt(newRoomInfo.roomPersonnel))) {
-      window.alert('방 인원을 숫자로 입력해주세요');
-    } else if (isNaN(parseInt(newRoomInfo.roomCount))) {
-      window.alert('방 개수를 숫자로 입력해주세요');
-    } else {
+    if (confirmToAddRoom(newRoomInfo)) {
       setRoomList([
         ...newRoomList,
         {
@@ -113,14 +105,8 @@ const CreatePlace = () => {
     }
   };
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (newPlaceInfo.placeName == '') {
-      window.alert('공간 이름을 입력해주세요');
-    } else if (newPlaceInfo.address == '') {
-      window.alert('주소를 입력해주세요');
-    } else if (newPlaceInfo.phone == '') {
-      window.alert('연락처를 입력해주세요');
-    } else {
-      // createApi
+    if (confirmToPost(newPlaceInfo)) {
+      // updateApi
       navigate('/mypage');
     }
   };
@@ -133,14 +119,23 @@ const CreatePlace = () => {
 
   return (
     <div className="createPlace-container">
+      {openAddressModal && (
+        <AddressModal
+          setAddressModal={setAddressModal}
+          onAddressChange={onAddressChange}
+        />
+      )}
       <PlaceForm
         header={'신규 공간 등록'}
         newPlaceInfo={newPlaceInfo}
-        placeOptions={placeOptions}
-        setPlaceOptions={setPlaceOptions}
+        setAddressModal={setAddressModal}
         onPlaceNameChange={onPlaceNameChange}
         onAddressChange={onAddressChange}
         onPhoneChange={onPhoneChange}
+      />
+      <OptionForm
+        placeOptions={placeOptions}
+        setPlaceOptions={setPlaceOptions}
       />
       <RoomForm
         newRoomInfo={newRoomInfo}
