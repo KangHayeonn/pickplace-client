@@ -4,7 +4,7 @@ import DropDown from '../common/DropDown';
 import { categorySelectorProps } from './types';
 
 const CategorySelector = ({
-  optionForm,
+  categoryName,
   onChangeCategory,
 }: categorySelectorProps) => {
   return (
@@ -12,10 +12,10 @@ const CategorySelector = ({
       <h3>카테고리</h3>
       <div className="container-dropdown">
         <DropDown
-          defaultText={optionForm.category.name}
+          defaultText={categoryName}
           dropDownList={categoryNameList}
           onChangeCategory={onChangeCategory}
-        ></DropDown>
+        />
       </div>
     </div>
   );

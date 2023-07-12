@@ -38,6 +38,12 @@ export const adminPlaceList = [
     placeReviewCnt: 15,
 
     roomList: adminRoomList,
+    category: { name: '스터디룸', id: 4 },
+    tagList: [
+      { tagName: '아이동반', id: 2 },
+      { tagName: '가족추천', id: 4 },
+      { tagName: '편안한', id: 8 },
+    ],
   },
   {
     placeId: 30,
@@ -70,6 +76,12 @@ export const adminPlaceList = [
         roomPrice: 100000,
         roomStatus: 'available',
       },
+    ],
+    category: { name: '호텔/리조트', id: 1 },
+    tagList: [
+      { tagName: '아이동반', id: 2 },
+      { tagName: '가족추천', id: 4 },
+      { tagName: '편안한', id: 8 },
     ],
   },
 ];

@@ -27,12 +27,6 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
   ) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
       //room update api
-      console.log({
-        roomName: newRoomName,
-        roomPrice: newRoomPrice,
-        roomPersonnel: newRoomPersonnel,
-        roomCount: newRoomCount,
-      });
       setRoomInfo({
         ...roomInfo,
         roomName: newRoomName,

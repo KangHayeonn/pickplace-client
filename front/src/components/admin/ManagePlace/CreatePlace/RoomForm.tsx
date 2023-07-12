@@ -26,7 +26,6 @@ const RoomForm = ({
       <div className="RoomForm-textField__container">
         <label className="RoomForm-textField__label">방 가격</label>
         <TextField
-          textType={'number'}
           onChangeText={onRoomPriceChange}
           value={newRoomInfo.roomPrice}
         />
@@ -34,7 +33,6 @@ const RoomForm = ({
       <div className="RoomForm-textField__container">
         <label className="RoomForm-textField__label">방 인원</label>
         <TextField
-          textType={'number'}
           onChangeText={onPersonnelChange}
           value={newRoomInfo.roomPersonnel}
         />
@@ -42,7 +40,6 @@ const RoomForm = ({
       <div className="RoomForm-textField__container">
         <label className="RoomForm-textField__label">방 개수</label>
         <TextField
-          textType={'number'}
           onChangeText={onRoomCountChange}
           value={newRoomInfo.roomCount}
         />

@@ -36,7 +36,8 @@ export type searchOptionMenuProps = {
 };
 
 export type categorySelectorProps = {
-  optionForm: optionFormProps;
+  // optionForm: optionFormProps;
+  categoryName: string;
   onChangeCategory: (category: string) => void;
 };
 

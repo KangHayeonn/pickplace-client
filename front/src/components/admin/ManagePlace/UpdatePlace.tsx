@@ -4,7 +4,12 @@ import PlaceForm from './CreatePlace/PlaceForm';
 import RoomForm from './CreatePlace/RoomForm';
 import AddedRoom from './CreatePlace/AddedRoom';
 import '../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
-import { roomProps, placeProps } from '../types';
+import {
+  roomProps,
+  placeProps,
+  newRoomProps,
+  placeOptionsProps,
+} from '../types';
 import {
   adminPlaceList,
   adminRoomList,
@@ -14,20 +19,32 @@ const UpdatePlace = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const defaultRoomInfo = {
+  const defaultNewRoomForm = {
     roomName: '',
-    roomPrice: 0,
-    roomPersonnel: 1,
-    roomCount: 1,
+    roomPrice: '0',
+    roomPersonnel: '1',
+    roomCount: '1',
     roomId: undefined,
   };
+
   const [placeInfo, setPlaceInfo] = useState<placeProps>({
     placeName: adminPlaceList[0].placeName,
     address: adminPlaceList[0].placeAddress.address,
     phone: adminPlaceList[0].placePhone,
   });
-  const [newRoomInfo, setNewRoomInfo] = useState<roomProps>(defaultRoomInfo);
+
+  const [newRoomInfo, setNewRoomInfo] =
+    useState<newRoomProps>(defaultNewRoomForm);
+
   const [newRoomList, setRoomList] = useState<roomProps[]>(adminRoomList);
+
+  const [placeOptions, setPlaceOptions] = useState<placeOptionsProps>({
+    category: {
+      name: adminPlaceList[0].category.name,
+      id: adminPlaceList[0].category.id,
+    },
+    tagId: [],
+  });
 
   const onPlaceNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlaceInfo({
@@ -56,32 +73,47 @@ const UpdatePlace = () => {
   const onRoomPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomPrice: parseInt(e.currentTarget.value),
+      roomPrice: e.currentTarget.value,
     });
   };
   const onPersonnelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomPersonnel: parseInt(e.currentTarget.value),
+      roomPersonnel: e.currentTarget.value,
     });
   };
   const onRoomCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomCount: parseInt(e.currentTarget.value),
+      roomCount: e.currentTarget.value,
     });
   };
   const onAddNewRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (newRoomInfo.roomName == '') window.alert('방 이름을 입력해주세요');
-    else if (newRoomInfo.roomPrice == null)
+    else if (newRoomInfo.roomPrice == '')
       window.alert('방 가격을 입력해주세요');
-    else if (newRoomInfo.roomPersonnel == null)
+    else if (newRoomInfo.roomPersonnel == '')
       window.alert('방 인원을 입력해주세요');
-    else if (newRoomInfo.roomCount == null)
+    else if (newRoomInfo.roomCount == '')
       window.alert('방 개수를 입력해주세요');
-    else {
-      setRoomList([...newRoomList, newRoomInfo]);
-      setNewRoomInfo(defaultRoomInfo);
+    else if (isNaN(parseInt(newRoomInfo.roomPrice))) {
+      window.alert('방 가격을 숫자로 입력해주세요');
+    } else if (isNaN(parseInt(newRoomInfo.roomPersonnel))) {
+      window.alert('방 인원을 숫자로 입력해주세요');
+    } else if (isNaN(parseInt(newRoomInfo.roomCount))) {
+      window.alert('방 개수를 숫자로 입력해주세요');
+    } else {
+      setRoomList([
+        ...newRoomList,
+        {
+          roomName: newRoomInfo.roomName,
+          roomPrice: parseInt(newRoomInfo.roomPrice),
+          roomPersonnel: parseInt(newRoomInfo.roomPersonnel),
+          roomCount: parseInt(newRoomInfo.roomCount),
+          roomId: undefined,
+        },
+      ]);
+      setNewRoomInfo(defaultNewRoomForm);
     }
   };
   const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -106,13 +138,7 @@ const UpdatePlace = () => {
       const deletedList = newRoomList.filter((item) => item.roomId !== roomId);
       setRoomList(deletedList);
       if (roomId !== -1) {
-        //   Mypage.deleteRoom(state.id)
-        //     .then((res) => {
-        //       return res;
-        //     })
-        //     .catch((err) => {
-        //       return Promise.reject(err);
-        //     });
+        // delete room api
       }
     };
   };
@@ -122,6 +148,8 @@ const UpdatePlace = () => {
       <PlaceForm
         header={'공간 수정'}
         newPlaceInfo={placeInfo}
+        placeOptions={placeOptions}
+        setPlaceOptions={setPlaceOptions}
         onPlaceNameChange={onPlaceNameChange}
         onAddressChange={onAddressChange}
         onPhoneChange={onPhoneChange}
