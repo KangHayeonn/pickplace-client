@@ -86,6 +86,8 @@ export type placeProps = {
   placeName: string;
   address: string;
   phone: string;
+  x: string;
+  y: string;
 };
 
 export type addedRoomProps = {
@@ -105,16 +107,27 @@ export type roomFormProps = {
 };
 
 export type placeFormProps = {
-  header: string;
   newPlaceInfo: {
     placeName: string;
     address: string;
     phone: string;
   };
-  setAddressModal: React.Dispatch<React.SetStateAction<boolean>>;
+  header: string;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onAddressChange: (address: string) => void;
   onPhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type addressFormProps = {
+  newPlaceInfo: {
+    placeName: string;
+    address: string;
+    phone: string;
+  };
+  onAddressChange: (
+    address: string,
+    x: string,
+    y: string,
+  ) => (e: React.MouseEvent<HTMLParagraphElement>) => void;
 };
 
 export type placeOptionsProps = {
@@ -128,9 +141,4 @@ export type placeOptionsProps = {
 export type optionFormProps = {
   placeOptions: placeOptionsProps;
   setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
-};
-
-export type addressModalProps = {
-  onAddressChange: (address: string) => void;
-  setAddressModal: React.Dispatch<React.SetStateAction<boolean>>;
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PlaceForm from './CreatePlace/PlaceForm';
-import AddressModal from './AddressModal';
+import AddressForm from './CreatePlace/AddressForm';
 import RoomForm from './CreatePlace/RoomForm';
 import AddedRoom from './CreatePlace/AddedRoom';
 import OptionForm from './CreatePlace/OptionForm';
@@ -22,8 +22,6 @@ const UpdatePlace = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  const [openAddressModal, setAddressModal] = useState(false);
-
   const defaultNewRoomForm = {
     roomName: '',
     roomPrice: '0',
@@ -36,6 +34,8 @@ const UpdatePlace = () => {
     placeName: adminPlaceList[0].placeName,
     address: adminPlaceList[0].placeAddress.address,
     phone: adminPlaceList[0].placePhone,
+    x: adminPlaceList[0].placeAddress.longitude.toString(),
+    y: adminPlaceList[0].placeAddress.latitude.toString(),
   });
 
   const [newRoomInfo, setNewRoomInfo] =
@@ -57,11 +57,15 @@ const UpdatePlace = () => {
       placeName: e.currentTarget.value,
     });
   };
-  const onAddressChange = (address: string) => {
-    setPlaceInfo({
-      ...placeInfo,
-      address: address,
-    });
+  const onAddressChange = (address: string, x: string, y: string) => {
+    return (e: React.MouseEvent<HTMLParagraphElement>) => {
+      setPlaceInfo({
+        ...placeInfo,
+        address: address,
+        x: x,
+        y: y,
+      });
+    };
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlaceInfo({
@@ -131,20 +135,13 @@ const UpdatePlace = () => {
 
   return (
     <div className="createPlace-container">
-      {openAddressModal && (
-        <AddressModal
-          setAddressModal={setAddressModal}
-          onAddressChange={onAddressChange}
-        />
-      )}
       <PlaceForm
-        header={'공간 수정'}
         newPlaceInfo={placeInfo}
-        setAddressModal={setAddressModal}
+        header={'공간 수정'}
         onPlaceNameChange={onPlaceNameChange}
-        onAddressChange={onAddressChange}
         onPhoneChange={onPhoneChange}
       />
+      <AddressForm onAddressChange={onAddressChange} newPlaceInfo={placeInfo} />
       <OptionForm
         placeOptions={placeOptions}
         setPlaceOptions={setPlaceOptions}

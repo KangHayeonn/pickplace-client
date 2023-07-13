@@ -1,0 +1,71 @@
+@import "../../../../base/variable.scss";
+
+.AddressForm-container{
+    font-size: 17px;
+    margin : 20px 0 10px 0;
+
+    .AddressForm-label{
+        font-weight: 600;
+        font-size : 19px;
+        text-align: center;
+    }
+    .AddressForm-address{
+        margin-top : 10px;
+        display : flex;
+        .AddressForm-address__content{
+            max-width : 50%;
+            min-width : 300px;
+            margin :  -10px 0 0 20px;
+            display: flex;
+            align-items: center;
+        }           
+        .AddressForm-address__btn{
+            margin-left: 15px;
+            background-color: rgba(0,0,0,0);
+            width : 50px;
+            @include button-green();
+            &:hover {
+                @include button-hover-green();
+            }    
+            padding :  10px 0;    
+        }   
+    }
+
+    .AddressForm-searchResults__container{
+        padding :  10px;
+        margin :  10px 20px;
+        border-radius: 7px;
+        background-color: $color-surface-lightgray;
+
+        .AddressForm-searchResults{
+            padding : 5px 20px;
+        }
+        .AddressForm-searchResults__content{
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .AddressForm-searchResults__errMsg{
+            font-size: 14px;
+            color : $color-text-gray;
+        }
+    }
+    
+    .AddressForm-selectedAddress__container{
+        margin-top:10px;
+        margin-left :  20px;
+        background-color: $color-surface-lightgray;
+        border-radius: 7px;
+        max-width : 50%;
+        min-width : 300px;
+
+        .AddressForm-selectedAddress{
+            padding : 0 0 0 20px;
+            height : 45px;
+            display: flex;
+            align-items: center;                
+            color : $color-text-green;
+            font-weight: 600;
+            font-size: 15px;
+        }
+    }
+}

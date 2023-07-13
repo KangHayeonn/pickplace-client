@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PlaceForm from './PlaceForm';
+import AddressForm from './AddressForm';
 import RoomForm from './RoomForm';
 import OptionForm from './OptionForm';
 import AddedRoom from './AddedRoom';
-import AddressModal from '../AddressModal';
 import '../../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
 import {
   roomProps,
@@ -25,12 +25,12 @@ const CreatePlace = () => {
     roomId: undefined,
   };
 
-  const [openAddressModal, setAddressModal] = useState(false);
-
   const [newPlaceInfo, setNewPlaceInfo] = useState<placeProps>({
     placeName: '',
     address: '',
     phone: '',
+    x: '',
+    y: '',
   });
   const [newRoomInfo, setNewRoomInfo] =
     useState<newRoomProps>(defaultNewRoomForm);
@@ -48,11 +48,15 @@ const CreatePlace = () => {
       placeName: e.currentTarget.value,
     });
   };
-  const onAddressChange = (address: string) => {
-    setNewPlaceInfo({
-      ...newPlaceInfo,
-      address: address,
-    });
+  const onAddressChange = (address: string, x: string, y: string) => {
+    return (e: React.MouseEvent<HTMLParagraphElement>) => {
+      setNewPlaceInfo({
+        ...newPlaceInfo,
+        address: address,
+        x: x,
+        y: y,
+      });
+    };
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPlaceInfo({
@@ -119,20 +123,17 @@ const CreatePlace = () => {
 
   return (
     <div className="createPlace-container">
-      {openAddressModal && (
-        <AddressModal
-          setAddressModal={setAddressModal}
-          onAddressChange={onAddressChange}
-        />
-      )}
       <PlaceForm
-        header={'신규 공간 등록'}
         newPlaceInfo={newPlaceInfo}
-        setAddressModal={setAddressModal}
+        header={'신규 공간 등록'}
         onPlaceNameChange={onPlaceNameChange}
-        onAddressChange={onAddressChange}
         onPhoneChange={onPhoneChange}
       />
+      <AddressForm
+        onAddressChange={onAddressChange}
+        newPlaceInfo={newPlaceInfo}
+      />
+
       <OptionForm
         placeOptions={placeOptions}
         setPlaceOptions={setPlaceOptions}

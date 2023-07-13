@@ -5,17 +5,11 @@ import '../../../../styles/components/admin/managePlace/createPlace/placeForm.sc
 import '../../../../styles/components/search/searchOptionMenu.scss';
 
 const PlaceForm = ({
-  header,
   newPlaceInfo,
-  setAddressModal,
+  header,
   onPlaceNameChange,
   onPhoneChange,
 }: placeFormProps) => {
-  const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    document.body.style.overflow = 'hidden';
-    setAddressModal(true);
-  };
-
   return (
     <div className="PlaceForm-container">
       <h3 className="PlaceForm-header">{header}</h3>
@@ -34,15 +28,6 @@ const PlaceForm = ({
           value={newPlaceInfo.phone}
           placeholder={'010-1234-5678'}
         />
-      </div>
-      <div className="PlaceForm-address__container">
-        <label className="PlaceForm-address__label">주소</label>
-        <div className="PlaceForm-address">
-          <p className="PlaceForm-address__content">{newPlaceInfo.address}</p>
-          <button className="PlaceForm-address__btn" onClick={onOpenModal}>
-            검색
-          </button>
-        </div>
       </div>
     </div>
   );
