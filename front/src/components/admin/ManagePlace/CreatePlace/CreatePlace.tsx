@@ -133,7 +133,6 @@ const CreatePlace = () => {
         onAddressChange={onAddressChange}
         newPlaceInfo={newPlaceInfo}
       />
-
       <OptionForm
         placeOptions={placeOptions}
         setPlaceOptions={setPlaceOptions}

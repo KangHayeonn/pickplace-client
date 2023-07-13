@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import PlaceCard from './PlaceCard';
-
 import '../../../styles/components/admin/managePlace/managePlace.scss';
 import { adminPlaceList } from '../../../utils/mock/adminPlaceList';
 

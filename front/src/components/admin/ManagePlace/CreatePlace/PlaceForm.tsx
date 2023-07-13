@@ -2,7 +2,6 @@ import React from 'react';
 import TextField from '../../../common/TextField';
 import { placeFormProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/placeForm.scss';
-import '../../../../styles/components/search/searchOptionMenu.scss';
 
 const PlaceForm = ({
   newPlaceInfo,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { optionFormProps } from '../../types';
 import '../../../../styles/components/admin/managePlace/createPlace/optionForm.scss';
-import '../../../../styles/components/search/searchOptionMenu.scss';
 import CategorySelector from '../../../../components/search/CategorySelector';
 import TagSelector from '../../../../components/search/TagSelector';
 import { categoryList } from '../../../../utils/mock/categoryList';

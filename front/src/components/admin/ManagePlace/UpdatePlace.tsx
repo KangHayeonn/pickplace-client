@@ -132,7 +132,6 @@ const UpdatePlace = () => {
       }
     };
   };
-
   return (
     <div className="createPlace-container">
       <PlaceForm
