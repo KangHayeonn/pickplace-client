@@ -123,11 +123,7 @@ export type addressFormProps = {
     address: string;
     phone: string;
   };
-  onAddressChange: (
-    address: string,
-    x: string,
-    y: string,
-  ) => (e: React.MouseEvent<HTMLParagraphElement>) => void;
+  onAddressChange: (address: string, x: string, y: string) => void;
 };
 
 export type placeOptionsProps = {

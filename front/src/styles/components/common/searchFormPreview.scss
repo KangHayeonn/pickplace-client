@@ -42,4 +42,12 @@
             background-color: $color-surface-variant;
         }
     }
+    .search-preview__errMsg{
+      @include text-body2();
+      color: $color-text-gray;
+      display: flex;
+      align-items: center;
+      height: 1.875rem;
+      padding: 3px 12px;
+    }
 }

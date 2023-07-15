@@ -49,14 +49,12 @@ const CreatePlace = () => {
     });
   };
   const onAddressChange = (address: string, x: string, y: string) => {
-    return (e: React.MouseEvent<HTMLParagraphElement>) => {
-      setNewPlaceInfo({
-        ...newPlaceInfo,
-        address: address,
-        x: x,
-        y: y,
-      });
-    };
+    setNewPlaceInfo({
+      ...newPlaceInfo,
+      address: address,
+      x: x,
+      y: y,
+    });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPlaceInfo({
