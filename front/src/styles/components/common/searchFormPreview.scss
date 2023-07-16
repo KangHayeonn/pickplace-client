@@ -3,7 +3,7 @@
 .search-preview {
     width: 100%;
     background-color: $color-surface-lightgray;
-    height: 11rem;
+    max-height: 11rem;
     overflow-y: auto;
     border-radius: 7px;
     z-index:999;

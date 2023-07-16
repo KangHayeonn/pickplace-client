@@ -56,9 +56,9 @@ const AddressForm = ({ newPlaceInfo, onAddressChange }: addressFormProps) => {
             onClickAddress={onClickAddress}
           />
         </div>
-      </div>
-      <div className="AddressForm-selectedAddress__container">
-        <p className="AddressForm-selectedAddress">{newPlaceInfo.address}</p>
+        <div className="AddressForm-selectedAddress__container">
+          <p className="AddressForm-selectedAddress">{newPlaceInfo.address}</p>
+        </div>
       </div>
     </div>
   );

@@ -12,30 +12,30 @@
     .AddressForm-address{
         margin-top : 10px;
         display : flex;
+        align-items: center;
         .AddressForm-address__content{
             max-width : 50%;
-            min-width : 300px;
+            min-width : 280px;
             margin :  -10px 0 0 20px;
             display: flex;
-            align-items: center;
         }           
     }
     .AddressForm-selectedAddress__container{
-        margin-top:10px;
-        margin-left :  20px;
+        margin-left :  15px;
         background-color: $color-surface-lightgray;
         border-radius: 7px;
-        max-width : 50%;
-        min-width : 300px;
-
+        width : 25vw;
+        min-width : 240px;
+        max-width : 320px;
+        height : 35px;
+        display: flex;
+        align-items: center;  
         .AddressForm-selectedAddress{
             padding : 0 0 0 20px;
-            height : 45px;
-            display: flex;
-            align-items: center;                
             color : $color-text-green;
             font-weight: 600;
             font-size: 15px;
+            margin : 0;
         }
     }
 }

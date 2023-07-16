@@ -34,8 +34,8 @@ const UpdatePlace = () => {
     placeName: adminPlaceList[0].placeName,
     address: adminPlaceList[0].placeAddress.address,
     phone: adminPlaceList[0].placePhone,
-    x: adminPlaceList[0].placeAddress.longitude.toString(),
-    y: adminPlaceList[0].placeAddress.latitude.toString(),
+    x: adminPlaceList[0].placeAddress.longitude,
+    y: adminPlaceList[0].placeAddress.latitude,
   });
 
   const [newRoomInfo, setNewRoomInfo] =
@@ -61,8 +61,8 @@ const UpdatePlace = () => {
     setPlaceInfo({
       ...placeInfo,
       address: address,
-      x: x,
-      y: y,
+      x: parseFloat(x),
+      y: parseFloat(y),
     });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {

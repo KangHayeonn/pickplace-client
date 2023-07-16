@@ -29,8 +29,8 @@ const CreatePlace = () => {
     placeName: '',
     address: '',
     phone: '',
-    x: '',
-    y: '',
+    x: 0,
+    y: 0,
   });
   const [newRoomInfo, setNewRoomInfo] =
     useState<newRoomProps>(defaultNewRoomForm);
@@ -52,8 +52,8 @@ const CreatePlace = () => {
     setNewPlaceInfo({
       ...newPlaceInfo,
       address: address,
-      x: x,
-      y: y,
+      x: parseFloat(x),
+      y: parseFloat(y),
     });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {

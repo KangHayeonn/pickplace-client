@@ -86,8 +86,8 @@ export type placeProps = {
   placeName: string;
   address: string;
   phone: string;
-  x: string;
-  y: string;
+  x: number;
+  y: number;
 };
 
 export type addedRoomProps = {
