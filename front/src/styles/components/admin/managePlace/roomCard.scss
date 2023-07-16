@@ -1,8 +1,7 @@
 @import "../../../base/variable.scss";
 
-
-.roomCard-update__container
-,.roomCard-show__container{
+.roomCard-update__container,
+.roomCard-show__container{
     background-color: white;
     box-shadow: $shadow-dropdown;    
     margin : 10px 0;
@@ -25,7 +24,6 @@
 }
 .roomCard-show__container{
     height: 220px;
-
     .roomCard-right__container{
         width :100%;
         .roomCard-header{

@@ -3,7 +3,7 @@
 .search-preview {
     width: 100%;
     background-color: $color-surface-lightgray;
-    height: 11rem;
+    max-height: 11rem;
     overflow-y: auto;
     border-radius: 7px;
     z-index:999;
@@ -41,5 +41,13 @@
         &:hover {
             background-color: $color-surface-variant;
         }
+    }
+    .search-preview__errMsg{
+      @include text-body2();
+      color: $color-text-gray;
+      display: flex;
+      align-items: center;
+      height: 1.875rem;
+      padding: 3px 12px;
     }
 }

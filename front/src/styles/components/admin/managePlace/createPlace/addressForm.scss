@@ -1,0 +1,41 @@
+@import "../../../../base/variable.scss";
+
+.AddressForm-container{
+    font-size: 17px;
+    margin : 20px 0 10px 0;
+
+    .AddressForm-label{
+        font-weight: 600;
+        font-size : 19px;
+        text-align: center;
+    }
+    .AddressForm-address{
+        margin-top : 10px;
+        display : flex;
+        align-items: center;
+        .AddressForm-address__content{
+            max-width : 50%;
+            min-width : 280px;
+            margin :  -10px 0 0 20px;
+            display: flex;
+        }           
+    }
+    .AddressForm-selectedAddress__container{
+        margin-left :  15px;
+        background-color: $color-surface-lightgray;
+        border-radius: 7px;
+        width : 25vw;
+        min-width : 240px;
+        max-width : 320px;
+        height : 35px;
+        display: flex;
+        align-items: center;  
+        .AddressForm-selectedAddress{
+            padding : 0 0 0 20px;
+            color : $color-text-green;
+            font-weight: 600;
+            font-size: 15px;
+            margin : 0;
+        }
+    }
+}

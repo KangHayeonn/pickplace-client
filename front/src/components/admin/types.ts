@@ -86,6 +86,8 @@ export type placeProps = {
   placeName: string;
   address: string;
   phone: string;
+  x: number;
+  y: number;
 };
 
 export type addedRoomProps = {
@@ -105,23 +107,34 @@ export type roomFormProps = {
 };
 
 export type placeFormProps = {
-  header: string;
   newPlaceInfo: {
     placeName: string;
     address: string;
     phone: string;
   };
-  placeOptions: placeOptionsProps;
-  setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
+  header: string;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onAddressChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export interface placeOptionsProps {
+export type addressFormProps = {
+  newPlaceInfo: {
+    placeName: string;
+    address: string;
+    phone: string;
+  };
+  onAddressChange: (address: string, x: string, y: string) => void;
+};
+
+export type placeOptionsProps = {
   category: {
     name: string;
     id: number;
   };
   tagId: Array<number>;
-}
+};
+
+export type optionFormProps = {
+  placeOptions: placeOptionsProps;
+  setPlaceOptions: React.Dispatch<React.SetStateAction<placeOptionsProps>>;
+};

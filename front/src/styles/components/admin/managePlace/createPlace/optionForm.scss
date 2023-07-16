@@ -1,0 +1,18 @@
+@import "../../../../base/variable.scss";
+
+.OptionForm-categorySelector__container{
+    width : 60%;
+}
+.OptionForm-tagSelector__container{
+    width : 350px;
+    .OptionForm-tagSelector__header{
+        font-size : 18px;
+        font-weight: 600;
+        margin : 10px 0;
+    }
+    .container.tagBtns{
+        display : grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr ;
+        margin : 0 0 0 20px;
+    }
+}
