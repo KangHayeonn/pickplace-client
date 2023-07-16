@@ -1,0 +1,85 @@
+@import "../../base/variable.scss";
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 350px;
+    margin: 53px 73px;
+
+    &__field {
+        width: 350px;
+        margin-bottom: 19px;
+
+        &.btn {
+            width: 300px;
+            margin-top: 10px;
+            margin-bottom: 32px;
+        }
+    }
+}
+
+.sub-menu {
+    @include text-body3();
+    color: $color-text-gray;
+    display: flex;
+    align-items: center;
+
+    &__line{
+        border-left: 1px solid $color-lightgray;
+        height: 11px;
+        margin: 0px 7px 0px 8px;
+    } 
+}
+
+.sub-link {
+    @include text-body3();
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-top: 20px;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        color: $color-surface-variant;
+
+        &--line {
+            border-top: 1px solid $color-lightgray;
+            width: 150px;
+    
+            &:first-child {
+                margin-right: 15px;
+            }
+            &:last-child {
+                margin-left: 15px;
+            }
+        }
+    }
+
+    &__login {
+        margin-top: 20px;
+        button {
+            border-radius: 5px;
+            margin-right: 33px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+a {
+    color: $color-gray;
+}
+
+.screen_out {
+    display: none;
+    width: 0;
+    height: 0;
+}

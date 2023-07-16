@@ -1,0 +1,13 @@
+@import "../../../base/variable.scss";
+
+.reservation-detail{
+    width : 60%;
+    min-width: 550px;    
+    margin : 40px auto;
+
+    hr{
+        width : 100%;
+        border-top : 1px solid rgb(195, 195, 195);  
+        margin : 15px 0;   
+    }
+}

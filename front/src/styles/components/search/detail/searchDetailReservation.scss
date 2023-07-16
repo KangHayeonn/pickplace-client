@@ -1,0 +1,36 @@
+@import "../../../base/variable.scss";
+
+.search-detail-reservation {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    box-shadow: $shadow-center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    &__date {
+        display: flex;
+        align-items: center;
+        width: 30rem;
+
+        &--title {
+            @include text-subtitle1();
+            display: flex;
+            width: 6rem;
+            font-weight: 600;
+        }
+    }
+
+    &__time {
+        display: flex;
+        align-items: center;
+        width: 30rem;
+
+        &--title {
+            @include text-subtitle1();
+            display: flex;
+            width: 6rem;
+            font-weight: 600;
+        }
+    }
+}

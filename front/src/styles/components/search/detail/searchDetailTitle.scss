@@ -1,0 +1,79 @@
+@import "../../../base/variable.scss";
+
+.search-detail-top {
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    &__image {
+        position: relative;
+        width: 70rem;
+        height: 12rem;
+        background: url("../../../../assets//images/place-default.svg") no-repeat;
+        background-size: cover;
+        color: transparent;
+
+        img {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
+    &__content {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        box-shadow: $shadow-bottom;
+        padding: 15px 30px;
+
+        &--title {
+            @include text-h5();
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        &--link {
+            display:flex;
+            align-items: center;
+            @include text-subtitle1();
+            letter-spacing: 0.25px;
+            gap: 1rem;
+            cursor: pointer;
+
+            &__star {
+                display: flex;
+                align-items: center;
+                font-weight: 600;
+                color: $color-text-yellow;
+            
+                &:hover {
+                    opacity: 0.5;
+                }
+            
+                img {
+                    margin-right: 7px;
+                }
+            }
+            
+            &__review {
+                font-weight: 600;
+                color: $color-text-green;
+            
+                &:hover {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+}

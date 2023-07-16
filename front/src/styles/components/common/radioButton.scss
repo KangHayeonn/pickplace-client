@@ -1,0 +1,23 @@
+@import "../../base/variable.scss";
+@import "../../base/mixin.scss";
+
+.radioGroup{
+    display: flex;
+    align-items:center;
+    label{  
+        @include button-white(); 
+        cursor: pointer;  
+        padding: 7px 22px;
+        &:hover {
+            @include button-hover-gray();
+        }
+        margin : 0 2px;
+    }
+    input[type=radio] {
+        -webkit-appearance: none;            
+    }
+
+    input[type=radio]:checked +label{
+        @include button-hover-black();
+    }  
+}

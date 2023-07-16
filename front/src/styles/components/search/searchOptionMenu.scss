@@ -1,0 +1,93 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+body{
+    .rc-tooltip-placement-top .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topLeft .rc-tooltip-arrow, 
+    .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+        bottom: 4px;
+        margin-left: -5px;
+        border-top-color: rgba(0,0,0,0.2);
+    }
+}
+.container.SearchOptionMenu{
+    width : 40%;
+    min-width : 250px;
+    margin : 30px 0;
+    hr{
+        border : 0.5px solid rgb(218, 218, 218);
+    }
+    h3{
+        padding : 0 20px;
+        text-align: left;
+    }
+}
+
+.container.category{
+    margin : 30px 0;
+    h3{
+        margin : 10px 0;
+    }
+    .container-dropdown{
+        margin : 0 20px;
+    }
+}
+.container.personnel{
+    margin : 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container.distance{
+    margin : 30px 0;
+
+    .container.slider{
+        width : 23vw;
+        min-width: 180px;
+        margin : 0 auto;
+        margin-top : 20px;
+    }
+    p{                
+        padding : 5px 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+}
+.container.tagBtns{
+    margin : 30px 5px;
+    .tabBtn{
+        margin : 3px 5px;
+        padding :5px 0;  
+        width : 70px;
+        border : $border-button;         
+        border-radius: $border-radius-button;
+        background-color: $color-surface-white;
+        &.clicked{
+            background-color: $color-primary;
+            color: $color-text-white;
+            border-radius: $border-radius-button;
+        }
+        &:hover {
+            background-color: $color-gray;
+            color: $color-text-black;
+            border: $border-button-hover;
+            box-shadow: $shadow-button-hover;
+        }
+    }
+}
+.button.submit{
+    margin : 15px 0;
+    cursor: pointer;  
+    border : $border-button;         
+    border-radius: $border-radius-button;
+    background-color: $color-surface-white;
+    padding: 5px 15px;
+    &:hover {
+        background-color: $color-gray;
+        color: $color-text-black;
+        border: $border-button-hover;
+        box-shadow: $shadow-button-hover;
+    }
+}

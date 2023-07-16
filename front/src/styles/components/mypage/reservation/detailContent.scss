@@ -1,0 +1,30 @@
+@import "../../../base/variable.scss";
+
+.detail-address{
+    margin-bottom : 10px;
+}
+.detail-address,
+.detail-phone{
+    display: inline-block;
+    width : 70px;
+}
+
+.detail-reservationInfo{
+    margin-bottom : 20px;
+    display: flex;
+    flex-wrap: wrap;
+    .detail-reservationId{
+        margin-right : 50px;
+    }
+}
+
+.detail-checkin,
+.detail-checkout{
+    margin-bottom : 10px;
+    display: inline-block;
+    width : 70px;
+}
+
+.detail-nickName,.detail-personnel,.detail-roomPrice{
+    font-weight: 600;
+}

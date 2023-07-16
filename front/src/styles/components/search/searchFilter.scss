@@ -1,0 +1,24 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+.tabBtns{
+    @include text-body2();
+    display: flex;
+    justify-content: center;
+
+    .button.map{
+        margin-left : 1.5vw;
+        cursor: pointer;  
+        border : $border-button;         
+        border-radius: $border-radius-button;
+        background-color: $color-surface-white;
+        padding: 5px 15px;
+        &:hover {
+            background-color: $color-hover;
+            color: $color-text-white;
+            border: $border-button-hover;
+            box-shadow: $shadow-button-hover;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+@import "../../../base/variable.scss";
+
+.managePlace{
+    max-width: 100%;
+    min-width : 550px;
+}
+.placeCard-container{
+    cursor : pointer;
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin : 10px 0;
+    height: 150px;
+    text-align: left;
+
+    .placeCard-img__container{
+        @include background-default-small();
+        min-width: 220px;
+        width: 30%;
+        height : 100%;
+    }
+
+    .placeCard-content{
+        padding : 10px 30px;
+    }
+    .placeCard-content{
+        .address,.phone{
+            display: inline-block;
+            width : 50px;
+        }
+        span{
+            font-size: 15px;
+        }
+    }
+}
+.managePlace-btn__container{
+    display: flex;
+    justify-content: flex-end;
+    .addPlace-btn{
+        @include button-white;
+        cursor: pointer;  
+        padding: 7px 20px;
+        font-size : 16px;
+        &:hover{
+            @include button-hover-black
+        }
+    }
+}

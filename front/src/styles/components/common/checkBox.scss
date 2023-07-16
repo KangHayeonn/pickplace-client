@@ -1,0 +1,32 @@
+@import "../../base/variable.scss";
+
+.checkbox-form {
+    display: flex;
+    align-items: center;
+
+    &__input {
+        min-width: 1.1rem;
+        height: 1.1rem;
+        margin: 0;
+        appearance: none;
+        background: url("../../../assets/images/checkbox-off.png") no-repeat;
+        background-size: cover;
+        cursor: pointer;
+
+        &:checked {
+            background: url("../../../assets/images/checkbox-on.png") no-repeat;
+            background-size: cover;
+        }
+
+        &:disabled {
+            cursor: default;
+        }
+    }
+
+    &__text {
+        @include text-body2();
+        min-width: fit-content;
+        margin-left: 0.7rem;
+        cursor: pointer;
+    }
+}

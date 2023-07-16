@@ -1,0 +1,35 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+
+.modal-background{
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+}
+.map-modal{
+    position : absolute;
+    width : 60rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0);
+
+    .map-modal__header{
+        height : 35px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .map-modal__btn--close{
+            width: 40px;
+            img{
+                width: 20px;
+                height: 20px;
+            }
+            background-color: rgba(0,0,0,0);
+        }
+    }
+}

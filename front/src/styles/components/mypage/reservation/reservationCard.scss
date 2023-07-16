@@ -1,0 +1,77 @@
+@import "../../../base/variable.scss";
+
+.reservation{
+    min-width : 550px;
+}
+
+.img-container,.reservationCard-header,.reservationCard-content{
+    cursor: pointer;
+}
+
+.reservationCard-container{
+    background-color: white;
+    box-shadow: $shadow-dropdown;    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin : 10px 0;
+    height: 240px;
+    .img-container{
+        @include background-default-small();
+        min-width: 230px;
+        width : 30%;
+        height : 240px;
+    }
+    .reservationCard{
+        text-align: left;
+        width : 100%;
+        padding : 0 30px;
+    }
+    .reservationCard-header{
+        .card-placeName{
+            margin-top : 10px;
+            width :100%;
+            font-weight: 800;
+            @include line-clamp-ellipsis1();
+        }
+        .reservationCard-reservationId{
+            font-size: 15px;
+        }
+    }
+    .reservationCard-content{
+        text-align: left;
+        padding : 10px 0;
+        .checkin,.checkout,.reservation-time{
+            display: inline-block;
+            width : 70px;
+            padding : 2px 0;
+        }
+        span{
+            font-size: 15px;
+        }
+    }
+    .reservationCard-reservationStatus{
+        margin : 0 0 1vw;
+        text-align: end;
+        font-weight: 600;
+        color : $color-text-green;
+        font-size: 16px;
+        .reservationCard-status{
+            display: inline-block;
+            width : 60px;
+            cursor : default;
+        }
+        .reservationCard-reviewCompleted,.reservationCard-review{
+            display: inline-block;
+            max-width : 95px;
+            margin-left : 15px;
+            cursor : default;
+        }
+        .reservationCard-review{
+            &:hover {
+                color: $color-text-lightgreen;
+            }  
+            cursor: pointer;  
+        }
+    }
+}

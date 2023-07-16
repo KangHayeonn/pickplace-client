@@ -1,0 +1,22 @@
+@import "../../base/variable.scss";
+
+.modal-form {
+    &__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+
+        &--btn {
+            width: 120px;
+
+            &:first-child {
+                margin-right: 50px;
+            }
+        }
+    }
+}
+
+p {
+    @include text-body1();
+    margin-bottom: 5px;
+}

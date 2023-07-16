@@ -1,0 +1,15 @@
+@import "../../base/variable.scss";
+
+.mypage{
+    min-width: 600px;
+    min-height: 90vh;
+    margin : 0 auto;
+    .mypage-header{    
+        height: 50px;
+        margin : 50px 0 0 20%; 
+    }
+    .mypage-content{  
+        width : 60%;
+        margin : 0 auto;
+    }
+}

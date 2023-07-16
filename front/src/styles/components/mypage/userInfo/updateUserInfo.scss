@@ -1,0 +1,26 @@
+@import "../../../base/variable.scss";
+
+.updateUserInfo{
+    width : 80vw;
+    .textField-container{
+        width : 50%;
+        min-width: 200px;
+        margin-top : 15px;
+    }
+    .updateUserInfo-btn__container{
+        display:flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top : -20px;
+        button{
+            font-weight: 500;
+            color: $color-text-lightgreen;
+            cursor: pointer;  
+            margin-right : 1.2vw;
+            font-size: 16px;
+            &:hover {
+                color : $color-text-green;
+            }
+        } 
+    }
+}

@@ -1,0 +1,40 @@
+@import "../../base/variable.scss";
+
+.text-btn{
+  @include text-button();
+  width: 100%;
+  background-color: $color-surface-white;
+  border-radius: $border-radius-button;
+  color: $color-text-black;
+  border: $border-button;
+  box-shadow: $shadow-button;
+  padding: 7px 22px;
+
+  &:hover {
+    background-color: $color-hover;
+    color: $color-text-white;
+    border: $border-button-hover;
+    box-shadow: $shadow-button-hover;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &.secondary {
+    &.short {
+      background: url("../../../assets/images/bg-short.png") no-repeat;
+    }
+
+    &.long {
+      background: url("../../../assets/images/bg-long.png") no-repeat;
+    }
+
+    &:hover {
+      opacity: 0.8;
+      color: $color-text-black;
+      border: $border-button;
+      box-shadow: $shadow-button;
+    }
+  }
+}

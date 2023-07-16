@@ -1,0 +1,34 @@
+@import "../../base/variable.scss";
+
+.reservedCard-btn__container{
+    display: flex;
+    justify-content: flex-end;
+    margin-left : 5px;
+
+    .reservedCard-btn__complete, 
+    .reservedCard-btn__refuse,
+    .reservedCard-btn__accept{
+        margin : 0 3px;
+        display: inline-block;
+        width : 90px;
+    }
+    .reservedCard-btn__complete{
+        cursor : default;
+    }
+    
+    .reservedCard-btn__complete,
+    .reservedCard-btn__accept{
+        @include button-green;
+    }
+    .reservedCard-btn__refuse{
+        @include button-lightgreen;
+    }
+
+    .reservedCard-btn__accept,
+    .reservedCard-btn__refuse{
+        cursor: pointer;  
+        &:hover {
+            @include button-hover-green
+        }
+    }
+}

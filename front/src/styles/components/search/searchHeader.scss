@@ -1,0 +1,77 @@
+@import "../../base/reset.scss";
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+.container.searchHeader{              
+    background-color: rgb(231, 231, 231);
+    min-width: 700px;
+
+    .wrapper{        
+        width : 80%;    
+        margin : 0 auto;
+        padding : 20px 0;
+        h1{
+            margin : 10px 0 0 0 ;
+            text-align : left        
+        }
+        .container.inputs{
+            display: flex;            
+            flex-wrap: wrap;
+            align-items : center;
+            margin : 20px 0 10px;
+
+            .container-searchForm{
+                margin-right : 20px;                    
+                width : 250px;
+            }
+            .container.date-input{
+                text-align: left;
+                
+                input{
+                    margin : 10px 0 0 0;
+                    padding : 10px;
+                    border-radius: 20px;
+
+                    position: relative;
+                    background: url(../../../assets/images/calendar.png) no-repeat white;
+                    background-position: 15px center;
+                    background-size :14px;
+                    text-indent: 13px;
+                    width: 150px;
+                    text-align: center;
+                }
+
+                input[type="date"]::-webkit-calendar-picker-indicator {
+                    display: block;
+                    cursor: pointer;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: auto;
+                    height: auto;
+                    color: transparent;
+                    background: transparent;
+                }                    
+                span{
+                    margin : 0 5px;
+                }
+                button{
+                    margin : 0 5px;
+                    height: 35px;
+                    width : 50px;
+                    border : $border-button;         
+                    border-radius: $border-radius-button;
+                    background-color: $color-surface-white;
+                    &:hover {
+                        background-color: $color-gray;
+                        color: $color-text-black;
+                        border: $border-button-hover;
+                        box-shadow: $shadow-button-hover;
+                    }
+                }
+            }
+        }
+    }      
+}

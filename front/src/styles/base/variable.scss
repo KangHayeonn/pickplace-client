@@ -1,0 +1,192 @@
+// 전역으로 사용하는 색상
+$color-primary: #000;
+$color-secondary: #E8E8E8;
+$color-hover: #000;
+$color-disabled: #bdc8d6;
+$color-surface-white: #fff;
+$color-surface-lightgray: #F4F4F4;
+$color-surface-gray: #D2D2D2;
+$color-surface-darkgray: #7A7A7A;
+
+$color-error: #EE0D0D;
+$color-focus: #2a82f0;
+$color-toast-background: rgba(0, 0, 0, 0.8);
+
+$color-text-white: #fff;
+$color-text-black: #000;
+$color-text-green: #63B224;
+$color-text-lightgreen: #ABC09B;
+$color-text-darkgreen: #577142;
+$color-text-gray: #a0a0a0;
+$color-text-darkgray: #646464;
+$color-text-yellow: #F9C74F;
+$color-placeholder: rgba(0, 0, 0, 0.3);
+$color-star: #F9C74F;
+$color-gray: #AAA;
+$color-lightgray: #D9D9D9;
+$color-surface-variant: #bfc8cc;
+$color-dimmed: rgba(0, 0, 0, 0.4);
+
+// 전역으로 사용하는 폰트 스타일
+@mixin text-h1 {
+    font-weight: 400;
+    font-size: 6rem;
+    line-height: 6.5rem;
+    letter-spacing: -1.5px;
+}
+
+@mixin text-h2 {
+    font-weight: 400;
+    font-size: 3.75rem;
+    line-height: 4.25rem;
+    letter-spacing: -0.5px;
+}
+
+@mixin text-h3 {
+    font-weight: 500;
+    font-size: 2.875rem;
+    line-height: 3.375rem;
+}
+
+@mixin text-h4 {
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.25px;
+}
+
+@mixin text-h5 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+@mixin text-h6 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    letter-spacing: 0.15px;
+}
+
+@mixin text-subtitle1 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.15px;
+}
+
+@mixin text-subtitle2 {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    letter-spacing: 0.1px;
+}
+
+@mixin text-body1 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+@mixin text-body2 {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.25px;
+}
+
+@mixin text-body3 {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.25px;
+}
+
+@mixin text-button {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 1.25px;
+}
+
+@mixin text-overline {
+    font-weight: 500;
+    font-size: 0.8rem;
+    line-height: 0.875rem;
+    letter-spacing: 1.5px;
+}
+
+
+@mixin button-white {
+    color : black;
+    border : $border-button;         
+    border-radius: $border-radius-button;
+    background-color: $color-surface-white;
+}
+
+@mixin button-hover-black {
+    background-color: $color-hover;
+    color:$color-text-white;
+    border: $border-button-hover;
+    box-shadow: $shadow-button-hover;
+}
+
+@mixin button-hover-gray {
+    background-color: $color-surface-gray;
+    color: $color-text-black;
+    border: $border-button-hover;
+    box-shadow: $shadow-button-hover;
+}
+
+@mixin button-green {
+    background-color: $color-surface-lightgray;
+    color: $color-text-green;
+    border-radius: $border-radius-button;
+    padding: 8px 16px;
+    font-weight: 700
+}
+
+@mixin button-lightgreen {
+    background-color: $color-surface-lightgray;
+    color: $color-text-lightgreen;
+    border-radius: $border-radius-button;
+    padding: 8px 16px;
+    font-weight: 700
+}
+
+@mixin button-hover-green {
+    background-color: $color-lightgray;
+    color : $color-text-darkgreen;
+}
+
+@mixin line-clamp-ellipsis1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+}
+
+@mixin background-default-small{
+    background-image: url("../../assets/images/place-default-small.svg");
+    background-repeat : no-repeat;
+    background-size : cover;  
+    background-position: center; 
+}
+
+@mixin text-title-bar {
+   font-size: 1.18rem;
+   font-weight: 600;
+   letter-spacing: 0.25px;
+   color: $color-text-white;
+}
+
+// 전역으로 사용하는 그림자 스타일
+$shadow-bottom: 0 4px 4px rgba(0, 0, 0, 0.25);
+$shadow-center: 0 0 5px rgba(0, 0, 0, 0.25);
+$shadow-dropdown: 1px 2px 4px rgba(0, 0, 0, 0.25);
+$shadow-button: 1px 3px 3px rgba(0, 0, 0, 1);
+$shadow-button-hover: 1px 3px 3px rgba(204, 207, 209, 1);
+
+// 전역으로 사용하는 버튼 스타일
+$border-button: 3px solid #000;
+$border-button-hover: 3px solid #e5e6e8;
+$border-radius-button: 1.25rem;

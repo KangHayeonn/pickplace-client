@@ -1,0 +1,51 @@
+@import "../../base/mixin.scss";
+@import "../../base/variable.scss";
+
+.main{
+    margin : 0 auto;
+    section{
+        img{
+            width : 30vw;
+            min-width: 350px;;
+        }
+        .buttons{
+            display : flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin : 40px 0 60px 0 ;
+            button{
+                min-width :60px;
+                margin : 5px;
+                padding : 5px;
+                font-size: 11px;
+                cursor: pointer;  
+                border : $border-button;         
+                border-radius: $border-radius-button;
+                background-color: $color-surface-white;
+                &:hover {
+                    background-color: $color-gray;
+                    color: $color-text-black;
+                    border: $border-button-hover;
+                    box-shadow: $shadow-button-hover;
+                }
+            }
+        }
+        hr{
+            margin : 0 auto;
+            width : 80%;
+            border-top : 1px solid rgb(195, 195, 195);                
+        }
+        article{  
+            padding : 50px 0 50px 0;
+            h1{
+                margin-bottom : 30px;
+                font-size : 25px;
+            }
+            .map-container{
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
