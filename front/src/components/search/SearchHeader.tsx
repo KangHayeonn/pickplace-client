@@ -17,13 +17,13 @@ const SearchHeader = ({
   const [searchKeyword, setSearchKeyword] = useState<string>(
     address.address_name,
   );
-  const [searchPreviewList, setSearchPreviewList] = useState<
+  const [searchPreviewList, setSearchPreviewList] = useState([
     {
-      address_name: string;
-      x: string;
-      y: string;
-    }[]
-  >([]);
+      address_name: address.address_name,
+      x: address.x.toString(),
+      y: address.y.toString(),
+    },
+  ]);
 
   useEffect(() => {
     async function getSearchList() {
@@ -40,6 +40,7 @@ const SearchHeader = ({
       }
     }
     if (searchKeyword != '') {
+      console.log(searchKeyword);
       getSearchList();
     } else {
       setSearchPreviewList([]);
