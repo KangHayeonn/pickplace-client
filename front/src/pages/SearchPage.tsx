@@ -24,7 +24,11 @@ const SearchPage = () => {
     useState<type.searchResultListProps[]>(hotelSearchResult);
 
   const [searchForm, setSearchForm] = useState<type.searchFormProps>({
-    address: '서울특별시 종로구 세종대로 172',
+    address: {
+      address_name: '서울특별시 종로구 세종대로 172',
+      x: 126.976661,
+      y: 37.5706546,
+    },
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
     distance: 5,
@@ -49,10 +53,14 @@ const SearchPage = () => {
     document.body.style.overflow = 'hidden';
     setOnMapOpen(true);
   };
-  const onChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeAddress = (address: string, x: string, y: string) => {
     setSearchForm({
       ...searchForm,
-      address: e.target.value,
+      address: {
+        address_name: address,
+        x: parseFloat(x),
+        y: parseFloat(y),
+      },
     });
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +99,7 @@ const SearchPage = () => {
     getSearchData();
   };
   const checkAddressExist = () => {
-    if (searchForm.address == '') {
+    if (searchForm.address.address_name == '') {
       window.alert('주소를 입력해주세요');
       return false;
     }
@@ -138,8 +146,7 @@ const SearchPage = () => {
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}
         onSearchBtnClick={onSearchBtnClick}
-      ></SearchHeader>
-
+      />
       <main>
         <SearchOptionMenu
           optionForm={optionForm}
@@ -147,17 +154,15 @@ const SearchPage = () => {
           searchForm={searchForm}
           setSearchForm={setSearchForm}
           onSearchWithOptionBtnClick={onSearchWithOptionBtnClick}
-        ></SearchOptionMenu>
+        />
         <section>
-          <div className="tabBtns">
-            <SearchFilter
-              onClickFilterButton={onClickFilterButton}
-            ></SearchFilter>
-            <button className="button map" onClick={onOpenModal}>
+          <div className="search-tabBtns">
+            <SearchFilter onClickFilterButton={onClickFilterButton} />
+            <button className="search-tabBtns__mapBtn" onClick={onOpenModal}>
               지도
             </button>
           </div>
-          <SearchResult searchResult={searchResult}></SearchResult>
+          <SearchResult searchResult={searchResult} />
         </section>
       </main>
     </div>

@@ -4,7 +4,7 @@ import { tagSelectorProps } from './types';
 
 const TagSelector = ({ onClickTagButton }: tagSelectorProps) => {
   return (
-    <div className="container tagBtns">
+    <div className="tagBtns-container">
       {tagList.map((item, key) => (
         <button
           className="tabBtn"

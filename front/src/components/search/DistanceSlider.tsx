@@ -7,7 +7,7 @@ import { distanceSliderProps } from './types';
 
 const DistanceSlider = ({ onChangeUserRangeInput }: distanceSliderProps) => {
   return (
-    <div className="container slider">
+    <div className="slider-container">
       <Slider
         min={0}
         max={10}

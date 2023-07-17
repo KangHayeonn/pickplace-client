@@ -2,11 +2,11 @@
 @import "../../base/mixin.scss";
 @import "../../base/variable.scss";
 
-.container.searchHeader{              
+.searchHeader-container{              
     background-color: rgb(231, 231, 231);
     min-width: 700px;
 
-    .wrapper{        
+    .searchHeader-wrapper{        
         width : 80%;    
         margin : 0 auto;
         padding : 20px 0;
@@ -14,17 +14,17 @@
             margin : 10px 0 0 0 ;
             text-align : left        
         }
-        .container.inputs{
+        .searchHeader-inputs__container{
             display: flex;            
             flex-wrap: wrap;
             align-items : center;
             margin : 20px 0 10px;
 
-            .container-searchForm{
+            .searchHeader-searchForm__container{
                 margin-right : 20px;                    
-                width : 250px;
+                width : 280px;
             }
-            .container.date-input{
+            .searchHeader-dateInput__container{
                 text-align: left;
                 
                 input{
