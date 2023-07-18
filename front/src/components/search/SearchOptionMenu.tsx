@@ -58,23 +58,26 @@ const SearchOptionMenu = ({
   };
 
   return (
-    <div className="container SearchOptionMenu">
+    <div className="searchOptionMenu-container">
       <hr />
       <CategorySelector
         categoryName={optionForm.category.name}
         onChangeCategory={onChangeCategory}
       />
-      <div className="container personnel">
-        <h3>인원</h3>
+      <div className="personnel-container">
+        <h3 className="personnel-header">인원</h3>
         <div className="counter">
-          <NumberForm min={0} onChangeNum={onChangeNum}></NumberForm>
+          <NumberForm min={0} onChangeNum={onChangeNum} />
         </div>
       </div>
       <DistanceInput onChangeUserRangeInput={onChangeUserRangeInput} />
       <hr />
       <TagSelector onClickTagButton={onClickTagButton} />
       <hr />
-      <button className="button submit" onClick={onSearchWithOptionBtnClick}>
+      <button
+        className="searchOptionMenu-submitBtn"
+        onClick={onSearchWithOptionBtnClick}
+      >
         옵션적용
       </button>
     </div>

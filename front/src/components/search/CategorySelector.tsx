@@ -8,9 +8,9 @@ const CategorySelector = ({
   onChangeCategory,
 }: categorySelectorProps) => {
   return (
-    <div className="container category">
-      <h3>카테고리</h3>
-      <div className="container-dropdown">
+    <div className="category-container">
+      <h3 className="category-header">카테고리</h3>
+      <div className="dropdown-container">
         <DropDown
           defaultText={categoryName}
           dropDownList={categoryNameList}

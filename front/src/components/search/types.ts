@@ -2,8 +2,12 @@ export type searchHeaderProps = {
   startDate: string;
   endDate: string;
   category: string;
-  address: string;
-  onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  address: {
+    address_name: string;
+    x: number;
+    y: number;
+  };
+  onChangeAddress: (address: string, x: string, y: string) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchBtnClick: () => void;
@@ -20,7 +24,11 @@ export interface optionFormProps {
   tagId: Array<number>;
 }
 export interface searchFormProps {
-  address: string;
+  address: {
+    address_name: string;
+    x: number;
+    y: number;
+  };
   startDate: string;
   endDate: string;
   distance: number;
@@ -36,7 +44,6 @@ export type searchOptionMenuProps = {
 };
 
 export type categorySelectorProps = {
-  // optionForm: optionFormProps;
   categoryName: string;
   onChangeCategory: (category: string) => void;
 };

@@ -3,7 +3,11 @@
 import { spaceSearchResult, hotelSearchResult } from '../utils/mock/searchList';
 
 type getSearchDataProps = {
-  address: string;
+  address: {
+    address_name: string;
+    x: number;
+    y: number;
+  };
   startDate: string;
   endDate: string;
   distance: number;

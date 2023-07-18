@@ -2,12 +2,12 @@
 @import "../../base/mixin.scss";
 @import "../../base/variable.scss";
 
-.tabBtns{
+.search-tabBtns{
     @include text-body2();
     display: flex;
     justify-content: center;
 
-    .button.map{
+    .search-tabBtns__mapBtn{
         margin-left : 1.5vw;
         cursor: pointer;  
         border : $border-button;         
