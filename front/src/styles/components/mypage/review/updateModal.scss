@@ -1,0 +1,29 @@
+@import "../../../base/variable.scss";
+
+.UpdateModal-container{
+    padding : 0px 50px;
+}
+
+.UpdateModal-content{
+    .UpdateModal-starRate__container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom : 10px;
+    }
+    .UpdateModal-textArea__container{ 
+        .UpdateModal-textArea{
+            width : 92%;
+            height : 130px;
+            padding : 20px;
+            font-size : 17px;
+            resize: none;
+            background-color: $color-surface-lightgray;
+            border-radius: 20px;
+        }
+        .UpdateModal-count__container{
+            text-align: right;
+            margin-right : 10px;
+        }
+    }
+}

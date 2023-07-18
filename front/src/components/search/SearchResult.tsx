@@ -1,5 +1,5 @@
 import React from 'react';
-import starIcon from '../../assets/images/star.png';
+import starIcon from '../../assets/images/star-full.svg';
 import { searchResultProps } from './types';
 import '../../styles/components/search/searchResult.scss';
 

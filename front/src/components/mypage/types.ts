@@ -71,3 +71,34 @@ export type detailContentProps = {
   personnel: number;
   roomPrice: number;
 };
+
+export type reviewProps = {
+  reviewId: number;
+  reservationId: number;
+  date: string;
+  content: string;
+  rating: number;
+  placeId: number;
+  placeName: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  nickname: string;
+};
+
+export type reviewDetailProps = {
+  reviewId: number;
+  date: string;
+  content: string;
+  rating: number;
+  placeId: number;
+  placeName: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  nickname: string;
+  placePhone: string;
+  placeAddress: string;
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import StarIcon from '../../../assets/images/star.png';
+import StarIcon from '../../../assets/images/star-full.svg';
 import * as type from '../types';
 import '../../../styles/components/mypage/reservation/detailHeader.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
