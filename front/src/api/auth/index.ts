@@ -1,26 +1,11 @@
 import { instance, instanceWithToken } from '../../api';
+import {
+  SignupRequestType,
+  LoginRequestType,
+  EmailCheckRequestType,
+  ReissueRequestType,
+} from './types';
 const prefix = '/api/v1/members';
-
-export interface SignupRequestType {
-  email: string;
-  nickname: string;
-  password: string;
-  phone: string;
-  memberRole: string;
-}
-
-export interface LoginRequestType {
-  email: string;
-  password: string;
-}
-
-export interface EmailCheckRequestType {
-  email: string;
-}
-
-export interface ReissueRequestType {
-  refreshToken: string;
-}
 
 const Auth = {
   // 회원가입
@@ -74,3 +59,5 @@ const Auth = {
     }
   },
 };
+
+export default Auth;

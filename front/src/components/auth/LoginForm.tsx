@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/modules';
+import { setLogin } from '../../store/modules/auth';
 import TextField from '../common/TextField';
 import TextButton from '../common/TextButton';
 import '../../styles/components/auth/loginForm.scss';
 import KakaoLoginIcon from '../../assets/images/login-kakao.svg';
 import NaverLoginIcon from '../../assets/images/login-naver.svg';
 import GoogleLoginIcon from '../../assets/images/login-google.svg';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { LoginRequestType } from '../../api/auth/types';
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const userData = useSelector((state: RootState) => state.auth.user);
+  const dispatch: ThunkDispatch<LoginRequestType, void, AnyAction> =
+    useDispatch();
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -19,9 +28,13 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const login = async (e: React.FormEvent<HTMLFormElement>) => {
+  const loginEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO : login api logic
+    const data = {
+      email: email,
+      password: password,
+    };
+    dispatch(setLogin(data));
   };
 
   const loginKakao = () => {
@@ -37,7 +50,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="login-form" onSubmit={login}>
+    <form className="login-form" onSubmit={loginEvent}>
       <div className="login-form__field">
         <label htmlFor="email" className="screen_out">
           이메일
