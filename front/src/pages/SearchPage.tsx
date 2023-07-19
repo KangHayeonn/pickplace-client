@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -47,6 +47,33 @@ const SearchPage = () => {
     userCnt: 1,
     tagList: [],
   });
+
+  useEffect(() => {
+    const getCategoryData = () => {
+      const data = {
+        address: '서울특별시 종로구 세종대로 172',
+        x: 126.976661,
+        y: 37.5706546,
+        startDate: searchForm.startDate,
+        endDate: searchForm.endDate,
+        distance: searchForm.distance,
+        searchType: searchForm.searchType,
+        pageProps: {
+          countPerPage: countPerPage,
+          pageNum: pageNum,
+        },
+        category: optionForm.category.name,
+      };
+      Search.getCategoryData(data)
+        .then((res) => {
+          // setSearchResult(res.data.placeList)
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    };
+    getCategoryData();
+  }, []);
 
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'unset';
@@ -109,7 +136,7 @@ const SearchPage = () => {
     return true;
   };
   const getSearchData = () => {
-    Search.getSearchData({
+    const data = {
       address: searchForm.address.address_name,
       x: searchForm.address.x,
       y: searchForm.address.y,
@@ -122,10 +149,10 @@ const SearchPage = () => {
         pageNum: pageNum,
       },
       category: optionForm.category.name,
-    })
+    };
+    Search.getSearchData(data)
       .then((res) => {
-        console.log(res);
-        // setSearchResult(res.data);
+        // setSearchResult(res.data.placeList);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -135,7 +162,7 @@ const SearchPage = () => {
     checkAddressExist() && getSearchData();
   };
   const getSearchDataWithOptions = () => {
-    Search.getSearchDataWithOptions({
+    const data = {
       address: searchForm.address.address_name,
       x: searchForm.address.x,
       y: searchForm.address.y,
@@ -152,10 +179,10 @@ const SearchPage = () => {
       category: optionForm.category.name,
       userCnt: optionForm.userCnt,
       tagList: optionForm.tagList,
-    })
+    };
+    Search.getSearchDataWithOptions(data)
       .then((res) => {
-        console.log(res);
-        // setSearchResult(res.data);
+        // setSearchResult(res.data.placeList);
       })
       .catch((err) => {
         return Promise.reject(err);

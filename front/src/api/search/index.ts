@@ -1,8 +1,32 @@
 import { instance } from '../../api';
-import { getSearchDataProps, getSearchDataWithOptionsProps } from './types';
+import {
+  getSearchDataProps,
+  getSearchDataWithOptionsProps,
+  getCategoryDataProps,
+} from './types';
 const prefix = '/api/v1/search';
 
 const Search = {
+  async getCategoryData(data: getCategoryDataProps) {
+    try {
+      const url = `${prefix}/category`;
+      const result = await instance.post(url, {
+        address: data.address,
+        x: data.x,
+        y: data.y,
+        startDate: data.startDate.replaceAll('-', '.'),
+        endDate: data.endDate.replaceAll('-', '.'),
+        distance: data.distance,
+        searchType: data.searchType,
+        countPerPage: data.pageProps.countPerPage,
+        pageNum: data.pageProps.pageNum,
+        category: data.category,
+      });
+      return result;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
   async getSearchData(data: getSearchDataProps) {
     try {
       const url = `${prefix}/basic`;
