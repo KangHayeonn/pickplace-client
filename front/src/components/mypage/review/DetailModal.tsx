@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import ModalForm from '../../../components/common/modal/ModalForm';
-import UpdateModal from './UpdateModal';
-import useModals from '../../../components/common/modal/UseModals';
+import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 
 import StarIcon from '../../../assets/images/star-full.svg';

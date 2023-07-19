@@ -1,0 +1,16 @@
+.mypage-modalForm{
+    display : flex;
+    align-items: center; 
+    .mypage-modalForm__title{
+        font-size : 25px;
+        font-weight: 500;
+        padding : 10px;
+        width : 100%;
+    }
+    .mypage-modalForm__img {
+        position: absolute;
+        top: 30%;
+        right: 3%;
+        cursor: pointer;
+    }
+}
