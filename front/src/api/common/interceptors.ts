@@ -1,7 +1,15 @@
-export const setInterceptors = (instance: any) => {
+import {
+  AxiosError,
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
+import { getAccessToken } from '../../utils/tokenControl';
+
+export const setInterceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
-    (config: any) => {
-      const token = '';
+    (config: InternalAxiosRequestConfig) => {
+      const token = getAccessToken();
 
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -9,15 +17,15 @@ export const setInterceptors = (instance: any) => {
 
       return config;
     },
-    (error: any) => {
+    (error: AxiosError | Error) => {
       return Promise.reject(error);
     },
   );
   instance.interceptors.response.use(
-    (response: any) => {
+    (response: AxiosResponse) => {
       return response;
     },
-    (error: any) => {
+    (error: AxiosError | Error) => {
       return Promise.reject(error);
     },
   );
