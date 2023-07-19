@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../styles/components/search/detail/searchDetailList.scss';
 import '../../../styles/components/search/detail/searchDetailReviewInfo.scss';
-import starIcon from '../../../assets/images/star.png';
+import starIcon from '../../../assets/images/star-full.svg';
 
 interface SearchDetailReviewInfoProps {
   reviewItem?: {

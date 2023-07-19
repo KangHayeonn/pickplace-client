@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../../styles/components/search/detail/searchDetailTitle.scss';
 import arrowLeftIcon from '../../../assets/images/arrow-left.svg';
-import starIcon from '../../../assets/images/star.png';
+import starIcon from '../../../assets/images/star-full.svg';
 
 const SearchDetailTitle = () => {
   const navigate = useNavigate();

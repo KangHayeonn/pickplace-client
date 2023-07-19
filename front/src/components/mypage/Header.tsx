@@ -6,15 +6,18 @@ import '../../styles/components/search/searchFilter.scss';
 
 const Header = ({ onClickHeaderButton }: type.headerProps) => {
   const [isAdmin, setIsAdmin] = useState<boolean>(true);
+
   const userHeader = [
     { value: '0', name: '예약내역', defaultChecked: true },
     { value: '1', name: '회원정보' },
+    { value: '2', name: '내 리뷰' },
   ];
   const adminHeader = [
     { value: '0', name: '예약내역', defaultChecked: true },
     { value: '1', name: '회원정보' },
-    { value: '2', name: '공간관리' },
-    { value: '3', name: '예약관리' },
+    { value: '2', name: '내 리뷰' },
+    { value: '3', name: '공간관리' },
+    { value: '4', name: '예약관리' },
   ];
   return (
     <RadioGroup onRadioChange={onClickHeaderButton}>

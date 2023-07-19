@@ -1,0 +1,36 @@
+@import "../../../base/variable.scss";
+
+.DetailModal-container{
+    padding : 0px 50px;
+    text-align: left;
+}
+
+.DetailModal-content{
+    .DetailModal-content__row1{
+        display: flex;
+        justify-content: space-between;
+        .DetailModal-card__rating{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 18px;
+            .DetailModal-star{
+                width : 20px;
+                margin-right : 5px;
+            }
+        }
+        .DetailModal-btn_container{
+            display: flex;
+            align-items: center;
+            .DetailModal-btn{
+                background-color: rgba(0,0,0,0);
+                margin: 0 5px;
+            }
+        }
+    }
+    .DetailModal-card__reviewContent{
+        margin-top : 10px;
+        font-size: 18px;
+        min-height: 100px;
+    }
+}

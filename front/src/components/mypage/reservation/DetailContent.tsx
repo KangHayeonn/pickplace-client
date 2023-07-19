@@ -2,7 +2,7 @@ import React from 'react';
 import DetailCard from './DetailCard';
 import ShowUserInfo from '../ShowUserInfo';
 import ShowCardInfo from '../ShowCardInfo';
-import * as type from '../types';
+import { detailContentProps } from './types';
 import '../../../styles/components/mypage/reservation/detailContent.scss';
 
 const DetailContent = ({
@@ -17,7 +17,7 @@ const DetailContent = ({
   nickName,
   personnel,
   roomPrice,
-}: type.detailContentProps) => {
+}: detailContentProps) => {
   return (
     <>
       <DetailCard>

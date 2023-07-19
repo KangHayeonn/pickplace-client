@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../ShowCardInfo';
-import * as type from '../types';
-import placeSmallImg from '../../../assets/images/place-default-small.svg';
-const ResevationCard = ({ reservationProps }: type.cardProps) => {
+import CreateModal from '../review/CreateModal';
+import { cardProps } from './types';
+
+const ResevationCard = ({ reservationProps }: cardProps) => {
   const navigate = useNavigate();
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
   const onClickResevationCard = (e: React.MouseEvent<HTMLDivElement>) => {
     const state = {
       id: reservationProps.reservationId,
@@ -14,13 +17,19 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
     });
   };
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('리뷰작성');
+    setCreateModalOpen(true);
   };
   const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('예약취소');
   };
   return (
     <div className="reservationCard-container" key={reservationProps.placeId}>
+      {createModalOpen && (
+        <CreateModal
+          setCreateModalOpen={setCreateModalOpen}
+          reservationId={reservationProps.reservationId}
+        />
+      )}
       <div className="img-container" onClick={onClickResevationCard}></div>
       <div className="reservationCard">
         <div className="reservationCard-header" onClick={onClickResevationCard}>

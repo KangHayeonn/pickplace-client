@@ -1,20 +1,3 @@
-export interface reservationProps {
-  reservationId: number;
-  placeId: number;
-  placeName: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
-  reservationStatus: string;
-  ReviewExistence: boolean;
-  reservationDate: string;
-}
-
-export type cardProps = {
-  reservationProps: reservationProps;
-};
-
 export type headerProps = {
   onClickHeaderButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -42,32 +25,33 @@ export type updateUserInfoProps = {
   onClickUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export type detailCardProps = {
-  children: React.ReactNode;
-  title?: string;
-};
-
-export type reservationDetailProps = {
+export type reviewProps = {
+  reviewId: number;
   reservationId: number;
-};
-
-export type detailHeaderProps = {
-  placeRating: number;
+  date: string;
+  content: string;
+  rating: number;
+  placeId: number;
   placeName: string;
-  reservationStatus: string;
-  ReviewExistence: boolean;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  nickname: string;
 };
 
-export type detailContentProps = {
-  address: string;
-  placePhone: string;
-  reservationId: number;
-  reservationDate: string;
+export type reviewDetailProps = {
+  reviewId: number;
+  date: string;
+  content: string;
+  rating: number;
+  placeId: number;
+  placeName: string;
   startDate: string;
-  startTime: string;
   endDate: string;
+  startTime: string;
   endTime: string;
-  nickName: string;
-  personnel: number;
-  roomPrice: number;
+  nickname: string;
+  placePhone: string;
+  placeAddress: string;
 };
