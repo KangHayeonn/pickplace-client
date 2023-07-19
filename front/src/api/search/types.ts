@@ -19,9 +19,6 @@ export type getCategoryDataProps = {
   address: string;
   x: number;
   y: number;
-  startDate: string;
-  endDate: string;
-  distance: number;
   searchType: string;
   pageProps: pageProps;
   category: string;

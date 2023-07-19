@@ -54,9 +54,6 @@ const SearchPage = () => {
         address: '서울특별시 종로구 세종대로 172',
         x: 126.976661,
         y: 37.5706546,
-        startDate: searchForm.startDate,
-        endDate: searchForm.endDate,
-        distance: searchForm.distance,
         searchType: searchForm.searchType,
         pageProps: {
           countPerPage: countPerPage,
@@ -194,7 +191,7 @@ const SearchPage = () => {
   return (
     <div className="search">
       {onMapOpen && (
-        <MapModal onCloseModal={onCloseModal} mapList={markerList}></MapModal>
+        <MapModal onCloseModal={onCloseModal} mapList={markerList} />
       )}
       <SearchHeader
         startDate={searchForm.startDate}
