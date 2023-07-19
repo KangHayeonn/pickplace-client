@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ModalForm from '../../../components/common/modal/ModalForm';
+import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 import CheckIcon from '../../../assets/images/check.svg';
 import StarRate from '../../../components/common/StarRate';

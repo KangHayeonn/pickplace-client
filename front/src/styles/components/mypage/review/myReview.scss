@@ -4,6 +4,18 @@
     min-width : 620px;
     max-height: 40rem;
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        margin: 8px;
+    }
 }
 .MyReview-card__container{
     min-width : 550px;
