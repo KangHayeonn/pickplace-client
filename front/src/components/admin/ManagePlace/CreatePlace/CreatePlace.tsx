@@ -14,15 +14,16 @@ import {
 } from '../../types';
 import { categoryList } from '../../../../utils/mock/categoryList';
 import { confirmToAddRoom, confirmToPost } from '../PlaceManageFunc';
+import Admin from '../../../../api/admin';
 
 const CreatePlace = () => {
   const navigate = useNavigate();
   const defaultNewRoomForm = {
     roomName: '',
     roomPrice: '0',
-    roomPersonnel: '1',
-    roomCount: '1',
-    roomId: undefined,
+    roomMaxNum: '1',
+    roomAmount: '1',
+    roomId: -1,
   };
 
   const [newPlaceInfo, setNewPlaceInfo] = useState<placeProps>({
@@ -77,13 +78,13 @@ const CreatePlace = () => {
   const onPersonnelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomPersonnel: e.currentTarget.value,
+      roomMaxNum: e.currentTarget.value,
     });
   };
-  const onRoomCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onroomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomCount: e.currentTarget.value,
+      roomAmount: e.currentTarget.value,
     });
   };
   const onAddNewRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -93,8 +94,8 @@ const CreatePlace = () => {
         {
           roomName: newRoomInfo.roomName,
           roomPrice: parseInt(newRoomInfo.roomPrice),
-          roomPersonnel: parseInt(newRoomInfo.roomPersonnel),
-          roomCount: parseInt(newRoomInfo.roomCount),
+          roomMaxNum: parseInt(newRoomInfo.roomMaxNum),
+          roomAmount: parseInt(newRoomInfo.roomAmount),
           roomId: -1,
         },
       ]);
@@ -108,7 +109,28 @@ const CreatePlace = () => {
   };
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(newPlaceInfo)) {
-      // updateApi
+      const rooms = [];
+
+      for (let i = 0; i < newRoomList.length; i++) {
+        const { roomId, ...room } = newRoomList[i];
+        rooms.push(room);
+      }
+
+      const data = {
+        place: {
+          placeAddress: newPlaceInfo.address,
+          placeName: newPlaceInfo.placeName,
+          placePhone: newPlaceInfo.phone,
+        },
+        rooms: rooms,
+      };
+      Admin.v1CreatePlace(data)
+        .then((res) => {
+          // console.log(res);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
       navigate('/mypage');
     }
   };
@@ -140,7 +162,7 @@ const CreatePlace = () => {
         onRoomNameChange={onRoomNameChange}
         onRoomPriceChange={onRoomPriceChange}
         onPersonnelChange={onPersonnelChange}
-        onRoomCountChange={onRoomCountChange}
+        onroomAmountChange={onroomAmountChange}
         onAddNewRoom={onAddNewRoom}
       />
       <AddedRoom

@@ -14,14 +14,13 @@ export const confirmToPost = (placeInfo: placeProps) => {
 export const confirmToAddRoom = (newRoomInfo: newRoomProps) => {
   if (newRoomInfo.roomName == '') window.alert('방 이름을 입력해주세요');
   else if (newRoomInfo.roomPrice == '') window.alert('방 가격을 입력해주세요');
-  else if (newRoomInfo.roomPersonnel == '')
-    window.alert('방 인원을 입력해주세요');
-  else if (newRoomInfo.roomCount == '') window.alert('방 개수를 입력해주세요');
+  else if (newRoomInfo.roomMaxNum == '') window.alert('방 인원을 입력해주세요');
+  else if (newRoomInfo.roomAmount == '') window.alert('방 개수를 입력해주세요');
   else if (isNaN(parseInt(newRoomInfo.roomPrice))) {
     window.alert('방 가격을 숫자로 입력해주세요');
-  } else if (isNaN(parseInt(newRoomInfo.roomPersonnel))) {
+  } else if (isNaN(parseInt(newRoomInfo.roomMaxNum))) {
     window.alert('방 인원을 숫자로 입력해주세요');
-  } else if (isNaN(parseInt(newRoomInfo.roomCount))) {
+  } else if (isNaN(parseInt(newRoomInfo.roomAmount))) {
     window.alert('방 개수를 숫자로 입력해주세요');
   } else return true;
   return false;

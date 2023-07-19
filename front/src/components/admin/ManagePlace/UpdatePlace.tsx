@@ -25,8 +25,8 @@ const UpdatePlace = () => {
   const defaultNewRoomForm = {
     roomName: '',
     roomPrice: '0',
-    roomPersonnel: '1',
-    roomCount: '1',
+    roomMaxNum: '1',
+    roomAmount: '1',
     roomId: undefined,
   };
 
@@ -86,13 +86,13 @@ const UpdatePlace = () => {
   const onPersonnelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomPersonnel: e.currentTarget.value,
+      roomMaxNum: e.currentTarget.value,
     });
   };
-  const onRoomCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onroomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      roomCount: e.currentTarget.value,
+      roomAmount: e.currentTarget.value,
     });
   };
   const onAddNewRoom = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -102,8 +102,8 @@ const UpdatePlace = () => {
         {
           roomName: newRoomInfo.roomName,
           roomPrice: parseInt(newRoomInfo.roomPrice),
-          roomPersonnel: parseInt(newRoomInfo.roomPersonnel),
-          roomCount: parseInt(newRoomInfo.roomCount),
+          roomMaxNum: parseInt(newRoomInfo.roomMaxNum),
+          roomAmount: parseInt(newRoomInfo.roomAmount),
           roomId: -1,
         },
       ]);
@@ -148,7 +148,7 @@ const UpdatePlace = () => {
         onRoomNameChange={onRoomNameChange}
         onRoomPriceChange={onRoomPriceChange}
         onPersonnelChange={onPersonnelChange}
-        onRoomCountChange={onRoomCountChange}
+        onroomAmountChange={onroomAmountChange}
         onAddNewRoom={onAddNewRoom}
       />
       <AddedRoom

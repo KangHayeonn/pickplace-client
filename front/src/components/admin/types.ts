@@ -50,8 +50,8 @@ export type roomCardProps = {
     roomName: string;
     roomPrice: number;
     roomStatus: string;
-    roomPersonnel: number;
-    roomCount: number;
+    roomMaxNum: number;
+    roomAmount: number;
   };
 };
 
@@ -61,24 +61,24 @@ export type updateRoomInfoProps = {
   onClickUpdateBtn: (
     newRoomName: string,
     newRoomPrice: number,
-    newRoomPersonnel: number,
-    newRoomCount: number,
+    newroomMaxNum: number,
+    newroomAmount: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type newRoomProps = {
   roomName: string;
   roomPrice: string;
-  roomPersonnel: string;
-  roomCount: string;
+  roomMaxNum: string;
+  roomAmount: string;
   roomId: undefined | number;
 };
 
 export type roomProps = {
   roomName: string;
   roomPrice: number;
-  roomPersonnel: number;
-  roomCount: number;
+  roomMaxNum: number;
+  roomAmount: number;
   roomId: undefined | number;
 };
 
@@ -102,7 +102,7 @@ export type roomFormProps = {
   onRoomNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRoomPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPersonnelChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRoomCountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onroomAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddNewRoom: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 

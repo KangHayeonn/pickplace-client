@@ -8,7 +8,7 @@ const RoomForm = ({
   onRoomNameChange,
   onRoomPriceChange,
   onPersonnelChange,
-  onRoomCountChange,
+  onroomAmountChange,
   onAddNewRoom,
 }: roomFormProps) => {
   return (
@@ -33,14 +33,14 @@ const RoomForm = ({
         <label className="RoomForm-textField__label">방 인원</label>
         <TextField
           onChangeText={onPersonnelChange}
-          value={newRoomInfo.roomPersonnel}
+          value={newRoomInfo.roomMaxNum}
         />
       </div>
       <div className="RoomForm-textField__container">
         <label className="RoomForm-textField__label">방 개수</label>
         <TextField
-          onChangeText={onRoomCountChange}
-          value={newRoomInfo.roomCount}
+          onChangeText={onroomAmountChange}
+          value={newRoomInfo.roomAmount}
         />
       </div>
       <div className="RoomForm-btn__container">
