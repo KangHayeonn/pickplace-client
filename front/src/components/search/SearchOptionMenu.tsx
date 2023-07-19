@@ -34,19 +34,21 @@ const SearchOptionMenu = ({
     });
   };
   const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const tagId = e.currentTarget.value;
+    const selectedName = e.currentTarget.value;
     const clickedButton = e.currentTarget;
     if (clickedButton.classList.contains('clicked')) {
       e.currentTarget.classList.remove('clicked');
       setOptionForm({
         ...optionForm,
-        tagId: optionForm.tagId.filter((id) => id !== parseInt(tagId)),
+        tagList: optionForm.tagList.filter(
+          (tagName) => tagName !== selectedName,
+        ),
       });
     } else {
       e.currentTarget.classList.add('clicked');
       setOptionForm({
         ...optionForm,
-        tagId: [...optionForm.tagId, parseInt(tagId)],
+        tagList: [...optionForm.tagList, selectedName],
       });
     }
   };

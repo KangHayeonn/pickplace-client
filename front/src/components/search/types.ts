@@ -21,7 +21,7 @@ export interface optionFormProps {
     id: number;
   };
   userCnt: number;
-  tagId: Array<number>;
+  tagList: Array<string>;
 }
 export interface searchFormProps {
   address: {

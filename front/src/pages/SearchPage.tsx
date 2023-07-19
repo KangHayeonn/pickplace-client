@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 
-import SearchApi from '../api/search';
+import Search from '../api/search';
 import SearchHeader from '../components/search/SearchHeader';
 import SearchOptionMenu from '../components/search/SearchOptionMenu';
 import SearchFilter from '../components/search/SearchFilter';
@@ -18,6 +18,9 @@ import * as type from '../components/search/types';
 const SearchPage = () => {
   const { state } = useLocation();
   const [onMapOpen, setOnMapOpen] = useState(false);
+
+  const countPerPage = 10;
+  const [pageNum, setPageNum] = useState(0);
 
   //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
   const [searchResult, setSearchResult] =
@@ -42,7 +45,7 @@ const SearchPage = () => {
       ? state
       : { name: categoryList[0].name, id: categoryList[0].id },
     userCnt: 1,
-    tagId: [],
+    tagList: [],
   });
 
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -106,9 +109,23 @@ const SearchPage = () => {
     return true;
   };
   const getSearchData = () => {
-    SearchApi.getSearchData(searchForm)
+    Search.getSearchData({
+      address: searchForm.address.address_name,
+      x: searchForm.address.x,
+      y: searchForm.address.y,
+      startDate: searchForm.startDate,
+      endDate: searchForm.endDate,
+      distance: searchForm.distance,
+      searchType: searchForm.searchType,
+      pageProps: {
+        countPerPage: countPerPage,
+        pageNum: pageNum,
+      },
+      category: optionForm.category.name,
+    })
       .then((res) => {
-        setSearchResult(res.data);
+        console.log(res);
+        // setSearchResult(res.data);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -118,12 +135,27 @@ const SearchPage = () => {
     checkAddressExist() && getSearchData();
   };
   const getSearchDataWithOptions = () => {
-    SearchApi.getSearchDataWithOptions({
-      searchForm,
-      optionForm,
+    Search.getSearchDataWithOptions({
+      address: searchForm.address.address_name,
+      x: searchForm.address.x,
+      y: searchForm.address.y,
+      startDate: searchForm.startDate,
+      endDate: searchForm.endDate,
+      distance: searchForm.distance,
+      searchType: searchForm.searchType,
+      pageProps: {
+        countPerPage: countPerPage,
+        pageNum: pageNum,
+      },
+      startTime: optionForm.startTime,
+      endTime: optionForm.endTime,
+      category: optionForm.category.name,
+      userCnt: optionForm.userCnt,
+      tagList: optionForm.tagList,
     })
       .then((res) => {
-        setSearchResult(res.data);
+        console.log(res);
+        // setSearchResult(res.data);
       })
       .catch((err) => {
         return Promise.reject(err);
