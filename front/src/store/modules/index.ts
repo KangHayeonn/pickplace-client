@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import mock from './sample';
+import sample from './sample';
+import auth from './auth';
 
 const rootReducer = combineReducers({
-  mock,
+  sample,
+  auth,
 });
 
 // root reducer
