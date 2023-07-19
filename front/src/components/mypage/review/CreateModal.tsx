@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
-import FullStarIcon from '../../../assets/images/star-full.svg';
-import EmptyStarIcon from '../../../assets/images/star-empty.svg';
+import StarRate from '../../../components/common/StarRate';
 import CheckIcon from '../../../assets/images/check.svg';
 import { reservationDetail } from '../../../utils/mock/reservationDetail';
 import '../../../styles/components/mypage/review/updateModal.scss';
@@ -17,6 +16,7 @@ const CreateModal = ({
 }: CreateModalProps) => {
   const [reviewContent, setReviewContent] = useState('');
   const [resevationInfo, setReservationInfo] = useState(reservationDetail);
+  const [starRate, setStarRate] = useState(0);
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (reviewContent.length <= 500)
@@ -33,6 +33,10 @@ const CreateModal = ({
     }
   };
 
+  const onClickStar = (rate: number) => {
+    setStarRate(rate);
+  };
+
   return (
     <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
       <div className="UpdateModal-container">
@@ -45,24 +49,8 @@ const CreateModal = ({
         />
         <div className="UpdateModal-content">
           <div className="UpdateModal-starRate__container">
-            <div>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-            </div>
-            <img src={CheckIcon} alt="checked icon" />
+            <StarRate onClickStar={onClickStar} />
+            {starRate != 0 && <img src={CheckIcon} alt="checked icon" />}
           </div>
           <div className="UpdateModal-textArea__container">
             <textarea

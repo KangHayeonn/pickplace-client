@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
-import FullStarIcon from '../../../assets/images/star-full.svg';
-import EmptyStarIcon from '../../../assets/images/star-empty.svg';
 import CheckIcon from '../../../assets/images/check.svg';
+import StarRate from '../../../components/common/StarRate';
 
 import '../../../styles/components/mypage/review/updateModal.scss';
 import {
@@ -19,6 +18,11 @@ interface UpdateModalProps {
 const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
   const [reviewDetail, setReviewDetail] = useState(myReviewDetail);
   const [reviewContent, setReviewContent] = useState(reviewDetail.content);
+  const [starRate, setStarRate] = useState(0);
+
+  const onClickStar = (rate: number) => {
+    setStarRate(rate);
+  };
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (reviewContent.length <= 500)
@@ -49,23 +53,10 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
         />
         <div className="UpdateModal-content">
           <div className="UpdateModal-starRate__container">
-            <div>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-              <span>
-                <img src={EmptyStarIcon} />
-              </span>
-            </div>
+            <StarRate
+              onClickStar={onClickStar}
+              defaultStar={reviewDetail.rating}
+            />
             <img src={CheckIcon} alt="checked icon" />
           </div>
           <div className="UpdateModal-textArea__container">
