@@ -1,54 +1,62 @@
-import React, { useState } from 'react';
-import ModalForm from '../../../components/common/modal/ModalForm';
-import useModals from '../../../components/common/modal/UseModals';
-
+import React from 'react';
 import PinIcon from '../../../assets/images/pin.svg';
 import ClockIcon from '../../../assets/images/clock.svg';
 import ProfileIcon from '../../../assets/images/profile.svg';
 import '../../../styles/components/mypage/review/reviewModalHeader.scss';
-import {
-  myReviewDetail,
-  myReviewDetail2,
-} from '../../../utils/mock/myReviewList';
-import { reviewDetailProps } from '../types';
 
 interface ReviewModalHeaderProps {
-  reviewDetail: reviewDetailProps;
+  nickname?: string;
+  date?: string;
+  placeAddress: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
 }
 
-const ReviewModalHeader = ({ reviewDetail }: ReviewModalHeaderProps) => {
+const ReviewModalHeader = ({
+  nickname,
+  date,
+  placeAddress,
+  startDate,
+  endDate,
+  startTime,
+  endTime,
+}: ReviewModalHeaderProps) => {
   return (
     <>
       <div className="ReviewModalHeader-top">
-        <span className="ReviewModalHeader-nickname">
-          <img className="ReviewModalHeader-profileIcon" src={ProfileIcon} />
-          {reviewDetail.nickname} 님이 작성함
-        </span>
-        <span className="ReviewModalHeader-date">{reviewDetail.date}</span>
+        {nickname && (
+          <span className="ReviewModalHeader-nickname">
+            <img className="ReviewModalHeader-profileIcon" src={ProfileIcon} />
+            {nickname} 님이 작성함
+          </span>
+        )}
+        {date && <span className="ReviewModalHeader-date">{date}</span>}
       </div>
       <div className="ReviewModalHeader-header">
         <div className="ReviewModalHeader-img__container"></div>
         <div className="ReviewModalHeader-reviewInfo">
           <div className="ReviewModalHeader-address">
             <img className="ReviewModalHeader-pinIcon" src={PinIcon} />
-            {reviewDetail.placeAddress}
+            {placeAddress}
           </div>
           <div className="ReviewModalHeader-dateOfUse">
             <img className="ReviewModalHeader-clockIcon" src={ClockIcon} />
-            {reviewDetail.startDate == reviewDetail.endDate ? (
+            {startDate == endDate ? (
               <div>
-                <span>{reviewDetail.startDate} </span>
+                <span>{startDate} </span>
                 <span>
-                  {reviewDetail.startTime} ~ {reviewDetail.endTime}
+                  {startTime} ~ {endTime}
                 </span>
               </div>
             ) : (
               <div className="ReviewModalHeader-dateRange">
                 <p>
-                  {reviewDetail.startDate} {reviewDetail.startTime}
+                  {startDate} {startTime}
                 </p>
                 <p>
-                  {reviewDetail.endDate} {reviewDetail.endTime}
+                  {endDate} {endTime}
                 </p>
               </div>
             )}

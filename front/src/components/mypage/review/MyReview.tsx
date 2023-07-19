@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useModals from '../../../components/common/modal/UseModals';
 import DetailModal from './DetailModal';
 import UpdateModal from './UpdateModal';
 
@@ -11,15 +10,17 @@ import { reviewProps } from '../types';
 import '../../../styles/components/mypage/review/myReview.scss';
 
 const MyReview = () => {
-  const [myReview, setMyReview] = useState<reviewProps[]>(myReviewList);
-  const { openModal } = useModals();
+  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [detailModalOpen, setDetailModalOpen] = useState(false);
 
-  const onCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    openModal(DetailModal, {
-      onSubmit: async () => {
-        // get detail
-      },
-    });
+  const [myReview, setMyReview] = useState<reviewProps[]>(myReviewList);
+  const [clickedReviewId, setClickedReviewId] = useState(-1);
+
+  const onCardClick = (reviewId: number) => {
+    return (e: React.MouseEvent<HTMLDivElement>) => {
+      setDetailModalOpen(true);
+      setClickedReviewId(reviewId);
+    };
   };
   const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
@@ -28,23 +29,39 @@ const MyReview = () => {
   };
   const onUpdateBtnClick = (reviewId: number) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
-      openModal(UpdateModal, {
-        onSubmit: async () => {
-          // update api
-        },
-      });
+      setUpdateModalOpen(true);
+      setClickedReviewId(reviewId);
     };
   };
 
   return (
     <div className="MyReview">
+      {detailModalOpen && (
+        <DetailModal
+          reviewId={clickedReviewId}
+          setUpdateModalOpen={setUpdateModalOpen}
+          setDetailModalOpen={setDetailModalOpen}
+        />
+      )}
+      {updateModalOpen && (
+        <UpdateModal
+          reviewId={clickedReviewId}
+          setUpdateModalOpen={setUpdateModalOpen}
+        />
+      )}
       {myReviewList.map((item, key) => (
         <div className="MyReview-card__container" key={key}>
           <div className="MyReview-card__header">
-            <div className="MyReview-card__header--col1" onClick={onCardClick}>
+            <div
+              className="MyReview-card__header--col1"
+              onClick={onCardClick(item.reviewId)}
+            >
               <div className="detail-img__container"></div>
             </div>
-            <div className="MyReview-card__header--col2" onClick={onCardClick}>
+            <div
+              className="MyReview-card__header--col2"
+              onClick={onCardClick(item.reviewId)}
+            >
               <div className="MyReview-card__header--row1">
                 <h4 className="MyReview-placeName">{item.placeName}</h4>
               </div>
@@ -64,7 +81,10 @@ const MyReview = () => {
               </button>
             </div>
           </div>
-          <div className="MyReview-card__content" onClick={onCardClick}>
+          <div
+            className="MyReview-card__content"
+            onClick={onCardClick(item.reviewId)}
+          >
             <p className="MyReview-card__rating">
               <img className="MyReview-star" src={StarIcon} alt="star" />
               {item.rating}

@@ -40,7 +40,6 @@ const SearchHeader = ({
       }
     }
     if (searchKeyword != '') {
-      console.log(searchKeyword);
       getSearchList();
     } else {
       setSearchPreviewList([]);

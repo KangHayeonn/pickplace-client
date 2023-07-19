@@ -4,21 +4,19 @@ import ReviewModalHeader from './ReviewModalHeader';
 import FullStarIcon from '../../../assets/images/star-full.svg';
 import EmptyStarIcon from '../../../assets/images/star-empty.svg';
 import CheckIcon from '../../../assets/images/check.svg';
-
+import { reservationDetail } from '../../../utils/mock/reservationDetail';
 import '../../../styles/components/mypage/review/updateModal.scss';
-import {
-  myReviewDetail,
-  myReviewDetail2,
-} from '../../../utils/mock/myReviewList';
 
-interface UpdateModalProps {
-  reviewId: number;
-  setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+interface CreateModalProps {
+  reservationId: number;
+  setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
-  const [reviewDetail, setReviewDetail] = useState(myReviewDetail);
-  const [reviewContent, setReviewContent] = useState(reviewDetail.content);
+const CreateModal = ({
+  reservationId,
+  setCreateModalOpen,
+}: CreateModalProps) => {
+  const [reviewContent, setReviewContent] = useState('');
+  const [resevationInfo, setReservationInfo] = useState(reservationDetail);
 
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (reviewContent.length <= 500)
@@ -31,21 +29,19 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
         '취소 시 내용이 저장되지 않습니다. 작성을 취소하시겠습니까?',
       )
     ) {
-      setUpdateModalOpen(false);
+      setCreateModalOpen(false);
     }
   };
 
   return (
-    <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
+    <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
       <div className="UpdateModal-container">
         <ReviewModalHeader
-          nickname={reviewDetail.nickname}
-          date={reviewDetail.date}
-          placeAddress={reviewDetail.placeAddress}
-          startDate={reviewDetail.startDate}
-          endDate={reviewDetail.endDate}
-          startTime={reviewDetail.startTime}
-          endTime={reviewDetail.endTime}
+          placeAddress={resevationInfo.placeAddress.address}
+          startDate={resevationInfo.startDate}
+          endDate={resevationInfo.endDate}
+          startTime={resevationInfo.startTime}
+          endTime={resevationInfo.endTime}
         />
         <div className="UpdateModal-content">
           <div className="UpdateModal-starRate__container">
@@ -84,4 +80,4 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
   );
 };
 
-export default UpdateModal;
+export default CreateModal;

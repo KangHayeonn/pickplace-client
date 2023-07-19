@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import StarIcon from '../../../assets/images/star-full.svg';
-import * as type from '../types';
+import { detailHeaderProps } from './types';
 import '../../../styles/components/mypage/reservation/detailHeader.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 
@@ -10,11 +10,12 @@ const DetailHeader = ({
   placeRating,
   reservationStatus,
   ReviewExistence,
-}: type.detailHeaderProps) => {
+  setCreateModalOpen,
+}: detailHeaderProps) => {
   const navigate = useNavigate();
 
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('리뷰작성');
+    setCreateModalOpen(true);
   };
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');
