@@ -12,8 +12,6 @@ export type searchHeaderProps = {
 };
 
 export interface optionFormProps {
-  startTime: string;
-  endTime: string;
   category: {
     name: string;
     id: number;
@@ -77,4 +75,10 @@ export interface searchResultListProps {
 
 export type searchResultProps = {
   searchResult: searchResultListProps[];
+  pageNum: number;
+  hasNext: boolean;
+  setSearchResult: React.Dispatch<
+    React.SetStateAction<searchResultListProps[]>
+  >;
+  getSearchDataWithOptions: (newPageNum?: number) => searchResultListProps[];
 };

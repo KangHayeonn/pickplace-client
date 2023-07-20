@@ -21,9 +21,8 @@ const SearchPage = () => {
 
   const countPerPage = 10;
   const [pageNum, setPageNum] = useState(0);
+  const [hasNext, setHasNext] = useState(false);
 
-  const [loading, setLoading] = useState(true);
-  //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
   const [searchResult, setSearchResult] = useState<
     type.searchResultListProps[]
   >([]);
@@ -39,8 +38,6 @@ const SearchPage = () => {
   });
 
   const [optionForm, setOptionForm] = useState<type.optionFormProps>({
-    startTime: '',
-    endTime: '',
     category: state
       ? state
       : { name: categoryList[0].name, id: categoryList[0].id },
@@ -64,13 +61,13 @@ const SearchPage = () => {
       await Search.getCategoryData(data)
         .then((res) => {
           setSearchResult(res.data.data.placeList);
+          setHasNext(res.data.data.hasNext);
         })
         .catch((err) => {
           return Promise.reject(err);
         });
     };
     getCategoryData();
-    setLoading(true);
   }, []);
 
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -148,7 +145,8 @@ const SearchPage = () => {
     };
     Search.getSearchData(data)
       .then((res) => {
-        // setSearchResult(res.data.placeList);
+        setSearchResult(res.data.data.placeList);
+        setHasNext(res.data.data.hasNext);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -157,7 +155,8 @@ const SearchPage = () => {
   const onSearchBtnClick = () => {
     checkAddressExist() && getSearchData();
   };
-  const getSearchDataWithOptions = () => {
+  const getSearchDataWithOptions = (newPageNum?: number) => {
+    let newList: type.searchResultListProps[] = [];
     const data = {
       address: searchForm.address,
       x: searchForm.x,
@@ -168,21 +167,25 @@ const SearchPage = () => {
       searchType: searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
-        pageNum: pageNum,
+        pageNum: newPageNum ? newPageNum : pageNum,
       },
-      startTime: optionForm.startTime,
-      endTime: optionForm.endTime,
       category: optionForm.category.name,
       userCnt: optionForm.userCnt,
       tagList: optionForm.tagList,
     };
     Search.getSearchDataWithOptions(data)
       .then((res) => {
-        // setSearchResult(res.data.placeList);
+        setHasNext(res.data.data.hasNext);
+        if (newPageNum === undefined) {
+          setSearchResult(res.data.data.placeList);
+        } else {
+          newList = res.data.data.placeList;
+        }
       })
       .catch((err) => {
         return Promise.reject(err);
       });
+    return newList;
   };
   const onSearchWithOptionBtnClick = () => {
     checkAddressExist() && getSearchDataWithOptions();
@@ -219,8 +222,15 @@ const SearchPage = () => {
               지도
             </button>
           </div>
-          {loading && searchResult && (
-            <SearchResult searchResult={searchResult} />
+
+          {searchResult && (
+            <SearchResult
+              searchResult={searchResult}
+              pageNum={pageNum}
+              hasNext={hasNext}
+              setSearchResult={setSearchResult}
+              getSearchDataWithOptions={getSearchDataWithOptions}
+            />
           )}
         </section>
       </main>

@@ -34,8 +34,6 @@ export type getSearchDataWithOptionsProps = {
   searchType: string;
   pageProps: pageProps;
 
-  startTime: string;
-  endTime: string;
   category: string;
   userCnt: number;
   tagList: Array<string>;
