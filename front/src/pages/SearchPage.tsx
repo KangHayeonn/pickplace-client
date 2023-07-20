@@ -22,16 +22,16 @@ const SearchPage = () => {
   const countPerPage = 10;
   const [pageNum, setPageNum] = useState(0);
 
+  const [loading, setLoading] = useState(true);
   //최초 보여줄 address default로 정해서 api 요청한 response로 초기화
-  const [searchResult, setSearchResult] =
-    useState<type.searchResultListProps[]>(hotelSearchResult);
+  const [searchResult, setSearchResult] = useState<
+    type.searchResultListProps[]
+  >([]);
 
   const [searchForm, setSearchForm] = useState<type.searchFormProps>({
-    address: {
-      address_name: '서울특별시 종로구 세종대로 172',
-      x: 126.976661,
-      y: 37.5706546,
-    },
+    address: '서울특별시 종로구 세종대로 172',
+    x: 126.976661,
+    y: 37.5706546,
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
     distance: 5,
@@ -49,27 +49,28 @@ const SearchPage = () => {
   });
 
   useEffect(() => {
-    const getCategoryData = () => {
+    const getCategoryData = async () => {
       const data = {
         address: '서울특별시 종로구 세종대로 172',
         x: 126.976661,
         y: 37.5706546,
-        searchType: searchForm.searchType,
+        searchType: 'recommend',
         pageProps: {
           countPerPage: countPerPage,
           pageNum: pageNum,
         },
         category: optionForm.category.name,
       };
-      Search.getCategoryData(data)
+      await Search.getCategoryData(data)
         .then((res) => {
-          // setSearchResult(res.data.placeList)
+          setSearchResult(res.data.data.placeList);
         })
         .catch((err) => {
           return Promise.reject(err);
         });
     };
     getCategoryData();
+    setLoading(true);
   }, []);
 
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -83,11 +84,9 @@ const SearchPage = () => {
   const onChangeAddress = (address: string, x: string, y: string) => {
     setSearchForm({
       ...searchForm,
-      address: {
-        address_name: address,
-        x: parseFloat(x),
-        y: parseFloat(y),
-      },
+      address: address,
+      x: parseFloat(x),
+      y: parseFloat(y),
     });
   };
   const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,7 +125,7 @@ const SearchPage = () => {
     getSearchData();
   };
   const checkAddressExist = () => {
-    if (searchForm.address.address_name == '') {
+    if (searchForm.address == '') {
       window.alert('주소를 입력해주세요');
       return false;
     }
@@ -134,9 +133,9 @@ const SearchPage = () => {
   };
   const getSearchData = () => {
     const data = {
-      address: searchForm.address.address_name,
-      x: searchForm.address.x,
-      y: searchForm.address.y,
+      address: searchForm.address,
+      x: searchForm.x,
+      y: searchForm.y,
       startDate: searchForm.startDate,
       endDate: searchForm.endDate,
       distance: searchForm.distance,
@@ -160,9 +159,9 @@ const SearchPage = () => {
   };
   const getSearchDataWithOptions = () => {
     const data = {
-      address: searchForm.address.address_name,
-      x: searchForm.address.x,
-      y: searchForm.address.y,
+      address: searchForm.address,
+      x: searchForm.x,
+      y: searchForm.y,
       startDate: searchForm.startDate,
       endDate: searchForm.endDate,
       distance: searchForm.distance,
@@ -198,6 +197,8 @@ const SearchPage = () => {
         endDate={searchForm.endDate}
         category={optionForm.category.name}
         address={searchForm.address}
+        x={searchForm.x}
+        y={searchForm.y}
         onChangeAddress={onChangeAddress}
         onChangeStartDate={onChangeStartDate}
         onChangeEndDate={onChangeEndDate}
@@ -218,7 +219,9 @@ const SearchPage = () => {
               지도
             </button>
           </div>
-          <SearchResult searchResult={searchResult} />
+          {loading && searchResult && (
+            <SearchResult searchResult={searchResult} />
+          )}
         </section>
       </main>
     </div>

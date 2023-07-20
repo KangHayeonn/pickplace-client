@@ -2,11 +2,9 @@ export type searchHeaderProps = {
   startDate: string;
   endDate: string;
   category: string;
-  address: {
-    address_name: string;
-    x: number;
-    y: number;
-  };
+  address: string;
+  x: number;
+  y: number;
   onChangeAddress: (address: string, x: string, y: string) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -24,11 +22,9 @@ export interface optionFormProps {
   tagList: Array<string>;
 }
 export interface searchFormProps {
-  address: {
-    address_name: string;
-    x: number;
-    y: number;
-  };
+  address: string;
+  x: number;
+  y: number;
   startDate: string;
   endDate: string;
   distance: number;
