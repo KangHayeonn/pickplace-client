@@ -33,6 +33,7 @@ const CreatePlace = () => {
     x: 0,
     y: 0,
   });
+
   const [newRoomInfo, setNewRoomInfo] =
     useState<newRoomProps>(defaultNewRoomForm);
 
