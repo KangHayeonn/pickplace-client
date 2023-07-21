@@ -43,5 +43,27 @@ const User = {
       return Promise.reject(err);
     }
   },
+  async v1GetUserReservations() {
+    try {
+      const url = `${prefix}/reservations`;
+      const result = await instanceWithToken.get(url, {
+        ...defaultOptions,
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+  async v1GetUserReservationDetail(reservationId: number) {
+    try {
+      const url = `${prefix}/reservations/${reservationId}`;
+      const result = await instanceWithToken.get(url, {
+        ...defaultOptions,
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
 };
 export default User;
