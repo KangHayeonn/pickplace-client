@@ -17,19 +17,21 @@ import * as type from '../components/search/types';
 
 const SearchPage = () => {
   const { state } = useLocation();
-  const [onMapOpen, setOnMapOpen] = useState(false);
 
+  const defaultAddress = '서울 중구 창경궁로 62-29';
   const countPerPage = 10;
+
   const [pageNum, setPageNum] = useState(0);
   const [hasNext, setHasNext] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [onMapOpen, setOnMapOpen] = useState(false);
 
   const [searchResult, setSearchResult] = useState<
     type.searchResultListProps[]
   >([]);
 
   const [searchForm, setSearchForm] = useState<type.searchFormProps>({
-    address: '서울특별시 종로구 세종대로 172',
+    address: defaultAddress,
     x: 126.976661,
     y: 37.5706546,
     startDate: format(new Date(), 'yyyy-MM-dd'),
@@ -49,7 +51,7 @@ const SearchPage = () => {
   useEffect(() => {
     const getCategoryData = async () => {
       const data = {
-        address: '서울특별시 종로구 세종대로 172',
+        address: defaultAddress,
         x: 126.976661,
         y: 37.5706546,
         searchType: 'recommend',
