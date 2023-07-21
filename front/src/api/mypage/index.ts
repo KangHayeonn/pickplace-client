@@ -65,5 +65,16 @@ const User = {
       return Promise.reject(err);
     }
   },
+  async v1DeleteUserReservation(reservationId: number) {
+    try {
+      const url = `${prefix}/reservations/${reservationId}`;
+      const result = await instanceWithToken.delete(url, {
+        ...defaultOptions,
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
 };
 export default User;

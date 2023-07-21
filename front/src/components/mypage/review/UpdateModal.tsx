@@ -36,6 +36,7 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
       )
     ) {
       setUpdateModalOpen(false);
+      document.body.style.overflow = 'unset';
     }
   };
 

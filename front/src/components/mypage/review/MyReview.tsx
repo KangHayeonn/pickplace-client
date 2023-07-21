@@ -13,11 +13,15 @@ const MyReview = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [detailModalOpen, setDetailModalOpen] = useState(false);
 
+  // document.body.style.overflow = 'hidden';
+  // document.body.style.overflow = 'unset';
+
   const [myReview, setMyReview] = useState<reviewProps[]>(myReviewList);
   const [clickedReviewId, setClickedReviewId] = useState(-1);
 
   const onCardClick = (reviewId: number) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
+      document.body.style.overflow = 'hidden';
       setDetailModalOpen(true);
       setClickedReviewId(reviewId);
     };
@@ -29,6 +33,7 @@ const MyReview = () => {
   };
   const onUpdateBtnClick = (reviewId: number) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
+      document.body.style.overflow = 'hidden';
       setUpdateModalOpen(true);
       setClickedReviewId(reviewId);
     };
