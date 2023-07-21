@@ -1,11 +1,11 @@
 import { instanceWithToken } from '../../api';
 import { getAccessToken, getUserId } from '../../utils/tokenControl';
-import { updateUserInfoType } from './types';
+import { updatePhoneType, updateNicknameType } from './types';
 const prefix = '/api/v1/members';
 
 const defaultOptions = {
   headers: {
-    Authorization: getAccessToken(),
+    accessToken: getAccessToken(),
   },
 };
 
@@ -21,7 +21,7 @@ const User = {
       return Promise.reject(err);
     }
   },
-  async v1UpdateNickname(data: updateUserInfoType) {
+  async v1UpdateNickname(data: updateNicknameType) {
     try {
       const url = `${prefix}/nickname`;
       const result = await instanceWithToken.put(url, data, {
@@ -32,7 +32,7 @@ const User = {
       return Promise.reject(err);
     }
   },
-  async v1UpdatePhone(data: updateUserInfoType) {
+  async v1UpdatePhone(data: updatePhoneType) {
     try {
       const url = `${prefix}/phone`;
       const result = await instanceWithToken.put(url, data, {
