@@ -9,7 +9,6 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
     roomName: roomProps.roomName,
     roomPrice: roomProps.roomPrice,
     roomId: roomProps.roomId,
-    roomStatus: roomProps.roomStatus,
     roomMaxNum: roomProps.roomMaxNum,
     roomAmount: roomProps.roomAmount,
   });

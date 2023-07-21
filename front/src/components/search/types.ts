@@ -2,11 +2,9 @@ export type searchHeaderProps = {
   startDate: string;
   endDate: string;
   category: string;
-  address: {
-    address_name: string;
-    x: number;
-    y: number;
-  };
+  address: string;
+  x: number;
+  y: number;
   onChangeAddress: (address: string, x: string, y: string) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,21 +12,17 @@ export type searchHeaderProps = {
 };
 
 export interface optionFormProps {
-  startTime: string;
-  endTime: string;
   category: {
     name: string;
     id: number;
   };
   userCnt: number;
-  tagId: Array<number>;
+  tagList: Array<string>;
 }
 export interface searchFormProps {
-  address: {
-    address_name: string;
-    x: number;
-    y: number;
-  };
+  address: string;
+  x: number;
+  y: number;
   startDate: string;
   endDate: string;
   distance: number;
@@ -81,4 +75,10 @@ export interface searchResultListProps {
 
 export type searchResultProps = {
   searchResult: searchResultListProps[];
+  pageNum: number;
+  hasNext: boolean;
+  setSearchResult: React.Dispatch<
+    React.SetStateAction<searchResultListProps[]>
+  >;
+  getSearchDataWithOptions: (newPageNum?: number) => searchResultListProps[];
 };

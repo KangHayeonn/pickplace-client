@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import starIcon from '../../assets/images/star-full.svg';
 import { searchResultProps } from './types';
 import '../../styles/components/search/searchResult.scss';
+import useIntersectionObserver from './useIntersectionObserver';
 
-const SearchResult = ({ searchResult }: searchResultProps) => {
+const SearchResult = ({
+  searchResult,
+  hasNext,
+  pageNum,
+  setSearchResult,
+  getSearchDataWithOptions,
+}: searchResultProps) => {
+  useEffect(() => {
+    console.log(hasNext);
+  }, [hasNext]);
+
+  // const fetchMoreItems = async () => {
+  //   const nextList = getSearchDataWithOptions(pageNum + 1);
+  //   // setSearchResult(nextList);
+  // };
+
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    // isIntersecting && hasNext && fetchMoreItems();
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
   return (
     <div className="searchResult-container">
       {searchResult.map((item, key) => (
@@ -28,6 +50,7 @@ const SearchResult = ({ searchResult }: searchResultProps) => {
           </div>
         </div>
       ))}
+      <div ref={setTarget} />
     </div>
   );
 };

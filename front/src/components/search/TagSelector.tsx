@@ -9,7 +9,7 @@ const TagSelector = ({ onClickTagButton }: tagSelectorProps) => {
         <button
           className="tabBtn"
           key={key}
-          value={item.id}
+          value={item.tagName}
           onClick={onClickTagButton}
         >
           {item.tagName}

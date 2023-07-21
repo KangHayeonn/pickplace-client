@@ -2,10 +2,12 @@ import { instance, instanceWithToken } from '../../api';
 import { CreatePlaceType } from './types';
 const prefix = '/api/v1/host';
 
+const accessToken =
+  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb3BoaWE0MTMwQG5hdmVyLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjg5ODMwMTUxLCJleHAiOjE2ODk4MzE5NTF9.-JWFK3aHxuKlMQiFUZdyEUv7lT52xmz57Y9kK_Rvc-A';
+
 const defaultOptions = {
   headers: {
-    Authorization:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJlbWFpbCI6ImFiY0BuYXZlci5jb20ifQ.QptS0V6x0RPP-MgXqKSYMaK-vIq0FTAaLGxeWIkNvo',
+    accessToken: `${accessToken}`,
   },
 };
 
@@ -45,7 +47,7 @@ const Admin = {
   },
   async v1GetPlaceDetailResevations(placeId: number) {
     try {
-      const url = `${prefix}/${placeId}/resevations`;
+      const url = `${prefix}/${placeId}/reservations`;
       const result = await instanceWithToken.get(url, {
         ...defaultOptions,
       });
@@ -56,7 +58,7 @@ const Admin = {
   },
   async v1GetReservations() {
     try {
-      const url = `${prefix}/resevations`;
+      const url = `${prefix}/reservations`;
       const result = await instanceWithToken.get(url, {
         ...defaultOptions,
       });
@@ -67,7 +69,7 @@ const Admin = {
   },
   async v1GetReservationDetail(reservationId: number) {
     try {
-      const url = `${prefix}/resevations/${reservationId}`;
+      const url = `${prefix}/reservations/${reservationId}`;
       const result = await instanceWithToken.get(url, {
         ...defaultOptions,
       });

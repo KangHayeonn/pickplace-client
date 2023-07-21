@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import DetailContent from '../../mypage/reservation/DetailContent';
@@ -7,23 +7,31 @@ import { adminReservationDetail } from '../../../utils/mock/adminReservationDeta
 import '../../../styles/components/admin/manageReservation/manageReservationDetail.scss';
 import '../../../styles/components/admin/reservationBtn.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
+import Admin from '../../../api/admin';
 
 const ManageReservationDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  // const [adminReservationDetailm, setAdminReservationDetail] = useState();
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');
   };
-  // useEffect(() => {
-  //   Mypage.getAdminReservationDetail(state.id)
-  //     .then((res) => {
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       return Promise.reject(err);
-  //     });
-  // }, []);
+
+  useEffect(() => {
+    getAdminReservationDetail();
+  }, []);
+
+  const getAdminReservationDetail = () => {
+    Admin.v1GetReservationDetail(state.placeId)
+      .then((res) => {
+        // console.log(res.data.data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
+
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('예약수락');
   };
