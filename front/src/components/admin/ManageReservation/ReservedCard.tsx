@@ -25,10 +25,13 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
     window.alert('예약취소');
   };
   return (
-    <div className="reservedCard-container" key={adminReservationProps.placeId}>
+    <div
+      className="reservedCard-container"
+      key={adminReservationProps.reservationId}
+    >
       <div className="reservedCard-header" onClick={onClickResevedCard}>
         <h3 className="reservedCard-placeName">
-          {adminReservationProps.placeName}
+          {adminReservationProps.roomName}
         </h3>
       </div>
       <div className="reservedCard-content" onClick={onClickResevedCard}>
@@ -36,16 +39,18 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
           childClassname={'checkin'}
           title={'체크인'}
           content={
-            adminReservationProps.startDate +
+            adminReservationProps.checkInDate +
             ' ' +
-            adminReservationProps.startTime
+            adminReservationProps.checkInTime
           }
         />
         <ShowCardInfo
           childClassname={'checkout'}
           title={'체크아웃'}
           content={
-            adminReservationProps.endDate + ' ' + adminReservationProps.endTime
+            adminReservationProps.checkOutDate +
+            ' ' +
+            adminReservationProps.checkOutTime
           }
         />
       </div>

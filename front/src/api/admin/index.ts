@@ -3,7 +3,7 @@ import { CreatePlaceType } from './types';
 const prefix = '/api/v1/host';
 
 const accessToken =
-  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb3BoaWE0MTMwQG5hdmVyLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjg5ODMwMTUxLCJleHAiOjE2ODk4MzE5NTF9.-JWFK3aHxuKlMQiFUZdyEUv7lT52xmz57Y9kK_Rvc-A';
+  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmNAbmF2ZXIuY29tIiwiYXV0aCI6IlJPTEVfSE9TVCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2ODk5MTk3MDIsImV4cCI6MTY4OTkyMTUwMn0.C2kpUMOx2wVMYVIuz2rXExKV5_zBEXfoXhCSfNYJvpw';
 
 const defaultOptions = {
   headers: {

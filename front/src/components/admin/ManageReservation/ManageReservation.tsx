@@ -17,7 +17,6 @@ const ManageReservation = () => {
   const getAdminReservations = () => {
     Admin.v1GetReservations()
       .then((res) => {
-        console.log(res.data.data);
         // setAdminReservationList(res.data.data);
       })
       .catch((err) => {
@@ -28,7 +27,12 @@ const ManageReservation = () => {
     <div className="manageReservation">
       {adminReservationList ? (
         adminReservationList.map((item, key) => (
-          <ReservedCard key={key} adminReservationProps={item} />
+          <div key={key}>
+            <p>{item.placeName}</p>
+            {item.rooms.map((item, key) => (
+              <ReservedCard key={key} adminReservationProps={item} />
+            ))}
+          </div>
         ))
       ) : (
         <div>
