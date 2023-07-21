@@ -48,7 +48,7 @@ const UpdatePlace = () => {
       name: adminPlaceList[0].category.name,
       id: adminPlaceList[0].category.id,
     },
-    tagId: [],
+    tagList: [],
   });
 
   const onPlaceNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

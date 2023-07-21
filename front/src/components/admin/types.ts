@@ -1,43 +1,59 @@
 export type reservedCardProps = {
-  adminReservationProps: {
-    reservationId: number;
-    placeId: number;
-    placeName: string;
-    startDate: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    reservationStatus: string;
-  };
+  adminReservationProps: adminReservation;
 };
 
+export type adminReservation = {
+  reservationId: number;
+  placeId: number;
+  placeName: string;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  reservationStatus: string;
+};
+
+export type adminReservationDetail = {
+  member: {
+    memberName: string;
+  };
+
+  reservation: {
+    reservationId: number;
+    roomName: string;
+    checkInDate: string;
+    checkInTime: string;
+    checkOutDate: string;
+    checkOutTime: string;
+    reservationStatus: string;
+    createdDate: string;
+    updatedDate: string;
+    reservationPeopleNum: number;
+  };
+
+  place: {
+    placeAddress: string;
+    placePhone: string;
+    placeName: string;
+    placeId: number;
+  };
+};
 export type reservationBtnsProps = {
   reservationStatus: string;
   onClickRefuseBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickAcceptBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export type placeCardProps = {
-  adminPlaceProps: {
-    placeId: number;
-    placeName: string;
-    placePhone: string;
-    placeAddress: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-    placeRating: number;
-    placeReviewCnt: number;
-    roomList: {
-      roomId: number;
-      roomName: string;
-      roomPrice: number;
-      roomStatus: string;
-    }[];
-  };
+export type adminPlaceProps = {
+  placeName: string;
+  placeAddress: string;
+  placePhone: string;
+  placeId: number;
 };
 
+export type placeCardProps = {
+  adminPlace: adminPlaceProps;
+};
 export type placeHeaderProps = {
   placeName: string;
   placePhone: string;
@@ -45,14 +61,7 @@ export type placeHeaderProps = {
 };
 
 export type roomCardProps = {
-  roomProps: {
-    roomId: number;
-    roomName: string;
-    roomPrice: number;
-    roomStatus: string;
-    roomMaxNum: number;
-    roomAmount: number;
-  };
+  roomProps: roomProps;
 };
 
 export type updateRoomInfoProps = {
@@ -131,7 +140,7 @@ export type placeOptionsProps = {
     name: string;
     id: number;
   };
-  tagId: Array<number>;
+  tagList: Array<string>;
 };
 
 export type optionFormProps = {

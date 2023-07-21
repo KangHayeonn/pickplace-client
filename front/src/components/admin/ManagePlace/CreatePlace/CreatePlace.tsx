@@ -33,6 +33,7 @@ const CreatePlace = () => {
     x: 0,
     y: 0,
   });
+
   const [newRoomInfo, setNewRoomInfo] =
     useState<newRoomProps>(defaultNewRoomForm);
 
@@ -40,7 +41,7 @@ const CreatePlace = () => {
 
   const [placeOptions, setPlaceOptions] = useState<placeOptionsProps>({
     category: { name: categoryList[0].name, id: categoryList[0].id },
-    tagId: [],
+    tagList: [],
   });
 
   const onPlaceNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,18 +116,22 @@ const CreatePlace = () => {
         const { roomId, ...room } = newRoomList[i];
         rooms.push(room);
       }
-
       const data = {
         place: {
           placeAddress: newPlaceInfo.address,
           placeName: newPlaceInfo.placeName,
           placePhone: newPlaceInfo.phone,
+          placeXaxis: newPlaceInfo.x,
+          placeYaxis: newPlaceInfo.y,
         },
         rooms: rooms,
+        category: placeOptions.category.name,
+        tagList: placeOptions.tagList,
       };
+      console.log(data);
       Admin.v1CreatePlace(data)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
         })
         .catch((err) => {
           return Promise.reject(err);
