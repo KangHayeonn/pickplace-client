@@ -22,6 +22,7 @@ const SearchPage = () => {
   const countPerPage = 10;
   const [pageNum, setPageNum] = useState(0);
   const [hasNext, setHasNext] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [searchResult, setSearchResult] = useState<
     type.searchResultListProps[]
@@ -223,7 +224,7 @@ const SearchPage = () => {
             </button>
           </div>
 
-          {searchResult && (
+          {searchResult ? (
             <SearchResult
               searchResult={searchResult}
               pageNum={pageNum}
@@ -231,6 +232,12 @@ const SearchPage = () => {
               setSearchResult={setSearchResult}
               getSearchDataWithOptions={getSearchDataWithOptions}
             />
+          ) : (
+            loading && (
+              <div>
+                <p>loading...</p>
+              </div>
+            )
           )}
         </section>
       </main>
