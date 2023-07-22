@@ -17,64 +17,119 @@ import * as type from '../components/search/types';
 const SearchPage = () => {
   const { state } = useLocation();
 
-  const defaultAddress = '서울 중구 창경궁로 62-29';
-  const countPerPage = 10;
+  const defaultSearchFrom = {
+    address: '서울 중구 창경궁로 62-29',
+    x: 126.998711,
+    y: 37.5681704,
+    startDate: format(new Date(), 'yyyy-MM-dd'),
+    endDate: format(new Date(), 'yyyy-MM-dd'),
+    distance: 5,
+    searchType: '추천순',
+  };
+  const defaultOptionForm = {
+    category: state
+      ? state
+      : { name: categoryList[0].name, id: categoryList[0].id },
+    userCnt: 1,
+    tagList: [],
+  };
 
+  const countPerPage = 10;
   const [pageNum, setPageNum] = useState(0);
   const [hasNext, setHasNext] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [onMapOpen, setOnMapOpen] = useState(false);
 
   const [searchResult, setSearchResult] = useState<
     type.searchResultListProps[]
   >([]);
 
-  const [searchForm, setSearchForm] = useState<type.searchFormProps>({
-    address: defaultAddress,
-    x: 126.998711,
-    y: 37.5681704,
-    startDate: format(new Date(), 'yyyy-MM-dd'),
-    endDate: format(new Date(), 'yyyy-MM-dd'),
-    distance: 5,
-    searchType: '추천 순',
-  });
+  const [searchForm, setSearchForm] =
+    useState<type.searchFormProps>(defaultSearchFrom);
 
-  const [optionForm, setOptionForm] = useState<type.optionFormProps>({
-    category: state
-      ? state
-      : { name: categoryList[0].name, id: categoryList[0].id },
-    userCnt: 1,
-    tagList: [],
-  });
+  const [optionForm, setOptionForm] =
+    useState<type.optionFormProps>(defaultOptionForm);
 
   useEffect(() => {
-    const getCategoryData = async () => {
-      const data = {
-        address: defaultAddress,
-        x: 126.976661,
-        y: 37.5706546,
-        startDate: searchForm.startDate,
-        endDate: searchForm.endDate,
-        distance: searchForm.distance,
-        searchType: '추천 순',
-        pageProps: {
-          countPerPage: countPerPage,
-          pageNum: pageNum,
-        },
-        category: optionForm.category.name,
-      };
-      await Search.getCategoryData(data)
-        .then((res) => {
-          setSearchResult(res.data.data.placeList);
-          setHasNext(res.data.data.hasNext);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
-    };
     getCategoryData();
   }, []);
 
+  const getCategoryData = async () => {
+    const data = {
+      address: defaultSearchFrom.address,
+      x: defaultSearchFrom.x,
+      y: defaultSearchFrom.y,
+      searchType: defaultSearchFrom.searchType,
+      pageProps: {
+        countPerPage: countPerPage,
+        pageNum: pageNum,
+      },
+      category: optionForm.category.name,
+    };
+    await Search.getCategoryData(data)
+      .then((res) => {
+        setSearchResult(res.data.data.placeList);
+        setHasNext(res.data.data.hasNext);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
+  const getSearchData = () => {
+    const data = {
+      address: searchForm.address,
+      x: searchForm.x,
+      y: searchForm.y,
+      startDate: searchForm.startDate,
+      endDate: searchForm.endDate,
+      distance: searchForm.distance,
+      searchType: searchForm.searchType,
+      pageProps: {
+        countPerPage: countPerPage,
+        pageNum: pageNum,
+      },
+      category: optionForm.category.name,
+    };
+    Search.getSearchData(data)
+      .then((res) => {
+        setSearchResult(res.data.data.placeList);
+        setHasNext(res.data.data.hasNext);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
+  const getSearchDataWithOptions = (newPageNum?: number) => {
+    let newList: type.searchResultListProps[] = [];
+    const data = {
+      address: searchForm.address,
+      x: searchForm.x,
+      y: searchForm.y,
+      startDate: searchForm.startDate,
+      endDate: searchForm.endDate,
+      distance: searchForm.distance,
+      searchType: searchForm.searchType,
+      pageProps: {
+        countPerPage: countPerPage,
+        pageNum: newPageNum ? newPageNum : pageNum,
+      },
+      category: optionForm.category.name,
+      userCnt: optionForm.userCnt,
+      tagList: optionForm.tagList,
+    };
+    Search.getSearchDataWithOptions(data)
+      .then((res) => {
+        setHasNext(res.data.data.hasNext);
+        if (newPageNum === undefined) {
+          setSearchResult(res.data.data.placeList);
+        } else {
+          newList = res.data.data.placeList;
+        }
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+    return newList;
+  };
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'unset';
     setOnMapOpen(false);
@@ -124,7 +179,19 @@ const SearchPage = () => {
       ...searchForm,
       searchType: e.currentTarget.value,
     });
-    getSearchData();
+    if (checkOptionFormIsEmpty()) {
+      if (
+        searchForm.address == defaultSearchFrom.address &&
+        searchForm.startDate == defaultSearchFrom.startDate &&
+        searchForm.endDate == defaultSearchFrom.endDate
+      ) {
+        getCategoryData();
+      } else {
+        getSearchData();
+      }
+    } else {
+      getSearchDataWithOptions();
+    }
   };
   const checkAddressExist = () => {
     if (searchForm.address == '') {
@@ -133,64 +200,21 @@ const SearchPage = () => {
     }
     return true;
   };
-  const getSearchData = () => {
-    const data = {
-      address: searchForm.address,
-      x: searchForm.x,
-      y: searchForm.y,
-      startDate: searchForm.startDate,
-      endDate: searchForm.endDate,
-      distance: searchForm.distance,
-      searchType: searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pageNum,
-      },
-      category: optionForm.category.name,
-    };
-    Search.getSearchData(data)
-      .then((res) => {
-        setSearchResult(res.data.data.placeList);
-        setHasNext(res.data.data.hasNext);
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+  const checkOptionFormIsEmpty = () => {
+    if (
+      optionForm.category.name == defaultOptionForm.category.name &&
+      optionForm.userCnt == 1 &&
+      optionForm.tagList.length == 0 &&
+      searchForm.distance == 5
+    )
+      return true;
+    return false;
   };
   const onSearchBtnClick = () => {
-    checkAddressExist() && getSearchData();
-  };
-  const getSearchDataWithOptions = (newPageNum?: number) => {
-    let newList: type.searchResultListProps[] = [];
-    const data = {
-      address: searchForm.address,
-      x: searchForm.x,
-      y: searchForm.y,
-      startDate: searchForm.startDate,
-      endDate: searchForm.endDate,
-      distance: searchForm.distance,
-      searchType: searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: newPageNum ? newPageNum : pageNum,
-      },
-      category: optionForm.category.name,
-      userCnt: optionForm.userCnt,
-      tagList: optionForm.tagList,
-    };
-    Search.getSearchDataWithOptions(data)
-      .then((res) => {
-        setHasNext(res.data.data.hasNext);
-        if (newPageNum === undefined) {
-          setSearchResult(res.data.data.placeList);
-        } else {
-          newList = res.data.data.placeList;
-        }
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
-    return newList;
+    checkOptionFormIsEmpty() && checkAddressExist() && getSearchData();
+    !checkOptionFormIsEmpty() &&
+      checkAddressExist() &&
+      getSearchDataWithOptions();
   };
   const onSearchWithOptionBtnClick = () => {
     checkAddressExist() && getSearchDataWithOptions();
@@ -228,21 +252,13 @@ const SearchPage = () => {
             </button>
           </div>
 
-          {searchResult ? (
-            <SearchResult
-              searchResult={searchResult}
-              pageNum={pageNum}
-              hasNext={hasNext}
-              setSearchResult={setSearchResult}
-              getSearchDataWithOptions={getSearchDataWithOptions}
-            />
-          ) : (
-            loading && (
-              <div>
-                <p>loading...</p>
-              </div>
-            )
-          )}
+          <SearchResult
+            searchResult={searchResult}
+            pageNum={pageNum}
+            hasNext={hasNext}
+            setSearchResult={setSearchResult}
+            getSearchDataWithOptions={getSearchDataWithOptions}
+          />
         </section>
       </main>
     </div>

@@ -18,9 +18,6 @@ const Search = {
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
         category: data.category,
-        startDate: data.startDate.replaceAll('-', '.'),
-        endDate: data.endDate.replaceAll('-', '.'),
-        distance: data.distance * 1000,
       });
       return result;
     } catch (error) {
