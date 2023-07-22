@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import PlaceHeader from './PlaceHeader';
@@ -7,9 +7,8 @@ import RadioGroup from '../../common/RadioGroupContext';
 import RoomCard from './RoomCard';
 import ReservedCard from '../../admin/ManageReservation/ReservedCard';
 
-import { adminReservationList } from '../../../utils/mock/adminReservationList';
-import { adminPlaceList } from '../../../utils/mock/adminPlaceList';
-import { adminRoomList } from '../../../utils/mock/adminPlaceList';
+import Admin from '../../../api/admin';
+import { roomProps, adminReservation, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
 
@@ -23,16 +22,40 @@ const ManagePlaceDetail = () => {
   ];
   const [clickedMenu, setClickedMenu] = useState(0);
 
+  const [adminReservationList, setAdminReservationList] =
+    useState<reservedRoom[]>();
+
+  const [adminRoomList, setAdminRoomList] = useState<roomProps[]>();
+
+  useEffect(() => {
+    getAdminDetailReservation();
+    getAdminDetailRoom();
+  }, []);
+
+  const getAdminDetailRoom = () => {
+    Admin.v1GetPlaceDetailRoom(state.placeId)
+      .then((res) => {
+        setAdminRoomList(res.data.data.room);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
+  const getAdminDetailReservation = () => {
+    Admin.v1GetPlaceDetailResevations(state.placeId)
+      .then((res) => {
+        setAdminReservationList(res.data.data.reservation);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
   const onClickHeaderBtn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setClickedMenu(parseInt(e.currentTarget.value));
   };
-
-  // getAdmiPlaceDetail api
-
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');
   };
-
   const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate(`/mypage/managePlace/updatePlace/${state.placeId}`, {
       state: {
@@ -53,9 +76,9 @@ const ManagePlaceDetail = () => {
           </button>
         </div>
         <PlaceHeader
-          placeName={adminPlaceList[0].placeName}
-          placePhone={adminPlaceList[0].placePhone}
-          address={adminPlaceList[0].placeAddress.address}
+          placeName={state.placeName}
+          placePhone={state.placePhone}
+          address={state.placeAddress}
         />
       </div>
       <div className="managePlace-detail__btn--container">
@@ -76,12 +99,24 @@ const ManagePlaceDetail = () => {
       </div>
       <div className="managePlace-detail__content">
         {clickedMenu === 0 &&
-          adminRoomList.map((item, key) => (
-            <RoomCard key={key} roomProps={item} />
+          (adminRoomList && adminRoomList.length > 0 ? (
+            adminRoomList.map((item, key) => (
+              <RoomCard key={key} roomProps={item} />
+            ))
+          ) : (
+            <div>
+              <p>등록된 방이 없습니다.</p>
+            </div>
           ))}
         {clickedMenu === 1 &&
-          adminReservationList.map((item, key) => (
-            <ReservedCard key={key} adminReservationProps={item} />
+          (adminReservationList && adminReservationList.length > 0 ? (
+            adminReservationList.map((item, key) => (
+              <ReservedCard key={key} adminReservationProps={item} />
+            ))
+          ) : (
+            <div>
+              <p>예약 내역이 없습니다.</p>
+            </div>
           ))}
       </div>
     </div>

@@ -39,7 +39,7 @@ const DetailContent = ({
           parentClassname={'detail-reservationInfo'}
           childClassname={'detail-reservationId'}
           title={'예약 번호 : ' + reservationId}
-          content={'예약 일시 : ' + reservationDate}
+          content={'예약 일시 : ' + reservationDate.replace('T', ' ')}
         />
         <ShowCardInfo
           childClassname={'detail-checkin'}
@@ -65,19 +65,21 @@ const DetailContent = ({
           content={personnel}
         />
       </DetailCard>
-      <DetailCard title={'결제 정보'}>
-        <ShowUserInfo
-          childClassname={'detail-roomPrice'}
-          title={'총 결제 금액'}
-          content={roomPrice}
-        />
-        <hr />
-        <ShowUserInfo
-          childClassname={'detail-roomPrice'}
-          title={'결제 방법'}
-          content={'현장 결제'}
-        />
-      </DetailCard>
+      {roomPrice && (
+        <DetailCard title={'결제 정보'}>
+          <ShowUserInfo
+            childClassname={'detail-roomPrice'}
+            title={'총 결제 금액'}
+            content={roomPrice}
+          />
+          <hr />
+          <ShowUserInfo
+            childClassname={'detail-roomPrice'}
+            title={'결제 방법'}
+            content={'현장 결제'}
+          />
+        </DetailCard>
+      )}
     </>
   );
 };

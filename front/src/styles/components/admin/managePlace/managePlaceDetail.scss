@@ -48,5 +48,8 @@
     }
     .managePlace-detail__content{
         min-height: 600px;
+        max-height: 40rem;
+        padding : 0 5px;
+        @include overflow-y-scroll()
     }
 }

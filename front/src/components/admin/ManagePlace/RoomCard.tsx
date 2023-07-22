@@ -9,9 +9,8 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
     roomName: roomProps.roomName,
     roomPrice: roomProps.roomPrice,
     roomId: roomProps.roomId,
-    roomStatus: roomProps.roomStatus,
-    roomPersonnel: roomProps.roomPersonnel,
-    roomCount: roomProps.roomCount,
+    roomMaxNum: roomProps.roomMaxNum,
+    roomAmount: roomProps.roomAmount,
   });
   const [updateState, setUpdateState] = useState<boolean>(false);
 
@@ -22,8 +21,8 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
   const onClickUpdateBtn = (
     newRoomName: string,
     newRoomPrice: number,
-    newRoomPersonnel: number,
-    newRoomCount: number,
+    newroomMaxNum: number,
+    newroomAmount: number,
   ) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
       //room update api
@@ -31,8 +30,8 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
         ...roomInfo,
         roomName: newRoomName,
         roomPrice: newRoomPrice,
-        roomPersonnel: newRoomPersonnel,
-        roomCount: newRoomCount,
+        roomMaxNum: newroomMaxNum,
+        roomAmount: newroomAmount,
       });
       setUpdateState(false);
     };
@@ -64,12 +63,12 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
               <ShowCardInfo
                 childClassname={'personnel'}
                 title={'인원 수'}
-                content={roomInfo.roomPersonnel + ' 명'}
+                content={roomInfo.roomMaxNum + ' 명'}
               />
               <ShowCardInfo
                 childClassname={'count'}
                 title={'방 개수'}
-                content={roomInfo.roomCount + ' 개'}
+                content={roomInfo.roomAmount + ' 개'}
               />
             </div>
             <div className="managePlace-detail__btn--container">

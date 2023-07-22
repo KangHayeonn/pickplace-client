@@ -9,7 +9,8 @@
         @include line-clamp-ellipsis1();
     }
 }
-.placeCard-address{
+.placeCard-address__container{
+    @include line-clamp-ellipsis1();
     margin-bottom : 7px;
 }
 .placeCard-address,.placeCard-phone{

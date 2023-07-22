@@ -172,7 +172,20 @@ $color-dimmed: rgba(0, 0, 0, 0.4);
     background-position: center; 
 }
 
-
+@mixin overflow-y-scroll{
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        width: 7px;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+        margin: 10px;
+    }
+}
 @mixin text-title-bar {
    font-size: 1.18rem;
    font-weight: 600;

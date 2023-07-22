@@ -35,5 +35,5 @@ export type detailContentProps = {
   endTime: string;
   nickName: string;
   personnel: number;
-  roomPrice: number;
+  roomPrice?: number;
 };
