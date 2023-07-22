@@ -6,27 +6,19 @@
     margin-left : 5px;
 
     .reservedCard-btn__complete, 
-    .reservedCard-btn__refuse,
     .reservedCard-btn__accept{
         margin : 0 3px;
         display: inline-block;
         width : 90px;
     }
+
     .reservedCard-btn__complete{
+        @include button-lightgreen;
         cursor : default;
     }
-    
-    .reservedCard-btn__complete,
     .reservedCard-btn__accept{
-        @include button-green;
-    }
-    .reservedCard-btn__refuse{
-        @include button-lightgreen;
-    }
-
-    .reservedCard-btn__accept,
-    .reservedCard-btn__refuse{
         cursor: pointer;  
+        @include button-green;
         &:hover {
             @include button-hover-green
         }

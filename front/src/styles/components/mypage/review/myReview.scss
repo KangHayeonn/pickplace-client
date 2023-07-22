@@ -1,24 +1,12 @@
 @import "../../../base/variable.scss";
 
 .MyReview{
-    min-width : 630px;
+    min-width : 550px;
     max-height: 40rem;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-        width: 7px;
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-track {
-        margin: 10px;
-    }
+    @include overflow-y-scroll();
 }
 .MyReview-card__container{
-    min-width : 550px;
+    min-width : 470px;
     background-color: white;
     margin : 10px 5px;
     padding : 20px 30px;    
@@ -79,6 +67,7 @@
 }
 
 .MyReview-card__info{
+    margin-top : 10px;
     display: flex;
     justify-content: flex-end;
     font-size: 15px;

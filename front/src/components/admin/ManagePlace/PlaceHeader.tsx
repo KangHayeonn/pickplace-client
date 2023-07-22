@@ -11,6 +11,7 @@ const PlaceHeader = ({ placeName, placePhone, address }: placeHeaderProps) => {
       </div>
       <div className="placeCard-content">
         <ShowCardInfo
+          parentClassname={'placeCard-address__container'}
           childClassname={'placeCard-address'}
           title={'주소'}
           content={address}

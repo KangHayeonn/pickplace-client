@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReservedCard from './ReservedCard';
-
 import Admin from '../../../api/admin';
 import '../../../styles/components/admin/manageReservation/manageReservation.scss';
 import { adminReservation } from '../types';
@@ -28,9 +27,11 @@ const ManageReservation = () => {
         adminReservationList.map((item, key) => (
           <div key={key} className="manageReservation-place__container">
             <h3 className="manageReservation-placeName">{item.placeName}</h3>
-            {item.reservations.map((item, key) => (
-              <ReservedCard key={key} adminReservationProps={item} />
-            ))}
+            <div className="manageReservation-place__reservations">
+              {item.reservations.map((item, key) => (
+                <ReservedCard key={key} adminReservationProps={item} />
+              ))}
+            </div>
           </div>
         ))
       ) : (
