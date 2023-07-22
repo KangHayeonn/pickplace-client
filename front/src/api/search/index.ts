@@ -18,6 +18,9 @@ const Search = {
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
         category: data.category,
+        startDate: data.startDate.replaceAll('-', '.'),
+        endDate: data.endDate.replaceAll('-', '.'),
+        distance: data.distance * 1000,
       });
       return result;
     } catch (error) {
@@ -33,7 +36,7 @@ const Search = {
         y: data.y,
         startDate: data.startDate.replaceAll('-', '.'),
         endDate: data.endDate.replaceAll('-', '.'),
-        distance: data.distance,
+        distance: data.distance * 1000,
         searchType: data.searchType,
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
@@ -53,7 +56,7 @@ const Search = {
         y: data.y,
         startDate: data.startDate.replaceAll('-', '.'),
         endDate: data.endDate.replaceAll('-', '.'),
-        distance: data.distance,
+        distance: data.distance * 1000,
         searchType: data.searchType,
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
@@ -61,7 +64,6 @@ const Search = {
         userCnt: data.userCnt,
         tagList: data.tagList,
       });
-
       return result;
     } catch (error) {
       return Promise.reject(error);

@@ -10,7 +10,6 @@ import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
-import { hotelSearchResult } from '../utils/mock/searchList';
 import { categoryList } from '../utils/mock/categoryList';
 import { markerList } from '../utils/mock/markerList';
 import * as type from '../components/search/types';
@@ -32,12 +31,12 @@ const SearchPage = () => {
 
   const [searchForm, setSearchForm] = useState<type.searchFormProps>({
     address: defaultAddress,
-    x: 126.976661,
-    y: 37.5706546,
+    x: 126.998711,
+    y: 37.5681704,
     startDate: format(new Date(), 'yyyy-MM-dd'),
     endDate: format(new Date(), 'yyyy-MM-dd'),
     distance: 5,
-    searchType: 'recommend',
+    searchType: '추천 순',
   });
 
   const [optionForm, setOptionForm] = useState<type.optionFormProps>({
@@ -54,7 +53,10 @@ const SearchPage = () => {
         address: defaultAddress,
         x: 126.976661,
         y: 37.5706546,
-        searchType: 'recommend',
+        startDate: searchForm.startDate,
+        endDate: searchForm.endDate,
+        distance: searchForm.distance,
+        searchType: '추천 순',
         pageProps: {
           countPerPage: countPerPage,
           pageNum: pageNum,
