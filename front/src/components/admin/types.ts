@@ -1,16 +1,23 @@
 export type reservedCardProps = {
-  adminReservationProps: adminReservation;
+  adminReservationProps: reservedRoom;
+};
+
+export type reservedRoom = {
+  reservationId: number;
+  roomName: string;
+  checkInDate: string;
+  checkInTime: string;
+  checkOutDate: string;
+  checkOutTime: string;
+  createdDate: string;
+  updatedDated: string;
+  reservationStatus: string;
+  reservationPeopleNum: string;
 };
 
 export type adminReservation = {
-  reservationId: number;
-  placeId: number;
   placeName: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
-  reservationStatus: string;
+  reservations: reservedRoom[];
 };
 
 export type adminReservationDetail = {

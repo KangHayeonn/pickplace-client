@@ -1,18 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import DetailContent from '../../mypage/reservation/DetailContent';
 import ReservationBtns from '../ReservationBtns';
-import { adminReservationDetail } from '../../../utils/mock/adminReservationDetail';
 import '../../../styles/components/admin/manageReservation/manageReservationDetail.scss';
 import '../../../styles/components/admin/reservationBtn.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import Admin from '../../../api/admin';
+import { adminReservationDetail } from '../types';
 
 const ManageReservationDetail = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  // const [adminReservationDetailm, setAdminReservationDetail] = useState();
+  const [adminReservationDetail, setAdminReservationDetail] =
+    useState<adminReservationDetail>({
+      member: {
+        memberName: '',
+      },
+      reservation: {
+        reservationId: 0,
+        roomName: '',
+        checkInDate: '',
+        checkInTime: '',
+        checkOutDate: '',
+        checkOutTime: '',
+        reservationStatus: '',
+        createdDate: '',
+        updatedDate: '',
+        reservationPeopleNum: 0,
+      },
+      place: {
+        placeAddress: '',
+        placePhone: '',
+        placeName: '',
+        placeId: 0,
+      },
+    });
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');
@@ -23,9 +46,9 @@ const ManageReservationDetail = () => {
   }, []);
 
   const getAdminReservationDetail = () => {
-    Admin.v1GetReservationDetail(state.placeId)
+    Admin.v1GetReservationDetail(state.reservationId)
       .then((res) => {
-        // console.log(res.data.data);
+        setAdminReservationDetail(res.data.data);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -54,27 +77,28 @@ const ManageReservationDetail = () => {
         </div>
         <div className="manageReservation-detail__header--content">
           <h2 className="manageReservation-detail__placeName">
-            {adminReservationDetail.placeName}
+            {adminReservationDetail.place.placeName}
           </h2>
           <ReservationBtns
-            reservationStatus={adminReservationDetail.reservationStatus}
+            reservationStatus={
+              adminReservationDetail.reservation.reservationStatus
+            }
             onClickAcceptBtn={onClickAcceptBtn}
             onClickRefuseBtn={onClickRefuseBtn}
           />
         </div>
       </div>
       <DetailContent
-        address={adminReservationDetail.placeAddress.address}
-        placePhone={adminReservationDetail.placePhone}
-        reservationId={adminReservationDetail.reservationId}
-        reservationDate={adminReservationDetail.reservationDate}
-        startDate={adminReservationDetail.startDate}
-        startTime={adminReservationDetail.startTime}
-        endDate={adminReservationDetail.endDate}
-        endTime={adminReservationDetail.endTime}
-        nickName={adminReservationDetail.nickName}
-        personnel={adminReservationDetail.personnel}
-        roomPrice={adminReservationDetail.roomPrice}
+        address={adminReservationDetail.place.placeAddress}
+        placePhone={adminReservationDetail.place.placePhone}
+        reservationId={adminReservationDetail.reservation.reservationId}
+        reservationDate={adminReservationDetail.reservation.createdDate}
+        startDate={adminReservationDetail.reservation.checkInDate}
+        startTime={adminReservationDetail.reservation.checkInTime}
+        endDate={adminReservationDetail.reservation.checkOutDate}
+        endTime={adminReservationDetail.reservation.checkOutTime}
+        nickName={adminReservationDetail.member.memberName}
+        personnel={adminReservationDetail.reservation.reservationPeopleNum}
       />
     </div>
   );

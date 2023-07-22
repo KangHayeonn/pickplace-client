@@ -3,7 +3,6 @@ import ReservedCard from './ReservedCard';
 
 import Admin from '../../../api/admin';
 import '../../../styles/components/admin/manageReservation/manageReservation.scss';
-// import { adminReservationList } from '../../../utils/mock/adminReservationList';
 import { adminReservation } from '../types';
 
 const ManageReservation = () => {
@@ -17,8 +16,7 @@ const ManageReservation = () => {
   const getAdminReservations = () => {
     Admin.v1GetReservations()
       .then((res) => {
-        console.log(res.data.data);
-        // setAdminReservationList(res.data.data);
+        setAdminReservationList(res.data.data.placeList);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -28,7 +26,12 @@ const ManageReservation = () => {
     <div className="manageReservation">
       {adminReservationList ? (
         adminReservationList.map((item, key) => (
-          <ReservedCard key={key} adminReservationProps={item} />
+          <div key={key} className="manageReservation-place__container">
+            <h3 className="manageReservation-placeName">{item.placeName}</h3>
+            {item.reservations.map((item, key) => (
+              <ReservedCard key={key} adminReservationProps={item} />
+            ))}
+          </div>
         ))
       ) : (
         <div>

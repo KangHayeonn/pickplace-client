@@ -8,7 +8,7 @@ import RoomCard from './RoomCard';
 import ReservedCard from '../../admin/ManageReservation/ReservedCard';
 
 import Admin from '../../../api/admin';
-import { roomProps, adminReservation } from '../types';
+import { roomProps, adminReservation, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
 
@@ -23,7 +23,7 @@ const ManagePlaceDetail = () => {
   const [clickedMenu, setClickedMenu] = useState(0);
 
   const [adminReservationList, setAdminReservationList] =
-    useState<adminReservation[]>();
+    useState<reservedRoom[]>();
 
   const [adminRoomList, setAdminRoomList] = useState<roomProps[]>();
 
