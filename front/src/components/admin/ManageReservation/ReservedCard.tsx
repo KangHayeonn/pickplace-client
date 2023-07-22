@@ -8,7 +8,7 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   const navigate = useNavigate();
   const onClickResevedCard = (e: React.MouseEvent<HTMLDivElement>) => {
     const state = {
-      id: adminReservationProps.reservationId,
+      reservationId: adminReservationProps.reservationId,
     };
     navigate(
       `/mypage/manageReservation/detail/${adminReservationProps.reservationId}`,

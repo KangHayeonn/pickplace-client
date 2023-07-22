@@ -128,10 +128,9 @@ const CreatePlace = () => {
         category: placeOptions.category.name,
         tagList: placeOptions.tagList,
       };
-      console.log(data);
       Admin.v1CreatePlace(data)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
         })
         .catch((err) => {
           return Promise.reject(err);

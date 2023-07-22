@@ -4,6 +4,16 @@
     max-width: 100%;
     min-width : 550px;
 }
+
+.manageReservation-place__container{
+    margin-bottom : 50px;
+    .manageReservation-placeName{
+        text-align: left;
+        font-weight: 600;
+        font-size : 20px;
+    }
+}
+
 .reservedCard-container{
     background-color: white;
     box-shadow: $shadow-dropdown;    

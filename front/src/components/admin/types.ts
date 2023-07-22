@@ -17,7 +17,7 @@ export type reservedRoom = {
 
 export type adminReservation = {
   placeName: string;
-  rooms: reservedRoom[];
+  reservations: reservedRoom[];
 };
 
 export type adminReservationDetail = {
