@@ -16,6 +16,7 @@ import {
   setNickName,
   setAccessToken,
   setRefreshToken,
+  setRole,
 } from '../../utils/tokenControl';
 
 const LoginForm = () => {
@@ -45,11 +46,13 @@ const LoginForm = () => {
     await dispatch(setLogin(data))
       .then((res) => {
         if (res) {
-          const { memberId, nickname, accessToken, refreshToken } = res.member;
+          const { memberId, nickname, accessToken, refreshToken, role } =
+            res.member;
           setUserId(`${memberId}`);
           setNickName(nickname);
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
+          setRole(role);
           initForm();
           navigate('/');
         }

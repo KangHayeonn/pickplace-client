@@ -30,9 +30,18 @@ export const getRefreshToken = () => {
   return localStorage.getItem('refreshToken');
 };
 
+export const setRole = (role: string) => {
+  localStorage.setItem('role', role);
+};
+
+export const getRole = () => {
+  return localStorage.getItem('role');
+};
+
 export const clearToken = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('nickName');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
+  localStorage.removeItem('role');
 };
