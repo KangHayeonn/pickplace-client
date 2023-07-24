@@ -3,6 +3,11 @@
 .managePlace{
     max-width: 100%;
     min-width : 550px;
+    .managePlace-container{
+        padding : 0 5px;
+        max-height: 40rem;
+        @include overflow-y-scroll()
+    }
 }
 .placeCard-container{
     cursor : pointer;
@@ -29,6 +34,10 @@
         .address,.phone{
             display: inline-block;
             width : 50px;
+        }
+        .address{
+            @include line-clamp-ellipsis1();
+ 
         }
         span{
             font-size: 15px;

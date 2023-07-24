@@ -9,19 +9,19 @@ const SearchHeader = ({
   endDate,
   category,
   address,
+  x,
+  y,
   onChangeAddress,
   onChangeStartDate,
   onChangeEndDate,
   onSearchBtnClick,
 }: searchHeaderProps) => {
-  const [searchKeyword, setSearchKeyword] = useState<string>(
-    address.address_name,
-  );
+  const [searchKeyword, setSearchKeyword] = useState<string>(address);
   const [searchPreviewList, setSearchPreviewList] = useState([
     {
-      address_name: address.address_name,
-      x: address.x.toString(),
-      y: address.y.toString(),
+      address_name: address,
+      x: x.toString(),
+      y: y.toString(),
     },
   ]);
 

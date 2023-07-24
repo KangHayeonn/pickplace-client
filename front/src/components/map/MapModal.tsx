@@ -11,14 +11,14 @@ type mapModalProps = {
 
 const MapModal = ({ onCloseModal, mapList }: mapModalProps) => {
   return (
-    <div className="modal-background">
-      <div className="map-modal">
-        <div className="map-modal__header">
-          <button className="map-modal__btn--close" onClick={onCloseModal}>
-            <img src={closeBtnIcon}></img>
+    <div className="mapModal-background">
+      <div className="mapModal-container">
+        <div className="mapModal__header">
+          <button className="mapModal__btn--close" onClick={onCloseModal}>
+            <img src={closeBtnIcon} />
           </button>
         </div>
-        <Map width={'100%'} height={'700px'} markerList={mapList} />
+        <Map width={'100%'} height={'600px'} markerList={mapList} />
       </div>
     </div>
   );

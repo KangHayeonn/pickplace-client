@@ -11,8 +11,8 @@ const UpdateRoomInfo = ({
   const [newRoomInfo, setNewRoomInfo] = useState({
     newRoomName: roomInfo.roomName,
     newRoomPrice: roomInfo.roomPrice,
-    newRoomPersonnel: roomInfo.roomPersonnel,
-    newRoomCount: roomInfo.roomCount,
+    newroomMaxNum: roomInfo.roomMaxNum,
+    newroomAmount: roomInfo.roomAmount,
   });
   const onChangeRoomName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
@@ -27,17 +27,17 @@ const UpdateRoomInfo = ({
     });
   };
 
-  const onChangeRoomPersonnel = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeroomMaxNum = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      newRoomPersonnel: parseInt(e.currentTarget.value),
+      newroomMaxNum: parseInt(e.currentTarget.value),
     });
   };
 
-  const onChangeRoomCount = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeroomAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomInfo({
       ...newRoomInfo,
-      newRoomCount: parseInt(e.currentTarget.value),
+      newroomAmount: parseInt(e.currentTarget.value),
     });
   };
 
@@ -64,16 +64,16 @@ const UpdateRoomInfo = ({
         <label className="updateRoomInfo-textField__label">방 인원</label>
         <TextField
           textType={'number'}
-          onChangeText={onChangeRoomPersonnel}
-          value={newRoomInfo.newRoomPersonnel}
+          onChangeText={onChangeroomMaxNum}
+          value={newRoomInfo.newroomMaxNum}
         />
       </div>
       <div className="updateRoomInfo-textField__container">
         <label className="updateRoomInfo-textField__label">방 개수</label>
         <TextField
           textType={'number'}
-          onChangeText={onChangeRoomCount}
-          value={newRoomInfo.newRoomCount}
+          onChangeText={onChangeroomAmount}
+          value={newRoomInfo.newroomAmount}
         />
       </div>
       <div className="updateRoomInfo-btn__container">
@@ -90,8 +90,8 @@ const UpdateRoomInfo = ({
           onClick={onClickUpdateBtn(
             newRoomInfo.newRoomName,
             newRoomInfo.newRoomPrice,
-            newRoomInfo.newRoomPersonnel,
-            newRoomInfo.newRoomCount,
+            newRoomInfo.newroomMaxNum,
+            newRoomInfo.newroomAmount,
           )}
         >
           수정

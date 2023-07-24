@@ -30,10 +30,12 @@ const DetailModal = ({
 
   const onClickClose = () => {
     setDetailModalOpen(false);
+    document.body.style.overflow = 'unset';
   };
   const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
       //delete api
+      onClickClose();
     }
   };
   const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {

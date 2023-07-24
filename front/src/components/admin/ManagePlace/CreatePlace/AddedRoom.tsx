@@ -14,11 +14,9 @@ const AddedRoom = ({ newRoomList, onClickDeleteRoomBtn }: addedRoomProps) => {
               <span>/</span>
               <span className="AddedRoom-roomPrice">{item.roomPrice} 원</span>
               <span>/</span>
-              <span className="AddedRoom-roomPersonnel">
-                {item.roomPersonnel} 명
-              </span>
+              <span className="AddedRoom-roomMaxNum">{item.roomMaxNum} 명</span>
               <span>/</span>
-              <span className="AddedRoom-roomCount">{item.roomCount} 개</span>
+              <span className="AddedRoom-roomAmount">{item.roomAmount} 개</span>
             </div>
             <button
               className="AddedRoom-deleteBtn"
