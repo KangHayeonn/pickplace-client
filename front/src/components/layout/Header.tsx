@@ -26,7 +26,6 @@ const Header = () => {
       .catch((err) => {
         return Promise.reject(err);
       });
-    // logout api logic
   };
 
   return (
