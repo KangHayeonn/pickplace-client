@@ -1,10 +1,17 @@
+import axios from 'axios';
 import {
   AxiosError,
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { getAccessToken } from '../../utils/tokenControl';
+import Api from '../../api/auth';
+import {
+  getAccessToken,
+  getRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+} from '../../utils/tokenControl';
 
 export const setInterceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
@@ -23,6 +30,26 @@ export const setInterceptors = (instance: AxiosInstance) => {
   );
   instance.interceptors.response.use(
     (response: AxiosResponse) => {
+      const errorAPI = response.config;
+      if (!response.data.success) {
+        const { errMsg } = response.data;
+        if (errMsg === '만료된 token 입니다') {
+          const data = {
+            refreshToken: getRefreshToken() || '',
+          };
+
+          Api.v1Reissue(data).then((res) => {
+            const { member } = res.data.data;
+            setAccessToken(member.accessToken);
+            setRefreshToken(member.refreshToken);
+          });
+
+          errorAPI.headers['AccessToken'] = `${getAccessToken()}`;
+          return axios(errorAPI);
+        } else {
+          // toast message (errMsg)
+        }
+      }
       return response;
     },
     (error: AxiosError | Error) => {
