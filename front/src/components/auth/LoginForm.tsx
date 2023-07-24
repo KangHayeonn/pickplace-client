@@ -5,6 +5,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { LoginRequestType } from '../../api/auth/types';
 import { setLogin } from '../../store/modules/auth';
+import { showToast } from '../../store/modules/common';
 import TextField from '../common/TextField';
 import TextButton from '../common/TextButton';
 import '../../styles/components/auth/loginForm.scss';
@@ -55,6 +56,7 @@ const LoginForm = () => {
           setRole(role);
           initForm();
           navigate('/');
+          dispatch(showToast('로그인을 성공하였습니다.'));
         }
         return;
       })

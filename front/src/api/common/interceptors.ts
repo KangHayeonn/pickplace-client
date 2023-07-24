@@ -12,6 +12,7 @@ import {
   setAccessToken,
   setRefreshToken,
 } from '../../utils/tokenControl';
+import { isShowError } from '../../components/common/ToastBox';
 
 export const setInterceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
@@ -47,7 +48,7 @@ export const setInterceptors = (instance: AxiosInstance) => {
           errorAPI.headers['AccessToken'] = `${getAccessToken()}`;
           return axios(errorAPI);
         } else {
-          // toast message (errMsg)
+          isShowError(errMsg);
         }
       }
       return response;
