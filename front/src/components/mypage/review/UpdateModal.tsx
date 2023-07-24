@@ -3,12 +3,9 @@ import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 import CheckIcon from '../../../assets/images/check.svg';
 import StarRate from '../../../components/common/StarRate';
-
-import '../../../styles/components/mypage/review/updateModal.scss';
-import {
-  myReviewDetail,
-  myReviewDetail2,
-} from '../../../utils/mock/myReviewList';
+import Review from '../../../api/review';
+import '../../../styles/components/mypage/review/reviewModal.scss';
+import { myReviewDetail } from '../../../utils/mock/myReviewList';
 
 interface UpdateModalProps {
   reviewId: number;
@@ -18,17 +15,15 @@ interface UpdateModalProps {
 const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
   const [reviewDetail, setReviewDetail] = useState(myReviewDetail);
   const [reviewContent, setReviewContent] = useState(reviewDetail.content);
-  const [starRate, setStarRate] = useState(0);
+  const [starRate, setStarRate] = useState(reviewDetail.rating);
 
   const onClickStar = (rate: number) => {
     setStarRate(rate);
   };
-
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (reviewContent.length <= 500)
       setReviewContent(e.currentTarget.value.substring(0, 500));
   };
-
   const onClickClose = () => {
     if (
       window.confirm(
@@ -39,10 +34,33 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
       document.body.style.overflow = 'unset';
     }
   };
+  const onUpdateBtnClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (starRate == 0) {
+      window.alert('별점을 입력해주세요.');
+    } else if (reviewContent == '') {
+      window.alert('리뷰 내용을 입력해주세요');
+    } else {
+      const data = {
+        reviewId: reviewId,
+        data: {
+          content: reviewContent,
+          rating: starRate,
+        },
+      };
+      Review.v1UpdateReview(data)
+        .then((res) => {
+          setUpdateModalOpen(false);
+          document.body.style.overflow = 'unset';
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
 
   return (
     <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
-      <div className="UpdateModal-container">
+      <div className="ReviewModal-container">
         <ReviewModalHeader
           nickname={reviewDetail.nickname}
           date={reviewDetail.date}
@@ -52,24 +70,32 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
           startTime={reviewDetail.startTime}
           endTime={reviewDetail.endTime}
         />
-        <div className="UpdateModal-content">
-          <div className="UpdateModal-starRate__container">
+        <div className="ReviewModal-content">
+          <div className="ReviewModal-starRate__container">
             <StarRate
               onClickStar={onClickStar}
               defaultStar={reviewDetail.rating}
             />
             <img src={CheckIcon} alt="checked icon" />
           </div>
-          <div className="UpdateModal-textArea__container">
+          <div className="ReviewModal-textArea__container">
             <textarea
-              className="UpdateModal-textArea"
+              className="ReviewModal-textArea"
               onChange={onChangeContent}
               value={reviewContent}
             />
-            <div className="UpdateModal-count__container">
+            <div className="ReviewModal-count__container">
               <span>{reviewContent.length}/500</span>
             </div>
           </div>
+        </div>
+        <div className="ReviewModal-btn__container">
+          <button
+            className="ReviewModal-submitBtn"
+            onClick={onUpdateBtnClicked}
+          >
+            작성완료
+          </button>
         </div>
       </div>
     </ModalForm>

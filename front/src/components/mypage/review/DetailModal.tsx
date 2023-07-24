@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 
 import StarIcon from '../../../assets/images/star-full.svg';
 import DeleteIcon from '../../../assets/images/trash.svg';
 import UpdateIcon from '../../../assets/images/edit.svg';
+import Review from '../../../api/review';
 
 import { reviewDetailProps } from '../types';
 import {
@@ -15,6 +16,12 @@ import '../../../styles/components/mypage/review/detailModal.scss';
 
 type DetailModalProps = {
   reviewId: number;
+  onUpdateBtnClick: (
+    reviewId: number,
+  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDeleteBtnClick: (
+    reviewId: number,
+  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
   setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -23,8 +30,9 @@ const DetailModal = ({
   reviewId,
   setUpdateModalOpen,
   setDetailModalOpen,
+  onDeleteBtnClick,
+  onUpdateBtnClick,
 }: DetailModalProps) => {
-  // api : get reviewDetail with reviewId
   const [reviewDetail, setReviewDetail] =
     useState<reviewDetailProps>(myReviewDetail2);
 
@@ -32,15 +40,19 @@ const DetailModal = ({
     setDetailModalOpen(false);
     document.body.style.overflow = 'unset';
   };
-  const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      //delete api
-      onClickClose();
-    }
-  };
-  const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setDetailModalOpen(false);
-    setUpdateModalOpen(true);
+
+  useEffect(() => {
+    // getUserReviewDetail();
+  }, []);
+
+  const getUserReviewDetail = () => {
+    Review.v1GetReviewDetail(reviewId)
+      .then((res) => {
+        setReviewDetail(res.data.data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
 
   return (
@@ -62,10 +74,16 @@ const DetailModal = ({
               {reviewDetail.rating}
             </div>
             <div className="DetailModal-btn_container">
-              <button className="DetailModal-btn" onClick={onUpdateBtnClick}>
+              <button
+                className="DetailModal-btn"
+                onClick={onUpdateBtnClick(reviewId)}
+              >
                 <img src={UpdateIcon} />
               </button>
-              <button className="DetailModal-btn" onClick={onDeleteBtnClick}>
+              <button
+                className="DetailModal-btn"
+                onClick={onDeleteBtnClick(reviewId)}
+              >
                 <img src={DeleteIcon} />
               </button>
             </div>

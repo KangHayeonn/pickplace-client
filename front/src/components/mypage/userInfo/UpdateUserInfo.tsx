@@ -1,15 +1,15 @@
 import React from 'react';
 import TextField from '../../common/TextField';
 import '../../../styles/components/mypage/userInfo/updateUserInfo.scss';
-import * as type from '../types';
+import { updateUserInfoProps } from '../types';
 
 const UpdateUserInfo = ({
   title,
   value,
+  onCancleBtnClick,
   onChangeSearch,
-  setUpdateState,
   onClickUpdate,
-}: type.updateUserInfoProps) => {
+}: updateUserInfoProps) => {
   return (
     <div className="updateUserInfo">
       <h4>{title}</h4>
@@ -17,7 +17,7 @@ const UpdateUserInfo = ({
         <TextField onChangeText={onChangeSearch} value={value} />
       </div>
       <div className="updateUserInfo-btn__container">
-        <button onClick={() => setUpdateState(false)}>취소</button>
+        <button onClick={onCancleBtnClick}>취소</button>
         <button onClick={onClickUpdate}>수정</button>
       </div>
     </div>
