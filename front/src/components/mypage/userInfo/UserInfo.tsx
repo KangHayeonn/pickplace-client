@@ -1,59 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UpdateUserInfo from './UpdateUserInfo';
 import ShowUserInfo from '../ShowUserInfo';
 import '../../../styles/components/mypage/userInfo/userInfo.scss';
-
+import User from '../../../api/mypage';
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({
-    email: 'pickplace@gmail.com',
-    phone: '010-1234-5678',
-    nickName: 'pickplace',
+    email: '',
+    phone: '',
+    nickname: '',
   });
 
+  const [newNickname, setNewNickname] = useState('');
+  const [newPhone, setNewPhone] = useState('');
   const [updateNickname, setUpdateNickname] = useState(false);
   const [updatePhone, setUpdatePhone] = useState(false);
 
-  // useEffect(() => {
-  //   Mypage.getUserInfo(memberId)
-  //     .then((res) => {
-  //       return res;
-  //     })
-  //     .catch((err) => {
-  //       return Promise.reject(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const getUserInfo = () => {
+    User.v1GetUserInfo()
+      .then((res) => {
+        setUserInfo(res.data.data.member);
+        setNewNickname(res.data.data.member.nickname);
+        setNewPhone(res.data.data.member.phone);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
 
   const onUpdateNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //   Mypage.updateNickname(memberId,userInfo.nickName)
-    //     .then((res) => {
-    //       return res;
-    //     })
-    //     .catch((err) => {
-    //       return Promise.reject(err);
-    //     });
+    User.v1UpdateNickname(newNickname)
+      .then((res) => {
+        getUserInfo();
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
     setUpdateNickname(false);
   };
   const onUpdatePhone = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //   Mypage.updatePhone(memberId,userInfo.phone)
-    //     .then((res) => {
-    //       return res;
-    //     })
-    //     .catch((err) => {
-    //       return Promise.reject(err);
-    //     });
+    User.v1UpdatePhone(newPhone)
+      .then((res) => {
+        getUserInfo();
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
     setUpdatePhone(false);
   };
   const onNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({
-      ...userInfo,
-      nickName: e.target.value,
-    });
+    setNewNickname(e.currentTarget.value);
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo({
-      ...userInfo,
-      phone: e.target.value,
-    });
+    setNewPhone(e.currentTarget.value);
+  };
+
+  const onNicknameUpdateCancle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setUpdateNickname(false);
+    setNewNickname(userInfo.nickname);
+  };
+  const onPhoneUpdateCancle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setUpdatePhone(false);
+    setNewPhone(userInfo.phone);
   };
 
   return (
@@ -67,15 +78,15 @@ const UserInfo = () => {
         {updateNickname ? (
           <UpdateUserInfo
             title={'닉네임 변경'}
-            value={userInfo.nickName}
+            value={newNickname}
+            onCancleBtnClick={onNicknameUpdateCancle}
             onChangeSearch={onNicknameChange}
-            setUpdateState={setUpdateNickname}
             onClickUpdate={onUpdateNickname}
           />
         ) : (
           <ShowUserInfo
             title={'닉네임'}
-            content={userInfo.nickName}
+            content={userInfo.nickname}
             setUpdateState={setUpdateNickname}
           />
         )}
@@ -84,9 +95,9 @@ const UserInfo = () => {
         {updatePhone ? (
           <UpdateUserInfo
             title={'전화번호 변경'}
-            value={userInfo.phone}
+            value={newPhone}
             onChangeSearch={onPhoneChange}
-            setUpdateState={setUpdatePhone}
+            onCancleBtnClick={onPhoneUpdateCancle}
             onClickUpdate={onUpdatePhone}
           />
         ) : (

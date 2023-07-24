@@ -20,7 +20,7 @@ export type ShowCardInfo = {
 export type updateUserInfoProps = {
   title: string;
   value: string;
-  setUpdateState: React.Dispatch<React.SetStateAction<boolean>>;
+  onCancleBtnClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onChangeSearch: React.ChangeEventHandler<HTMLInputElement>;
   onClickUpdate: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };

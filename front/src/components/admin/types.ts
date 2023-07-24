@@ -47,7 +47,6 @@ export type adminReservationDetail = {
 };
 export type reservationBtnsProps = {
   reservationStatus: string;
-  onClickRefuseBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickAcceptBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 

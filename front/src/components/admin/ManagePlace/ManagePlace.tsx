@@ -29,9 +29,11 @@ const ManagePlace = () => {
 
   return (
     <div className="managePlace">
-      {adminPlaceList.map((item, key) => (
-        <PlaceCard key={key} adminPlace={item} />
-      ))}
+      <div className="managePlace-container">
+        {adminPlaceList.map((item, key) => (
+          <PlaceCard key={key} adminPlace={item} />
+        ))}
+      </div>
       <div className="managePlace-btn__container">
         <button className="addPlace-btn" onClick={onClickAddPlaceBtn}>
           공간추가

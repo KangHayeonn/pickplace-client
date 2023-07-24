@@ -43,9 +43,6 @@ const DetailHeader = ({
                 리뷰 작성하기
               </span>
             ))}
-          {reservationStatus == '이용 전' && (
-            <span className="review">예약 취소</span>
-          )}
         </p>
       </div>
     </div>

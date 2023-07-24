@@ -84,7 +84,6 @@ const ManageReservationDetail = () => {
               adminReservationDetail.reservation.reservationStatus
             }
             onClickAcceptBtn={onClickAcceptBtn}
-            onClickRefuseBtn={onClickRefuseBtn}
           />
         </div>
       </div>

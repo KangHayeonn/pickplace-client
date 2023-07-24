@@ -21,9 +21,7 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('예약수락');
   };
-  const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약취소');
-  };
+
   return (
     <div
       className="reservedCard-container"
@@ -58,7 +56,6 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
         <ReservationBtns
           reservationStatus={adminReservationProps.reservationStatus}
           onClickAcceptBtn={onClickAcceptBtn}
-          onClickRefuseBtn={onClickRefuseBtn}
         />
       </div>
     </div>

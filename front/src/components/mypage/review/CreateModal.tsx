@@ -5,7 +5,8 @@ import ReviewModalHeader from './ReviewModalHeader';
 import StarRate from '../../../components/common/StarRate';
 import CheckIcon from '../../../assets/images/check.svg';
 import { reservationDetail } from '../../../utils/mock/reservationDetail';
-import '../../../styles/components/mypage/review/updateModal.scss';
+import '../../../styles/components/mypage/review/reviewModal.scss';
+import Review from '../../../api/review';
 
 interface CreateModalProps {
   reservationId: number;
@@ -23,7 +24,6 @@ const CreateModal = ({
     if (reviewContent.length <= 500)
       setReviewContent(e.currentTarget.value.substring(0, 500));
   };
-
   const onClickClose = () => {
     if (
       window.confirm(
@@ -33,14 +33,34 @@ const CreateModal = ({
       setCreateModalOpen(false);
     }
   };
-
   const onClickStar = (rate: number) => {
     setStarRate(rate);
+  };
+  const onCreateBtnClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (starRate == 0) {
+      window.alert('별점을 입력해주세요.');
+    } else if (reviewContent == '') {
+      window.alert('리뷰 내용을 입력해주세요');
+    } else {
+      const data = {
+        reservationId: reservationId,
+        content: reviewContent,
+        rating: starRate,
+      };
+      Review.v1CreateReview(data)
+        .then((res) => {
+          setCreateModalOpen(false);
+          document.body.style.overflow = 'unset';
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
   };
 
   return (
     <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
-      <div className="UpdateModal-container">
+      <div className="ReviewModal-container">
         <ReviewModalHeader
           placeAddress={resevationInfo.placeAddress.address}
           startDate={resevationInfo.startDate}
@@ -48,21 +68,29 @@ const CreateModal = ({
           startTime={resevationInfo.startTime}
           endTime={resevationInfo.endTime}
         />
-        <div className="UpdateModal-content">
-          <div className="UpdateModal-starRate__container">
+        <div className="ReviewModal-content">
+          <div className="ReviewModal-starRate__container">
             <StarRate onClickStar={onClickStar} />
             {starRate != 0 && <img src={CheckIcon} alt="checked icon" />}
           </div>
-          <div className="UpdateModal-textArea__container">
+          <div className="ReviewModal-textArea__container">
             <textarea
-              className="UpdateModal-textArea"
+              className="ReviewModal-textArea"
               onChange={onChangeContent}
               value={reviewContent}
             />
-            <div className="UpdateModal-count__container">
+            <div className="ReviewModal-count__container">
               <span>{reviewContent.length}/500</span>
             </div>
           </div>
+        </div>
+        <div className="ReviewModal-btn__container">
+          <button
+            className="ReviewModal-submitBtn"
+            onClick={onCreateBtnClicked}
+          >
+            작성완료
+          </button>
         </div>
       </div>
     </ModalForm>

@@ -19,9 +19,6 @@ const ResevationCard = ({ reservationProps }: cardProps) => {
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCreateModalOpen(true);
   };
-  const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약취소');
-  };
   return (
     <div className="reservationCard-container" key={reservationProps.placeId}>
       {createModalOpen && (
@@ -77,11 +74,6 @@ const ResevationCard = ({ reservationProps }: cardProps) => {
                 리뷰 작성하기
               </span>
             ))}
-          {reservationProps.reservationStatus == '이용 전' && (
-            <span className="reservationCard-review" onClick={onClickRefuseBtn}>
-              예약 취소
-            </span>
-          )}
         </div>
       </div>
     </div>

@@ -41,7 +41,6 @@ const ManagePlaceDetail = () => {
         return Promise.reject(err);
       });
   };
-
   const getAdminDetailReservation = () => {
     Admin.v1GetPlaceDetailResevations(state.placeId)
       .then((res) => {
@@ -51,7 +50,6 @@ const ManagePlaceDetail = () => {
         return Promise.reject(err);
       });
   };
-
   const onClickHeaderBtn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setClickedMenu(parseInt(e.currentTarget.value));
   };
@@ -80,7 +78,7 @@ const ManagePlaceDetail = () => {
         <PlaceHeader
           placeName={state.placeName}
           placePhone={state.placePhone}
-          address={state.placeAddress.address}
+          address={state.placeAddress}
         />
       </div>
       <div className="managePlace-detail__btn--container">
