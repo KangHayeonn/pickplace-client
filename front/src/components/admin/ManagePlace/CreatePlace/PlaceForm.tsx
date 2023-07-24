@@ -25,7 +25,7 @@ const PlaceForm = ({
         <TextField
           onChangeText={onPhoneChange}
           value={newPlaceInfo.phone}
-          placeholder={'010-1234-5678'}
+          placeholder={'- 없이 숫자만 입력해주세요.'}
         />
       </div>
     </div>

@@ -22,7 +22,7 @@
 
     .placeCard-img__container{
         @include background-default-small();
-        min-width: 220px;
+        min-width: 180px;
         width: 30%;
         height : 100%;
     }
@@ -37,7 +37,6 @@
         }
         .address{
             @include line-clamp-ellipsis1();
- 
         }
         span{
             font-size: 15px;

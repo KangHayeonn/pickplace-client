@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PlaceForm from './CreatePlace/PlaceForm';
 import AddressForm from './CreatePlace/AddressForm';
@@ -17,6 +17,7 @@ import {
   adminRoomList,
 } from '../../../utils/mock/adminPlaceList';
 import { confirmToAddRoom, confirmToPost } from './PlaceManageFunc';
+import Admin from '../../../api/admin';
 
 const UpdatePlace = () => {
   const navigate = useNavigate();
