@@ -35,7 +35,9 @@ const SearchResult = ({
                   src={starIcon}
                   alt="Star Icon"
                 />
-                <span className="searchResult-rate">{item.placeRating}</span>
+                <span className="searchResult-rate">
+                  {isNaN(item.placeRating) ? 0 : item.placeRating}
+                </span>
                 <span className="searchResult-review">
                   리뷰 {item.placeReviewCnt}
                 </span>

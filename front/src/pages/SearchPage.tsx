@@ -76,8 +76,8 @@ const SearchPage = () => {
       address: searchForm.address,
       x: searchForm.x,
       y: searchForm.y,
-      startDate: searchForm.startDate,
-      endDate: searchForm.endDate,
+      startDate: searchForm.startDate.replaceAll('-', '.'),
+      endDate: searchForm.endDate.replaceAll('-', '.'),
       distance: searchForm.distance,
       searchType: searchType ? searchType : searchForm.searchType,
       pageProps: {
@@ -104,8 +104,8 @@ const SearchPage = () => {
       address: searchForm.address,
       x: searchForm.x,
       y: searchForm.y,
-      startDate: searchForm.startDate,
-      endDate: searchForm.endDate,
+      startDate: searchForm.startDate.replaceAll('-', '.'),
+      endDate: searchForm.endDate.replaceAll('-', '.'),
       distance: searchForm.distance,
       searchType: item?.searchType ? item.searchType : searchForm.searchType,
       pageProps: {
