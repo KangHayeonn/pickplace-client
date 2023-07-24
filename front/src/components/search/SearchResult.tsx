@@ -12,7 +12,7 @@ const SearchResult = ({
   getSearchDataWithOptions,
 }: searchResultProps) => {
   // const fetchMoreItems = async () => {
-  //   const nextList = getSearchDataWithOptions(pageNum + 1);
+  //   const nextList = getSearchDataWithOptions({ newPageNum: pageNum + 1 });
   //   // setSearchResult(nextList);
   // };
 

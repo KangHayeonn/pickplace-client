@@ -10,7 +10,6 @@ import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
-import { categoryList } from '../utils/mock/categoryList';
 import { markerList } from '../utils/mock/markerList';
 import * as type from '../components/search/types';
 
@@ -27,9 +26,7 @@ const SearchPage = () => {
     searchType: '추천순',
   };
   const defaultOptionForm = {
-    category: state
-      ? state
-      : { name: categoryList[0].name, id: categoryList[0].id },
+    category: state,
     userCnt: 1,
     tagList: [],
   };
@@ -53,12 +50,12 @@ const SearchPage = () => {
     getCategoryData();
   }, []);
 
-  const getCategoryData = async () => {
+  const getCategoryData = async (searchType?: string) => {
     const data = {
       address: defaultSearchFrom.address,
       x: defaultSearchFrom.x,
       y: defaultSearchFrom.y,
-      searchType: defaultSearchFrom.searchType,
+      searchType: searchType ? searchType : searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
         pageNum: pageNum,
@@ -74,7 +71,7 @@ const SearchPage = () => {
         return Promise.reject(err);
       });
   };
-  const getSearchData = () => {
+  const getSearchData = (searchType?: string) => {
     const data = {
       address: searchForm.address,
       x: searchForm.x,
@@ -82,7 +79,7 @@ const SearchPage = () => {
       startDate: searchForm.startDate,
       endDate: searchForm.endDate,
       distance: searchForm.distance,
-      searchType: searchForm.searchType,
+      searchType: searchType ? searchType : searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
         pageNum: pageNum,
@@ -98,7 +95,10 @@ const SearchPage = () => {
         return Promise.reject(err);
       });
   };
-  const getSearchDataWithOptions = (newPageNum?: number) => {
+  const getSearchDataWithOptions = (item?: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => {
     let newList: type.searchResultListProps[] = [];
     const data = {
       address: searchForm.address,
@@ -107,10 +107,10 @@ const SearchPage = () => {
       startDate: searchForm.startDate,
       endDate: searchForm.endDate,
       distance: searchForm.distance,
-      searchType: searchForm.searchType,
+      searchType: item?.searchType ? item.searchType : searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
-        pageNum: newPageNum ? newPageNum : pageNum,
+        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
       },
       category: optionForm.category.name,
       userCnt: optionForm.userCnt,
@@ -119,7 +119,7 @@ const SearchPage = () => {
     Search.getSearchDataWithOptions(data)
       .then((res) => {
         setHasNext(res.data.data.hasNext);
-        if (newPageNum === undefined) {
+        if (item?.newPageNum === undefined) {
           setSearchResult(res.data.data.placeList);
         } else {
           newList = res.data.data.placeList;
@@ -185,12 +185,12 @@ const SearchPage = () => {
         searchForm.startDate == defaultSearchFrom.startDate &&
         searchForm.endDate == defaultSearchFrom.endDate
       ) {
-        getCategoryData();
+        getCategoryData(e.currentTarget.value);
       } else {
-        getSearchData();
+        getSearchData(e.currentTarget.value);
       }
     } else {
-      getSearchDataWithOptions();
+      getSearchDataWithOptions({ searchType: e.currentTarget.value });
     }
   };
   const checkAddressExist = () => {

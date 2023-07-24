@@ -18,6 +18,8 @@
 
         .col-1.placeName{
             margin : 0;
+            text-align: left;
+            @include line-clamp-ellipsis1();
         }
         .row.top{   
             min-height: 105px;      
