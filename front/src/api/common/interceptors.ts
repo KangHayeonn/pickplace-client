@@ -12,7 +12,7 @@ export const setInterceptors = (instance: AxiosInstance) => {
       const token = getAccessToken();
 
       if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        config.headers['AccessToken'] = `${token}`;
       }
 
       return config;
