@@ -15,19 +15,14 @@
             align-items: center;
             margin : 40px 0 60px 0 ;
             button{
-                min-width :60px;
+                min-width :80px;
                 margin : 5px;
-                padding : 5px;
-                font-size: 11px;
-                cursor: pointer;  
-                border : $border-button;         
-                border-radius: $border-radius-button;
-                background-color: $color-surface-white;
+                padding : 7px 15px;
+                font-size: 13px;
+                font-weight: 500;
+                @include button-white();                
                 &:hover {
-                    background-color: $color-gray;
-                    color: $color-text-black;
-                    border: $border-button-hover;
-                    box-shadow: $shadow-button-hover;
+                    @include button-hover-gray();
                 }
             }
         }

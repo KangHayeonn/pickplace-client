@@ -3,7 +3,7 @@ import starIcon from '../../assets/images/star-full.svg';
 import { searchResultProps } from './types';
 import '../../styles/components/search/searchResult.scss';
 import useIntersectionObserver from './useIntersectionObserver';
-
+import { useNavigate } from 'react-router-dom';
 const SearchResult = ({
   searchResult,
   hasNext,
@@ -11,6 +11,8 @@ const SearchResult = ({
   setSearchResult,
   getSearchDataWithOptions,
 }: searchResultProps) => {
+  const navigate = useNavigate();
+
   // const fetchMoreItems = async () => {
   //   const nextList = getSearchDataWithOptions({ newPageNum: pageNum + 1 });
   //   // setSearchResult(nextList);
@@ -22,11 +24,20 @@ const SearchResult = ({
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
+  const onResultCardClick = (placeId: number) => {
+    return (e: React.MouseEvent<HTMLDivElement>) => {
+      navigate(`/search/:${placeId}/detail`);
+    };
+  };
   return (
     <div className="searchResult-container">
       {searchResult.length > 0 ? (
         searchResult.map((item, key) => (
-          <div key={key} className="searchResult-card__component">
+          <div
+            key={key}
+            className="searchResult-card__component"
+            onClick={onResultCardClick(item.placeId)}
+          >
             <div className="row top">
               <h1 className="col-1 placeName">{item.placeName}</h1>
               <div className="col-2">

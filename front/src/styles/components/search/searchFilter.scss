@@ -9,16 +9,10 @@
 
     .search-tabBtns__mapBtn{
         margin-left : 1.5vw;
-        cursor: pointer;  
-        border : $border-button;         
-        border-radius: $border-radius-button;
-        background-color: $color-surface-white;
+        @include button-white();                
         padding: 5px 15px;
         &:hover {
-            background-color: $color-hover;
-            color: $color-text-white;
-            border: $border-button-hover;
-            box-shadow: $shadow-button-hover;
+            @include button-hover-gray();
         }
     }
 }

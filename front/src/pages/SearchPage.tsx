@@ -11,6 +11,7 @@ import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
 import { markerList } from '../utils/mock/markerList';
+import { categoryList } from '../utils/mock/categoryList';
 import * as type from '../components/search/types';
 
 const SearchPage = () => {
@@ -26,7 +27,7 @@ const SearchPage = () => {
     searchType: '추천순',
   };
   const defaultOptionForm = {
-    category: state,
+    category: state ? state : categoryList[0],
     userCnt: 1,
     tagList: [],
   };
