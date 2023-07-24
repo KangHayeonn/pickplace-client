@@ -4,15 +4,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    margin: 43px 73px;
+    margin: 43px 73px 80px;
 
     &__field {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 350px;
+        width: 400px;
         margin-bottom: 9px;
+
+        &.role > div {
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
 
         &.btn {
             width: 300px;
@@ -24,5 +28,47 @@
             margin-bottom: 10px;
             font-weight: 600;
         }
+
+        &-error {
+            display: flex;
+            width: 100%;
+            height: 1.5rem;
+            align-items: flex-end;
+            justify-content: center;
+            .error {
+                @include text-overline();
+                color: $color-error;
+            }
+        }
+    }
+
+    .error {
+        @include text-overline();
+        color: $color-error;
+    }
+}
+
+.email-check {
+    display: flex;
+    width: 100%;
+
+    & > div {
+        width: 100%;
+        min-width: 15rem;
+    }
+
+    & > button {
+        width: 8rem;
+        height: 2.6rem;
+        line-height: 1.5rem;
+        padding: 7px 10px;
+        margin-left: 10px;
+    }
+
+    &__btn {
+        width: 2rem;
+        min-width: 2rem;
+        padding: 12px 10px;
+        margin-left: 10px;
     }
 }
