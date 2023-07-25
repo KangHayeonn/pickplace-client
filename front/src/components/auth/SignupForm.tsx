@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import TextField from '../common/TextField';
 import TextButton from '../common/TextButton';
@@ -10,12 +11,14 @@ import RadioButton from '../../components/common/RadioButton';
 import { validPasswordReg } from '../../utils/func/ValidFunc';
 import { validationSignup } from '../../utils/func/SingupFunc';
 import { SignupRequestType } from '../../api/auth/types';
+import { showToast } from '../../store/modules/common';
 import { ErrorType } from './types';
 // api
 import Api from '../../api/auth';
 
 const SignupForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [signupInfo, setSignupInfo] = useState<SignupRequestType>({
     email: '',
     nickname: '',
@@ -164,6 +167,7 @@ const SignupForm = () => {
     await Api.v1Signup(signupInfo)
       .then((res) => {
         navigate('/');
+        dispatch(showToast('회원가입에 성공하였습니다.'));
       })
       .catch((err) => {
         return Promise.reject(err);

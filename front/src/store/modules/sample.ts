@@ -1,5 +1,5 @@
 // Action Type 정의
-export const SET_INCREASE = 'mock/SET_INCREASE' as const;
+export const SET_INCREASE = 'sample/SET_INCREASE' as const;
 
 // Action 생성 함수
 export const increase = () => ({
