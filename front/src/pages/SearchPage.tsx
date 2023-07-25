@@ -10,10 +10,10 @@ import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
 import '../styles/components/search/search.scss';
-import { markerList } from '../utils/mock/markerList';
+// import { markerList } from '../utils/mock/markerList';
 import { categoryList } from '../utils/mock/categoryList';
+import { markerListType } from '../components/map/types';
 import * as type from '../components/search/types';
-
 const SearchPage = () => {
   const { state } = useLocation();
 
@@ -36,7 +36,7 @@ const SearchPage = () => {
   const [pageNum, setPageNum] = useState(0);
   const [hasNext, setHasNext] = useState(false);
   const [onMapOpen, setOnMapOpen] = useState(false);
-
+  const [markerList, setMarkerList] = useState<markerListType[]>([]);
   const [searchResult, setSearchResult] = useState<
     type.searchResultListProps[]
   >([]);
@@ -51,28 +51,43 @@ const SearchPage = () => {
     getCategoryData();
   }, []);
 
-  const getCategoryData = async (searchType?: string) => {
+  const getCategoryData = async (item?: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => {
     const data = {
       address: defaultSearchFrom.address,
       x: defaultSearchFrom.x,
       y: defaultSearchFrom.y,
-      searchType: searchType ? searchType : searchForm.searchType,
+      searchType: item?.searchType ? item.searchType : searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
-        pageNum: pageNum,
+        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
       },
       category: optionForm.category.name,
     };
     await Search.getCategoryData(data)
       .then((res) => {
-        setSearchResult(res.data.data.placeList);
         setHasNext(res.data.data.hasNext);
+        if (item?.newPageNum === undefined) {
+          setSearchResult(res.data.data.placeList);
+        } else {
+          if (item.newPageNum == 0) {
+            setSearchResult(res.data.data.placeList);
+          } else {
+            setSearchResult([...searchResult, ...res.data.data.placeList]);
+          }
+          setPageNum(item.newPageNum);
+        }
       })
       .catch((err) => {
         return Promise.reject(err);
       });
   };
-  const getSearchData = (searchType?: string) => {
+  const getSearchData = (item?: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => {
     const data = {
       address: searchForm.address,
       x: searchForm.x,
@@ -80,17 +95,27 @@ const SearchPage = () => {
       startDate: searchForm.startDate.replaceAll('-', '.'),
       endDate: searchForm.endDate.replaceAll('-', '.'),
       distance: searchForm.distance,
-      searchType: searchType ? searchType : searchForm.searchType,
+      searchType: item?.searchType ? item.searchType : searchForm.searchType,
       pageProps: {
         countPerPage: countPerPage,
-        pageNum: pageNum,
+        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
       },
       category: optionForm.category.name,
     };
     Search.getSearchData(data)
       .then((res) => {
-        setSearchResult(res.data.data.placeList);
         setHasNext(res.data.data.hasNext);
+        if (item?.newPageNum === undefined) {
+          setSearchResult(res.data.data.placeList);
+          setPageNum(0);
+        } else {
+          if (item.newPageNum == 0) {
+            setSearchResult(res.data.data.placeList);
+          } else {
+            setSearchResult([...searchResult, ...res.data.data.placeList]);
+          }
+          setPageNum(item.newPageNum);
+        }
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -100,7 +125,6 @@ const SearchPage = () => {
     newPageNum?: number;
     searchType?: string;
   }) => {
-    let newList: type.searchResultListProps[] = [];
     const data = {
       address: searchForm.address,
       x: searchForm.x,
@@ -122,22 +146,45 @@ const SearchPage = () => {
         setHasNext(res.data.data.hasNext);
         if (item?.newPageNum === undefined) {
           setSearchResult(res.data.data.placeList);
+          setPageNum(0);
         } else {
-          newList = res.data.data.placeList;
+          if (item.newPageNum == 0) {
+            setSearchResult(res.data.data.placeList);
+          } else {
+            setSearchResult([...searchResult, ...res.data.data.placeList]);
+          }
+          setPageNum(item.newPageNum);
         }
       })
       .catch((err) => {
         return Promise.reject(err);
       });
-    return newList;
   };
   const onCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'unset';
     setOnMapOpen(false);
   };
-  const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onOpenMapModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'hidden';
     setOnMapOpen(true);
+
+    const newMarkerList: markerListType[] = [];
+    document.querySelectorAll('.active').forEach((item) => {
+      const tagList = item.attributes.getNamedItem('data-tag')?.nodeValue;
+      const placeDetail = {
+        lat: Number(item.attributes.getNamedItem('data-lat')?.nodeValue),
+        lng: Number(item.attributes.getNamedItem('data-lng')?.nodeValue),
+        id: Number(item.attributes.getNamedItem('data-id')?.nodeValue),
+        name: item.attributes.getNamedItem('data-name')?.nodeValue || '',
+        category:
+          item.attributes.getNamedItem('data-category')?.nodeValue || '',
+        // tag: tagList,
+      };
+
+      const marker = placeDetail;
+      newMarkerList.push(marker);
+    });
+    setMarkerList(newMarkerList);
   };
   const onChangeAddress = (address: string, x: string, y: string) => {
     setSearchForm({
@@ -181,17 +228,16 @@ const SearchPage = () => {
       searchType: e.currentTarget.value,
     });
     if (checkOptionFormIsEmpty()) {
-      if (
-        searchForm.address == defaultSearchFrom.address &&
-        searchForm.startDate == defaultSearchFrom.startDate &&
-        searchForm.endDate == defaultSearchFrom.endDate
-      ) {
-        getCategoryData(e.currentTarget.value);
+      if (checkSearchFormIsEmpty()) {
+        getCategoryData({ searchType: e.currentTarget.value, newPageNum: 0 });
       } else {
-        getSearchData(e.currentTarget.value);
+        getSearchData({ searchType: e.currentTarget.value, newPageNum: 0 });
       }
     } else {
-      getSearchDataWithOptions({ searchType: e.currentTarget.value });
+      getSearchDataWithOptions({
+        searchType: e.currentTarget.value,
+        newPageNum: 0,
+      });
     }
   };
   const checkAddressExist = () => {
@@ -200,6 +246,15 @@ const SearchPage = () => {
       return false;
     }
     return true;
+  };
+  const checkSearchFormIsEmpty = () => {
+    if (
+      searchForm.address == defaultSearchFrom.address &&
+      searchForm.startDate == defaultSearchFrom.startDate &&
+      searchForm.endDate == defaultSearchFrom.endDate
+    )
+      return true;
+    return false;
   };
   const checkOptionFormIsEmpty = () => {
     if (
@@ -212,17 +267,19 @@ const SearchPage = () => {
     return false;
   };
   const onSearchBtnClick = () => {
-    checkOptionFormIsEmpty() && checkAddressExist() && getSearchData();
+    checkOptionFormIsEmpty() &&
+      checkAddressExist() &&
+      getSearchData({ newPageNum: 0 });
     !checkOptionFormIsEmpty() &&
       checkAddressExist() &&
-      getSearchDataWithOptions();
+      getSearchDataWithOptions({ newPageNum: 0 });
   };
   const onSearchWithOptionBtnClick = () => {
-    checkAddressExist() && getSearchDataWithOptions();
+    checkAddressExist() && getSearchDataWithOptions({ newPageNum: 0 });
   };
   return (
     <div className="search">
-      {onMapOpen && (
+      {onMapOpen && markerList && (
         <MapModal onCloseModal={onCloseModal} mapList={markerList} />
       )}
       <SearchHeader
@@ -248,7 +305,7 @@ const SearchPage = () => {
         <section>
           <div className="search-tabBtns">
             <SearchFilter onClickFilterButton={onClickFilterButton} />
-            <button className="search-tabBtns__mapBtn" onClick={onOpenModal}>
+            <button className="search-tabBtns__mapBtn" onClick={onOpenMapModal}>
               지도
             </button>
           </div>
@@ -257,7 +314,10 @@ const SearchPage = () => {
             searchResult={searchResult}
             pageNum={pageNum}
             hasNext={hasNext}
-            setSearchResult={setSearchResult}
+            checkOptionFormIsEmpty={checkOptionFormIsEmpty}
+            checkSearchFormIsEmpty={checkSearchFormIsEmpty}
+            getCategoryData={getCategoryData}
+            getSearchData={getSearchData}
             getSearchDataWithOptions={getSearchDataWithOptions}
           />
         </section>

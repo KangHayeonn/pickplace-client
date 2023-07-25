@@ -3,6 +3,6 @@ export interface markerListType {
   lng: number;
   name: string;
   id: number;
-  category: string;
-  tag: string[];
+  category?: string;
+  tag?: string[];
 }

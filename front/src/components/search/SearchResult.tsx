@@ -1,28 +1,45 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import starIcon from '../../assets/images/star-full.svg';
 import { searchResultProps } from './types';
 import '../../styles/components/search/searchResult.scss';
 import useIntersectionObserver from './useIntersectionObserver';
+import useViewportObserver from './useViewportObserver';
 import { useNavigate } from 'react-router-dom';
+
 const SearchResult = ({
   searchResult,
   hasNext,
   pageNum,
-  setSearchResult,
+  checkOptionFormIsEmpty,
+  checkSearchFormIsEmpty,
+  getCategoryData,
+  getSearchData,
   getSearchDataWithOptions,
 }: searchResultProps) => {
   const navigate = useNavigate();
 
-  // const fetchMoreItems = async () => {
-  //   const nextList = getSearchDataWithOptions({ newPageNum: pageNum + 1 });
-  //   // setSearchResult(nextList);
-  // };
-
-  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    // isIntersecting && hasNext && fetchMoreItems();
+  const fetchMoreItems = async () => {
+    if (checkOptionFormIsEmpty()) {
+      if (checkSearchFormIsEmpty()) {
+        getCategoryData({ newPageNum: pageNum + 1 });
+      } else {
+        getSearchData({ newPageNum: pageNum + 1 });
+      }
+    } else {
+      getSearchDataWithOptions({ newPageNum: pageNum + 1 });
+    }
   };
-
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    isIntersecting && hasNext && fetchMoreItems();
+  };
   const { setTarget } = useIntersectionObserver({ onIntersect });
+
+  const onIntersectViewport: IntersectionObserverCallback = ([
+    { isIntersecting },
+  ]) => {
+    isIntersecting;
+  };
+  const { setShownCard } = useViewportObserver({ onIntersectViewport });
 
   const onResultCardClick = (placeId: number) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
@@ -35,8 +52,16 @@ const SearchResult = ({
         searchResult.map((item, key) => (
           <div
             key={key}
+            id={key.toString()}
+            data-id={item.placeId}
+            data-name={item.placeName}
+            data-lat={item.placeAddress.latitude}
+            data-lng={item.placeAddress.longitude}
+            data-category={item.category}
+            data-tag={item.tagList}
             className="searchResult-card__component"
             onClick={onResultCardClick(item.placeId)}
+            ref={setShownCard}
           >
             <div className="row top">
               <h1 className="col-1 placeName">{item.placeName}</h1>

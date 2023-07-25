@@ -1,21 +1,23 @@
-export const markerHtml = (name: string, category: string, tag: string[]) => {
+export const markerHtml = (name: string, category?: string, tag?: string[]) => {
   // parameter로 이미지 src 받기
   return `
             <div 
                 className="marker-container"
-                style="background-color:white;
-                height : 130px; 
-                width : 100px;
-                border-radius : 10px;
-                padding : 10px 0;
-                border:1px solid black;"
+                style="
+                    background-color:white;
+                    max-height : 130px; 
+                    width : 100px;
+                    border-radius : 10px;
+                    padding : 10px 0;
+                    border:1px solid black;
+                "
             >
                 <div 
                     className="img-container"
                     style="margin : auto; 
                     background-color:lightgray; 
                     width : 70%; 
-                    height : 50%;"
+                    height : 70px;"
                 >
                 </div>
                 <div 
@@ -41,13 +43,18 @@ export const markerHtml = (name: string, category: string, tag: string[]) => {
                 </div>
                 <p className="tag-container"
                     style="
+                        max-height : 30px;
                         font-size: 12px; 
                         margin : 5px; 
                         line-height:15px;
                     ">
-                    ${category}
-                    <span style="color: cadetblue;">#${tag[0]}</span>
-                    <span style="color: seagreen;">#${tag[1]}</span>
+                    ${category ? category : ''}
+                    <span style="color: cadetblue;">${
+                      tag ? '#' + tag[0] : ''
+                    }</span>
+                    <span style="color: seagreen;">${
+                      tag ? '#' + tag[1] : ''
+                    }</span>
                 </p>
             </div>
         `;
