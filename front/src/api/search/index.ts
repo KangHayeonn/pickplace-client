@@ -31,9 +31,9 @@ const Search = {
         address: data.address,
         x: data.x,
         y: data.y,
-        startDate: data.startDate.replaceAll('-', '.'),
-        endDate: data.endDate.replaceAll('-', '.'),
-        distance: data.distance,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        distance: data.distance * 1000,
         searchType: data.searchType,
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
@@ -51,9 +51,9 @@ const Search = {
         address: data.address,
         x: data.x,
         y: data.y,
-        startDate: data.startDate.replaceAll('-', '.'),
-        endDate: data.endDate.replaceAll('-', '.'),
-        distance: data.distance,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        distance: data.distance * 1000,
         searchType: data.searchType,
         countPerPage: data.pageProps.countPerPage,
         pageNum: data.pageProps.pageNum,
@@ -61,7 +61,6 @@ const Search = {
         userCnt: data.userCnt,
         tagList: data.tagList,
       });
-
       return result;
     } catch (error) {
       return Promise.reject(error);

@@ -8,16 +8,19 @@
     padding : 0 10px;
     height :490px;
     .searchResult-card__component{
+        @include background-default-small();;
         color : white;
         border-radius: 20px;
         height : 150px;
         background-color: rgb(148, 153, 156);
-        @include background-default-small();;
         padding : 0 20px;
-        margin : 10px 5px;                            
+        margin : 10px 5px;        
+        cursor: pointer;                    
 
         .col-1.placeName{
             margin : 0;
+            text-align: left;
+            @include line-clamp-ellipsis1();
         }
         .row.top{   
             min-height: 105px;      

@@ -6,9 +6,9 @@ import RadioButton from '../common/RadioButton';
 
 const SearchFilter = ({ onClickFilterButton }: searchFilterProps) => {
   const filter = [
-    { value: 'recommend', name: '추천순', defaultChecked: true },
-    { value: 'asc', name: '낮은가격순' },
-    { value: 'desc', name: '높은가격순' },
+    { value: '추천순', name: '추천순', defaultChecked: true },
+    { value: '낮은가격순', name: '낮은가격순' },
+    { value: '높은가격순', name: '높은가격순' },
   ];
   return (
     <RadioGroup onRadioChange={onClickFilterButton}>

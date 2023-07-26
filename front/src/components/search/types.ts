@@ -80,5 +80,8 @@ export type searchResultProps = {
   setSearchResult: React.Dispatch<
     React.SetStateAction<searchResultListProps[]>
   >;
-  getSearchDataWithOptions: (newPageNum?: number) => searchResultListProps[];
+  getSearchDataWithOptions: (item: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => searchResultListProps[];
 };
