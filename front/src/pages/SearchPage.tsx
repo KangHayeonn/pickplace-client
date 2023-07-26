@@ -9,11 +9,11 @@ import SearchFilter from '../components/search/SearchFilter';
 import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
-import '../styles/components/search/search.scss';
-// import { markerList } from '../utils/mock/markerList';
 import { categoryList } from '../utils/mock/categoryList';
 import { markerListType } from '../components/map/types';
 import * as type from '../components/search/types';
+import '../styles/components/search/search.scss';
+
 const SearchPage = () => {
   const { state } = useLocation();
 

@@ -67,9 +67,7 @@ const Map = ({ width, height, markerList }: mapProps) => {
     }
 
     const getClickHandler = (seq: number) => {
-      return () => {
-        navigate(`/search/:${markerList[seq].id}/detail`);
-      };
+      return () => navigate(`/search/:${markerList[seq].id}/detail`);
     };
 
     for (let i = 0; i < markers.length; i++) {

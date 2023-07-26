@@ -1,10 +1,11 @@
 import React from 'react';
-import starIcon from '../../assets/images/star-full.svg';
-import { searchResultProps } from './types';
-import '../../styles/components/search/searchResult.scss';
+import { useNavigate } from 'react-router-dom';
 import useIntersectionObserver from './useIntersectionObserver';
 import useViewportObserver from './useViewportObserver';
-import { useNavigate } from 'react-router-dom';
+
+import { searchResultProps } from './types';
+import starIcon from '../../assets/images/star-full.svg';
+import '../../styles/components/search/searchResult.scss';
 
 const SearchResult = ({
   searchResult,
