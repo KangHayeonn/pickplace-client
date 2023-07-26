@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import sample from './sample';
 import auth from './auth';
+import common from './common';
 
 const rootReducer = combineReducers({
   sample,
   auth,
+  common,
 });
 
 // root reducer
