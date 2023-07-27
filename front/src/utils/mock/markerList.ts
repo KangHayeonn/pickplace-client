@@ -12,7 +12,7 @@ export const markerList = [
     lat: 126.981075,
     name: '신라스테이 광화문',
     id: 20,
-    category: '호텔·리조트',
+    category: '파티룸',
     tag: ['가족추천', '편안한'],
   },
   {
@@ -20,7 +20,7 @@ export const markerList = [
     lat: 126.975404,
     name: '포시즌스호텔',
     id: 30,
-    category: '호텔·리조트',
+    category: '게스트하우스',
     tag: ['연인추천', '신나는'],
   },
   {
@@ -28,7 +28,7 @@ export const markerList = [
     lat: 126.989327,
     name: 'MOXY',
     id: 40,
-    category: '호텔·리조트',
+    category: '펜션',
     tag: ['친구추천', '신나는'],
   },
 ];

@@ -1,16 +1,7 @@
-import studyRoomImg from '../../assets/images/place-default-small.svg';
-import guestHouseImg from '../../assets/images/place-guestHouse-img.svg';
-import pensionImg from '../../assets/images/place-pension-img.svg';
-import partyRoomImg from '../../assets/images/place-partyRoom-img.svg';
-import hotelImg from '../../assets/images/place-hotel-img.svg';
+import { GetCategoryImage } from '../common/GetCategoryImage';
 
 export const markerHtml = (name: string, category?: string, tag?: string[]) => {
-  let img = hotelImg;
-  if (category == '호텔·리조트') img = hotelImg;
-  else if (category == '펜션') img = pensionImg;
-  else if (category == '게스트하우스') img = guestHouseImg;
-  else if (category == '파티룸') img = partyRoomImg;
-  else if (category == '스터디룸') img = studyRoomImg;
+  const img = GetCategoryImage(category ? category : '호텔·리조트');
 
   return `
             <div 
