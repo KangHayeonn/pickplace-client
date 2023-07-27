@@ -71,11 +71,8 @@ export interface searchResultListProps {
   };
   placeRating: number;
   placeReviewCnt: number;
-  category: {
-    name: string;
-    id: number;
-  };
-  tagList: string[];
+  category: string;
+  tags: string[];
 }
 
 export type searchResultProps = {

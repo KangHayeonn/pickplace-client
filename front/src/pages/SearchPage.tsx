@@ -170,7 +170,7 @@ const SearchPage = () => {
 
     const newMarkerList: markerListType[] = [];
     document.querySelectorAll('.active').forEach((item) => {
-      const tagList = item.attributes.getNamedItem('data-tag')?.nodeValue;
+      const tags = item.attributes.getNamedItem('data-tag')?.nodeValue;
       const placeDetail = {
         lat: Number(item.attributes.getNamedItem('data-lat')?.nodeValue),
         lng: Number(item.attributes.getNamedItem('data-lng')?.nodeValue),
@@ -178,9 +178,8 @@ const SearchPage = () => {
         name: item.attributes.getNamedItem('data-name')?.nodeValue || '',
         category:
           item.attributes.getNamedItem('data-category')?.nodeValue || '',
-        // tag: tagList,
+        tag: tags ? tags.split(',') : [''],
       };
-
       const marker = placeDetail;
       newMarkerList.push(marker);
     });

@@ -1,14 +1,13 @@
 import { GetCategoryImage } from '../common/GetCategoryImage';
 
-export const markerHtml = (name: string, category?: string, tag?: string[]) => {
-  const img = GetCategoryImage(category ? category : '호텔·리조트');
-
+export const markerHtml = (name: string, category: string, tag: string[]) => {
+  const img = GetCategoryImage(category);
   return `
             <div 
                 className="marker-container"
                 style="
                     background-color:white;
-                    max-height : 135px; 
+                    max-height : 150px; 
                     width : 100px;
                     border-radius : 10px;
                     padding : 12px 0;
@@ -39,11 +38,7 @@ export const markerHtml = (name: string, category?: string, tag?: string[]) => {
                         "
                     /> 
                 </div>
-                <div 
-                    style="
-                        max-height : 33px; 
-                    "
-                >
+                <div>
                     <h5 
                         style="
                             margin : 5px 3px;   
@@ -65,11 +60,17 @@ export const markerHtml = (name: string, category?: string, tag?: string[]) => {
                         line-height:15px;
                     ">
                     ${category ? category : '호텔·리조트'}
-                    <span style="color: cadetblue;">#${
-                      tag ? tag[0] : '연인추천'
+                    <span style="color: cadetblue;">${
+                      tag[0] ? '#' + tag[0] : ''
                     }</span>
-                    <span style="color: seagreen;">#${
-                      tag ? tag[1] : '친구추천'
+                    <span style="color: seagreen;">${
+                      tag[1] ? '#' + tag[1] : ''
+                    }</span>
+                    <span style="color: purple;">${
+                      tag[2] ? '#' + tag[2] : ''
+                    }</span>
+                    <span style="color: navy;">${
+                      tag[3] ? '#' + tag[3] : ''
                     }</span>
                 </p>
             </div>
