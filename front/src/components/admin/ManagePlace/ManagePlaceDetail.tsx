@@ -8,7 +8,7 @@ import RoomCard from './RoomCard';
 import ReservedCard from '../../admin/ManageReservation/ReservedCard';
 
 import Admin from '../../../api/admin';
-import { roomProps, adminReservation, reservedRoom } from '../types';
+import { roomProps, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
 
@@ -63,6 +63,17 @@ const ManagePlaceDetail = () => {
       },
     });
   };
+  const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (window.confirm('정말로 해당 공간을 삭제하시겠습니까?')) {
+      Admin.v1DeletePlace(state.placeId)
+        .then((res) => {
+          navigate(`/mypage`);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
 
   return (
     <div className="managePlace-detail">
@@ -93,15 +104,24 @@ const ManagePlaceDetail = () => {
             </RadioButton>
           ))}
         </RadioGroup>
-        <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
-          공간 수정
-        </button>
+        <div className="managePlace-manage__btn--container">
+          <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
+            공간 수정
+          </button>
+          <button className="deletePlace-btn" onClick={onDeleteBtnClick}>
+            공간 삭제
+          </button>
+        </div>
       </div>
       <div className="managePlace-detail__content">
         {clickedMenu === 0 &&
           (adminRoomList && adminRoomList.length > 0 ? (
             adminRoomList.map((item, key) => (
-              <RoomCard key={key} roomProps={item} />
+              <RoomCard
+                key={key}
+                roomProps={item}
+                getAdminDetailRoom={getAdminDetailRoom}
+              />
             ))
           ) : (
             <div>

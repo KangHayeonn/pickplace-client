@@ -68,6 +68,7 @@ export type placeHeaderProps = {
 
 export type roomCardProps = {
   roomProps: roomProps;
+  getAdminDetailRoom: () => void;
 };
 
 export type updateRoomInfoProps = {
@@ -94,15 +95,15 @@ export type roomProps = {
   roomPrice: number;
   roomMaxNum: number;
   roomAmount: number;
-  roomId: undefined | number;
+  roomId: number;
 };
 
 export type placeProps = {
   placeName: string;
-  address: string;
-  phone: string;
-  x: number;
-  y: number;
+  placeAddress: string;
+  placePhone: string;
+  placeXaxis: number;
+  placeYaxis: number;
 };
 
 export type addedRoomProps = {
@@ -124,8 +125,8 @@ export type roomFormProps = {
 export type placeFormProps = {
   newPlaceInfo: {
     placeName: string;
-    address: string;
-    phone: string;
+    placeAddress: string;
+    placePhone: string;
   };
   header: string;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -135,8 +136,8 @@ export type placeFormProps = {
 export type addressFormProps = {
   newPlaceInfo: {
     placeName: string;
-    address: string;
-    phone: string;
+    placeAddress: string;
+    placePhone: string;
   };
   onAddressChange: (address: string, x: string, y: string) => void;
 };

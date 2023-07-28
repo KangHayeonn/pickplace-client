@@ -28,10 +28,10 @@ const CreatePlace = () => {
 
   const [newPlaceInfo, setNewPlaceInfo] = useState<placeProps>({
     placeName: '',
-    address: '',
-    phone: '',
-    x: 0,
-    y: 0,
+    placeAddress: '',
+    placePhone: '',
+    placeXaxis: 0,
+    placeYaxis: 0,
   });
 
   const [newRoomInfo, setNewRoomInfo] =
@@ -53,15 +53,15 @@ const CreatePlace = () => {
   const onAddressChange = (address: string, x: string, y: string) => {
     setNewPlaceInfo({
       ...newPlaceInfo,
-      address: address,
-      x: parseFloat(x),
-      y: parseFloat(y),
+      placeAddress: address,
+      placeXaxis: parseFloat(x),
+      placeYaxis: parseFloat(y),
     });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPlaceInfo({
       ...newPlaceInfo,
-      phone: e.currentTarget.value,
+      placePhone: e.currentTarget.value,
     });
   };
   const onRoomNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,11 +118,11 @@ const CreatePlace = () => {
       }
       const data = {
         place: {
-          placeAddress: newPlaceInfo.address,
+          placeAddress: newPlaceInfo.placeAddress,
           placeName: newPlaceInfo.placeName,
-          placePhone: newPlaceInfo.phone,
-          placeXaxis: newPlaceInfo.x,
-          placeYaxis: newPlaceInfo.y,
+          placePhone: newPlaceInfo.placePhone,
+          placeXaxis: newPlaceInfo.placeXaxis,
+          placeYaxis: newPlaceInfo.placeYaxis,
         },
         rooms: rooms,
         category: placeOptions.category.name,
@@ -130,12 +130,20 @@ const CreatePlace = () => {
       };
       Admin.v1CreatePlace(data)
         .then((res) => {
-          // console.log(res);
+          // console.log(res.data.data);
+          // const newState = {
+          //   placeId: res.data.placeId,
+          //   placeName: newPlaceInfo.placeName,
+          //   placeAddress: newPlaceInfo.placeAddress,
+          //   placePhone: newPlaceInfo.placePhone,
+          // };
+          // navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
+          //   state: newState,
+          // });
         })
         .catch((err) => {
           return Promise.reject(err);
         });
-      navigate('/mypage');
     }
   };
   const onClickDeleteRoomBtn = (roomId: number) => {

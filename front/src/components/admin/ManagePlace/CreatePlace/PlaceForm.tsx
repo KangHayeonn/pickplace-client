@@ -24,7 +24,7 @@ const PlaceForm = ({
         <label className="PlaceForm-textField__label">연락처</label>
         <TextField
           onChangeText={onPhoneChange}
-          value={newPlaceInfo.phone}
+          value={newPlaceInfo.placePhone}
           placeholder={'- 없이 숫자만 입력해주세요.'}
         />
       </div>
