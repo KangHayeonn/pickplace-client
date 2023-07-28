@@ -15,6 +15,8 @@ export const POST_LOGIN_ERROR = 'auth/POST_LOGIN_ERROR' as const;
 
 export const SET_LOGOUT = 'auth/SET_LOGOUT' as const;
 
+export const SET_LOGIN = 'auth/SET_LOGIN' as const;
+
 export const setLogin =
   (data: LoginRequestType) => async (dispatch: Dispatch) => {
     dispatch({ type: POST_LOGIN });
@@ -43,6 +45,10 @@ export const setLogout = () => async (dispatch: Dispatch) => {
     return Promise.reject(e);
   }
 };
+
+export const setSocialLogin = () => ({
+  type: SET_LOGIN,
+});
 
 const initialState = {
   loading: {
@@ -85,6 +91,10 @@ const authReducer = handleActions(
       },
       user: {},
       isLogin: false,
+    }),
+    [SET_LOGIN]: (state) => ({
+      ...state,
+      isLogin: true,
     }),
   },
   initialState,
