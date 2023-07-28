@@ -5,6 +5,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { LoginRequestType } from '../../api/auth/types';
 import { setLogin } from '../../store/modules/auth';
+import { showToast } from '../../store/modules/common';
 import TextField from '../common/TextField';
 import TextButton from '../common/TextButton';
 import '../../styles/components/auth/loginForm.scss';
@@ -16,6 +17,7 @@ import {
   setNickName,
   setAccessToken,
   setRefreshToken,
+  setRole,
 } from '../../utils/tokenControl';
 
 const LoginForm = () => {
@@ -45,13 +47,16 @@ const LoginForm = () => {
     await dispatch(setLogin(data))
       .then((res) => {
         if (res) {
-          const { memberId, nickname, accessToken, refreshToken } = res.member;
+          const { memberId, nickname, accessToken, refreshToken, role } =
+            res.member;
           setUserId(`${memberId}`);
           setNickName(nickname);
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
+          setRole(role);
           initForm();
           navigate('/');
+          dispatch(showToast('로그인을 성공하였습니다.'));
         }
         return;
       })

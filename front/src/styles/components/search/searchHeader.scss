@@ -61,14 +61,9 @@
                     margin : 0 5px;
                     height: 35px;
                     width : 50px;
-                    border : $border-button;         
-                    border-radius: $border-radius-button;
-                    background-color: $color-surface-white;
+                    @include button-white();                
                     &:hover {
-                        background-color: $color-gray;
-                        color: $color-text-black;
-                        border: $border-button-hover;
-                        box-shadow: $shadow-button-hover;
+                        @include button-hover-gray();
                     }
                 }
             }

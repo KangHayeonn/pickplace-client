@@ -90,9 +90,7 @@ const SamplePage = () => {
           onChangeText={onChangeMessage}
         />
       </div>
-      {isShowToast && (
-        <ToastBox text="토스트메시지" setIsShow={setIsShowToast} />
-      )}
+      {isShowToast && <ToastBox />}
       <RadioGroup onRadioChange={handleChange}>
         <RadioButton value="radio">라디오</RadioButton>
         <RadioButton value="button">버튼</RadioButton>

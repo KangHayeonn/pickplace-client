@@ -1,7 +1,7 @@
-import React from 'react';
-import { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { markerHtml } from './MarkerHtml';
 import { markerListType } from './types';
+import { useNavigate } from 'react-router-dom';
 
 type mapProps = {
   width: string;
@@ -11,6 +11,7 @@ type mapProps = {
 
 const Map = ({ width, height, markerList }: mapProps) => {
   const { naver } = window;
+  const navigate = useNavigate();
 
   const getMinLng = (markerList: markerListType[]) => {
     return Math.min.apply(
@@ -18,21 +19,18 @@ const Map = ({ width, height, markerList }: mapProps) => {
       markerList.map((item) => item.lng),
     );
   };
-
   const getMaxLng = (markerList: markerListType[]) => {
     return Math.max.apply(
       null,
       markerList.map((item) => item.lng),
     );
   };
-
   const getMinLat = (markerList: markerListType[]) => {
     return Math.min.apply(
       null,
       markerList.map((item) => item.lat),
     );
   };
-
   const getMaxLat = (markerList: markerListType[]) => {
     return Math.max.apply(
       null,
@@ -47,14 +45,13 @@ const Map = ({ width, height, markerList }: mapProps) => {
       zoomControl: true,
       scaleControl: true,
       bounds: new naver.maps.PointBounds(
-        new naver.maps.Point(getMinLng(markerList), getMinLat(markerList)),
-        new naver.maps.Point(getMaxLng(markerList), getMaxLat(markerList)),
+        new naver.maps.Point(getMinLat(markerList), getMinLng(markerList)),
+        new naver.maps.Point(getMaxLat(markerList), getMaxLng(markerList)),
       ),
     });
-
     for (let i = 0; i < markerList.length; i++) {
       const marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(markerList[i].lat, markerList[i].lng),
+        position: new naver.maps.LatLng(markerList[i].lng, markerList[i].lat),
         map,
         icon: {
           content: [
@@ -70,17 +67,14 @@ const Map = ({ width, height, markerList }: mapProps) => {
     }
 
     const getClickHandler = (seq: number) => {
-      return () => {
-        // navigate(`/detail?id={markerList[seq].id}`)
-      };
+      return () => navigate(`/search/:${markerList[seq].id}/detail`);
     };
 
     for (let i = 0; i < markers.length; i++) {
       naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
     }
   }, []);
-
-  return <div id="map" style={{ width: width, height: height }}></div>;
+  return <div id="map" style={{ width: width, height: height }} />;
 };
 
 export default Map;
