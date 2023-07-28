@@ -7,6 +7,8 @@ import {
 } from './types';
 const prefix = '/api/v1/members';
 
+export const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URL}&response_type=code&prompt=login`;
+
 const Auth = {
   // 회원가입
   async v1Signup(data: SignupRequestType) {
@@ -53,6 +55,16 @@ const Auth = {
     try {
       const url = `${prefix}/reissue`;
       const result = await instanceWithToken.post(url, data);
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+  // 카카오 소셜 로그인
+  async v1KakaoLogin(code: string) {
+    try {
+      const url = `${prefix}/kakaoLogin`;
+      const result = await instance.post(url, { code: code });
       return result;
     } catch (err) {
       return Promise.reject(err);
