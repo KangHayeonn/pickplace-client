@@ -19,6 +19,7 @@ import {
   setRefreshToken,
   setRole,
 } from '../../utils/tokenControl';
+import { KAKAO_LOGIN_URL } from '../../api/auth';
 
 const LoginForm = () => {
   // router
@@ -66,7 +67,7 @@ const LoginForm = () => {
   };
 
   const loginKakao = () => {
-    // TODO : kakao login logic
+    window.location.href = KAKAO_LOGIN_URL;
   };
 
   const loginNaver = () => {
