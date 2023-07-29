@@ -75,8 +75,7 @@ const MyReview = () => {
           getUserReviews={getUserReviews}
         />
       )}
-      {myReviewList &&
-        myReviewList.length > 0 &&
+      {myReviewList && myReviewList.length > 0 ? (
         myReviewList.map((item, key) => (
           <ReviewCard
             reviewItem={item}
@@ -85,7 +84,10 @@ const MyReview = () => {
             onDeleteBtnClick={onDeleteBtnClick}
             onUpdateBtnClick={onUpdateBtnClick}
           />
-        ))}
+        ))
+      ) : (
+        <div>리뷰가 아직 없습니다.</div>
+      )}
     </div>
   );
 };

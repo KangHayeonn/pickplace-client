@@ -22,11 +22,13 @@ const Reservation = () => {
   };
   return (
     <div className="reservation">
-      {reservationList &&
-        reservationList.length > 0 &&
+      {reservationList && reservationList.length > 0 ? (
         reservationList.map((item, key) => (
           <ResevationCard key={key} reservationProps={item} />
-        ))}
+        ))
+      ) : (
+        <div>예약 내역이 없습니다.</div>
+      )}
     </div>
   );
 };
