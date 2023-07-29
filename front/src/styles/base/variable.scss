@@ -165,8 +165,28 @@ $color-dimmed: rgba(0, 0, 0, 0.4);
     word-break: keep-all;
 }
 
+@mixin background-hotelImg{
+    background-image: url("../../../assets/images/place-hotel-img.svg");
+}
+@mixin background-pensionImg{
+    background-image: url("../../../assets/images/place-pension-img.svg");
+}
+@mixin background-guestHouseImg{
+    background-image: url("../../../assets/images/place-guestHouse-img.svg");
+}
+@mixin background-studtRoomImg{
+    background-image: url("../../assets/images/place-default-small.svg");
+}
+@mixin background-partyRoomImg{
+    background-image: url("../../../assets/images/place-partyRoom-img.svg");
+}
 @mixin background-default-small{
     background-image: url("../../assets/images/place-default-small.svg");
+    background-repeat : no-repeat;
+    background-size : cover;  
+    background-position: center; 
+}
+@mixin background-default{
     background-repeat : no-repeat;
     background-size : cover;  
     background-position: center; 

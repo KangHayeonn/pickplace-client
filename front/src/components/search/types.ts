@@ -71,17 +71,25 @@ export interface searchResultListProps {
   };
   placeRating: number;
   placeReviewCnt: number;
+  category: string;
+  tags: string[];
 }
 
 export type searchResultProps = {
   searchResult: searchResultListProps[];
   pageNum: number;
   hasNext: boolean;
-  setSearchResult: React.Dispatch<
-    React.SetStateAction<searchResultListProps[]>
-  >;
+  checkOptionFormIsEmpty: () => boolean;
+  checkSearchFormIsEmpty: () => boolean;
+
+  getSearchData: (item?: { newPageNum?: number; searchType?: string }) => void;
   getSearchDataWithOptions: (item: {
     newPageNum?: number;
     searchType?: string;
-  }) => searchResultListProps[];
+  }) => void;
+
+  getCategoryData: (item?: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => void;
 };

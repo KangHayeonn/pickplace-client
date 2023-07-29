@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import MainPage from '../pages/MainPage';
 import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
+import RedirectPage from '../pages/RedirectPage';
 import SamplePage from '../pages/SamplePage';
 import SearchPage from '../pages/SearchPage';
 import SearchDetailPage from '../pages/SearchDetailPage';
@@ -26,9 +27,11 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<Navigate replace to="/main" />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/redirect" element={<RedirectPage />} />
           <Route path="/sample" element={<SamplePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route
