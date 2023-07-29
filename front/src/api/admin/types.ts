@@ -12,6 +12,8 @@ export interface CreatePlaceType {
     roomName: string;
     roomPrice: number;
   }[];
+  category: string;
+  tagList: string[];
 }
 
 export interface UpdatePlaceType {

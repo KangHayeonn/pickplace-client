@@ -130,16 +130,16 @@ const CreatePlace = () => {
       };
       Admin.v1CreatePlace(data)
         .then((res) => {
-          // console.log(res.data.data);
-          // const newState = {
-          //   placeId: res.data.placeId,
-          //   placeName: newPlaceInfo.placeName,
-          //   placeAddress: newPlaceInfo.placeAddress,
-          //   placePhone: newPlaceInfo.placePhone,
-          // };
-          // navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
-          //   state: newState,
-          // });
+          console.log(res.data.data);
+          const newState = {
+            placeId: res.data.data.placeId,
+            placeName: newPlaceInfo.placeName,
+            placeAddress: newPlaceInfo.placeAddress,
+            placePhone: newPlaceInfo.placePhone,
+          };
+          navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
+            state: newState,
+          });
         })
         .catch((err) => {
           return Promise.reject(err);

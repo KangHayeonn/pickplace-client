@@ -55,8 +55,8 @@ const UpdatePlace = () => {
       placeName: data.placeName,
       placeAddress: data.placeAddress,
       placePhone: data.placePhone,
-      placeXaxis: parseFloat(res.data.documents[0].road_address.x),
-      placeYaxis: parseFloat(res.data.documents[0].road_address.y),
+      placeXaxis: parseFloat(res.data.documents[0].address.x),
+      placeYaxis: parseFloat(res.data.documents[0].address.y),
     });
   }
   const getPlaceDetail = () => {
