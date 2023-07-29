@@ -8,7 +8,6 @@ import leftArrow from '../../../assets/images/arrow-left.svg';
 const DetailHeader = ({
   placeName,
   placeRating,
-  reservationStatus,
   ReviewExistence,
   setCreateModalOpen,
 }: detailHeaderProps) => {
@@ -27,23 +26,23 @@ const DetailHeader = ({
           <img src={leftArrow} className="reservation-detail__leftArrow" />
         </button>
       </div>
-      <div className="detail-header__content">
+      <div className="detail-header__content--container">
         <h2 className="detail-placeName">{placeName}</h2>
-        <p className="detail-star">
-          <img src={StarIcon} alt="Star Icon" />
-          {placeRating}
-        </p>
-        <p className="detail-reservationStatus">
-          {reservationStatus}
-          {reservationStatus == '이용 완료' &&
-            (ReviewExistence ? (
+        <div className="detail-header__content">
+          <div className="detail-star">
+            <img src={StarIcon} alt="Star Icon" />
+            {placeRating}
+          </div>
+          <div className="detail-reservationStatus">
+            {ReviewExistence ? (
               <span className="reviewCompleted">리뷰 작성 완료</span>
             ) : (
               <span className="review" onClick={onClickCreateReview}>
                 리뷰 작성하기
               </span>
-            ))}
-        </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

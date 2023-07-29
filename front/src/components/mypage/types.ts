@@ -84,5 +84,6 @@ export type reviewDetailProps = {
 
 export type UpdateModalProps = {
   reviewId: number;
+  getUserReviews: () => void;
   setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

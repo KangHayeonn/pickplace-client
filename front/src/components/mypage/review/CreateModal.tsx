@@ -9,23 +9,38 @@ import Review from '../../../api/review';
 import { CreateModalProps } from '../types';
 import User from '../../../api/mypage';
 
+export type resevationInfoProps = {
+  placeName: string;
+  address: string;
+  reservationDate: string;
+};
 const CreateModal = ({
   reservationId,
   setCreateModalOpen,
 }: CreateModalProps) => {
   const [reviewContent, setReviewContent] = useState('');
-  const [resevationInfo, setReservationInfo] = useState(reservationDetail);
+  const [resevationInfo, setReservationInfo] = useState<resevationInfoProps>({
+    placeName: '',
+    address: '',
+    reservationDate: '',
+  });
   const [starRate, setStarRate] = useState(0);
 
   useEffect(() => {
-    // getUserReservationDetail();
+    getUserReservationDetail();
   }, []);
 
   const getUserReservationDetail = () => {
     User.v1GetUserReservationDetail(reservationId)
       .then((res) => {
-        // console.log(res.data.data);
-        // setReservationDetail(res.data.data);
+        setReservationInfo({
+          placeName: res.data.data.reservation[0].placeName,
+          address: res.data.data.reservation[0].placeAddress.address,
+          reservationDate: res.data.data.reservation[0].reservationDate.replace(
+            'T',
+            ' ',
+          ),
+        });
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -73,7 +88,7 @@ const CreateModal = ({
     <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
       <div className="ReviewModal-container">
         <ReviewModalHeader
-          placeAddress={resevationInfo.placeAddress.address}
+          placeAddress={resevationInfo.address}
           reservationDate={resevationInfo.reservationDate}
         />
         <div className="ReviewModal-content">

@@ -39,6 +39,7 @@ const MyReview = () => {
       if (window.confirm('정말로 삭제하시겠습니까?')) {
         Review.v1DetleteReview(reviewId)
           .then((res) => {
+            getUserReviews();
             setDetailModalOpen(false);
           })
           .catch((err) => {
@@ -63,7 +64,7 @@ const MyReview = () => {
           reviewId={clickedReviewId}
           onUpdateBtnClick={onUpdateBtnClick}
           onDeleteBtnClick={onDeleteBtnClick}
-          setUpdateModalOpen={setUpdateModalOpen}
+          getUserReviews={getUserReviews}
           setDetailModalOpen={setDetailModalOpen}
         />
       )}
@@ -71,6 +72,7 @@ const MyReview = () => {
         <UpdateModal
           reviewId={clickedReviewId}
           setUpdateModalOpen={setUpdateModalOpen}
+          getUserReviews={getUserReviews}
         />
       )}
       {myReviewList &&

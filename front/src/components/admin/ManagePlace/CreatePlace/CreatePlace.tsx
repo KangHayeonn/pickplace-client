@@ -130,12 +130,11 @@ const CreatePlace = () => {
       };
       Admin.v1CreatePlace(data)
         .then((res) => {
-          // console.log(res);
+          navigate('/mypage');
         })
         .catch((err) => {
           return Promise.reject(err);
         });
-      navigate('/mypage');
     }
   };
   const onClickDeleteRoomBtn = (roomId: number) => {

@@ -18,13 +18,13 @@ type DetailModalProps = {
   onDeleteBtnClick: (
     reviewId: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
-  setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserReviews: () => void;
 };
 
 const DetailModal = ({
   reviewId,
-  setUpdateModalOpen,
+  getUserReviews,
   setDetailModalOpen,
   onDeleteBtnClick,
   onUpdateBtnClick,
@@ -52,6 +52,7 @@ const DetailModal = ({
   const getUserReviewDetail = () => {
     Review.v1GetReviewDetail(reviewId)
       .then((res) => {
+        getUserReviews();
         setReviewDetail(res.data.data);
       })
       .catch((err) => {

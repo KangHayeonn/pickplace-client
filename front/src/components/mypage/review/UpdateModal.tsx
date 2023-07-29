@@ -7,7 +7,11 @@ import Review from '../../../api/review';
 import '../../../styles/components/mypage/review/reviewModal.scss';
 import { UpdateModalProps, reviewDetailProps } from '../types';
 
-const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
+const UpdateModal = ({
+  reviewId,
+  setUpdateModalOpen,
+  getUserReviews,
+}: UpdateModalProps) => {
   const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
     reviewId: 0,
     reviewDate: '',
@@ -69,6 +73,7 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
       };
       Review.v1UpdateReview(data)
         .then((res) => {
+          getUserReviews();
           setUpdateModalOpen(false);
           document.body.style.overflow = 'unset';
         })
