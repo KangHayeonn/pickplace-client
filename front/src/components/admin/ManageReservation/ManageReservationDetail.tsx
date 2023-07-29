@@ -8,6 +8,7 @@ import '../../../styles/components/admin/reservationBtn.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import Admin from '../../../api/admin';
 import { adminReservationDetail } from '../types';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
 const ManageReservationDetail = () => {
   const { state } = useLocation();
@@ -34,11 +35,24 @@ const ManageReservationDetail = () => {
         placePhone: '',
         placeName: '',
         placeId: 0,
+        placeCategory: '',
       },
     });
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
-    navigate('/mypage');
+    const state = {
+      placeId: adminReservationDetail.place.placeId,
+      placeName: adminReservationDetail.place.placeName,
+      placeAddress: adminReservationDetail.place.placeAddress,
+      placePhone: adminReservationDetail.place.placePhone,
+      placeCategory: adminReservationDetail.place.placeCategory,
+    };
+    navigate(
+      `/mypage/managePlace/detail/${adminReservationDetail.place.placeId}`,
+      {
+        state: state,
+      },
+    );
   };
 
   useEffect(() => {
@@ -58,13 +72,18 @@ const ManageReservationDetail = () => {
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
     window.alert('예약수락');
   };
-  const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약취소');
-  };
+
   return (
     <div className="manageReservation-detail">
       <div className="manageReservation-detail__header">
-        <div className="manageReservation-detail__img--container">
+        <div
+          className="manageReservation-detail__img--container"
+          style={{
+            backgroundImage: `url(${GetCategoryImage(
+              adminReservationDetail.place.placeCategory,
+            )})`,
+          }}
+        >
           <button
             className="manageReservation-detail__back--btn"
             onClick={onClickBack}

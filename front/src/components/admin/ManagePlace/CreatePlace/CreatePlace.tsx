@@ -110,40 +110,43 @@ const CreatePlace = () => {
   };
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(newPlaceInfo)) {
-      const rooms = [];
-
-      for (let i = 0; i < newRoomList.length; i++) {
-        const { roomId, ...room } = newRoomList[i];
-        rooms.push(room);
-      }
-      const data = {
-        place: {
-          placeAddress: newPlaceInfo.placeAddress,
-          placeName: newPlaceInfo.placeName,
-          placePhone: newPlaceInfo.placePhone,
-          placeXaxis: newPlaceInfo.placeXaxis,
-          placeYaxis: newPlaceInfo.placeYaxis,
-        },
-        rooms: rooms,
-        category: placeOptions.category.name,
-        tagList: placeOptions.tagList,
-      };
-      Admin.v1CreatePlace(data)
-        .then((res) => {
-          console.log(res.data.data);
-          const newState = {
-            placeId: res.data.data.placeId,
-            placeName: newPlaceInfo.placeName,
+      if (newRoomList.length == 0) {
+        window.alert('방을 한 개 이상 추가해주세요');
+      } else {
+        const rooms = [];
+        for (let i = 0; i < newRoomList.length; i++) {
+          const { roomId, ...room } = newRoomList[i];
+          rooms.push(room);
+        }
+        const data = {
+          place: {
             placeAddress: newPlaceInfo.placeAddress,
+            placeName: newPlaceInfo.placeName,
             placePhone: newPlaceInfo.placePhone,
-          };
-          navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
-            state: newState,
+            placeXaxis: newPlaceInfo.placeXaxis,
+            placeYaxis: newPlaceInfo.placeYaxis,
+          },
+          rooms: rooms,
+          category: placeOptions.category.name,
+          tagList: placeOptions.tagList,
+        };
+        Admin.v1CreatePlace(data)
+          .then((res) => {
+            const newState = {
+              placeId: res.data.data.placeId,
+              placeName: newPlaceInfo.placeName,
+              placeAddress: newPlaceInfo.placeAddress,
+              placePhone: newPlaceInfo.placePhone,
+              placeCategory: placeOptions.category.name,
+            };
+            navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
+              state: newState,
+            });
+          })
+          .catch((err) => {
+            return Promise.reject(err);
           });
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
+      }
     }
   };
   const onClickDeleteRoomBtn = (roomId: number) => {

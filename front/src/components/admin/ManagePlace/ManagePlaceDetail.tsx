@@ -7,6 +7,7 @@ import RadioGroup from '../../common/RadioGroupContext';
 import RoomCard from './RoomCard';
 import ReservedCard from '../../admin/ManageReservation/ReservedCard';
 
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import Admin from '../../../api/admin';
 import { roomProps, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
@@ -60,6 +61,7 @@ const ManagePlaceDetail = () => {
     navigate(`/mypage/managePlace/updatePlace/${state.placeId}`, {
       state: {
         placeId: state.placeId,
+        placeCategory: state.placeCategory,
       },
     });
   };
@@ -78,7 +80,12 @@ const ManagePlaceDetail = () => {
   return (
     <div className="managePlace-detail">
       <div className="managePlace-detail__header">
-        <div className="managePlace-detail__img--container">
+        <div
+          className="managePlace-detail__img--container"
+          style={{
+            backgroundImage: `url(${GetCategoryImage(state.placeCategory)})`,
+          }}
+        >
           <button
             className="managePlace-detail__back--btn"
             onClick={onClickBack}
@@ -90,6 +97,7 @@ const ManagePlaceDetail = () => {
           placeName={state.placeName}
           placePhone={state.placePhone}
           address={state.placeAddress}
+          placeCategory={state.placeCategory}
         />
       </div>
       <div className="managePlace-detail__btn--container">
@@ -120,6 +128,7 @@ const ManagePlaceDetail = () => {
               <RoomCard
                 key={key}
                 roomProps={item}
+                placeCategory={state.placeCategory}
                 getAdminDetailRoom={getAdminDetailRoom}
               />
             ))

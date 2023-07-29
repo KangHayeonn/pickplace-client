@@ -4,8 +4,13 @@ import UpdateRoomInfo from './UpdateRoomInfo';
 import { roomCardProps } from '../types';
 import '../../../styles/components/admin/managePlace/roomCard.scss';
 import Admin from '../../../api/admin';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
-const RoomCard = ({ roomProps, getAdminDetailRoom }: roomCardProps) => {
+const RoomCard = ({
+  roomProps,
+  getAdminDetailRoom,
+  placeCategory,
+}: roomCardProps) => {
   const [roomInfo, setRoomInfo] = useState({
     roomName: roomProps.roomName,
     roomPrice: roomProps.roomPrice,
@@ -62,7 +67,12 @@ const RoomCard = ({ roomProps, getAdminDetailRoom }: roomCardProps) => {
     <div className="roomCard-container" key={roomProps.roomId}>
       {updateState ? (
         <div className="roomCard-update__container">
-          <div className="roomCard-img__container" />
+          <div
+            className="roomCard-img__container"
+            style={{
+              backgroundImage: `url(${GetCategoryImage(placeCategory)})`,
+            }}
+          />
           <UpdateRoomInfo
             roomInfo={roomInfo}
             setUpdateState={setUpdateState}
@@ -71,7 +81,12 @@ const RoomCard = ({ roomProps, getAdminDetailRoom }: roomCardProps) => {
         </div>
       ) : (
         <div className="roomCard-show__container">
-          <div className="roomCard-img__container" />
+          <div
+            className="roomCard-img__container"
+            style={{
+              backgroundImage: `url(${GetCategoryImage(placeCategory)})`,
+            }}
+          />
           <div className="roomCard-right__container">
             <div className="roomCard-header">
               <h2 className="roomCard-placeName">{roomInfo.roomName}</h2>

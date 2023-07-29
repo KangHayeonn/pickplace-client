@@ -43,6 +43,7 @@ export type adminReservationDetail = {
     placePhone: string;
     placeName: string;
     placeId: number;
+    placeCategory: string;
   };
 };
 export type reservationBtnsProps = {
@@ -54,6 +55,7 @@ export type adminPlaceProps = {
   placeName: string;
   placeAddress: string;
   placePhone: string;
+  placeCategory: string;
   placeId: number;
 };
 
@@ -63,12 +65,14 @@ export type placeCardProps = {
 export type placeHeaderProps = {
   placeName: string;
   placePhone: string;
+  placeCategory: string;
   address: string;
 };
 
 export type roomCardProps = {
   roomProps: roomProps;
   getAdminDetailRoom: () => void;
+  placeCategory: string;
 };
 
 export type updateRoomInfoProps = {

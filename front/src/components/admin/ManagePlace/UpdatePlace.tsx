@@ -93,7 +93,6 @@ const UpdatePlace = () => {
       placePhone: e.currentTarget.value,
     });
   };
-
   const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (window.confirm('정말로 수정을 취소하시겠습니까?')) {
       navigate('/mypage');
@@ -122,6 +121,7 @@ const UpdatePlace = () => {
             placeName: placeInfo.placeName,
             placeAddress: placeInfo.placeAddress,
             placePhone: placeInfo.placePhone,
+            placeCategory: placeOptions.category.name,
           };
           navigate(`/mypage/managePlace/detail/${state.placeId}`, {
             state: newState,
