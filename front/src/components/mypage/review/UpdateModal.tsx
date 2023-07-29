@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 import CheckIcon from '../../../assets/images/check.svg';
 import StarRate from '../../../components/common/StarRate';
 import Review from '../../../api/review';
 import '../../../styles/components/mypage/review/reviewModal.scss';
-import { myReviewDetail } from '../../../utils/mock/myReviewList';
+import { UpdateModalProps, reviewDetailProps } from '../types';
 
-interface UpdateModalProps {
-  reviewId: number;
-  setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const UpdateModal = ({
+  reviewId,
+  setUpdateModalOpen,
+  getUserReviews,
+}: UpdateModalProps) => {
+  const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
+    reviewId: 0,
+    reviewDate: '',
+    reviewContent: '',
+    reviewRating: 0,
+    reservationDate: '',
+    memberName: '',
+    placeAddress: '',
+    placeName: '',
+  });
+  const [reviewContent, setReviewContent] = useState<string>('');
+  const [starRate, setStarRate] = useState<number>(0);
 
-const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
-  const [reviewDetail, setReviewDetail] = useState(myReviewDetail);
-  const [reviewContent, setReviewContent] = useState(reviewDetail.content);
-  const [starRate, setStarRate] = useState(reviewDetail.rating);
+  useEffect(() => {
+    getUserReviewDetail();
+  }, []);
+
+  const getUserReviewDetail = () => {
+    Review.v1GetReviewDetail(reviewId)
+      .then((res) => {
+        setReviewDetail(res.data.data);
+        setReviewContent(res.data.data.reviewContent);
+        setStarRate(res.data.data.reviewRating);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  };
 
   const onClickStar = (rate: number) => {
     setStarRate(rate);
@@ -49,6 +73,7 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
       };
       Review.v1UpdateReview(data)
         .then((res) => {
+          getUserReviews();
           setUpdateModalOpen(false);
           document.body.style.overflow = 'unset';
         })
@@ -62,20 +87,19 @@ const UpdateModal = ({ reviewId, setUpdateModalOpen }: UpdateModalProps) => {
     <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
       <div className="ReviewModal-container">
         <ReviewModalHeader
-          nickname={reviewDetail.nickname}
-          date={reviewDetail.date}
+          memberName={reviewDetail.memberName}
+          reviewDate={reviewDetail.reviewDate}
           placeAddress={reviewDetail.placeAddress}
-          startDate={reviewDetail.startDate}
-          endDate={reviewDetail.endDate}
-          startTime={reviewDetail.startTime}
-          endTime={reviewDetail.endTime}
+          reservationDate={reviewDetail.reservationDate}
         />
         <div className="ReviewModal-content">
           <div className="ReviewModal-starRate__container">
-            <StarRate
-              onClickStar={onClickStar}
-              defaultStar={reviewDetail.rating}
-            />
+            {reviewDetail.reviewRating > 0 && (
+              <StarRate
+                onClickStar={onClickStar}
+                defaultStar={reviewDetail.reviewRating}
+              />
+            )}
             <img src={CheckIcon} alt="checked icon" />
           </div>
           <div className="ReviewModal-textArea__container">

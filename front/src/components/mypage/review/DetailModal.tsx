@@ -8,10 +8,6 @@ import UpdateIcon from '../../../assets/images/edit.svg';
 import Review from '../../../api/review';
 
 import { reviewDetailProps } from '../types';
-import {
-  myReviewDetail,
-  myReviewDetail2,
-} from '../../../utils/mock/myReviewList';
 import '../../../styles/components/mypage/review/detailModal.scss';
 
 type DetailModalProps = {
@@ -22,19 +18,27 @@ type DetailModalProps = {
   onDeleteBtnClick: (
     reviewId: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
-  setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserReviews: () => void;
 };
 
 const DetailModal = ({
   reviewId,
-  setUpdateModalOpen,
+  getUserReviews,
   setDetailModalOpen,
   onDeleteBtnClick,
   onUpdateBtnClick,
 }: DetailModalProps) => {
-  const [reviewDetail, setReviewDetail] =
-    useState<reviewDetailProps>(myReviewDetail2);
+  const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
+    reviewId: 0,
+    reviewDate: '',
+    reviewContent: '',
+    reviewRating: 0,
+    reservationDate: '',
+    memberName: '',
+    placeAddress: '',
+    placeName: '',
+  });
 
   const onClickClose = () => {
     setDetailModalOpen(false);
@@ -42,12 +46,13 @@ const DetailModal = ({
   };
 
   useEffect(() => {
-    // getUserReviewDetail();
+    getUserReviewDetail();
   }, []);
 
   const getUserReviewDetail = () => {
     Review.v1GetReviewDetail(reviewId)
       .then((res) => {
+        getUserReviews();
         setReviewDetail(res.data.data);
       })
       .catch((err) => {
@@ -59,19 +64,16 @@ const DetailModal = ({
     <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
       <div className="DetailModal-container">
         <ReviewModalHeader
-          nickname={reviewDetail.nickname}
-          date={reviewDetail.date}
+          memberName={reviewDetail.memberName}
+          reviewDate={reviewDetail.reviewDate}
           placeAddress={reviewDetail.placeAddress}
-          startDate={reviewDetail.startDate}
-          endDate={reviewDetail.endDate}
-          startTime={reviewDetail.startTime}
-          endTime={reviewDetail.endTime}
+          reservationDate={reviewDetail.reservationDate}
         />
         <div className="DetailModal-content">
           <div className="DetailModal-content__row1">
             <div className="DetailModal-card__rating">
               <img className="DetailModal-star" src={StarIcon} alt="star" />
-              {reviewDetail.rating}
+              {reviewDetail.reviewRating}
             </div>
             <div className="DetailModal-btn_container">
               <button
@@ -88,9 +90,8 @@ const DetailModal = ({
               </button>
             </div>
           </div>
-
           <div className="DetailModal-card__reviewContent">
-            {reviewDetail.content}
+            {reviewDetail.reviewContent}
           </div>
         </div>
       </div>

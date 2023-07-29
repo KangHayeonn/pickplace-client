@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { reservationDetail } from '../../../utils/mock/reservationDetail';
 import { useLocation } from 'react-router-dom';
 import DetailHeader from './DetailHeader';
 import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import CreateModal from '../review/CreateModal';
 import User from '../../../api/mypage';
+import { reservationDetailProps } from './types';
 
 const ReservationDetail = () => {
   const { state } = useLocation();
   const [createModalOpen, setCreateModalOpen] = useState(false);
-  // const [reservationDetail, setReservationDetail] = useState();
+  const [reservationDetail, setReservationDetail] =
+    useState<reservationDetailProps>();
 
   useEffect(() => {
     getUserReservationDetail();
@@ -19,7 +20,7 @@ const ReservationDetail = () => {
   const getUserReservationDetail = () => {
     User.v1GetUserReservationDetail(state.id)
       .then((res) => {
-        // setReservationDetail(res.data.data);
+        setReservationDetail(res.data.data.reservation[0]);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -38,8 +39,7 @@ const ReservationDetail = () => {
         <DetailHeader
           placeName={reservationDetail.placeName}
           placeRating={reservationDetail.placeRating}
-          reservationStatus={reservationDetail.reservationStatus}
-          ReviewExistence={reservationDetail.ReviewExistence}
+          ReviewExistence={reservationDetail.reviewExistence}
           setCreateModalOpen={setCreateModalOpen}
         />
       )}
@@ -53,7 +53,7 @@ const ReservationDetail = () => {
           startTime={reservationDetail.startTime}
           endDate={reservationDetail.endDate}
           endTime={reservationDetail.endTime}
-          nickName={reservationDetail.nickName}
+          nickName={reservationDetail.nickname}
           personnel={reservationDetail.personnel}
           roomPrice={reservationDetail.roomPrice}
         />

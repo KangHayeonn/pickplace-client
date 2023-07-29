@@ -3,10 +3,12 @@ import RadioGroup from '../common/RadioGroupContext';
 import RadioButton from '../common/RadioButton';
 import * as type from './types';
 import '../../styles/components/search/searchFilter.scss';
+import { getRole } from '../../utils/tokenControl';
 
 const Header = ({ onClickHeaderButton }: type.headerProps) => {
-  const [isAdmin, setIsAdmin] = useState<boolean>(true);
-
+  const [isAdmin, setIsAdmin] = useState<boolean>(
+    getRole() == 'HOST' ? true : false,
+  );
   const userHeader = [
     { value: '0', name: '예약내역', defaultChecked: true },
     { value: '1', name: '회원정보' },

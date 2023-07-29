@@ -34,6 +34,10 @@ const UserInfo = () => {
   const onUpdateNickname = (e: React.MouseEvent<HTMLButtonElement>) => {
     User.v1UpdateNickname(newNickname)
       .then((res) => {
+        setUserInfo({
+          ...userInfo,
+          nickname: newNickname,
+        });
         getUserInfo();
       })
       .catch((err) => {
@@ -44,6 +48,10 @@ const UserInfo = () => {
   const onUpdatePhone = (e: React.MouseEvent<HTMLButtonElement>) => {
     User.v1UpdatePhone(newPhone)
       .then((res) => {
+        setUserInfo({
+          ...userInfo,
+          phone: newPhone,
+        });
         getUserInfo();
       })
       .catch((err) => {

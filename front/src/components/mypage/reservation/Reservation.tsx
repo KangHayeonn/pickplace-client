@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import ResevationCard from './ResevationCard';
 import User from '../../../api/mypage';
 import '../../../styles/components/mypage/reservation/reservationCard.scss';
-import { reservationList } from '../../../utils/mock/reservationList';
+import { reservationProps } from './types';
 
 const Reservation = () => {
-  // const [reservationList, setReservationList] = useState();
+  const [reservationList, setReservationList] = useState<reservationProps[]>();
 
   useEffect(() => {
-    // getUserReservations();
+    getUserReservations();
   }, []);
 
   const getUserReservations = () => {
     User.v1GetUserReservations()
       .then((res) => {
-        // setReservationList(res.data.data)
+        setReservationList(res.data.data.reservation);
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -22,9 +22,11 @@ const Reservation = () => {
   };
   return (
     <div className="reservation">
-      {reservationList.map((item, key) => (
-        <ResevationCard key={key} reservationProps={item} />
-      ))}
+      {reservationList &&
+        reservationList.length > 0 &&
+        reservationList.map((item, key) => (
+          <ResevationCard key={key} reservationProps={item} />
+        ))}
     </div>
   );
 };
