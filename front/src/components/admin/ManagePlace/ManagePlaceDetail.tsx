@@ -7,8 +7,9 @@ import RadioGroup from '../../common/RadioGroupContext';
 import RoomCard from './RoomCard';
 import ReservedCard from '../../admin/ManageReservation/ReservedCard';
 
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import Admin from '../../../api/admin';
-import { roomProps, adminReservation, reservedRoom } from '../types';
+import { roomProps, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
 
@@ -60,14 +61,31 @@ const ManagePlaceDetail = () => {
     navigate(`/mypage/managePlace/updatePlace/${state.placeId}`, {
       state: {
         placeId: state.placeId,
+        placeCategory: state.placeCategory,
       },
     });
+  };
+  const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (window.confirm('정말로 해당 공간을 삭제하시겠습니까?')) {
+      Admin.v1DeletePlace(state.placeId)
+        .then((res) => {
+          navigate(`/mypage`);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
   };
 
   return (
     <div className="managePlace-detail">
       <div className="managePlace-detail__header">
-        <div className="managePlace-detail__img--container">
+        <div
+          className="managePlace-detail__img--container"
+          style={{
+            backgroundImage: `url(${GetCategoryImage(state.placeCategory)})`,
+          }}
+        >
           <button
             className="managePlace-detail__back--btn"
             onClick={onClickBack}
@@ -79,6 +97,7 @@ const ManagePlaceDetail = () => {
           placeName={state.placeName}
           placePhone={state.placePhone}
           address={state.placeAddress}
+          placeCategory={state.placeCategory}
         />
       </div>
       <div className="managePlace-detail__btn--container">
@@ -93,15 +112,25 @@ const ManagePlaceDetail = () => {
             </RadioButton>
           ))}
         </RadioGroup>
-        <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
-          공간 수정
-        </button>
+        <div className="managePlace-manage__btn--container">
+          <button className="updatePlace-btn" onClick={onUpdateBtnClick}>
+            공간 수정
+          </button>
+          <button className="deletePlace-btn" onClick={onDeleteBtnClick}>
+            공간 삭제
+          </button>
+        </div>
       </div>
       <div className="managePlace-detail__content">
         {clickedMenu === 0 &&
           (adminRoomList && adminRoomList.length > 0 ? (
             adminRoomList.map((item, key) => (
-              <RoomCard key={key} roomProps={item} />
+              <RoomCard
+                key={key}
+                roomProps={item}
+                placeCategory={state.placeCategory}
+                getAdminDetailRoom={getAdminDetailRoom}
+              />
             ))
           ) : (
             <div>

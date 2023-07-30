@@ -72,12 +72,6 @@ const DetailContent = ({
             title={'총 결제 금액'}
             content={roomPrice}
           />
-          <hr />
-          <ShowUserInfo
-            childClassname={'detail-roomPrice'}
-            title={'결제 방법'}
-            content={'현장 결제'}
-          />
         </DetailCard>
       )}
     </>

@@ -3,9 +3,14 @@ import ShowCardInfo from '../../mypage/ShowCardInfo';
 import '../../../styles/components/admin/managePlace/placeHeader.scss';
 import { placeHeaderProps } from '../types';
 
-const PlaceHeader = ({ placeName, placePhone, address }: placeHeaderProps) => {
+const PlaceHeader = ({
+  placeName,
+  placePhone,
+  address,
+  placeCategory,
+}: placeHeaderProps) => {
   return (
-    <div>
+    <div className="placeCard">
       <div className="placeCard-header">
         <h2 className="placeCard-placeName">{placeName}</h2>
       </div>

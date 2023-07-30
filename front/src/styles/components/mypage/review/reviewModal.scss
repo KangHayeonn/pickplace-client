@@ -1,18 +1,18 @@
 @import "../../../base/variable.scss";
 
-.UpdateModal-container{
+.ReviewModal-container{
     padding : 0px 50px;
 }
 
-.UpdateModal-content{
-    .UpdateModal-starRate__container{
+.ReviewModal-content{
+    .ReviewModal-starRate__container{
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom : 10px;
     }
-    .UpdateModal-textArea__container{ 
-        .UpdateModal-textArea{
+    .ReviewModal-textArea__container{ 
+        .ReviewModal-textArea{
             width : 92%;
             height : 130px;
             padding : 20px;
@@ -21,9 +21,20 @@
             background-color: $color-surface-lightgray;
             border-radius: 20px;
         }
-        .UpdateModal-count__container{
+        .ReviewModal-count__container{
             text-align: right;
             margin-right : 10px;
+        }
+    }
+}
+
+.ReviewModal-btn__container{
+    .ReviewModal-submitBtn{
+        padding : 7px 20px;
+        @include button-white;
+        
+        &:hover{
+            @include button-hover-gray;
         }
     }
 }
