@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PlaceForm from './CreatePlace/PlaceForm';
 import AddressForm from './CreatePlace/AddressForm';
-
 import OptionForm from './CreatePlace/OptionForm';
+
 import '../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
 import { placeProps, placeOptionsProps } from '../types';
-
 import { confirmToPost } from './PlaceManageFunc';
 import Admin from '../../../api/admin';
 import axios from 'axios';
@@ -72,7 +71,6 @@ const UpdatePlace = () => {
         return Promise.reject(err);
       });
   };
-
   const onPlaceNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlaceInfo({
       ...placeInfo,

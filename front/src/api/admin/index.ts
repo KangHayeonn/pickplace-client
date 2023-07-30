@@ -4,7 +4,6 @@ const prefix = '/api/v1/host';
 
 const Admin = {
   async v1CreatePlace(data: CreatePlaceType) {
-    console.log(data);
     try {
       const url = `${prefix}/place`;
       const result = await instanceWithToken.post(url, data);
