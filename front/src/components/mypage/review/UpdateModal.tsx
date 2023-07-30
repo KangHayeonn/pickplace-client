@@ -3,6 +3,8 @@ import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 import CheckIcon from '../../../assets/images/check.svg';
 import StarRate from '../../../components/common/StarRate';
+import { isShowError } from '../../../components/common/ToastBox';
+
 import Review from '../../../api/review';
 import '../../../styles/components/mypage/review/reviewModal.scss';
 import { UpdateModalProps, reviewDetailProps } from '../types';
@@ -73,6 +75,7 @@ const UpdateModal = ({
       };
       Review.v1UpdateReview(data)
         .then((res) => {
+          isShowError('리뷰 수정 완료');
           getUserReviews();
           setUpdateModalOpen(false);
           document.body.style.overflow = 'unset';

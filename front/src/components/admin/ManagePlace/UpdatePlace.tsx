@@ -9,6 +9,7 @@ import { placeProps, placeOptionsProps } from '../types';
 import { confirmToPost } from './PlaceManageFunc';
 import Admin from '../../../api/admin';
 import axios from 'axios';
+import { isShowError } from '../../../components/common/ToastBox';
 
 const UpdatePlace = () => {
   const navigate = useNavigate();
@@ -114,6 +115,8 @@ const UpdatePlace = () => {
       };
       Admin.v1UpdatePlace(data)
         .then((res) => {
+          isShowError('공간 수정 완료');
+
           const newState = {
             placeId: state.placeId,
             placeName: placeInfo.placeName,

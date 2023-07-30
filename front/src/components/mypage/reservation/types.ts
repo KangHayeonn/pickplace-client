@@ -23,7 +23,8 @@ export type detailHeaderProps = {
   ReviewExistence: boolean;
   setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export type detailContentProps = {
+
+export type detailProps = {
   address: string;
   placePhone: string;
   reservationId: number;
@@ -35,6 +36,9 @@ export type detailContentProps = {
   nickName: string;
   personnel: number;
   roomPrice?: number;
+};
+export type detailContentProps = {
+  reservation: detailProps;
 };
 
 export type reservationDetailProps = {

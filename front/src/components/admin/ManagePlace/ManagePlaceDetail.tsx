@@ -12,6 +12,7 @@ import Admin from '../../../api/admin';
 import { roomProps, reservedRoom } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
+import { isShowError } from '../../../components/common/ToastBox';
 
 const ManagePlaceDetail = () => {
   const { state } = useLocation();
@@ -27,6 +28,8 @@ const ManagePlaceDetail = () => {
     useState<reservedRoom[]>();
 
   const [adminRoomList, setAdminRoomList] = useState<roomProps[]>();
+  const urlParams = new URL(location.href).pathname.split('/');
+  const id = parseInt(urlParams[urlParams.length - 1]);
 
   useEffect(() => {
     getAdminDetailReservation();
@@ -69,6 +72,7 @@ const ManagePlaceDetail = () => {
     if (window.confirm('정말로 해당 공간을 삭제하시겠습니까?')) {
       Admin.v1DeletePlace(state.placeId)
         .then((res) => {
+          isShowError('공간 삭제 완료');
           navigate(`/mypage`);
         })
         .catch((err) => {

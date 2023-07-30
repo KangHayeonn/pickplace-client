@@ -5,6 +5,7 @@ import AddressForm from './AddressForm';
 import RoomForm from './RoomForm';
 import OptionForm from './OptionForm';
 import AddedRoom from './AddedRoom';
+import { isShowError } from '../../../../components/common/ToastBox';
 import '../../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
 import {
   roomProps,
@@ -132,6 +133,7 @@ const CreatePlace = () => {
         };
         Admin.v1CreatePlace(data)
           .then((res) => {
+            isShowError('공간 추가 완료');
             const newState = {
               placeId: res.data.data.placeId,
               placeName: newPlaceInfo.placeName,

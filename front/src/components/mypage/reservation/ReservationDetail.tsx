@@ -5,7 +5,7 @@ import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import CreateModal from '../review/CreateModal';
 import User from '../../../api/mypage';
-import { reservationDetailProps } from './types';
+import { reservationDetailProps, detailProps } from './types';
 
 const ReservationDetail = () => {
   const { state } = useLocation();
@@ -13,6 +13,7 @@ const ReservationDetail = () => {
   const [reservationDetail, setReservationDetail] =
     useState<reservationDetailProps>();
 
+  const [detailContentProps, setDetailContentProps] = useState<detailProps>();
   useEffect(() => {
     getUserReservationDetail();
   }, []);
@@ -21,6 +22,19 @@ const ReservationDetail = () => {
     User.v1GetUserReservationDetail(state.id)
       .then((res) => {
         setReservationDetail(res.data.data.reservation[0]);
+        setDetailContentProps({
+          address: res.data.data.reservation[0].place.placeAddress,
+          placePhone: res.data.data.reservation[0].place.placePhone,
+          reservationId: res.data.data.reservation[0].reservation.reservationId,
+          reservationDate: res.data.data.reservation[0].reservation.createdDate,
+          startDate: res.data.data.reservation[0].reservation.checkInDate,
+          startTime: res.data.data.reservation[0].reservation.checkInTime,
+          endDate: res.data.data.reservation[0].reservation.checkOutDate,
+          endTime: res.data.data.reservation[0].reservation.checkOutTime,
+          nickName: res.data.data.reservation[0].member.memberName,
+          personnel:
+            res.data.data.reservation[0].reservation.reservationPeopleNum,
+        });
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -43,21 +57,7 @@ const ReservationDetail = () => {
           setCreateModalOpen={setCreateModalOpen}
         />
       )}
-      {reservationDetail && (
-        <DetailContent
-          address={reservationDetail.placeAddress.address}
-          placePhone={reservationDetail.placePhone}
-          reservationId={reservationDetail.reservationId}
-          reservationDate={reservationDetail.reservationDate}
-          startDate={reservationDetail.startDate}
-          startTime={reservationDetail.startTime}
-          endDate={reservationDetail.endDate}
-          endTime={reservationDetail.endTime}
-          nickName={reservationDetail.nickname}
-          personnel={reservationDetail.personnel}
-          roomPrice={reservationDetail.roomPrice}
-        />
-      )}
+      {detailContentProps && <DetailContent reservation={detailContentProps} />}
     </div>
   );
 };

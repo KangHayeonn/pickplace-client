@@ -3,6 +3,7 @@ import DetailModal from './DetailModal';
 import UpdateModal from './UpdateModal';
 import ReviewCard from './ReviewCard';
 import Review from '../../../api/review';
+import { isShowError } from '../../../components/common/ToastBox';
 
 import { reviewCardItemProps } from '../types';
 import '../../../styles/components/mypage/review/myReview.scss';
@@ -39,6 +40,7 @@ const MyReview = () => {
       if (window.confirm('정말로 삭제하시겠습니까?')) {
         Review.v1DetleteReview(reviewId)
           .then((res) => {
+            isShowError('리뷰 삭제 완료');
             getUserReviews();
             setDetailModalOpen(false);
           })

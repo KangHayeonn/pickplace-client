@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
+import { isShowError } from '../../../components/common/ToastBox';
 import StarRate from '../../../components/common/StarRate';
+
 import CheckIcon from '../../../assets/images/check.svg';
-import { reservationDetail } from '../../../utils/mock/reservationDetail';
-import '../../../styles/components/mypage/review/reviewModal.scss';
 import Review from '../../../api/review';
-import { CreateModalProps } from '../types';
 import User from '../../../api/mypage';
+import '../../../styles/components/mypage/review/reviewModal.scss';
+import { CreateModalProps } from '../types';
 
 export type resevationInfoProps = {
   placeName: string;
@@ -75,6 +76,7 @@ const CreateModal = ({
       };
       Review.v1CreateReview(data)
         .then((res) => {
+          isShowError('리뷰 추가 완료');
           setCreateModalOpen(false);
           document.body.style.overflow = 'unset';
         })
