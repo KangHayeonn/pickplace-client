@@ -40,8 +40,8 @@ export type getSearchDataWithOptionsProps = {
 };
 
 export interface SearchDetailType {
-  startDate: string;
-  startTime?: string;
-  endDate: string;
-  endTime?: string;
+  startDate: string | undefined;
+  startTime?: string | undefined;
+  endDate: string | undefined;
+  endTime?: string | undefined;
 }

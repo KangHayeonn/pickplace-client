@@ -58,7 +58,19 @@ const initialState = {
     SEARCH_DETAIL: false,
     GET_PLACE_REVIEW: false,
   },
-  place: {},
+  place: {
+    placeId: -1,
+    placeName: '',
+    placeRating: 0,
+    placeReviewCnt: 0,
+    category: '',
+    placeAddress: {
+      address: '',
+      latitude: 0,
+      longitude: 0,
+    },
+    tags: [],
+  },
   roomList: [],
   reviewList: [],
 };

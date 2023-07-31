@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import '../../../styles/components/search/detail/searchDetailTitle.scss';
 import arrowLeftIcon from '../../../assets/images/arrow-left.svg';
 import starIcon from '../../../assets/images/star-full.svg';
 import Api from '../../../api/search';
+import { RootState } from '../../../store/modules';
 
 const SearchDetailTitle = () => {
   const navigate = useNavigate();
   const { searchId } = useParams();
+  const searchDetail = useSelector(
+    (state: RootState) => state.searchDetail.place,
+  );
 
   const goSearchPage = () => {
     navigate('/search');
@@ -52,7 +57,7 @@ const SearchDetailTitle = () => {
           className="search-detail-top__content--title"
           onClick={goDetailPage}
         >
-          서울역 공유 오피스
+          {searchDetail.placeName}
         </div>
         <div className="search-detail-top__content--link">
           <div
@@ -60,13 +65,13 @@ const SearchDetailTitle = () => {
             onClick={goReviewPage}
           >
             <img src={starIcon} width={20} height={20} alt="Star Icon" />
-            3.5
+            {searchDetail.placeRating.toFixed(1)}
           </div>
           <span
             className="search-detail-top__content--link__review"
             onClick={goReviewPage}
           >
-            리뷰 23
+            리뷰 {searchDetail.placeReviewCnt}
           </span>
         </div>
       </div>

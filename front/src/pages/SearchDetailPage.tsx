@@ -8,10 +8,21 @@ import SearchDetailTitle from '../components/search/detail/SearchDetailTitle';
 import SearchDetailInfo from '../components/search/detail/SearchDetailInfo';
 import SearchDetailList from '../components/search/detail/SearchDetailList';
 import SearchDetailReservation from '../components/search/detail/SearchDetailReservation';
+import {
+  toStringByFormatting,
+  toStringByFormattingTime,
+} from '../utils/dataFormat';
 // api
 import { SearchDetailType } from '@/api/search/types';
 // redux
 import { getPlaceReview, searchDetail } from '../store/modules/searchDetail';
+
+type CategoryType =
+  | '호텔/리조트'
+  | '펜션'
+  | '게스트하우스'
+  | '스터디룸'
+  | '파티룸';
 
 const SearchDetailPage = () => {
   const location = useLocation();
@@ -20,15 +31,25 @@ const SearchDetailPage = () => {
   const placeId = Number(searchId);
   const dispatch: ThunkDispatch<SearchDetailType, void, AnyAction> =
     useDispatch();
+  const category: CategoryType = '스터디룸';
 
   const getPlaceDetail = async () => {
-    const data = {
-      startDate: '2023.06.30',
-      endDate: '2023.07.01',
-      startTime: '11:00',
-      endTime: '12:00',
-    };
-    await dispatch(searchDetail(placeId, data));
+    const now = new Date();
+    if (['호텔/리조트', '펜션', '게스트하우스'].includes(category)) {
+      const data = {
+        startDate: toStringByFormatting(now),
+        endDate: toStringByFormatting(new Date(now.getDate() + 1)),
+      };
+      await dispatch(searchDetail(placeId, data));
+    } else {
+      const data = {
+        startDate: toStringByFormatting(now),
+        endDate: toStringByFormatting(now),
+        startTime: toStringByFormattingTime(now),
+        endTime: toStringByFormattingTime(new Date(now.getHours() + 1)),
+      };
+      await dispatch(searchDetail(placeId, data));
+    }
   };
 
   const getPlaceReviewList = async () => {
