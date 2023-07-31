@@ -3,7 +3,7 @@ import {
   getSearchDataProps,
   getSearchDataWithOptionsProps,
   getCategoryDataProps,
-  ISearchDetail,
+  SearchDetailType,
 } from './types';
 const prefix = '/api/v1/search';
 
@@ -68,7 +68,7 @@ const Search = {
     }
   },
   // 검색 공간 상세
-  async v1SearchDetail(placeId: number, data: ISearchDetail) {
+  async v1SearchDetail(placeId: number, data: SearchDetailType) {
     try {
       const url = `${prefix}/${placeId}`;
       const result = await instance.post(url, data);

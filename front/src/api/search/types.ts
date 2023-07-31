@@ -39,9 +39,9 @@ export type getSearchDataWithOptionsProps = {
   tagList: Array<string>;
 };
 
-export interface ISearchDetail {
+export interface SearchDetailType {
   startDate: string;
-  startTime: string;
+  startTime?: string;
   endDate: string;
-  endTime: string;
+  endTime?: string;
 }
