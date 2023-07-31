@@ -2,6 +2,8 @@ import React from 'react';
 import { categoryNameList } from '../../utils/mock/categoryList';
 import DropDown from '../common/DropDown';
 import { categorySelectorProps } from './types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/modules';
 
 const CategorySelector = ({
   categoryName,
@@ -12,7 +14,11 @@ const CategorySelector = ({
       <h3 className="category-header">카테고리</h3>
       <div className="dropdown-container">
         <DropDown
-          defaultText={categoryName}
+          defaultText={
+            categoryName
+              ? categoryName
+              : useSelector((state: RootState) => state.optionForm.category)
+          }
           dropDownList={categoryNameList}
           onChangeCategory={onChangeCategory}
         />

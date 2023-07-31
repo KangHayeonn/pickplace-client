@@ -3,17 +3,22 @@ import { useNavigate } from 'react-router-dom';
 
 import Map from '../components/map/Map';
 import { markerList } from '../utils/mock/markerList';
-import { categoryList } from '../utils/mock/categoryList';
+import { categoryNameList } from '../utils/mock/categoryList';
 import articleImg from '../assets/images/main-article.png';
 import '../styles/components/main/main.scss';
+import { useDispatch } from 'react-redux';
+import { resetSearchForm } from '../store/modules/searchForm';
+import { resetOptionForm } from '../store/modules/optionForm';
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const onClickCategryBtn = (item: { name: string; id: number }) => {
+  const onClickCategoryBtn = (item: string) => {
+    dispatch(resetSearchForm());
+    dispatch(resetOptionForm(item));
     const state = {
-      name: item.name,
-      id: item.id,
+      category: item,
     };
     navigate('/search', {
       state: state,
@@ -25,9 +30,9 @@ const MainPage = () => {
       <section>
         <img src={articleImg}></img>
         <div className="buttons">
-          {categoryList.map((item) => (
-            <button key={item.id} onClick={() => onClickCategryBtn(item)}>
-              {item.name}
+          {categoryNameList.map((item, key) => (
+            <button key={key} onClick={() => onClickCategoryBtn(item)}>
+              {item}
             </button>
           ))}
         </div>
