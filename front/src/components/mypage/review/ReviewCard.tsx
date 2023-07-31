@@ -4,7 +4,7 @@ import DeleteIcon from '../../../assets/images/trash.svg';
 import UpdateIcon from '../../../assets/images/edit.svg';
 import { ReviewCardProps } from '../types';
 import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
-import ConfirmModal from './DeleteConfirmModal';
+import DeleteConfirmModal from '../DeleteConfirmModal';
 
 const ReviewCard = ({
   reviewItem,
@@ -21,10 +21,12 @@ const ReviewCard = ({
   return (
     <>
       {confirmModalOpen && (
-        <ConfirmModal
-          reviewId={reviewItem.reviewId}
+        <DeleteConfirmModal
+          title={'리뷰 삭제'}
+          content={'삭제 시 리뷰를 복구할 수 없습니다. 정말 삭제하시겠습니까?'}
+          id={reviewItem.reviewId}
           onClose={onCloseConfirmModal}
-          onDeleteReview={onDeleteReview}
+          onSelectDelete={onDeleteReview}
         />
       )}
       <div className="MyReview-card__container">

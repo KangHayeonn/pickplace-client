@@ -1,32 +1,36 @@
 import React from 'react';
-import ModalForm from '../../../components/common/modal/ModalForm';
-import TextButton from '../../common/TextButton';
-import '../../../styles/components/common/confirmModal.scss';
+import ModalForm from '../common/modal/ModalForm';
+import TextButton from '../common/TextButton';
+import '../../styles/components/common/confirmModal.scss';
 
 interface ConfirmModalProps {
-  reviewId: number;
+  title: string;
+  content: string;
+  id: number;
   onClose: () => void;
-  onDeleteReview: (reviewId: number) => void;
+  onSelectDelete: (id: number) => void;
 }
 
 const DeleteConfirmModal = ({
-  reviewId,
+  id,
   onClose,
-  onDeleteReview,
+  onSelectDelete,
+  title,
+  content,
 }: ConfirmModalProps) => {
   const onClickClose = () => {
     onClose();
   };
 
   const onClickConfirm = (e: React.MouseEvent<HTMLElement>) => {
-    onDeleteReview(reviewId);
+    onSelectDelete(id);
     onClose();
   };
 
   return (
-    <ModalForm title="" onClickEvent={onClickClose}>
+    <ModalForm title={title} onClickEvent={onClickClose}>
       <div>
-        <p>삭제 시 리뷰를 복구할 수 없습니다.</p>
+        <p>{content}</p>
         <div className="modal-form__footer">
           <div className="modal-form__footer--btn">
             <TextButton text="취소" onClick={onClickClose} />

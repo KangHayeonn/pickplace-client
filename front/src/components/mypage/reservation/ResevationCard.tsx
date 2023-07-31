@@ -4,7 +4,7 @@ import ShowCardInfo from '../ShowCardInfo';
 import CreateModal from '../review/CreateModal';
 import { cardProps } from './types';
 import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
-import ConfirmModal from '../review/ConfirmModal';
+import ConfirmModal from '../ConfirmModal';
 
 const ResevationCard = ({ reservationProps }: cardProps) => {
   const navigate = useNavigate();

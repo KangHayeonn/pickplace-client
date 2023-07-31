@@ -16,6 +16,7 @@ import {
 import { categoryList } from '../../../../utils/mock/categoryList';
 import { confirmToAddRoom, confirmToPost } from '../PlaceManageFunc';
 import Admin from '../../../../api/admin';
+import ConfirmModal from '../../../../components/mypage/ConfirmModal';
 
 const CreatePlace = () => {
   const navigate = useNavigate();
@@ -104,11 +105,11 @@ const CreatePlace = () => {
       setNewRoomInfo(defaultNewRoomForm);
     }
   };
-  const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (window.confirm('정말로 작성을 취소하시겠습니까?')) {
-      navigate('/mypage');
-    }
-  };
+  // const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   if (window.confirm('정말로 작성을 취소하시겠습니까?')) {
+  //     navigate('/mypage');
+  //   }
+  // };
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(newPlaceInfo)) {
       if (newRoomList.length == 0) {
@@ -157,44 +158,65 @@ const CreatePlace = () => {
       setRoomList(deletedList);
     };
   };
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  const onClickClose = () => {
+    navigate('/mypage');
+  };
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
 
   return (
-    <div className="createPlace-container">
-      <PlaceForm
-        newPlaceInfo={newPlaceInfo}
-        header={'신규 공간 등록'}
-        onPlaceNameChange={onPlaceNameChange}
-        onPhoneChange={onPhoneChange}
-      />
-      <AddressForm
-        onAddressChange={onAddressChange}
-        newPlaceInfo={newPlaceInfo}
-      />
-      <OptionForm
-        placeOptions={placeOptions}
-        setPlaceOptions={setPlaceOptions}
-      />
-      <RoomForm
-        newRoomInfo={newRoomInfo}
-        onRoomNameChange={onRoomNameChange}
-        onRoomPriceChange={onRoomPriceChange}
-        onPersonnelChange={onPersonnelChange}
-        onroomAmountChange={onroomAmountChange}
-        onAddNewRoom={onAddNewRoom}
-      />
-      <AddedRoom
-        newRoomList={newRoomList}
-        onClickDeleteRoomBtn={onClickDeleteRoomBtn}
-      />
-      <div className="createPlace-btn__container">
-        <button className="createPlace-cancelBtn" onClick={onCancleBtnClick}>
-          등록취소
-        </button>
-        <button className="createPlace-createBtn" onClick={onCreateBtnClick}>
-          공간등록
-        </button>
+    <>
+      {confirmModalOpen && (
+        <ConfirmModal
+          onClose={onClickClose}
+          onCloseConfirmModal={onCloseConfirmModal}
+          title="공간 추가 취소"
+          content="취소 시에 내용이 저장되지 않습니다. 정말 취소하시겠습니까?"
+        />
+      )}{' '}
+      <div className="createPlace-container">
+        <PlaceForm
+          newPlaceInfo={newPlaceInfo}
+          header={'신규 공간 등록'}
+          onPlaceNameChange={onPlaceNameChange}
+          onPhoneChange={onPhoneChange}
+        />
+        <AddressForm
+          onAddressChange={onAddressChange}
+          newPlaceInfo={newPlaceInfo}
+        />
+        <OptionForm
+          placeOptions={placeOptions}
+          setPlaceOptions={setPlaceOptions}
+        />
+        <RoomForm
+          newRoomInfo={newRoomInfo}
+          onRoomNameChange={onRoomNameChange}
+          onRoomPriceChange={onRoomPriceChange}
+          onPersonnelChange={onPersonnelChange}
+          onroomAmountChange={onroomAmountChange}
+          onAddNewRoom={onAddNewRoom}
+        />
+        <AddedRoom
+          newRoomList={newRoomList}
+          onClickDeleteRoomBtn={onClickDeleteRoomBtn}
+        />
+        <div className="createPlace-btn__container">
+          <button
+            className="createPlace-cancelBtn"
+            onClick={() => setConfirmModalOpen(true)}
+          >
+            등록취소
+          </button>
+          <button className="createPlace-createBtn" onClick={onCreateBtnClick}>
+            공간등록
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

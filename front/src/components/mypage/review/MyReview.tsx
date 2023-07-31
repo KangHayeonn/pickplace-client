@@ -6,7 +6,7 @@ import Review from '../../../api/review';
 import { isShowError } from '../../../components/common/ToastBox';
 import { reviewCardItemProps } from '../types';
 import '../../../styles/components/mypage/review/myReview.scss';
-import ConfirmModal from '../review/ConfirmModal';
+import ConfirmModal from '../ConfirmModal';
 
 const MyReview = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);

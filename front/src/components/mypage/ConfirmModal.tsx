@@ -1,8 +1,7 @@
 import React from 'react';
-import ModalForm from '../../../components/common/modal/ModalForm';
-import TextButton from '../../common/TextButton';
-import '../../../styles/components/common/confirmModal.scss';
-// import useModals from '../../../components/common/modal/UseModals';
+import ModalForm from '../common/modal/ModalForm';
+import TextButton from '../common/TextButton';
+import '../../styles/components/common/confirmModal.scss';
 
 interface ConfirmModalProps {
   title: string;

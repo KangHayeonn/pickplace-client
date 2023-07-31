@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PlaceForm from './CreatePlace/PlaceForm';
 import AddressForm from './CreatePlace/AddressForm';
 import OptionForm from './CreatePlace/OptionForm';
+import ConfirmModal from '../../../components/mypage/ConfirmModal';
 
 import '../../../styles/components/admin/managePlace/createPlace/createPlace.scss';
 import { placeProps, placeOptionsProps } from '../types';
@@ -92,11 +93,7 @@ const UpdatePlace = () => {
       placePhone: e.currentTarget.value,
     });
   };
-  const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (window.confirm('정말로 수정을 취소하시겠습니까?')) {
-      navigate('/mypage');
-    }
-  };
+
   const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(placeInfo)) {
       const data = {
@@ -133,28 +130,52 @@ const UpdatePlace = () => {
         });
     }
   };
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  const onClickClose = () => {
+    navigate('/mypage');
+  };
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
   return (
-    <div className="createPlace-container">
-      <PlaceForm
-        newPlaceInfo={placeInfo}
-        header={'공간 수정'}
-        onPlaceNameChange={onPlaceNameChange}
-        onPhoneChange={onPhoneChange}
-      />
-      <AddressForm onAddressChange={onAddressChange} newPlaceInfo={placeInfo} />
-      <OptionForm
-        placeOptions={placeOptions}
-        setPlaceOptions={setPlaceOptions}
-      />
-      <div className="createPlace-btn__container">
-        <button className="createPlace-cancelBtn" onClick={onCancleBtnClick}>
-          등록취소
-        </button>
-        <button className="createPlace-createBtn" onClick={onUpdateBtnClick}>
-          공간수정
-        </button>
+    <>
+      {confirmModalOpen && (
+        <ConfirmModal
+          onClose={onClickClose}
+          onCloseConfirmModal={onCloseConfirmModal}
+          title="공간 수정 취소"
+          content="취소 시에 내용이 저장되지 않습니다. 정말 취소하시겠습니까?"
+        />
+      )}
+      <div className="createPlace-container">
+        <PlaceForm
+          newPlaceInfo={placeInfo}
+          header={'공간 수정'}
+          onPlaceNameChange={onPlaceNameChange}
+          onPhoneChange={onPhoneChange}
+        />
+        <AddressForm
+          onAddressChange={onAddressChange}
+          newPlaceInfo={placeInfo}
+        />
+        <OptionForm
+          placeOptions={placeOptions}
+          setPlaceOptions={setPlaceOptions}
+        />
+        <div className="createPlace-btn__container">
+          <button
+            className="createPlace-cancelBtn"
+            onClick={() => setConfirmModalOpen(true)}
+          >
+            등록취소
+          </button>
+          <button className="createPlace-createBtn" onClick={onUpdateBtnClick}>
+            공간수정
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

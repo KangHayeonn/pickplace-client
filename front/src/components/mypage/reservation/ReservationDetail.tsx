@@ -6,7 +6,7 @@ import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import CreateModal from '../review/CreateModal';
 import User from '../../../api/mypage';
 import { reservationDetailProps, detailProps } from './types';
-import ConfirmModal from '../review/ConfirmModal';
+import ConfirmModal from '../ConfirmModal';
 const ReservationDetail = () => {
   const { state } = useLocation();
   const [createModalOpen, setCreateModalOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
-import ConfirmModal from './DeleteConfirmModal';
+import DeleteConfirmModal from '../DeleteConfirmModal';
 
 import StarIcon from '../../../assets/images/star-full.svg';
 import DeleteIcon from '../../../assets/images/trash.svg';
@@ -66,10 +66,12 @@ const DetailModal = ({
   return (
     <>
       {confirmModalOpen && (
-        <ConfirmModal
+        <DeleteConfirmModal
+          title={'리뷰 삭제'}
+          content={'삭제 시 리뷰를 복구할 수 없습니다. 정말 삭제하시겠습니까?'}
           onClose={onCloseConfirmModal}
-          onDeleteReview={onDeleteReview}
-          reviewId={reviewDetail.reviewId}
+          onSelectDelete={onDeleteReview}
+          id={reviewDetail.reviewId}
         />
       )}
       <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
