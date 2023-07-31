@@ -3,9 +3,9 @@ import { placeProps, newRoomProps } from '../types';
 export const confirmToPost = (placeInfo: placeProps) => {
   if (placeInfo.placeName == '') {
     window.alert('공간 이름을 입력해주세요');
-  } else if (placeInfo.phone == '') {
+  } else if (placeInfo.placePhone == '') {
     window.alert('연락처를 입력해주세요');
-  } else if (placeInfo.address == '') {
+  } else if (placeInfo.placeAddress == '') {
     window.alert('주소를 입력해주세요');
   } else return true;
   return false;

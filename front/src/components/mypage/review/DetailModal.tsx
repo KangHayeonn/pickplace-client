@@ -1,78 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 
 import StarIcon from '../../../assets/images/star-full.svg';
 import DeleteIcon from '../../../assets/images/trash.svg';
 import UpdateIcon from '../../../assets/images/edit.svg';
+import Review from '../../../api/review';
 
 import { reviewDetailProps } from '../types';
-import {
-  myReviewDetail,
-  myReviewDetail2,
-} from '../../../utils/mock/myReviewList';
 import '../../../styles/components/mypage/review/detailModal.scss';
 
 type DetailModalProps = {
   reviewId: number;
-  setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onUpdateBtnClick: (
+    reviewId: number,
+  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDeleteBtnClick: (
+    reviewId: number,
+  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
   setDetailModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  getUserReviews: () => void;
 };
 
 const DetailModal = ({
   reviewId,
-  setUpdateModalOpen,
+  getUserReviews,
   setDetailModalOpen,
+  onDeleteBtnClick,
+  onUpdateBtnClick,
 }: DetailModalProps) => {
-  // api : get reviewDetail with reviewId
-  const [reviewDetail, setReviewDetail] =
-    useState<reviewDetailProps>(myReviewDetail2);
+  const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
+    reviewId: 0,
+    reviewDate: '',
+    reviewContent: '',
+    reviewRating: 0,
+    reservationDate: '',
+    memberName: '',
+    placeAddress: '',
+    placeName: '',
+  });
 
   const onClickClose = () => {
     setDetailModalOpen(false);
     document.body.style.overflow = 'unset';
   };
-  const onDeleteBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
-      //delete api
-      onClickClose();
-    }
-  };
-  const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setDetailModalOpen(false);
-    setUpdateModalOpen(true);
+
+  useEffect(() => {
+    getUserReviewDetail();
+  }, []);
+
+  const getUserReviewDetail = () => {
+    Review.v1GetReviewDetail(reviewId)
+      .then((res) => {
+        getUserReviews();
+        setReviewDetail(res.data.data);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
 
   return (
     <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
       <div className="DetailModal-container">
         <ReviewModalHeader
-          nickname={reviewDetail.nickname}
-          date={reviewDetail.date}
+          memberName={reviewDetail.memberName}
+          reviewDate={reviewDetail.reviewDate}
           placeAddress={reviewDetail.placeAddress}
-          startDate={reviewDetail.startDate}
-          endDate={reviewDetail.endDate}
-          startTime={reviewDetail.startTime}
-          endTime={reviewDetail.endTime}
+          reservationDate={reviewDetail.reservationDate}
         />
         <div className="DetailModal-content">
           <div className="DetailModal-content__row1">
             <div className="DetailModal-card__rating">
               <img className="DetailModal-star" src={StarIcon} alt="star" />
-              {reviewDetail.rating}
+              {reviewDetail.reviewRating}
             </div>
             <div className="DetailModal-btn_container">
-              <button className="DetailModal-btn" onClick={onUpdateBtnClick}>
+              <button
+                className="DetailModal-btn"
+                onClick={onUpdateBtnClick(reviewId)}
+              >
                 <img src={UpdateIcon} />
               </button>
-              <button className="DetailModal-btn" onClick={onDeleteBtnClick}>
+              <button
+                className="DetailModal-btn"
+                onClick={onDeleteBtnClick(reviewId)}
+              >
                 <img src={DeleteIcon} />
               </button>
             </div>
           </div>
-
           <div className="DetailModal-card__reviewContent">
-            {reviewDetail.content}
+            {reviewDetail.reviewContent}
           </div>
         </div>
       </div>

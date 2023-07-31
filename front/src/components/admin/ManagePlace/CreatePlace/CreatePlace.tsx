@@ -28,10 +28,10 @@ const CreatePlace = () => {
 
   const [newPlaceInfo, setNewPlaceInfo] = useState<placeProps>({
     placeName: '',
-    address: '',
-    phone: '',
-    x: 0,
-    y: 0,
+    placeAddress: '',
+    placePhone: '',
+    placeXaxis: 0,
+    placeYaxis: 0,
   });
 
   const [newRoomInfo, setNewRoomInfo] =
@@ -53,15 +53,15 @@ const CreatePlace = () => {
   const onAddressChange = (address: string, x: string, y: string) => {
     setNewPlaceInfo({
       ...newPlaceInfo,
-      address: address,
-      x: parseFloat(x),
-      y: parseFloat(y),
+      placeAddress: address,
+      placeXaxis: parseFloat(x),
+      placeYaxis: parseFloat(y),
     });
   };
   const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPlaceInfo({
       ...newPlaceInfo,
-      phone: e.currentTarget.value,
+      placePhone: e.currentTarget.value,
     });
   };
   const onRoomNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,32 +110,43 @@ const CreatePlace = () => {
   };
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(newPlaceInfo)) {
-      const rooms = [];
-
-      for (let i = 0; i < newRoomList.length; i++) {
-        const { roomId, ...room } = newRoomList[i];
-        rooms.push(room);
+      if (newRoomList.length == 0) {
+        window.alert('방을 한 개 이상 추가해주세요');
+      } else {
+        const rooms = [];
+        for (let i = 0; i < newRoomList.length; i++) {
+          const { roomId, ...room } = newRoomList[i];
+          rooms.push(room);
+        }
+        const data = {
+          place: {
+            placeAddress: newPlaceInfo.placeAddress,
+            placeName: newPlaceInfo.placeName,
+            placePhone: newPlaceInfo.placePhone,
+            placeXaxis: newPlaceInfo.placeXaxis,
+            placeYaxis: newPlaceInfo.placeYaxis,
+          },
+          rooms: rooms,
+          category: placeOptions.category.name,
+          tagList: placeOptions.tagList,
+        };
+        Admin.v1CreatePlace(data)
+          .then((res) => {
+            const newState = {
+              placeId: res.data.data.placeId,
+              placeName: newPlaceInfo.placeName,
+              placeAddress: newPlaceInfo.placeAddress,
+              placePhone: newPlaceInfo.placePhone,
+              placeCategory: placeOptions.category.name,
+            };
+            navigate(`/mypage/managePlace/detail/${res.data.placeId}`, {
+              state: newState,
+            });
+          })
+          .catch((err) => {
+            return Promise.reject(err);
+          });
       }
-      const data = {
-        place: {
-          placeAddress: newPlaceInfo.address,
-          placeName: newPlaceInfo.placeName,
-          placePhone: newPlaceInfo.phone,
-          placeXaxis: newPlaceInfo.x,
-          placeYaxis: newPlaceInfo.y,
-        },
-        rooms: rooms,
-        category: placeOptions.category.name,
-        tagList: placeOptions.tagList,
-      };
-      Admin.v1CreatePlace(data)
-        .then((res) => {
-          // console.log(res);
-        })
-        .catch((err) => {
-          return Promise.reject(err);
-        });
-      navigate('/mypage');
     }
   };
   const onClickDeleteRoomBtn = (roomId: number) => {

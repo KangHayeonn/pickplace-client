@@ -23,7 +23,7 @@ const ManageReservation = () => {
   };
   return (
     <div className="manageReservation">
-      {adminReservationList ? (
+      {adminReservationList && adminReservationList.length > 0 ? (
         adminReservationList.map((item, key) => (
           <div key={key} className="manageReservation-place__container">
             <h3 className="manageReservation-placeName">{item.placeName}</h3>

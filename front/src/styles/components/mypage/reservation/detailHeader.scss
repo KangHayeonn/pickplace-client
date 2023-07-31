@@ -3,7 +3,7 @@
 .detail-header{
     width : 100%;
     display: block;
-    height : 330px;
+    height : 300px;
     background-color: white;
     box-shadow: $shadow-dropdown;    
     text-align: left;
@@ -22,7 +22,7 @@
             }
         }
     }
-    .detail-header__content{
+    .detail-header__content--container{
         padding : 20px;
         text-align: left;
         .detail-placeName{
@@ -30,9 +30,14 @@
             font-weight: 800;
             @include line-clamp-ellipsis1();
         }
+        .detail-header__content{
+            display : flex;
+            align-items: center;
+            margin-top : 10px;
+
+        }
         .detail-star{
             color : $color-text-yellow;
-            margin-bottom : 10px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -44,16 +49,11 @@
             }
         }
         .detail-reservationStatus{
-            display: flex;
-            justify-content: flex-start;
             color : $color-text-green;
             font-size : 15px;
             font-weight: 600;
-            .reviewCompleted{
-                margin-left : 10px;
-            }
+            margin-left : 15px;
             .review{
-                margin-left : 10px;
                 cursor: pointer; 
                 &:hover {
                     color: $color-text-lightgreen;
