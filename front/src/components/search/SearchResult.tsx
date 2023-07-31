@@ -7,9 +7,11 @@ import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
 import { GetCategoryImage } from '../common/GetCategoryImage';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '../../store/modules';
 
 const SearchResult = ({
-  searchResult,
   hasNext,
   pageNum,
   checkOptionFormIsEmpty,
@@ -19,7 +21,9 @@ const SearchResult = ({
   getSearchDataWithOptions,
 }: searchResultProps) => {
   const navigate = useNavigate();
-
+  const searchResult = useSelector(
+    (state: RootState) => state.searchResultReducer,
+  );
   const fetchMoreItems = async () => {
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {

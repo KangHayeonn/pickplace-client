@@ -4,12 +4,14 @@ import auth from './auth';
 import common from './common';
 import searchForm from './searchForm';
 import optionForm from './optionForm';
+import searchResultReducer from './searchResult';
 const rootReducer = combineReducers({
   sample,
   auth,
   common,
   searchForm,
   optionForm,
+  searchResultReducer,
 });
 
 // root reducer

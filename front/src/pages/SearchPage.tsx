@@ -14,11 +14,9 @@ import MapModal from '../components/map/MapModal';
 
 import { categoryNameList } from '../utils/mock/categoryList';
 import { markerListType } from '../components/map/types';
-import * as type from '../components/search/types';
 import '../styles/components/search/search.scss';
-import { searchFormProps } from '../store/modules/searchForm';
-import { resetSearchForm, setSearchType } from '../store/modules/searchForm';
-import { resetOptionForm } from '../store/modules/optionForm';
+import { setSearchType } from '../store/modules/searchForm';
+import { setSearchResult } from '../store/modules/searchResult';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -29,33 +27,14 @@ const SearchPage = () => {
   const [hasNext, setHasNext] = useState(false);
   const [onMapOpen, setOnMapOpen] = useState(false);
   const [markerList, setMarkerList] = useState<markerListType[]>([]);
-  const [searchResult, setSearchResult] = useState<
-    type.searchResultListProps[]
-  >([]);
 
   const searchForm = useSelector((state: RootState) => state.searchForm);
   const optionForm = useSelector((state: RootState) => state.optionForm);
-
-  // const defaultSearchFrom: searchFormProps = {
-  //   address: '서울 중구 창경궁로 62-29',
-  //   x: 126.998711,
-  //   y: 37.5681704,
-  //   startDate: format(new Date(), 'yyyy-MM-dd'),
-  //   endDate: format(new Date(), 'yyyy-MM-dd'),
-  //   distance: 5,
-  //   searchType: '추천순',
-  // };
-  // const defaultOptionForm = {
-  //   category: state.category ? state.category : categoryNameList[0],
-  //   userCnt: 1,
-  //   tagList: [''],
-  // };
-
+  const searchResult = useSelector(
+    (state: RootState) => state.searchResultReducer,
+  );
   useEffect(() => {
     getCategoryData();
-    // dispatch(resetSearchForm());
-    // const category = state.category ? state.category : categoryNameList[0];
-    // dispatch(resetOptionForm(category));
   }, []);
 
   const getCategoryData = async (item?: {
@@ -76,14 +55,15 @@ const SearchPage = () => {
 
     await Search.getCategoryData(data)
       .then((res) => {
+        const result = res.data.data.placeList;
         setHasNext(res.data.data.hasNext);
         if (item?.newPageNum === undefined) {
-          setSearchResult(res.data.data.placeList);
+          dispatch(setSearchResult(result));
         } else {
           if (item.newPageNum == 0) {
-            setSearchResult(res.data.data.placeList);
+            dispatch(setSearchResult(result));
           } else {
-            setSearchResult([...searchResult, ...res.data.data.placeList]);
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
           setPageNum(item.newPageNum);
         }
@@ -112,15 +92,17 @@ const SearchPage = () => {
     };
     Search.getSearchData(data)
       .then((res) => {
+        const result = res.data.data.placeList;
+
         setHasNext(res.data.data.hasNext);
         if (item?.newPageNum === undefined) {
-          setSearchResult(res.data.data.placeList);
+          dispatch(setSearchResult(result));
           setPageNum(0);
         } else {
           if (item.newPageNum == 0) {
-            setSearchResult(res.data.data.placeList);
+            dispatch(setSearchResult(result));
           } else {
-            setSearchResult([...searchResult, ...res.data.data.placeList]);
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
           setPageNum(item.newPageNum);
         }
@@ -151,15 +133,17 @@ const SearchPage = () => {
     };
     Search.getSearchDataWithOptions(data)
       .then((res) => {
+        const result = res.data.data.placeList;
+
         setHasNext(res.data.data.hasNext);
         if (item?.newPageNum === undefined) {
-          setSearchResult(res.data.data.placeList);
+          dispatch(setSearchResult(result));
           setPageNum(0);
         } else {
           if (item.newPageNum == 0) {
-            setSearchResult(res.data.data.placeList);
+            dispatch(setSearchResult(result));
           } else {
-            setSearchResult([...searchResult, ...res.data.data.placeList]);
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
           setPageNum(item.newPageNum);
         }
@@ -265,7 +249,6 @@ const SearchPage = () => {
             </button>
           </div>
           <SearchResult
-            searchResult={searchResult}
             pageNum={pageNum}
             hasNext={hasNext}
             checkOptionFormIsEmpty={checkOptionFormIsEmpty}

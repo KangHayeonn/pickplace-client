@@ -22,7 +22,7 @@ export type searchOptionMenuProps = {
 };
 
 export type categorySelectorProps = {
-  categoryName?: string;
+  categoryName: string;
   onChangeCategory: (category: string) => void;
 };
 
@@ -45,22 +45,7 @@ export type searchFilterProps = {
   onClickFilterButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export interface searchResultListProps {
-  placeId: number;
-  placeName: string;
-  placeAddress: {
-    address: string;
-    latitude: number;
-    longitude: number;
-  };
-  placeRating: number;
-  placeReviewCnt: number;
-  category: string;
-  tags: string[];
-}
-
 export type searchResultProps = {
-  searchResult: searchResultListProps[];
   pageNum: number;
   hasNext: boolean;
   checkOptionFormIsEmpty: () => boolean;

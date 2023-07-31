@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import { handleActions } from 'redux-actions';
 
 // Action Type 정의
-export const SET_CATEGORY = 'search/SET_STARTDATE' as const;
-export const SET_USERCNT = 'search/SET_CATEGORY' as const;
+export const SET_CATEGORY = 'search/SET_CATEGORY' as const;
+export const SET_USERCNT = 'search/SET_USERCNT' as const;
 export const SET_TAGLIST = 'search/SET_TAGLIST' as const;
 export const RESET_OPTIONFORM = 'search/RESET_OPTIONFORM' as const;
 
