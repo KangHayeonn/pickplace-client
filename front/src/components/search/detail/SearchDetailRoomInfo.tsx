@@ -26,7 +26,7 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
               <span>{roomItem?.roomPrice}원</span>
             </div>
             <div className="search-detail-room__content--btn">
-              {roomItem?.roomStatus === 'progress' ? (
+              {roomItem?.roomStatus ? (
                 <button
                   type="button"
                   className="search-detail-room__content--btn__reservation"
