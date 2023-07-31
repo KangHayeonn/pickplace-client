@@ -1,0 +1,77 @@
+@import "../../../base/variable.scss";
+
+.MyReview{
+    min-width : 550px;
+    max-height: 40rem;
+    @include overflow-y-scroll();
+}
+.MyReview-card__container{
+    min-width : 470px;
+    background-color: white;
+    margin : 10px 5px;
+    padding : 20px 30px;    
+    cursor : pointer;
+    text-align: left;    
+    box-shadow: $shadow-dropdown;    
+}
+
+.MyReview-card__header{           
+    display: flex;
+    align-items: center;
+    .MyReview-card__header--col1{
+        .detail-img__container{
+            @include background-default-small();
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+        }
+        margin : 0 20px 10px 0;
+    }
+    .MyReview-card__header--col2{
+        width: 100%;
+        .MyReview-card__header--row1{
+            .MyReview-placeName{
+                font-size : 22px;
+                margin-bottom : 5px;
+                @include line-clamp-ellipsis1();
+            }
+        }
+    }
+    .MyReview-btn_container{
+        width : 80px;
+        display: flex;
+        align-items: center;
+        .MyReview-btn{
+            background-color: rgba(0,0,0,0);
+            margin: 0 5px;
+        }
+    }
+}
+
+.MyReview-card__content{
+    .MyReview-card__rating{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color : $color-text-yellow;
+        font-weight: 700;
+        font-size: 18px;
+        .MyReview-star{
+            width : 20px;
+            margin-right : 5px;
+        }
+    }
+    .MyReview-card__reviewContent{
+        padding : 10px 0;
+    }
+}
+
+.MyReview-card__info{
+    margin-top : 10px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 15px;
+    .MyReview-nickname{
+        margin : 0 10px;
+    }
+}

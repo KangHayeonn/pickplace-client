@@ -34,19 +34,21 @@ const SearchOptionMenu = ({
     });
   };
   const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const tagId = e.currentTarget.value;
+    const selectedName = e.currentTarget.value;
     const clickedButton = e.currentTarget;
     if (clickedButton.classList.contains('clicked')) {
       e.currentTarget.classList.remove('clicked');
       setOptionForm({
         ...optionForm,
-        tagId: optionForm.tagId.filter((id) => id !== parseInt(tagId)),
+        tagList: optionForm.tagList.filter(
+          (tagName) => tagName !== selectedName,
+        ),
       });
     } else {
       e.currentTarget.classList.add('clicked');
       setOptionForm({
         ...optionForm,
-        tagId: [...optionForm.tagId, parseInt(tagId)],
+        tagList: [...optionForm.tagList, selectedName],
       });
     }
   };
@@ -58,23 +60,26 @@ const SearchOptionMenu = ({
   };
 
   return (
-    <div className="container SearchOptionMenu">
+    <div className="searchOptionMenu-container">
       <hr />
       <CategorySelector
         categoryName={optionForm.category.name}
         onChangeCategory={onChangeCategory}
       />
-      <div className="container personnel">
-        <h3>인원</h3>
+      <div className="personnel-container">
+        <h3 className="personnel-header">인원</h3>
         <div className="counter">
-          <NumberForm min={0} onChangeNum={onChangeNum}></NumberForm>
+          <NumberForm min={0} onChangeNum={onChangeNum} />
         </div>
       </div>
       <DistanceInput onChangeUserRangeInput={onChangeUserRangeInput} />
       <hr />
       <TagSelector onClickTagButton={onClickTagButton} />
       <hr />
-      <button className="button submit" onClick={onSearchWithOptionBtnClick}>
+      <button
+        className="searchOptionMenu-submitBtn"
+        onClick={onSearchWithOptionBtnClick}
+      >
         옵션적용
       </button>
     </div>

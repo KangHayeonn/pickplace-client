@@ -3,24 +3,26 @@ export type searchHeaderProps = {
   endDate: string;
   category: string;
   address: string;
-  onChangeAddress: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  x: number;
+  y: number;
+  onChangeAddress: (address: string, x: string, y: string) => void;
   onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchBtnClick: () => void;
 };
 
 export interface optionFormProps {
-  startTime: string;
-  endTime: string;
   category: {
     name: string;
     id: number;
   };
   userCnt: number;
-  tagId: Array<number>;
+  tagList: Array<string>;
 }
 export interface searchFormProps {
   address: string;
+  x: number;
+  y: number;
   startDate: string;
   endDate: string;
   distance: number;
@@ -36,7 +38,6 @@ export type searchOptionMenuProps = {
 };
 
 export type categorySelectorProps = {
-  // optionForm: optionFormProps;
   categoryName: string;
   onChangeCategory: (category: string) => void;
 };
@@ -70,8 +71,25 @@ export interface searchResultListProps {
   };
   placeRating: number;
   placeReviewCnt: number;
+  category: string;
+  tags: string[];
 }
 
 export type searchResultProps = {
   searchResult: searchResultListProps[];
+  pageNum: number;
+  hasNext: boolean;
+  checkOptionFormIsEmpty: () => boolean;
+  checkSearchFormIsEmpty: () => boolean;
+
+  getSearchData: (item?: { newPageNum?: number; searchType?: string }) => void;
+  getSearchDataWithOptions: (item: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => void;
+
+  getCategoryData: (item?: {
+    newPageNum?: number;
+    searchType?: string;
+  }) => void;
 };

@@ -3216,6 +3216,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/redux-actions@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "@types/redux-actions@npm:2.6.2"
+  checksum: 61388ab6f590b61037c5366ddd030c1445c86d61314554488cf62cc3a79a0a4d76da5b61cf4e5fcd40b83d07d40a428a2eff0b2f4f8433f9c620db2b88061b2d
+  languageName: node
+  linkType: hard
+
+"@types/redux-logger@npm:^3":
+  version: 3.0.9
+  resolution: "@types/redux-logger@npm:3.0.9"
+  dependencies:
+    redux: ^4.0.0
+  checksum: c41fdc09198fae2d62ff7d6bd029ccae1fed655e6a7abd40614a8db5d6e01adbe565881b2c8d398789804a48259e3399af3939f994a532c11904ba2021799275
+  languageName: node
+  linkType: hard
+
 "@types/resolve@npm:1.17.1":
   version: 1.17.1
   resolution: "@types/resolve@npm:1.17.1"
@@ -5702,6 +5718,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deep-diff@npm:^0.3.5":
+  version: 0.3.8
+  resolution: "deep-diff@npm:0.3.8"
+  checksum: 8a0fb6cbe468e50211836f8daa1c14798b2d7436bfbcb7d8eb0902e0d61bf1dfd48d5b9edd46a10596182b90ad25f87461b8e55111ff9257b6067ad0676f79c9
+  languageName: node
+  linkType: hard
+
 "deep-equal@npm:^2.0.5":
   version: 2.2.1
   resolution: "deep-equal@npm:2.2.1"
@@ -7156,6 +7179,8 @@ __metadata:
     "@types/react-dom": ^18.0.0
     "@types/react-redux": ^7.1.25
     "@types/react-router-dom": ^5.3.3
+    "@types/redux-actions": ^2.6.2
+    "@types/redux-logger": ^3
     "@types/testing-library__jest-dom": ^5
     "@typescript-eslint/eslint-plugin": ^5.59.8
     "@typescript-eslint/parser": ^5.59.8
@@ -7178,7 +7203,9 @@ __metadata:
     react-router-dom: ^6.11.2
     react-scripts: 5.0.1
     redux: ^4.2.1
+    redux-actions: ^3.0.0
     redux-devtools-extension: ^2.13.9
+    redux-logger: ^3.0.6
     redux-thunk: ^2.4.2
     sass: ^1.62.1
     typescript: ^4.4.2
@@ -9268,6 +9295,13 @@ __metadata:
     array-includes: ^3.1.5
     object.assign: ^4.1.3
   checksum: a2ed78cac49a0f0c4be8b1eafe3c5257a1411341d8e7f1ac740debae003de04e5f6372bfcfbd9d082e954ffd99aac85bcda85b7c6bc11609992483f4cdc0f745
+  languageName: node
+  linkType: hard
+
+"just-curry-it@npm:5.3.0":
+  version: 5.3.0
+  resolution: "just-curry-it@npm:5.3.0"
+  checksum: 7a7d2e118c23e47374efa1a388f82d8b698953203408f398cd5333d22ea31aaa7ea7a10022f9475ba76c6068468bbb0476398a069f7129586f44ee51ef28a88f
   languageName: node
   linkType: hard
 
@@ -11992,12 +12026,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"reduce-reducers@npm:1.0.4":
+  version: 1.0.4
+  resolution: "reduce-reducers@npm:1.0.4"
+  checksum: 9b3648fa505a3ac7834cd8150ec98f9915e4020c8df0e9a4eddb5d3615814067943913f2582d0be4763ad6583209c0cf7ad3cc1021745b9b8e6ace768d49f6a9
+  languageName: node
+  linkType: hard
+
+"redux-actions@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "redux-actions@npm:3.0.0"
+  dependencies:
+    just-curry-it: 5.3.0
+    reduce-reducers: 1.0.4
+  checksum: 29cbf70f767c26ff8fae7809341fed5d77afc780f4126d26de5a6beed5d8277eb7eed24c1414e806ec0cde604a9bd746963233ad26154da84cfd5b1a7e207f84
+  languageName: node
+  linkType: hard
+
 "redux-devtools-extension@npm:^2.13.9":
   version: 2.13.9
   resolution: "redux-devtools-extension@npm:2.13.9"
   peerDependencies:
     redux: ^3.1.0 || ^4.0.0
   checksum: 603d48fd6acf3922ef373b251ab3fdbb990035e90284191047b29d25b06ea18122bc4ef01e0704ccae495acb27ab5e47b560937e98213605dd88299470025db9
+  languageName: node
+  linkType: hard
+
+"redux-logger@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "redux-logger@npm:3.0.6"
+  dependencies:
+    deep-diff: ^0.3.5
+  checksum: c40f63c44c6475cf6374ae0eaa810d913f142614cb80692a0beacaf135c5dc3eb3e2cdd4296f01446ba48cb69b82e81363b84d829f1f6659382c991022a814ac
   languageName: node
   linkType: hard
 

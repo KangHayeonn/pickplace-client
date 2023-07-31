@@ -1,7 +1,10 @@
 @import "../../../base/variable.scss";
 
 .reservation{
+    padding : 0 5px;
     min-width : 550px;
+    max-height: 40rem;
+    @include overflow-y-scroll();
 }
 
 .img-container,.reservationCard-header,.reservationCard-content{
@@ -16,6 +19,7 @@
     justify-content: flex-start;
     margin : 10px 0;
     height: 240px;
+
     .img-container{
         @include background-default-small();
         min-width: 230px;

@@ -3,7 +3,6 @@ import { reservationBtnsProps } from './types';
 
 const ReservationBtns = ({
   reservationStatus,
-  onClickRefuseBtn,
   onClickAcceptBtn,
 }: reservationBtnsProps) => {
   return (
@@ -15,12 +14,6 @@ const ReservationBtns = ({
       )}
       {reservationStatus == 'Payment' && (
         <>
-          <button
-            className="reservedCard-btn__refuse"
-            onClick={onClickRefuseBtn}
-          >
-            예약거절
-          </button>
           <button
             className="reservedCard-btn__accept"
             onClick={onClickAcceptBtn}

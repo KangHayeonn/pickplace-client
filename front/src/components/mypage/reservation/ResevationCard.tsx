@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../ShowCardInfo';
-import * as type from '../types';
-import placeSmallImg from '../../../assets/images/place-default-small.svg';
-const ResevationCard = ({ reservationProps }: type.cardProps) => {
+import CreateModal from '../review/CreateModal';
+import { cardProps } from './types';
+
+const ResevationCard = ({ reservationProps }: cardProps) => {
   const navigate = useNavigate();
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+
   const onClickResevationCard = (e: React.MouseEvent<HTMLDivElement>) => {
     const state = {
       id: reservationProps.reservationId,
@@ -14,13 +17,16 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
     });
   };
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('리뷰작성');
-  };
-  const onClickRefuseBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약취소');
+    setCreateModalOpen(true);
   };
   return (
     <div className="reservationCard-container" key={reservationProps.placeId}>
+      {createModalOpen && (
+        <CreateModal
+          setCreateModalOpen={setCreateModalOpen}
+          reservationId={reservationProps.reservationId}
+        />
+      )}
       <div className="img-container" onClick={onClickResevationCard}></div>
       <div className="reservationCard">
         <div className="reservationCard-header" onClick={onClickResevationCard}>
@@ -48,29 +54,20 @@ const ResevationCard = ({ reservationProps }: type.cardProps) => {
           <ShowCardInfo
             childClassname={'reservation-time'}
             title={'예약 일시'}
-            content={reservationProps.reservationDate}
+            content={reservationProps.reservationDate.replace('T', ' ')}
           />
         </div>
         <div className="reservationCard-reservationStatus">
-          <span className="reservationCard-status">
-            {reservationProps.reservationStatus}
-          </span>
-          {reservationProps.reservationStatus == '이용 완료' &&
-            (reservationProps.ReviewExistence ? (
-              <span className="reservationCard-reviewCompleted">
-                리뷰 작성 완료
-              </span>
-            ) : (
-              <span
-                className="reservationCard-review"
-                onClick={onClickCreateReview}
-              >
-                리뷰 작성하기
-              </span>
-            ))}
-          {reservationProps.reservationStatus == '이용 전' && (
-            <span className="reservationCard-review" onClick={onClickRefuseBtn}>
-              예약 취소
+          {reservationProps.reviewExistence == true ? (
+            <span className="reservationCard-reviewCompleted">
+              리뷰 작성 완료
+            </span>
+          ) : (
+            <span
+              className="reservationCard-review"
+              onClick={onClickCreateReview}
+            >
+              리뷰 작성하기
             </span>
           )}
         </div>

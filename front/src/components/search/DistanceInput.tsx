@@ -4,12 +4,10 @@ import { distanceInputProps } from './types';
 
 const DistanceInput = ({ onChangeUserRangeInput }: distanceInputProps) => {
   return (
-    <div className="container distance">
-      <h3>거리</h3>
-      <DistanceSlider
-        onChangeUserRangeInput={onChangeUserRangeInput}
-      ></DistanceSlider>
-      <p>
+    <div className="distance-container">
+      <h3 className="distance-header">거리</h3>
+      <DistanceSlider onChangeUserRangeInput={onChangeUserRangeInput} />
+      <p className="distance-content">
         <span>0km</span>
         <span>10km</span>
       </p>

@@ -20,19 +20,19 @@ const OptionForm = ({ placeOptions, setPlaceOptions }: optionFormProps) => {
     }
   };
   const onClickTagButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const tagId = e.currentTarget.value;
+    const tagName = e.currentTarget.value;
     const clickedButton = e.currentTarget;
     if (clickedButton.classList.contains('clicked')) {
       e.currentTarget.classList.remove('clicked');
       setPlaceOptions({
         ...placeOptions,
-        tagId: placeOptions.tagId.filter((id) => id !== parseInt(tagId)),
+        tagList: placeOptions.tagList.filter((tagName) => tagName !== tagName),
       });
     } else {
       e.currentTarget.classList.add('clicked');
       setPlaceOptions({
         ...placeOptions,
-        tagId: [...placeOptions.tagId, parseInt(tagId)],
+        tagList: [...placeOptions.tagList, tagName],
       });
     }
   };

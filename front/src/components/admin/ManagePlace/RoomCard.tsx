@@ -3,37 +3,63 @@ import ShowCardInfo from '../../mypage/ShowCardInfo';
 import UpdateRoomInfo from './UpdateRoomInfo';
 import { roomCardProps } from '../types';
 import '../../../styles/components/admin/managePlace/roomCard.scss';
+import Admin from '../../../api/admin';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
-const RoomCard = ({ roomProps }: roomCardProps) => {
+const RoomCard = ({
+  roomProps,
+  getAdminDetailRoom,
+  placeCategory,
+}: roomCardProps) => {
   const [roomInfo, setRoomInfo] = useState({
     roomName: roomProps.roomName,
     roomPrice: roomProps.roomPrice,
     roomId: roomProps.roomId,
-    roomStatus: roomProps.roomStatus,
-    roomPersonnel: roomProps.roomPersonnel,
-    roomCount: roomProps.roomCount,
+    roomMaxNum: roomProps.roomMaxNum,
+    roomAmount: roomProps.roomAmount,
   });
   const [updateState, setUpdateState] = useState<boolean>(false);
 
   const onClickDeleteBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('삭제');
+    Admin.v1DeleteRoom(roomInfo.roomId)
+      .then((res) => {
+        getAdminDetailRoom();
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
 
   const onClickUpdateBtn = (
     newRoomName: string,
     newRoomPrice: number,
-    newRoomPersonnel: number,
-    newRoomCount: number,
+    newroomMaxNum: number,
+    newroomAmount: number,
   ) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
-      //room update api
+      const data = {
+        roomId: roomInfo.roomId,
+        data: {
+          roomName: newRoomName,
+          roomPrice: newRoomPrice,
+          roomMaxNum: newroomMaxNum,
+          roomAmount: newroomAmount,
+        },
+      };
       setRoomInfo({
-        ...roomInfo,
+        roomId: roomInfo.roomId,
         roomName: newRoomName,
         roomPrice: newRoomPrice,
-        roomPersonnel: newRoomPersonnel,
-        roomCount: newRoomCount,
+        roomMaxNum: newroomMaxNum,
+        roomAmount: newroomAmount,
       });
+      Admin.v1UpdateRoom(data)
+        .then((res) => {
+          getAdminDetailRoom();
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
       setUpdateState(false);
     };
   };
@@ -41,7 +67,12 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
     <div className="roomCard-container" key={roomProps.roomId}>
       {updateState ? (
         <div className="roomCard-update__container">
-          <div className="roomCard-img__container" />
+          <div
+            className="roomCard-img__container"
+            style={{
+              backgroundImage: `url(${GetCategoryImage(placeCategory)})`,
+            }}
+          />
           <UpdateRoomInfo
             roomInfo={roomInfo}
             setUpdateState={setUpdateState}
@@ -50,7 +81,12 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
         </div>
       ) : (
         <div className="roomCard-show__container">
-          <div className="roomCard-img__container" />
+          <div
+            className="roomCard-img__container"
+            style={{
+              backgroundImage: `url(${GetCategoryImage(placeCategory)})`,
+            }}
+          />
           <div className="roomCard-right__container">
             <div className="roomCard-header">
               <h2 className="roomCard-placeName">{roomInfo.roomName}</h2>
@@ -64,12 +100,12 @@ const RoomCard = ({ roomProps }: roomCardProps) => {
               <ShowCardInfo
                 childClassname={'personnel'}
                 title={'인원 수'}
-                content={roomInfo.roomPersonnel + ' 명'}
+                content={roomInfo.roomMaxNum + ' 명'}
               />
               <ShowCardInfo
                 childClassname={'count'}
                 title={'방 개수'}
-                content={roomInfo.roomCount + ' 개'}
+                content={roomInfo.roomAmount + ' 개'}
               />
             </div>
             <div className="managePlace-detail__btn--container">

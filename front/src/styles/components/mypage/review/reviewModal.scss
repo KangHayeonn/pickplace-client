@@ -1,0 +1,40 @@
+@import "../../../base/variable.scss";
+
+.ReviewModal-container{
+    padding : 0px 50px;
+}
+
+.ReviewModal-content{
+    .ReviewModal-starRate__container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom : 10px;
+    }
+    .ReviewModal-textArea__container{ 
+        .ReviewModal-textArea{
+            width : 92%;
+            height : 130px;
+            padding : 20px;
+            font-size : 17px;
+            resize: none;
+            background-color: $color-surface-lightgray;
+            border-radius: 20px;
+        }
+        .ReviewModal-count__container{
+            text-align: right;
+            margin-right : 10px;
+        }
+    }
+}
+
+.ReviewModal-btn__container{
+    .ReviewModal-submitBtn{
+        padding : 7px 20px;
+        @include button-white;
+        
+        &:hover{
+            @include button-hover-gray;
+        }
+    }
+}

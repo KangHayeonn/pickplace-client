@@ -17,7 +17,7 @@ import Calendar from '../components/common/Calendar';
 
 const SamplePage = () => {
   const navigate = useNavigate();
-  const count = useSelector((state: RootState) => state.mock.count);
+  const count = useSelector((state: RootState) => state.sample.count);
   const dispatch = useDispatch();
   const [message, setMessage] = useState<string>('');
   const [isShowToast, setIsShowToast] = useState<boolean>(false);
@@ -90,9 +90,7 @@ const SamplePage = () => {
           onChangeText={onChangeMessage}
         />
       </div>
-      {isShowToast && (
-        <ToastBox text="토스트메시지" setIsShow={setIsShowToast} />
-      )}
+      {isShowToast && <ToastBox />}
       <RadioGroup onRadioChange={handleChange}>
         <RadioButton value="radio">라디오</RadioButton>
         <RadioButton value="button">버튼</RadioButton>

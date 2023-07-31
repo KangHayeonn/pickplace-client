@@ -4,6 +4,7 @@ import Reservation from '../components/mypage/reservation/Reservation';
 import UserInfo from '../components/mypage/userInfo/UserInfo';
 import ManagePlace from '../components/admin/ManagePlace/ManagePlace';
 import ManageReservation from '../components/admin/ManageReservation/ManageReservation';
+import MyReview from '../components/mypage/review/MyReview';
 import '../styles/components/mypage/mypage.scss';
 
 const MyPage = () => {
@@ -21,8 +22,9 @@ const MyPage = () => {
       <div className="mypage-content">
         {clickedMenu === 0 && <Reservation />}
         {clickedMenu === 1 && <UserInfo />}
-        {clickedMenu === 2 && <ManagePlace />}
-        {clickedMenu === 3 && <ManageReservation />}
+        {clickedMenu === 2 && <MyReview />}
+        {clickedMenu === 3 && <ManagePlace />}
+        {clickedMenu === 4 && <ManageReservation />}
       </div>
     </div>
   );

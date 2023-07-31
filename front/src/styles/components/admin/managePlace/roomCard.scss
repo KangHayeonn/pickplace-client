@@ -12,11 +12,11 @@
 }
 
 .roomCard-img__container{
-    @include background-default-small();
     min-width: 220px;
     width: 30%;
     height : 100%;
     border-radius : 5px 0 0 5px;
+    @include background-default();
 }
 
 .roomCard-update__container{

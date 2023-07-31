@@ -1,58 +1,78 @@
 export type reservedCardProps = {
-  adminReservationProps: {
-    reservationId: number;
-    placeId: number;
-    placeName: string;
-    startDate: string;
-    endDate: string;
-    startTime: string;
-    endTime: string;
-    reservationStatus: string;
-  };
+  adminReservationProps: reservedRoom;
 };
 
+export type reservedRoom = {
+  reservationId: number;
+  roomName: string;
+  checkInDate: string;
+  checkInTime: string;
+  checkOutDate: string;
+  checkOutTime: string;
+  createdDate: string;
+  updatedDated: string;
+  reservationStatus: string;
+  reservationPeopleNum: string;
+};
+
+export type adminReservation = {
+  placeName: string;
+  reservations: reservedRoom[];
+};
+
+export type adminReservationDetail = {
+  member: {
+    memberName: string;
+  };
+
+  reservation: {
+    reservationId: number;
+    roomName: string;
+    checkInDate: string;
+    checkInTime: string;
+    checkOutDate: string;
+    checkOutTime: string;
+    reservationStatus: string;
+    createdDate: string;
+    updatedDate: string;
+    reservationPeopleNum: number;
+  };
+
+  place: {
+    placeAddress: string;
+    placePhone: string;
+    placeName: string;
+    placeId: number;
+    placeCategory: string;
+  };
+};
 export type reservationBtnsProps = {
   reservationStatus: string;
-  onClickRefuseBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickAcceptBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export type placeCardProps = {
-  adminPlaceProps: {
-    placeId: number;
-    placeName: string;
-    placePhone: string;
-    placeAddress: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-    placeRating: number;
-    placeReviewCnt: number;
-    roomList: {
-      roomId: number;
-      roomName: string;
-      roomPrice: number;
-      roomStatus: string;
-    }[];
-  };
+export type adminPlaceProps = {
+  placeName: string;
+  placeAddress: string;
+  placePhone: string;
+  placeCategory: string;
+  placeId: number;
 };
 
+export type placeCardProps = {
+  adminPlace: adminPlaceProps;
+};
 export type placeHeaderProps = {
   placeName: string;
   placePhone: string;
+  placeCategory: string;
   address: string;
 };
 
 export type roomCardProps = {
-  roomProps: {
-    roomId: number;
-    roomName: string;
-    roomPrice: number;
-    roomStatus: string;
-    roomPersonnel: number;
-    roomCount: number;
-  };
+  roomProps: roomProps;
+  getAdminDetailRoom: () => void;
+  placeCategory: string;
 };
 
 export type updateRoomInfoProps = {
@@ -61,33 +81,33 @@ export type updateRoomInfoProps = {
   onClickUpdateBtn: (
     newRoomName: string,
     newRoomPrice: number,
-    newRoomPersonnel: number,
-    newRoomCount: number,
+    newroomMaxNum: number,
+    newroomAmount: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type newRoomProps = {
   roomName: string;
   roomPrice: string;
-  roomPersonnel: string;
-  roomCount: string;
+  roomMaxNum: string;
+  roomAmount: string;
   roomId: undefined | number;
 };
 
 export type roomProps = {
   roomName: string;
   roomPrice: number;
-  roomPersonnel: number;
-  roomCount: number;
-  roomId: undefined | number;
+  roomMaxNum: number;
+  roomAmount: number;
+  roomId: number;
 };
 
 export type placeProps = {
   placeName: string;
-  address: string;
-  phone: string;
-  x: number;
-  y: number;
+  placeAddress: string;
+  placePhone: string;
+  placeXaxis: number;
+  placeYaxis: number;
 };
 
 export type addedRoomProps = {
@@ -102,15 +122,15 @@ export type roomFormProps = {
   onRoomNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRoomPriceChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPersonnelChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onRoomCountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onroomAmountChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddNewRoom: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type placeFormProps = {
   newPlaceInfo: {
     placeName: string;
-    address: string;
-    phone: string;
+    placeAddress: string;
+    placePhone: string;
   };
   header: string;
   onPlaceNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -120,8 +140,8 @@ export type placeFormProps = {
 export type addressFormProps = {
   newPlaceInfo: {
     placeName: string;
-    address: string;
-    phone: string;
+    placeAddress: string;
+    placePhone: string;
   };
   onAddressChange: (address: string, x: string, y: string) => void;
 };
@@ -131,7 +151,7 @@ export type placeOptionsProps = {
     name: string;
     id: number;
   };
-  tagId: Array<number>;
+  tagList: Array<string>;
 };
 
 export type optionFormProps = {

@@ -1,0 +1,48 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 32;
+    min-height: 45rem;
+    background-color: #fff;
+    gap: 1rem;
+
+    &-circle {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+        border: 0.3rem solid #000;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        animation: loadingCircle 1s linear 0s infinite normal
+    }
+
+    &-empty {
+        position: absolute;
+        background-color: #fff;
+        width: 1rem;
+        height: 2rem;
+        top: -1rem;
+    }
+}
+
+@keyframes hideLoadingScreen {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+}
+
+@keyframes loadingCircle {
+    from {
+        transform: none;
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

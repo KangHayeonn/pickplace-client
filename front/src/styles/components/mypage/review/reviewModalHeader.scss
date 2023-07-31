@@ -1,0 +1,51 @@
+@import "../../../base/variable.scss";
+
+.ReviewModalHeader-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .ReviewModalHeader-nickname{
+        display: flex;
+        align-items: center;
+        .ReviewModalHeader-profileIcon{
+            width : 30px;
+            margin-right : 10px;
+        }
+        font-size: 20px;
+    }
+    .ReviewModalHeader-date{
+        color : $color-text-gray;
+    }
+}
+
+.ReviewModalHeader-header{
+    display: flex;
+    margin : 20px 0 30px 0;
+    .ReviewModalHeader-img__container{
+        @include background-default-small();
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+    }
+    .ReviewModalHeader-reviewInfo{    
+        width: 60%;
+        padding : 10px 20px;
+        
+        .ReviewModalHeader-pinIcon,
+        .ReviewModalHeader-clockIcon{
+            margin : 0 20px;
+        }
+        .ReviewModalHeader-address,.ReviewModalHeader-dateOfUse{
+            display: flex;
+            align-items: center;
+        }
+        .ReviewModalHeader-address{
+            margin : 10px 0 20px;
+        }
+        .ReviewModalHeader-dateOfUse{
+            display: flex;
+            align-items: flex-start;
+        }
+
+    }
+}

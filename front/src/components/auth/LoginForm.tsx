@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { LoginRequestType } from '../../api/auth/types';
+import { setLogin } from '../../store/modules/auth';
+import { showToast } from '../../store/modules/common';
 import TextField from '../common/TextField';
 import TextButton from '../common/TextButton';
 import '../../styles/components/auth/loginForm.scss';
 import KakaoLoginIcon from '../../assets/images/login-kakao.svg';
 import NaverLoginIcon from '../../assets/images/login-naver.svg';
 import GoogleLoginIcon from '../../assets/images/login-google.svg';
+import {
+  setUserId,
+  setNickName,
+  setAccessToken,
+  setRefreshToken,
+  setRole,
+} from '../../utils/tokenControl';
+import { KAKAO_LOGIN_URL } from '../../api/auth';
 
 const LoginForm = () => {
+  // router
+  const navigate = useNavigate();
+  // state
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  // redux
+  const dispatch: ThunkDispatch<LoginRequestType, void, AnyAction> =
+    useDispatch();
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -19,13 +39,35 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const login = async (e: React.FormEvent<HTMLFormElement>) => {
+  const loginEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO : login api logic
+    const data = {
+      email: email,
+      password: password,
+    };
+    await dispatch(setLogin(data))
+      .then((res) => {
+        if (res) {
+          const { memberId, nickname, accessToken, refreshToken, role } =
+            res.member;
+          setUserId(`${memberId}`);
+          setNickName(nickname);
+          setAccessToken(accessToken);
+          setRefreshToken(refreshToken);
+          setRole(role);
+          initForm();
+          navigate('/');
+          dispatch(showToast('로그인을 성공하였습니다.'));
+        }
+        return;
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
 
   const loginKakao = () => {
-    // TODO : kakao login logic
+    window.location.href = KAKAO_LOGIN_URL;
   };
 
   const loginNaver = () => {
@@ -36,8 +78,13 @@ const LoginForm = () => {
     // TODO : google login logic
   };
 
+  const initForm = () => {
+    setEmail('');
+    setPassword('');
+  };
+
   return (
-    <form className="login-form" onSubmit={login}>
+    <form className="login-form" onSubmit={loginEvent}>
       <div className="login-form__field">
         <label htmlFor="email" className="screen_out">
           이메일
@@ -45,6 +92,7 @@ const LoginForm = () => {
         <TextField
           id="email"
           placeholder="이메일을 입력해주세요."
+          value={email}
           onChangeText={changeEmail}
         />
       </div>
@@ -57,6 +105,7 @@ const LoginForm = () => {
           placeholder="비밀번호를 입력해주세요"
           inputType="pw"
           textType="password"
+          value={password}
           onChangeText={changePassword}
         />
       </div>

@@ -1,34 +1,47 @@
+import { GetCategoryImage } from '../common/GetCategoryImage';
+
 export const markerHtml = (name: string, category: string, tag: string[]) => {
-  // parameter로 이미지 src 받기
+  const img = GetCategoryImage(category);
   return `
             <div 
                 className="marker-container"
-                style="background-color:white;
-                height : 130px; 
-                width : 100px;
-                border-radius : 10px;
-                padding : 10px 0;
-                border:1px solid black;"
+                style="
+                    background-color:white;
+                    max-height : 150px; 
+                    width : 100px;
+                    border-radius : 10px;
+                    padding : 12px 0;
+                    border:1px solid lightgray;
+                "
             >
                 <div 
-                    className="img-container"
-                    style="margin : auto; 
-                    background-color:lightgray; 
-                    width : 70%; 
-                    height : 50%;"
-                >
-                </div>
-                <div 
+                    className="map-img-container"
                     style="
-                        align-items : center; 
-                        display : flex; 
+                        display : flex;
                         justify-content : center;
-                        height : 33px; 
+                        align-items : center;
+                        width : 70px; 
+                        height : 70px;
+                        overflow : hidden;
+                        margin :auto;
+                        position : relative;
                     "
-                >
+                >   
+                    <img src="${img}" 
+                        style="
+                            position: absolute;
+                            transform: translate(50, 50);
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            margin: auto;
+                        "
+                    /> 
+                </div>
+                <div>
                     <h5 
                         style="
-                            margin : 3px;   
+                            margin : 5px 3px;   
                             overflow: hidden;
                             text-overflow: ellipsis;
                             display: -webkit-box;
@@ -41,13 +54,24 @@ export const markerHtml = (name: string, category: string, tag: string[]) => {
                 </div>
                 <p className="tag-container"
                     style="
+                        max-height : 35px;
                         font-size: 12px; 
                         margin : 5px; 
                         line-height:15px;
                     ">
-                    ${category}
-                    <span style="color: cadetblue;">#${tag[0]}</span>
-                    <span style="color: seagreen;">#${tag[1]}</span>
+                    ${category ? category : '호텔·리조트'}
+                    <span style="color: cadetblue;">${
+                      tag[0] ? '#' + tag[0] : ''
+                    }</span>
+                    <span style="color: seagreen;">${
+                      tag[1] ? '#' + tag[1] : ''
+                    }</span>
+                    <span style="color: purple;">${
+                      tag[2] ? '#' + tag[2] : ''
+                    }</span>
+                    <span style="color: navy;">${
+                      tag[3] ? '#' + tag[3] : ''
+                    }</span>
                 </p>
             </div>
         `;

@@ -1,25 +1,20 @@
 import React from 'react';
-import articleImg from '../assets/images/main-article.png';
-import mapImg from '../assets/images/dummy_map.png';
-import '../styles/components/main/main.scss';
 import { useNavigate } from 'react-router-dom';
-import { categoryList } from '../utils/mock/categoryList';
+
 import Map from '../components/map/Map';
 import { markerList } from '../utils/mock/markerList';
+import { categoryList } from '../utils/mock/categoryList';
+import articleImg from '../assets/images/main-article.png';
+import '../styles/components/main/main.scss';
 
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const onClickCategryBtn = (item?: { name: string; id: number }) => {
-    const state = item
-      ? {
-          name: item.name,
-          id: item.id,
-        }
-      : {
-          name: categoryList[0].name,
-          id: categoryList[0].id,
-        };
+  const onClickCategryBtn = (item: { name: string; id: number }) => {
+    const state = {
+      name: item.name,
+      id: item.id,
+    };
     navigate('/search', {
       state: state,
     });
@@ -35,7 +30,6 @@ const MainPage = () => {
               {item.name}
             </button>
           ))}
-          <button onClick={() => onClickCategryBtn()}>더보기</button>
         </div>
         <hr></hr>
         <article>
