@@ -38,3 +38,10 @@ export type getSearchDataWithOptionsProps = {
   userCnt: number;
   tagList: Array<string>;
 };
+
+export interface ISearchDetail {
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+}

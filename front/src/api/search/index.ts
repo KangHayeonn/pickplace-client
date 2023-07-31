@@ -3,6 +3,7 @@ import {
   getSearchDataProps,
   getSearchDataWithOptionsProps,
   getCategoryDataProps,
+  ISearchDetail,
 } from './types';
 const prefix = '/api/v1/search';
 
@@ -61,6 +62,16 @@ const Search = {
         userCnt: data.userCnt,
         tagList: data.tagList,
       });
+      return result;
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+  // 검색 공간 상세
+  async v1SearchDetail(placeId: number, data: ISearchDetail) {
+    try {
+      const url = `${prefix}/${placeId}`;
+      const result = await instance.post(url, data);
       return result;
     } catch (error) {
       return Promise.reject(error);

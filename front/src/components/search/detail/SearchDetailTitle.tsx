@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../../styles/components/search/detail/searchDetailTitle.scss';
 import arrowLeftIcon from '../../../assets/images/arrow-left.svg';
 import starIcon from '../../../assets/images/star-full.svg';
+import Api from '../../../api/search';
 
 const SearchDetailTitle = () => {
   const navigate = useNavigate();
@@ -19,6 +20,20 @@ const SearchDetailTitle = () => {
   const goReviewPage = () => {
     navigate(`/search/${searchId}/review`);
   };
+
+  const getPlaceDetail = () => {
+    const data = {
+      startDate: '2023.06.30',
+      endDate: '2023.07.01',
+      startTime: '11:00',
+      endTime: '12:00',
+    };
+    Api.v1SearchDetail(Number(searchId), data);
+  };
+
+  useEffect(() => {
+    getPlaceDetail;
+  }, []);
 
   return (
     <div className="search-detail-top">
