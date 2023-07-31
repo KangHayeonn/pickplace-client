@@ -54,26 +54,22 @@ const ResevationCard = ({ reservationProps }: cardProps) => {
           <ShowCardInfo
             childClassname={'reservation-time'}
             title={'예약 일시'}
-            content={reservationProps.reservationDate}
+            content={reservationProps.reservationDate.replace('T', ' ')}
           />
         </div>
         <div className="reservationCard-reservationStatus">
-          <span className="reservationCard-status">
-            {reservationProps.reservationStatus}
-          </span>
-          {reservationProps.reservationStatus == '이용 완료' &&
-            (reservationProps.ReviewExistence ? (
-              <span className="reservationCard-reviewCompleted">
-                리뷰 작성 완료
-              </span>
-            ) : (
-              <span
-                className="reservationCard-review"
-                onClick={onClickCreateReview}
-              >
-                리뷰 작성하기
-              </span>
-            ))}
+          {reservationProps.reviewExistence == true ? (
+            <span className="reservationCard-reviewCompleted">
+              리뷰 작성 완료
+            </span>
+          ) : (
+            <span
+              className="reservationCard-review"
+              onClick={onClickCreateReview}
+            >
+              리뷰 작성하기
+            </span>
+          )}
         </div>
       </div>
     </div>

@@ -3,36 +3,26 @@ import PinIcon from '../../../assets/images/pin.svg';
 import ClockIcon from '../../../assets/images/clock.svg';
 import ProfileIcon from '../../../assets/images/profile.svg';
 import '../../../styles/components/mypage/review/reviewModalHeader.scss';
-
-interface ReviewModalHeaderProps {
-  nickname?: string;
-  date?: string;
-  placeAddress: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
-}
+import { ReviewModalHeaderProps } from '../types';
 
 const ReviewModalHeader = ({
-  nickname,
-  date,
+  memberName,
+  reviewDate,
   placeAddress,
-  startDate,
-  endDate,
-  startTime,
-  endTime,
+  reservationDate,
 }: ReviewModalHeaderProps) => {
   return (
     <>
       <div className="ReviewModalHeader-top">
-        {nickname && (
+        {memberName && (
           <span className="ReviewModalHeader-nickname">
             <img className="ReviewModalHeader-profileIcon" src={ProfileIcon} />
-            {nickname} 님이 작성함
+            {memberName} 님이 작성함
           </span>
         )}
-        {date && <span className="ReviewModalHeader-date">{date}</span>}
+        {reviewDate && (
+          <span className="ReviewModalHeader-date">{reviewDate}</span>
+        )}
       </div>
       <div className="ReviewModalHeader-header">
         <div className="ReviewModalHeader-img__container"></div>
@@ -43,23 +33,9 @@ const ReviewModalHeader = ({
           </div>
           <div className="ReviewModalHeader-dateOfUse">
             <img className="ReviewModalHeader-clockIcon" src={ClockIcon} />
-            {startDate == endDate ? (
-              <div>
-                <span>{startDate} </span>
-                <span>
-                  {startTime} ~ {endTime}
-                </span>
-              </div>
-            ) : (
-              <div className="ReviewModalHeader-dateRange">
-                <p>
-                  {startDate} {startTime}
-                </p>
-                <p>
-                  {endDate} {endTime}
-                </p>
-              </div>
-            )}
+            <div>
+              <span>{reservationDate} </span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,31 +1,37 @@
 import { instanceWithToken } from '../../api';
 import { getUserId } from '../../utils/tokenControl';
-import { updatePhoneType, updateNicknameType } from './types';
 const prefix = '/api/v1/members';
+const prefixReservation = '/api/v1/reservation';
 
 const User = {
   async v1GetUserInfo() {
     try {
-      const url = `${prefix}/${getUserId()}`;
-      const result = await instanceWithToken.post(url);
+      const url = `${prefix}/info/${getUserId()}`;
+      const result = await instanceWithToken.get(url);
       return result;
     } catch (err) {
       return Promise.reject(err);
     }
   },
-  async v1UpdateNickname(data: updateNicknameType) {
+  async v1UpdateNickname(nickname: string) {
     try {
-      const url = `${prefix}/nickname`;
-      const result = await instanceWithToken.put(url, data);
+      const url = `${prefix}/info/nickname`;
+      const result = await instanceWithToken.put(url, {
+        memberId: getUserId(),
+        nickname: nickname,
+      });
       return result;
     } catch (err) {
       return Promise.reject(err);
     }
   },
-  async v1UpdatePhone(data: updatePhoneType) {
+  async v1UpdatePhone(phone: string) {
     try {
-      const url = `${prefix}/phone`;
-      const result = await instanceWithToken.put(url, data);
+      const url = `${prefix}/info/phone`;
+      const result = await instanceWithToken.put(url, {
+        memberId: getUserId(),
+        phone: phone,
+      });
       return result;
     } catch (err) {
       return Promise.reject(err);
@@ -33,7 +39,7 @@ const User = {
   },
   async v1GetUserReservations() {
     try {
-      const url = `${prefix}/reservations`;
+      const url = `${prefixReservation}/info/${getUserId()}`;
       const result = await instanceWithToken.get(url);
       return result;
     } catch (err) {
@@ -42,17 +48,8 @@ const User = {
   },
   async v1GetUserReservationDetail(reservationId: number) {
     try {
-      const url = `${prefix}/reservations/${reservationId}`;
+      const url = `${prefixReservation}/info/details/${reservationId}`;
       const result = await instanceWithToken.get(url);
-      return result;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
-  async v1DeleteUserReservation(reservationId: number) {
-    try {
-      const url = `${prefix}/reservations/${reservationId}`;
-      const result = await instanceWithToken.delete(url);
       return result;
     } catch (err) {
       return Promise.reject(err);
