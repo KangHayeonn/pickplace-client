@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../styles/components/common/calendar.scss';
 import { ko } from 'date-fns/esm/locale';
 import { setHours, setMinutes } from 'date-fns';
-import { RootState } from '../../store/modules';
 
 interface CalendarProps {
   calendarType?: string;
