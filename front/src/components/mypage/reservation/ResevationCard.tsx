@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../ShowCardInfo';
 import CreateModal from '../review/CreateModal';
 import { cardProps } from './types';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
+import ConfirmModal from '../review/ConfirmModal';
 
 const ResevationCard = ({ reservationProps }: cardProps) => {
   const navigate = useNavigate();
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   const onClickResevationCard = (e: React.MouseEvent<HTMLDivElement>) => {
     const state = {
@@ -17,17 +20,42 @@ const ResevationCard = ({ reservationProps }: cardProps) => {
     });
   };
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
+    document.body.style.overflow = 'hidden';
     setCreateModalOpen(true);
+  };
+  const onClickClose = () => {
+    setCreateModalOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
   };
   return (
     <div className="reservationCard-container" key={reservationProps.placeId}>
+      {confirmModalOpen && (
+        <ConfirmModal
+          onClose={onClickClose}
+          onCloseConfirmModal={onCloseConfirmModal}
+          title="리뷰 생성 취소"
+          content="취소 시에 내용이 저장되지 않습니다. 정말 취소하시겠습니까?"
+        />
+      )}
       {createModalOpen && (
         <CreateModal
+          setConfirmModalOpen={setConfirmModalOpen}
           setCreateModalOpen={setCreateModalOpen}
           reservationId={reservationProps.reservationId}
         />
       )}
-      <div className="img-container" onClick={onClickResevationCard}></div>
+      <div
+        className="img-container"
+        onClick={onClickResevationCard}
+        style={{
+          backgroundImage: `url(${GetCategoryImage(
+            reservationProps.category,
+          )})`,
+        }}
+      ></div>
       <div className="reservationCard">
         <div className="reservationCard-header" onClick={onClickResevationCard}>
           <h2 className="card-placeName">{reservationProps.placeName}</h2>

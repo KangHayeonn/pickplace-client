@@ -1,10 +1,9 @@
 @import "../../base/variable.scss";
 
-.modal-container {
+.modal-container,.review-modal-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -13,6 +12,12 @@
     background-color: $color-dimmed;
 }
 
+.modal-container{
+    z-index: 999;
+}
+.review-modal-container {
+    z-index: 900;
+}
 .modal-form {
     width: 600px;
     &__title {

@@ -14,16 +14,19 @@ export type resevationInfoProps = {
   placeName: string;
   address: string;
   reservationDate: string;
+  placeCategory: string;
 };
 const CreateModal = ({
   reservationId,
   setCreateModalOpen,
+  setConfirmModalOpen,
 }: CreateModalProps) => {
   const [reviewContent, setReviewContent] = useState('');
   const [resevationInfo, setReservationInfo] = useState<resevationInfoProps>({
     placeName: '',
     address: '',
     reservationDate: '',
+    placeCategory: '',
   });
   const [starRate, setStarRate] = useState(0);
 
@@ -41,6 +44,7 @@ const CreateModal = ({
             'T',
             ' ',
           ),
+          placeCategory: res.data.data.reservation[0].category,
         });
       })
       .catch((err) => {
@@ -50,15 +54,6 @@ const CreateModal = ({
   const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (reviewContent.length <= 500)
       setReviewContent(e.currentTarget.value.substring(0, 500));
-  };
-  const onClickClose = () => {
-    if (
-      window.confirm(
-        '취소 시 내용이 저장되지 않습니다. 작성을 취소하시겠습니까?',
-      )
-    ) {
-      setCreateModalOpen(false);
-    }
   };
   const onClickStar = (rate: number) => {
     setStarRate(rate);
@@ -87,9 +82,13 @@ const CreateModal = ({
   };
 
   return (
-    <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
+    <ModalForm
+      title={resevationInfo.placeName}
+      onClickEvent={() => setConfirmModalOpen(true)}
+    >
       <div className="ReviewModal-container">
         <ReviewModalHeader
+          category={resevationInfo.placeCategory}
           placeAddress={resevationInfo.address}
           reservationDate={resevationInfo.reservationDate}
         />
