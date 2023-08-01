@@ -9,6 +9,7 @@ export interface reservationProps {
   reservationStatus: string;
   reviewExistence: boolean;
   reservationDate: string;
+  category: string;
 }
 export type cardProps = {
   reservationProps: reservationProps;
@@ -18,12 +19,14 @@ export type detailCardProps = {
   title?: string;
 };
 export type detailHeaderProps = {
+  category: string;
   placeRating: number;
   placeName: string;
   ReviewExistence: boolean;
-  setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onOpenCreateModal: (e: React.MouseEvent<HTMLSpanElement>) => void;
 };
-export type detailContentProps = {
+
+export type detailProps = {
   address: string;
   placePhone: string;
   reservationId: number;
@@ -35,6 +38,9 @@ export type detailContentProps = {
   nickName: string;
   personnel: number;
   roomPrice?: number;
+};
+export type detailContentProps = {
+  reservation: detailProps;
 };
 
 export type reservationDetailProps = {
@@ -48,6 +54,7 @@ export type reservationDetailProps = {
   placePhone: string;
   placeRating: number;
   placeReviewCnt: number;
+  category: string;
 
   userId: number;
   nickname: string;
