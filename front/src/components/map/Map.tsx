@@ -45,8 +45,14 @@ const Map = ({ width, height, markerList }: mapProps) => {
       zoomControl: true,
       scaleControl: true,
       bounds: new naver.maps.PointBounds(
-        new naver.maps.Point(getMinLat(markerList), getMinLng(markerList)),
-        new naver.maps.Point(getMaxLat(markerList), getMaxLng(markerList)),
+        new naver.maps.Point(
+          getMinLat(markerList),
+          getMinLng(markerList) - 0.005,
+        ),
+        new naver.maps.Point(
+          getMaxLat(markerList),
+          getMaxLng(markerList) + 0.005,
+        ),
       ),
     });
     for (let i = 0; i < markerList.length; i++) {
