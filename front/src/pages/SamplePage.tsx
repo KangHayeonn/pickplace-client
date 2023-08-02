@@ -14,6 +14,7 @@ import ToastBox from '../components/common/ToastBox';
 import RadioGroup from '../components/common/RadioGroupContext';
 import RadioButton from '../components/common/RadioButton';
 import Calendar from '../components/common/Calendar';
+import SelectBox from '../components/common/SelectBox';
 
 const SamplePage = () => {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const SamplePage = () => {
       <Calendar calendarType="time" />
       <Calendar calendarType="date" />
       <Calendar calendarType="range" />
+      <SelectBox />
     </div>
   );
 };

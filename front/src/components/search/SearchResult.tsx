@@ -45,9 +45,10 @@ const SearchResult = ({
 
   const onResultCardClick = (placeId: number) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
-      navigate(`/search/:${placeId}/detail`);
+      navigate(`/search/${placeId}/detail`);
     };
   };
+
   return (
     <div className="searchResult-container">
       {searchResult.length > 0 ? (

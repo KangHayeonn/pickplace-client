@@ -7,13 +7,36 @@ import { setHours, setMinutes } from 'date-fns';
 
 interface CalendarProps {
   calendarType?: string;
+  selectTime?: (time: Date | null) => void;
+  selectDate?: (date: Date | null) => void;
+  selectDateRange?: (dateRange: Array<Date | null>) => void;
 }
 
-const Calendar = ({ calendarType }: CalendarProps) => {
+const Calendar = ({
+  calendarType,
+  selectTime,
+  selectDate,
+  selectDateRange,
+}: CalendarProps) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState<Date | null>(null);
   const [dateRange, setDateRange] = useState<Array<Date | null>>([null, null]);
   const [startDateRange, endDateRange] = dateRange;
+
+  const onClickTime = (date: Date | null) => {
+    if (selectTime) selectTime(date);
+    setTime(date);
+  };
+
+  const onClickDate = (date: Date | null) => {
+    if (selectDate) selectDate(date);
+    setStartDate(date);
+  };
+
+  const onClickDateRange = (range: Array<Date | null>) => {
+    if (selectDateRange) selectDateRange(range);
+    setDateRange(range);
+  };
 
   if (calendarType === 'time') {
     return (
@@ -29,7 +52,7 @@ const Calendar = ({ calendarType }: CalendarProps) => {
           minTime={setHours(setMinutes(new Date(), 0), 15)}
           maxTime={setHours(setMinutes(new Date(), 0), 23)}
           dateFormat="h:mm aa"
-          onChange={(date) => setTime(date)}
+          onChange={(date) => onClickTime(date)}
           className="calendar-time"
           placeholderText="시간 입력"
         />
@@ -49,7 +72,7 @@ const Calendar = ({ calendarType }: CalendarProps) => {
           minDate={new Date()}
           dateFormat="yyyy.MM.dd"
           onChange={(update) => {
-            setDateRange(update);
+            onClickDateRange(update);
           }}
           className="calendar-range"
           placeholderText="기간 입력"
@@ -67,7 +90,7 @@ const Calendar = ({ calendarType }: CalendarProps) => {
         minDate={new Date()}
         dateFormat="yyyy.MM.dd"
         onChange={(date) => {
-          setStartDate(date);
+          onClickDate(date);
         }}
         placeholderText="날짜 입력"
       />
