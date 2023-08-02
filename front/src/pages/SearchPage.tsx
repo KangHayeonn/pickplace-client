@@ -25,6 +25,7 @@ import { categoryNameList } from '../utils/mock/categoryList';
 import { markerListType } from '../components/map/types';
 import '../styles/components/search/search.scss';
 import { format } from 'date-fns';
+import { isShowError } from '../components/common/ToastBox';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -161,7 +162,7 @@ const SearchPage = () => {
   };
   const checkAddressExist = () => {
     if (searchForm.address == '') {
-      window.alert('주소를 입력해주세요');
+      isShowError('주소를 입력해주세요');
       return false;
     }
     return true;
