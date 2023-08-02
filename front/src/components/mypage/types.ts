@@ -19,10 +19,12 @@ export type ReviewModalHeaderProps = {
   reviewDate?: string;
   placeAddress: string;
   reservationDate: string;
+  category: string;
 };
 export type CreateModalProps = {
   reservationId: number;
   setCreateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export type updateUserInfoProps = {
   title: string;
@@ -36,9 +38,7 @@ export type ReviewCardProps = {
   onUpdateBtnClick: (
     reviewId: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onDeleteBtnClick: (
-    reviewId: number,
-  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDeleteReview: (reviewId: number) => void;
   onCardClick: (
     reviewId: number,
   ) => (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -52,6 +52,7 @@ export type reviewCardItemProps = {
 
   reviewRating: number;
   memberName: string;
+  placeCategory: string;
 
   placeName: string;
 };
@@ -80,10 +81,13 @@ export type reviewDetailProps = {
   memberName: string;
   placeAddress: string;
   placeName: string;
+
+  placeCategory: string;
 };
 
 export type UpdateModalProps = {
   reviewId: number;
   getUserReviews: () => void;
   setUpdateModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setConfirmModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
