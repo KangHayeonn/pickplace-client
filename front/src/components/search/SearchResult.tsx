@@ -2,14 +2,19 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useIntersectionObserver from './useIntersectionObserver';
 import useViewportObserver from './useViewportObserver';
-
 import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
 import { GetCategoryImage } from '../common/GetCategoryImage';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/modules';
 
+import format from 'date-fns/format';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/modules';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { searchDetail } from '../../store/modules/searchDetail';
+import { SearchDetailType } from '../../api/search/types';
+import { searchResultListProps } from '../../store/modules/searchResult';
 const SearchResult = ({
   checkOptionFormIsEmpty,
   checkSearchFormIsEmpty,
@@ -29,6 +34,12 @@ const SearchResult = ({
   const pageNum = useSelector(
     (state: RootState) => state.searchApiReducer.pageNum,
   );
+  const dispatchSearchDetail: ThunkDispatch<
+    { placeId: number; data: SearchDetailType },
+    void,
+    AnyAction
+  > = useDispatch();
+
   const fetchMoreItems = async () => {
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
@@ -64,9 +75,16 @@ const SearchResult = ({
   };
   const { setShownCard } = useViewportObserver({ onIntersectViewport });
 
-  const onResultCardClick = (placeId: number) => {
+  const onResultCardClick = (item: searchResultListProps) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
-      navigate(`/search/${placeId}/detail`);
+      const data = {
+        startDate: format(new Date(), 'yyyy-MM-dd'),
+        endDate: format(new Date(), 'yyyy-MM-dd'),
+        startTime: '15:00',
+        endTime: '22:00',
+      };
+      dispatchSearchDetail(searchDetail(item.placeId, data));
+      navigate(`/search/${item.placeId}/detail`);
     };
   };
 
@@ -85,7 +103,7 @@ const SearchResult = ({
             data-lng={item.placeAddress.longitude}
             data-category={item.category}
             data-tag={item.tags}
-            onClick={onResultCardClick(item.placeId)}
+            onClick={onResultCardClick(item)}
           >
             <img
               className="searchResult-img"

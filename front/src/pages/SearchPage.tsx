@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/modules';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-
-import SearchHeader from '../components/search/SearchHeader';
-import SearchOptionMenu from '../components/search/SearchOptionMenu';
-import SearchFilter from '../components/search/SearchFilter';
-import SearchResult from '../components/search/SearchResult';
-import MapModal from '../components/map/MapModal';
-
-import { categoryNameList } from '../utils/mock/categoryList';
-import { markerListType } from '../components/map/types';
-import '../styles/components/search/search.scss';
 import { setSearchType } from '../store/modules/searchForm';
 import { setSearchResult } from '../store/modules/searchResult';
 import {
@@ -26,8 +15,21 @@ import {
 } from '../store/modules/search';
 import { searchProps } from '../store/modules/search';
 
+import SearchHeader from '../components/search/SearchHeader';
+import SearchOptionMenu from '../components/search/SearchOptionMenu';
+import SearchFilter from '../components/search/SearchFilter';
+import SearchResult from '../components/search/SearchResult';
+import MapModal from '../components/map/MapModal';
+
+import { categoryNameList } from '../utils/mock/categoryList';
+import { markerListType } from '../components/map/types';
+import '../styles/components/search/search.scss';
+import { format } from 'date-fns';
+
 const SearchPage = () => {
   const dispatch = useDispatch();
+  const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
+    useDispatch();
   const { state } = useLocation();
 
   const [onMapOpen, setOnMapOpen] = useState(false);
@@ -38,8 +40,6 @@ const SearchPage = () => {
   const searchResult = useSelector(
     (state: RootState) => state.searchResultReducer,
   );
-  const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
-    useDispatch();
 
   useEffect(() => {
     getCategoryData({ searchForm, optionForm, pagination: undefined });
@@ -142,27 +142,21 @@ const SearchPage = () => {
     setMarkerList(newMarkerList);
   };
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchType(e.currentTarget.value));
+    const value = e.currentTarget.value;
+    const data = {
+      searchForm,
+      optionForm,
+      pagination: { searchType: value, newPageNum: 0 },
+    };
+    dispatch(setSearchType(value));
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({
-          searchForm,
-          optionForm,
-          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-        });
+        getCategoryData(data);
       } else {
-        getSearchData({
-          searchForm,
-          optionForm,
-          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-        });
+        getSearchData(data);
       }
     } else {
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-      });
+      getSearchDataWithOptions(data);
     }
   };
   const checkAddressExist = () => {
@@ -194,20 +188,11 @@ const SearchPage = () => {
     return false;
   };
   const onSearchBtnClick = () => {
-    checkOptionFormIsEmpty() &&
-      checkAddressExist() &&
-      getSearchData({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: 0 },
-      });
-    !checkOptionFormIsEmpty() &&
-      checkAddressExist() &&
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: 0 },
-      });
+    if (checkAddressExist()) {
+      const data = { searchForm, optionForm, pagination: { newPageNum: 0 } };
+      checkOptionFormIsEmpty() && getSearchData(data);
+      !checkOptionFormIsEmpty() && getSearchDataWithOptions(data);
+    }
   };
   const onSearchWithOptionBtnClick = () => {
     checkAddressExist() &&
