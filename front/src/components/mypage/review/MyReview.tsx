@@ -3,15 +3,17 @@ import DetailModal from './DetailModal';
 import UpdateModal from './UpdateModal';
 import ReviewCard from './ReviewCard';
 import Review from '../../../api/review';
-
+import { isShowError } from '../../../components/common/ToastBox';
 import { reviewCardItemProps } from '../types';
 import '../../../styles/components/mypage/review/myReview.scss';
+import ConfirmModal from '../ConfirmModal';
 
 const MyReview = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [detailModalOpen, setDetailModalOpen] = useState(false);
   const [myReviewList, setMyReviewList] = useState<reviewCardItemProps[]>();
   const [clickedReviewId, setClickedReviewId] = useState(-1);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   useEffect(() => {
     getUserReviews();
@@ -26,7 +28,6 @@ const MyReview = () => {
         return Promise.reject(err);
       });
   };
-
   const onCardClick = (reviewId: number) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
       document.body.style.overflow = 'hidden';
@@ -34,19 +35,16 @@ const MyReview = () => {
       setClickedReviewId(reviewId);
     };
   };
-  const onDeleteBtnClick = (reviewId: number) => {
-    return (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (window.confirm('정말로 삭제하시겠습니까?')) {
-        Review.v1DetleteReview(reviewId)
-          .then((res) => {
-            getUserReviews();
-            setDetailModalOpen(false);
-          })
-          .catch((err) => {
-            return Promise.reject(err);
-          });
-      }
-    };
+  const onDeleteReview = (reviewId: number) => {
+    Review.v1DetleteReview(reviewId)
+      .then((res) => {
+        isShowError('리뷰 삭제 완료');
+        getUserReviews();
+        setDetailModalOpen(false);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   };
   const onUpdateBtnClick = (reviewId: number) => {
     return (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,14 +54,29 @@ const MyReview = () => {
       setClickedReviewId(reviewId);
     };
   };
+  const onClickClose = () => {
+    setUpdateModalOpen(false);
+    document.body.style.overflow = 'unset';
+  };
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
 
   return (
     <div className="MyReview">
+      {confirmModalOpen && (
+        <ConfirmModal
+          onClose={onClickClose}
+          onCloseConfirmModal={onCloseConfirmModal}
+          title="리뷰 수정 취소"
+          content="취소 시에 내용이 저장되지 않습니다. 정말 취소하시겠습니까?"
+        />
+      )}
       {detailModalOpen && (
         <DetailModal
           reviewId={clickedReviewId}
           onUpdateBtnClick={onUpdateBtnClick}
-          onDeleteBtnClick={onDeleteBtnClick}
+          onDeleteReview={onDeleteReview}
           getUserReviews={getUserReviews}
           setDetailModalOpen={setDetailModalOpen}
         />
@@ -73,6 +86,7 @@ const MyReview = () => {
           reviewId={clickedReviewId}
           setUpdateModalOpen={setUpdateModalOpen}
           getUserReviews={getUserReviews}
+          setConfirmModalOpen={setConfirmModalOpen}
         />
       )}
 
@@ -82,7 +96,7 @@ const MyReview = () => {
             reviewItem={item}
             key={key}
             onCardClick={onCardClick}
-            onDeleteBtnClick={onDeleteBtnClick}
+            onDeleteReview={onDeleteReview}
             onUpdateBtnClick={onUpdateBtnClick}
           />
         ))

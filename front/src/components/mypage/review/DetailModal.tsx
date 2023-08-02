@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
+import DeleteConfirmModal from '../DeleteConfirmModal';
 
 import StarIcon from '../../../assets/images/star-full.svg';
 import DeleteIcon from '../../../assets/images/trash.svg';
 import UpdateIcon from '../../../assets/images/edit.svg';
 import Review from '../../../api/review';
-
 import { reviewDetailProps } from '../types';
 import '../../../styles/components/mypage/review/detailModal.scss';
 
@@ -15,9 +15,7 @@ type DetailModalProps = {
   onUpdateBtnClick: (
     reviewId: number,
   ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onDeleteBtnClick: (
-    reviewId: number,
-  ) => (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDeleteReview: (reviewId: number) => void;
   setDetailModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   getUserReviews: () => void;
 };
@@ -26,7 +24,7 @@ const DetailModal = ({
   reviewId,
   getUserReviews,
   setDetailModalOpen,
-  onDeleteBtnClick,
+  onDeleteReview,
   onUpdateBtnClick,
 }: DetailModalProps) => {
   const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
@@ -38,8 +36,13 @@ const DetailModal = ({
     memberName: '',
     placeAddress: '',
     placeName: '',
+    placeCategory: '',
   });
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
   const onClickClose = () => {
     setDetailModalOpen(false);
     document.body.style.overflow = 'unset';
@@ -61,41 +64,53 @@ const DetailModal = ({
   };
 
   return (
-    <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
-      <div className="DetailModal-container">
-        <ReviewModalHeader
-          memberName={reviewDetail.memberName}
-          reviewDate={reviewDetail.reviewDate}
-          placeAddress={reviewDetail.placeAddress}
-          reservationDate={reviewDetail.reservationDate}
+    <>
+      {confirmModalOpen && (
+        <DeleteConfirmModal
+          title={'리뷰 삭제'}
+          content={'삭제 시 리뷰를 복구할 수 없습니다. 정말 삭제하시겠습니까?'}
+          onClose={onCloseConfirmModal}
+          onSelectDelete={onDeleteReview}
+          id={reviewDetail.reviewId}
         />
-        <div className="DetailModal-content">
-          <div className="DetailModal-content__row1">
-            <div className="DetailModal-card__rating">
-              <img className="DetailModal-star" src={StarIcon} alt="star" />
-              {reviewDetail.reviewRating}
+      )}
+      <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
+        <div className="DetailModal-container">
+          <ReviewModalHeader
+            category={reviewDetail.placeCategory}
+            memberName={reviewDetail.memberName}
+            reviewDate={reviewDetail.reviewDate}
+            placeAddress={reviewDetail.placeAddress}
+            reservationDate={reviewDetail.reservationDate}
+          />
+          <div className="DetailModal-content">
+            <div className="DetailModal-content__row1">
+              <div className="DetailModal-card__rating">
+                <img className="DetailModal-star" src={StarIcon} alt="star" />
+                {reviewDetail.reviewRating}
+              </div>
+              <div className="DetailModal-btn_container">
+                <button
+                  className="DetailModal-btn"
+                  onClick={onUpdateBtnClick(reviewId)}
+                >
+                  <img src={UpdateIcon} />
+                </button>
+                <button
+                  className="DetailModal-btn"
+                  onClick={() => setConfirmModalOpen(true)}
+                >
+                  <img src={DeleteIcon} />
+                </button>
+              </div>
             </div>
-            <div className="DetailModal-btn_container">
-              <button
-                className="DetailModal-btn"
-                onClick={onUpdateBtnClick(reviewId)}
-              >
-                <img src={UpdateIcon} />
-              </button>
-              <button
-                className="DetailModal-btn"
-                onClick={onDeleteBtnClick(reviewId)}
-              >
-                <img src={DeleteIcon} />
-              </button>
+            <div className="DetailModal-card__reviewContent">
+              {reviewDetail.reviewContent}
             </div>
-          </div>
-          <div className="DetailModal-card__reviewContent">
-            {reviewDetail.reviewContent}
           </div>
         </div>
-      </div>
-    </ModalForm>
+      </ModalForm>
+    </>
   );
 };
 

@@ -4,12 +4,14 @@ import ClockIcon from '../../../assets/images/clock.svg';
 import ProfileIcon from '../../../assets/images/profile.svg';
 import '../../../styles/components/mypage/review/reviewModalHeader.scss';
 import { ReviewModalHeaderProps } from '../types';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
 const ReviewModalHeader = ({
   memberName,
   reviewDate,
   placeAddress,
   reservationDate,
+  category,
 }: ReviewModalHeaderProps) => {
   return (
     <>
@@ -25,7 +27,12 @@ const ReviewModalHeader = ({
         )}
       </div>
       <div className="ReviewModalHeader-header">
-        <div className="ReviewModalHeader-img__container"></div>
+        <div
+          className="ReviewModalHeader-img__container"
+          style={{
+            backgroundImage: `url(${GetCategoryImage(category)})`,
+          }}
+        ></div>
         <div className="ReviewModalHeader-reviewInfo">
           <div className="ReviewModalHeader-address">
             <img className="ReviewModalHeader-pinIcon" src={PinIcon} />

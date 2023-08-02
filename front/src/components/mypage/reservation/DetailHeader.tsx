@@ -4,24 +4,28 @@ import StarIcon from '../../../assets/images/star-full.svg';
 import { detailHeaderProps } from './types';
 import '../../../styles/components/mypage/reservation/detailHeader.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
+import { GetCategoryImage } from '../../common/GetCategoryImage';
 
 const DetailHeader = ({
   placeName,
+  category,
   placeRating,
   ReviewExistence,
-  setCreateModalOpen,
+  onOpenCreateModal,
 }: detailHeaderProps) => {
   const navigate = useNavigate();
 
-  const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setCreateModalOpen(true);
-  };
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate('/mypage');
   };
   return (
     <div className="detail-header">
-      <div className="detail-img__container">
+      <div
+        className="detail-img__container"
+        style={{
+          backgroundImage: `url(${GetCategoryImage(category)})`,
+        }}
+      >
         <button className="reservation-detail__back--btn" onClick={onClickBack}>
           <img src={leftArrow} className="reservation-detail__leftArrow" />
         </button>
@@ -37,7 +41,7 @@ const DetailHeader = ({
             {ReviewExistence ? (
               <span className="reviewCompleted">리뷰 작성 완료</span>
             ) : (
-              <span className="review" onClick={onClickCreateReview}>
+              <span className="review" onClick={onOpenCreateModal}>
                 리뷰 작성하기
               </span>
             )}
