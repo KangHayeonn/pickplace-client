@@ -5,8 +5,9 @@ import common from './common';
 import searchDetail from './searchDetail';
 import searchForm from './searchForm';
 import optionForm from './optionForm';
-import searchResult from './searchResult';
+import searchResultReducer from './searchResult';
 import search from './search';
+
 const rootReducer = combineReducers({
   sample,
   auth,
@@ -14,7 +15,7 @@ const rootReducer = combineReducers({
   searchDetail,
   searchForm,
   optionForm,
-  searchResult,
+  searchResultReducer,
   search,
 });
 
