@@ -39,7 +39,6 @@ const MainPage = () => {
     };
     const res = await searchApi.getSearchDataWithOptions(data);
     const placeList: searchResultListProps[] = res.data.data.placeList;
-
     const newMarkerList: markerListType[] = [];
     placeList.map((item) =>
       newMarkerList.push({

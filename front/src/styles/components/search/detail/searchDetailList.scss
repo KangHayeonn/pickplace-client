@@ -47,4 +47,15 @@
             margin-top: 0.3rem;
         }
     }
+
+    &--isEmpty {
+        display: flex;
+        justify-content: center;
+        width: 65rem;
+        padding-top: 15rem;
+        min-height: 400px;
+        font-size: 18px;
+        font-weight: 600;
+        color: $color-surface-variant;
+    }
 }

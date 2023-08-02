@@ -2,18 +2,13 @@ import { combineReducers } from 'redux';
 import sample from './sample';
 import auth from './auth';
 import common from './common';
-import searchForm from './searchForm';
-import optionForm from './optionForm';
-import searchResultReducer from './searchResult';
-import searchApiReducer from './search';
+import searchDetail from './searchDetail';
+
 const rootReducer = combineReducers({
   sample,
   auth,
   common,
-  searchForm,
-  optionForm,
-  searchResultReducer,
-  searchApiReducer,
+  searchDetail,
 });
 
 // root reducer
