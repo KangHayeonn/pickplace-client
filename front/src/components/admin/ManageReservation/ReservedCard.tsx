@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ShowCardInfo from '../../mypage/ShowCardInfo';
-import ReservationBtns from '../ReservationBtns';
 import { reservedCardProps } from '../types';
+import { isShowError } from '../../../components/common/ToastBox';
 
 const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
   };
 
   const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약수락');
+    isShowError('예약수락');
   };
 
   return (
@@ -50,12 +50,6 @@ const ReservedCard = ({ adminReservationProps }: reservedCardProps) => {
             ' ' +
             adminReservationProps.checkOutTime
           }
-        />
-      </div>
-      <div className="reservedCard__btns">
-        <ReservationBtns
-          reservationStatus={adminReservationProps.reservationStatus}
-          onClickAcceptBtn={onClickAcceptBtn}
         />
       </div>
     </div>
