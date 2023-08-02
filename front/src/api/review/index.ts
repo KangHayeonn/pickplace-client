@@ -23,7 +23,7 @@ const Review = {
   },
   async v1GetReviewDetail(reviewId: number) {
     try {
-      const url = `${prefix}/${reviewId}`;
+      const url = `${prefix}/detail/${reviewId}`;
       const result = await instance.get(url);
       return result;
     } catch (err) {
