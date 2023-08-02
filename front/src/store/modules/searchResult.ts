@@ -30,7 +30,6 @@ const searchResultReducer = handleActions(
   {
     [SET_SEARCHRESULT]: (state, action) => action.payload,
   },
-
   initialState,
 );
 

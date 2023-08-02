@@ -4,7 +4,6 @@ import '../../styles/components/search/searchHeader.scss';
 import SearchForm from '../common/SearchForm';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import format from 'date-fns/format';
 import { RootState } from '../../store/modules';
 import {
   setStartDate,

@@ -1,3 +1,5 @@
+import { searchProps } from '@/store/modules/search';
+
 export type searchHeaderProps = {
   onSearchBtnClick: () => void;
 };
@@ -26,11 +28,6 @@ export type categorySelectorProps = {
   onChangeCategory: (category: string) => void;
 };
 
-export type personnelCounterProps = {
-  optionForm: optionFormProps;
-  setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
-};
-
 export type tagSelectorProps = {
   onClickTagButton: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -46,19 +43,9 @@ export type searchFilterProps = {
 };
 
 export type searchResultProps = {
-  pageNum: number;
-  hasNext: boolean;
   checkOptionFormIsEmpty: () => boolean;
   checkSearchFormIsEmpty: () => boolean;
-
-  getSearchData: (item?: { newPageNum?: number; searchType?: string }) => void;
-  getSearchDataWithOptions: (item: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => void;
-
-  getCategoryData: (item?: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => void;
+  getSearchData: (item: searchProps) => Promise<void>;
+  getSearchDataWithOptions: (item: searchProps) => Promise<void>;
+  getCategoryData: (item: searchProps) => Promise<void>;
 };

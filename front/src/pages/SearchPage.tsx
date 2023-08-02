@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/modules';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
-import Search from '../api/search';
 import SearchHeader from '../components/search/SearchHeader';
 import SearchOptionMenu from '../components/search/SearchOptionMenu';
 import SearchFilter from '../components/search/SearchFilter';
@@ -17,14 +17,19 @@ import { markerListType } from '../components/map/types';
 import '../styles/components/search/search.scss';
 import { setSearchType } from '../store/modules/searchForm';
 import { setSearchResult } from '../store/modules/searchResult';
+import {
+  getCategoryResults,
+  getBasicResults,
+  getDetailResults,
+  setHasNext,
+  setPageNum,
+} from '../store/modules/search';
+import { searchProps } from '../store/modules/search';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
   const { state } = useLocation();
 
-  const countPerPage = 10;
-  const [pageNum, setPageNum] = useState(0);
-  const [hasNext, setHasNext] = useState(false);
   const [onMapOpen, setOnMapOpen] = useState(false);
   const [markerList, setMarkerList] = useState<markerListType[]>([]);
 
@@ -33,120 +38,79 @@ const SearchPage = () => {
   const searchResult = useSelector(
     (state: RootState) => state.searchResultReducer,
   );
+  const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
+    useDispatch();
+
   useEffect(() => {
-    getCategoryData();
+    getCategoryData({ searchForm, optionForm, pagination: undefined });
   }, []);
 
-  const getCategoryData = async (item?: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => {
-    const data = {
-      address: searchForm.address,
-      x: searchForm.x,
-      y: searchForm.y,
-      searchType: item?.searchType ? item.searchType : searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
-      },
-      category: state.category ? state.category : categoryNameList[0],
-    };
-
-    await Search.getCategoryData(data)
+  const getCategoryData = async (item: searchProps) => {
+    await dispatchSearch(getCategoryResults(item))
       .then((res) => {
-        const result = res.data.data.placeList;
-        setHasNext(res.data.data.hasNext);
-        if (item?.newPageNum === undefined) {
-          dispatch(setSearchResult(result));
-        } else {
-          if (item.newPageNum == 0) {
+        if (res) {
+          const result = res.placeList;
+          dispatch(setHasNext(res.hasNext));
+          if (item?.pagination?.newPageNum === undefined) {
             dispatch(setSearchResult(result));
           } else {
-            dispatch(setSearchResult([...searchResult, ...result]));
+            if (item?.pagination?.newPageNum == 0) {
+              dispatch(setSearchResult(result));
+            } else {
+              dispatch(setSearchResult([...searchResult, ...result]));
+            }
+            dispatch(setPageNum(item?.pagination?.newPageNum));
           }
-          setPageNum(item.newPageNum);
         }
+        return;
       })
       .catch((err) => {
         return Promise.reject(err);
       });
   };
-  const getSearchData = (item?: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => {
-    const data = {
-      address: searchForm.address,
-      x: searchForm.x,
-      y: searchForm.y,
-      startDate: searchForm.startDate.replaceAll('-', '.'),
-      endDate: searchForm.endDate.replaceAll('-', '.'),
-      distance: searchForm.distance,
-      searchType: item?.searchType ? item.searchType : searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
-      },
-      category: optionForm.category,
-    };
-    Search.getSearchData(data)
+  const getSearchData = async (item: searchProps) => {
+    await dispatchSearch(getBasicResults(item))
       .then((res) => {
-        const result = res.data.data.placeList;
-
-        setHasNext(res.data.data.hasNext);
-        if (item?.newPageNum === undefined) {
-          dispatch(setSearchResult(result));
-          setPageNum(0);
-        } else {
-          if (item.newPageNum == 0) {
+        if (res) {
+          const result = res.placeList;
+          dispatch(setHasNext(res.hasNext));
+          if (item?.pagination?.newPageNum === undefined) {
             dispatch(setSearchResult(result));
+            dispatch(setPageNum(0));
           } else {
-            dispatch(setSearchResult([...searchResult, ...result]));
+            if (item?.pagination?.newPageNum == 0) {
+              dispatch(setSearchResult(result));
+            } else {
+              dispatch(setSearchResult([...searchResult, ...result]));
+            }
+            dispatch(setPageNum(item?.pagination?.newPageNum));
           }
-          setPageNum(item.newPageNum);
         }
+        return;
       })
       .catch((err) => {
         return Promise.reject(err);
       });
   };
-  const getSearchDataWithOptions = (item?: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => {
-    const data = {
-      address: searchForm.address,
-      x: searchForm.x,
-      y: searchForm.y,
-      startDate: searchForm.startDate.replaceAll('-', '.'),
-      endDate: searchForm.endDate.replaceAll('-', '.'),
-      distance: searchForm.distance,
-      searchType: item?.searchType ? item.searchType : searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: item?.newPageNum ? item.newPageNum : pageNum,
-      },
-      category: optionForm.category,
-      userCnt: optionForm.userCnt,
-      tagList: optionForm.tagList,
-    };
-    Search.getSearchDataWithOptions(data)
+  const getSearchDataWithOptions = async (item: searchProps) => {
+    await dispatchSearch(getDetailResults(item))
       .then((res) => {
-        const result = res.data.data.placeList;
-
-        setHasNext(res.data.data.hasNext);
-        if (item?.newPageNum === undefined) {
-          dispatch(setSearchResult(result));
-          setPageNum(0);
-        } else {
-          if (item.newPageNum == 0) {
+        if (res) {
+          const result = res.placeList;
+          dispatch(setHasNext(res.hasNext));
+          if (item?.pagination?.newPageNum === undefined) {
             dispatch(setSearchResult(result));
+            dispatch(setPageNum(0));
           } else {
-            dispatch(setSearchResult([...searchResult, ...result]));
+            if (item.pagination?.newPageNum == 0) {
+              dispatch(setSearchResult(result));
+            } else {
+              dispatch(setSearchResult([...searchResult, ...result]));
+            }
+            dispatch(setPageNum(item.pagination?.newPageNum));
           }
-          setPageNum(item.newPageNum);
         }
+        return;
       })
       .catch((err) => {
         return Promise.reject(err);
@@ -181,14 +145,23 @@ const SearchPage = () => {
     dispatch(setSearchType(e.currentTarget.value));
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({ searchType: e.currentTarget.value, newPageNum: 0 });
+        getCategoryData({
+          searchForm,
+          optionForm,
+          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
+        });
       } else {
-        getSearchData({ searchType: e.currentTarget.value, newPageNum: 0 });
+        getSearchData({
+          searchForm,
+          optionForm,
+          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
+        });
       }
     } else {
       getSearchDataWithOptions({
-        searchType: e.currentTarget.value,
-        newPageNum: 0,
+        searchForm,
+        optionForm,
+        pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
       });
     }
   };
@@ -223,13 +196,26 @@ const SearchPage = () => {
   const onSearchBtnClick = () => {
     checkOptionFormIsEmpty() &&
       checkAddressExist() &&
-      getSearchData({ newPageNum: 0 });
+      getSearchData({
+        searchForm,
+        optionForm,
+        pagination: { newPageNum: 0 },
+      });
     !checkOptionFormIsEmpty() &&
       checkAddressExist() &&
-      getSearchDataWithOptions({ newPageNum: 0 });
+      getSearchDataWithOptions({
+        searchForm,
+        optionForm,
+        pagination: { newPageNum: 0 },
+      });
   };
   const onSearchWithOptionBtnClick = () => {
-    checkAddressExist() && getSearchDataWithOptions({ newPageNum: 0 });
+    checkAddressExist() &&
+      getSearchDataWithOptions({
+        searchForm,
+        optionForm,
+        pagination: { newPageNum: 0 },
+      });
   };
   return (
     <div className="search">
@@ -249,8 +235,6 @@ const SearchPage = () => {
             </button>
           </div>
           <SearchResult
-            pageNum={pageNum}
-            hasNext={hasNext}
             checkOptionFormIsEmpty={checkOptionFormIsEmpty}
             checkSearchFormIsEmpty={checkSearchFormIsEmpty}
             getCategoryData={getCategoryData}
