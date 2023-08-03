@@ -13,11 +13,11 @@ import { roomProps, reservedRoom, adminPlaceProps } from '../types';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import '../../../styles/components/admin/managePlace/managePlaceDetail.scss';
 import { isShowError } from '../../../components/common/ToastBox';
+import { useParams } from 'react-router-dom';
 
 const ManagePlaceDetail = () => {
   const navigate = useNavigate();
-  const urlParams = new URL(location.href).pathname.split('/');
-  const id = parseInt(urlParams[urlParams.length - 1]);
+  const { placeId } = useParams();
 
   const managePlaceTabs = [
     { value: '0', name: '방조회', defualtcheck: true },
@@ -37,23 +37,27 @@ const ManagePlaceDetail = () => {
   }, []);
 
   const getAdminDetailRoom = () => {
-    Admin.v1GetPlaceDetailRoom(id)
-      .then((res) => {
-        setAdminRoomList(res.data.data.room);
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+    if (placeId !== undefined) {
+      Admin.v1GetPlaceDetailRoom(parseInt(placeId))
+        .then((res) => {
+          setAdminRoomList(res.data.data.room);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
   };
   const getAdminDetailReservation = () => {
-    Admin.v1GetPlaceDetailResevations(id)
-      .then((res) => {
-        setAdminReservationList(res.data.data.reservation);
-        setPlaceInfo(res.data.data.place);
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+    if (placeId !== undefined) {
+      Admin.v1GetPlaceDetailResevations(parseInt(placeId))
+        .then((res) => {
+          setAdminReservationList(res.data.data.reservation);
+          setPlaceInfo(res.data.data.place);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
   };
   const onClickHeaderBtn = (e: React.ChangeEvent<HTMLInputElement>) => {
     setClickedMenu(parseInt(e.currentTarget.value));
@@ -63,7 +67,7 @@ const ManagePlaceDetail = () => {
   };
   const onUpdateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     placeInfo &&
-      navigate(`/mypage/managePlace/updatePlace/${id}`, {
+      navigate(`/mypage/managePlace/updatePlace/${placeId}`, {
         state: {
           placeId: placeInfo.placeId,
           placeCategory: placeInfo.placeCategory,
@@ -86,13 +90,13 @@ const ManagePlaceDetail = () => {
 
   return (
     <>
-      {confirmModalOpen && (
+      {confirmModalOpen && placeId && (
         <DeleteConfirmModal
           title={'공간 삭제'}
           content={'삭제 시 공간을 복구할 수 없습니다. 정말 삭제하시겠습니까?'}
           onClose={onCloseConfirmModal}
           onSelectDelete={onDeletePlace}
-          id={id}
+          id={parseInt(placeId)}
         />
       )}
 

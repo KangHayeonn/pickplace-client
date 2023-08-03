@@ -8,12 +8,12 @@ import Admin from '../../../api/admin';
 import { adminReservationDetail } from '../types';
 import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import { detailProps } from '../../../components/mypage/reservation/types';
+import { useParams } from 'react-router-dom';
 
 const ManageReservationDetail = () => {
   const navigate = useNavigate();
+  const { reservationId } = useParams();
 
-  const urlParams = new URL(location.href).pathname.split('/');
-  const reservationId = parseInt(urlParams[urlParams.length - 1]);
   const [adminReservationDetail, setAdminReservationDetail] =
     useState<adminReservationDetail>({
       member: {
@@ -42,9 +42,7 @@ const ManageReservationDetail = () => {
   const [detailContentProps, setDetailContentProps] = useState<detailProps>();
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(
-      `/mypage/managePlace/detail/${adminReservationDetail.place.placeId}`,
-    );
+    navigate(-2);
   };
 
   useEffect(() => {
@@ -52,25 +50,27 @@ const ManageReservationDetail = () => {
   }, []);
 
   const getAdminReservationDetail = () => {
-    Admin.v1GetReservationDetail(reservationId)
-      .then((res) => {
-        setAdminReservationDetail(res.data.data);
-        setDetailContentProps({
-          address: res.data.data.place.placeAddress,
-          placePhone: res.data.data.place.placePhone,
-          reservationId: res.data.data.reservation.reservationId,
-          reservationDate: res.data.data.reservation.createdDate,
-          startDate: res.data.data.reservation.checkInDate,
-          startTime: res.data.data.reservation.checkInTime,
-          endDate: res.data.data.reservation.checkOutDate,
-          endTime: res.data.data.reservation.checkOutTime,
-          nickName: res.data.data.member.memberName,
-          personnel: res.data.data.reservation.reservationPeopleNum,
+    if (reservationId !== undefined) {
+      Admin.v1GetReservationDetail(parseInt(reservationId))
+        .then((res) => {
+          setAdminReservationDetail(res.data.data);
+          setDetailContentProps({
+            address: res.data.data.place.placeAddress,
+            placePhone: res.data.data.place.placePhone,
+            reservationId: res.data.data.reservation.reservationId,
+            reservationDate: res.data.data.reservation.createdDate,
+            startDate: res.data.data.reservation.checkInDate,
+            startTime: res.data.data.reservation.checkInTime,
+            endDate: res.data.data.reservation.checkOutDate,
+            endTime: res.data.data.reservation.checkOutTime,
+            nickName: res.data.data.member.memberName,
+            personnel: res.data.data.reservation.reservationPeopleNum,
+          });
+        })
+        .catch((err) => {
+          return Promise.reject(err);
         });
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+    }
   };
 
   return (
