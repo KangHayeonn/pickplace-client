@@ -17,6 +17,7 @@ interface SearchDetailRoomInfoProps {
     roomName: string;
     roomPrice: number;
     roomStatus: string;
+    roomMaxNum: number;
   };
 }
 
@@ -49,7 +50,7 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
           </div>
           <div className="search-detail-room__content">
             <div className="search-detail-room__content--title">
-              {roomItem?.roomName} (최대 8인)
+              {roomItem?.roomName} (최대 {roomItem?.roomMaxNum}인)
             </div>
             <div className="search-detail-room__content--info">
               <span>가격</span>

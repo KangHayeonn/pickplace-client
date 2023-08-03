@@ -64,6 +64,7 @@ const initialState = {
     placeRating: 0,
     placeReviewCnt: 0,
     category: '',
+    placeNumber: '',
     placeAddress: {
       address: '',
       latitude: 0,

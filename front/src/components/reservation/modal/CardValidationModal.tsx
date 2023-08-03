@@ -1,24 +1,51 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import TextButton from '../../../components/common/TextButton';
 import '../../../styles/components/reservation/modal/cardValidationModal.scss';
 import { RootState } from '../../../store/modules';
+import { setCard } from '../../../store/modules/reservation';
 
 interface CardValidationModalProps {
   onClose: () => void;
   handleSubmit: () => Promise<void>;
 }
 
+interface CardType {
+  cardNum: string;
+  cvc: string;
+}
+
 const CardValidationModal = ({
   onClose,
   handleSubmit,
 }: CardValidationModalProps) => {
+  const dispatch = useDispatch();
   const { payment } = useSelector((state: RootState) => state.reservation);
+  const [cardType, setCardType] = useState<CardType>({
+    cardNum: '',
+    cvc: '',
+  });
+
+  const setCardNum = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardType({
+      ...cardType,
+      cardNum: String(e.target.value),
+    });
+  };
+
+  const setCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardType({
+      ...cardType,
+      cvc: String(e.target.value),
+    });
+  };
 
   const onClickEvent = () => {
+    dispatch(setCard({ card: cardType }));
     handleSubmit();
   };
+
   const onClickClose = () => {
     onClose();
   };
@@ -44,6 +71,7 @@ const CardValidationModal = ({
             placeholder="카드번호 - 없이 입력"
             autoComplete="off"
             maxLength={16}
+            onChange={(e) => setCardNum(e)}
           />
         </div>
         <div className="card-validation-modal-form__content">
@@ -56,6 +84,7 @@ const CardValidationModal = ({
             placeholder="CVC번호 뒤 3자리"
             autoComplete="off"
             maxLength={3}
+            onChange={(e) => setCVC(e)}
           />
         </div>
         <div className="card-validation-modal-form__footer">

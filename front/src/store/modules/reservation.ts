@@ -30,6 +30,17 @@ interface paymentAccountType {
   paymentAccountType: string;
 }
 
+interface BankType {
+  bankNum: string;
+}
+
+interface CardType {
+  card: {
+    cardNum: string;
+    cvc: string;
+  };
+}
+
 // Action Type 정의
 export const RESERVATION_ACCOUNT = 'reservation/RESERVATION_ACCOUNT' as const;
 export const RESERVATION_ACCOUNT_SUCCESS =
@@ -64,6 +75,10 @@ export const SET_PAYMENT_TYPE = 'reservation/SET_PAYMENT_TYPE' as const;
 export const SET_QRCODE = 'reservation/SET_QRCODE' as const;
 
 export const SET_ACCOUNT = 'reservation/SET_ACCOUNT' as const;
+
+export const SET_BANK = 'reservation/SET_BANK' as const;
+
+export const SET_CARD = 'reservation/SET_CARD' as const;
 
 export const reservationAccount =
   (memberId: number, data: ReservationAccountType) =>
@@ -172,6 +187,16 @@ export const setAccount = (paymentAccountType: paymentAccountType) => ({
   payload: paymentAccountType,
 });
 
+export const setBank = (bankNum: BankType) => ({
+  type: SET_BANK,
+  payload: bankNum,
+});
+
+export const setCard = (card: CardType) => ({
+  type: SET_CARD,
+  payload: card,
+});
+
 export const initialState = {
   loading: {
     RESERVATION_ACCOUNT: false,
@@ -202,6 +227,11 @@ export const initialState = {
   paymentType: '',
   qrPaymentCode: '',
   paymentAccountType: '',
+  bankNum: '',
+  card: {
+    cardNum: '',
+    cvc: '',
+  },
 };
 
 const reservationReducer = handleActions(
@@ -272,6 +302,14 @@ const reservationReducer = handleActions(
     [SET_ACCOUNT]: (state, action) => ({
       ...state,
       paymentAccountType: action.payload.paymentAccountType,
+    }),
+    [SET_CARD]: (state, action) => ({
+      ...state,
+      card: action.payload.card,
+    }),
+    [SET_BANK]: (state, action) => ({
+      ...state,
+      bankNum: action.payload.bankNum,
     }),
   },
   initialState,
