@@ -7,11 +7,10 @@ import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
 import { GetCategoryImage } from '../common/GetCategoryImage';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/modules';
 
 const SearchResult = ({
-  searchResult,
-  hasNext,
-  pageNum,
   checkOptionFormIsEmpty,
   checkSearchFormIsEmpty,
   getCategoryData,
@@ -19,16 +18,38 @@ const SearchResult = ({
   getSearchDataWithOptions,
 }: searchResultProps) => {
   const navigate = useNavigate();
-
+  const searchForm = useSelector((state: RootState) => state.searchForm);
+  const optionForm = useSelector((state: RootState) => state.optionForm);
+  const searchResult = useSelector(
+    (state: RootState) => state.searchResultReducer,
+  );
+  const hasNext = useSelector(
+    (state: RootState) => state.searchApiReducer.hasNext,
+  );
+  const pageNum = useSelector(
+    (state: RootState) => state.searchApiReducer.pageNum,
+  );
   const fetchMoreItems = async () => {
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({ newPageNum: pageNum + 1 });
+        getCategoryData({
+          searchForm,
+          optionForm,
+          pagination: { newPageNum: pageNum + 1 },
+        });
       } else {
-        getSearchData({ newPageNum: pageNum + 1 });
+        getSearchData({
+          searchForm,
+          optionForm,
+          pagination: { newPageNum: pageNum + 1 },
+        });
       }
     } else {
-      getSearchDataWithOptions({ newPageNum: pageNum + 1 });
+      getSearchDataWithOptions({
+        searchForm,
+        optionForm,
+        pagination: { newPageNum: pageNum + 1 },
+      });
     }
   };
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {

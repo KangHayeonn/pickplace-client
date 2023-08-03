@@ -14,7 +14,6 @@ export const POST_LOGIN_SUCCESS = 'auth/POST_LOGIN_SUCCESS' as const;
 export const POST_LOGIN_ERROR = 'auth/POST_LOGIN_ERROR' as const;
 
 export const SET_LOGOUT = 'auth/SET_LOGOUT' as const;
-
 export const SET_LOGIN = 'auth/SET_LOGIN' as const;
 
 export const setLogin =
