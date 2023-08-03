@@ -24,7 +24,8 @@ import { markerListType } from '../components/map/types';
 import '../styles/components/search/search.scss';
 import { format } from 'date-fns';
 import { isShowError } from '../components/common/ToastBox';
-
+import { resetOptionForm } from '../store/modules/optionForm';
+import { resetSearchForm } from '../store/modules/searchForm';
 const SearchPage = () => {
   const dispatch = useDispatch();
   const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
@@ -49,6 +50,8 @@ const SearchPage = () => {
         newPageNum: pageNum,
       },
     });
+    dispatch(resetOptionForm(optionForm.category));
+    dispatch(resetSearchForm());
   }, []);
 
   const getCategoryData = async (item: searchProps) => {
@@ -144,8 +147,6 @@ const SearchPage = () => {
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
         getCategoryData(data);
-      } else {
-        getSearchData(data);
       }
     } else {
       getSearchDataWithOptions(data);
@@ -179,8 +180,7 @@ const SearchPage = () => {
   const onSearchBtnClick = () => {
     if (checkAddressExist()) {
       const data = { searchForm, optionForm, pagination: { newPageNum: 0 } };
-      checkOptionFormIsEmpty() && getSearchData(data);
-      !checkOptionFormIsEmpty() && getSearchDataWithOptions(data);
+      getSearchDataWithOptions(data);
     }
   };
   const onSearchWithOptionBtnClick = () => {

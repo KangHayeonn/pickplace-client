@@ -21,7 +21,7 @@
     height: 240px;
 
     .img-container{
-        @include background-default-small();
+        @include background-default;
         min-width: 230px;
         width : 30%;
         height : 240px;
@@ -67,7 +67,7 @@
         }
         .reservationCard-reviewCompleted,.reservationCard-review{
             display: inline-block;
-            max-width : 95px;
+            width : 120px;
             margin-left : 15px;
             cursor : default;
         }

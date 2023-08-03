@@ -87,8 +87,18 @@ const SearchHeader = ({ onSearchBtnClick }: searchHeaderProps) => {
             />
           </div>
           <div className="searchHeader-dateInput__container">
-            <Calendar calendarType="range" selectDateRange={selectDateRange} />
-            <button onClick={onSearchBtnClick}>검색</button>
+            <div>
+              <Calendar
+                calendarType="range"
+                selectDateRange={selectDateRange}
+              />
+            </div>
+            <button
+              className="searchHeader-search__btn"
+              onClick={onSearchBtnClick}
+            >
+              검색
+            </button>
           </div>
         </div>
       </div>
