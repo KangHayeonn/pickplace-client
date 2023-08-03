@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../../styles/components/search/detail/searchDetailList.scss';
 import '../../../styles/components/search/detail/searchDetailRoomInfo.scss';
 import { RootState } from '../../../store/modules';
@@ -10,6 +10,7 @@ import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import { ReservationInfoType } from '../../../api/reservation/types';
 import { getUserId } from '../../../utils/tokenControl';
 import { getReservationInfo } from '../../../store/modules/reservation';
+import { setPlaceId, setRoomId } from '../../../store/modules/reservation';
 
 interface SearchDetailRoomInfoProps {
   roomItem?: {
@@ -23,6 +24,7 @@ interface SearchDetailRoomInfoProps {
 
 const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
   const navigate = useNavigate();
+  const { searchId } = useParams();
   const category = useSelector((state: RootState) => state.optionForm.category);
   const dispatch: ThunkDispatch<ReservationInfoType, void, AnyAction> =
     useDispatch();
@@ -31,6 +33,16 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
   const onClickReservation = async () => {
     if (roomItem) {
       await dispatch(getReservationInfo(Number(userId), roomItem?.roomId));
+      dispatch(
+        setPlaceId({
+          placeId: Number(searchId),
+        }),
+      );
+      dispatch(
+        setRoomId({
+          roomId: roomItem?.roomId,
+        }),
+      );
       navigate('/reservation');
     }
   };

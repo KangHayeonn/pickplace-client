@@ -41,6 +41,14 @@ interface CardType {
   };
 }
 
+interface PlaceType {
+  placeId: number;
+}
+
+interface RoomType {
+  roomId: number;
+}
+
 // Action Type 정의
 export const RESERVATION_ACCOUNT = 'reservation/RESERVATION_ACCOUNT' as const;
 export const RESERVATION_ACCOUNT_SUCCESS =
@@ -79,6 +87,10 @@ export const SET_ACCOUNT = 'reservation/SET_ACCOUNT' as const;
 export const SET_BANK = 'reservation/SET_BANK' as const;
 
 export const SET_CARD = 'reservation/SET_CARD' as const;
+
+export const SET_PLACE_ID = 'reservation/SET_PLACE_ID' as const;
+
+export const SET_ROOM_ID = 'reservation/SET_ROOM_ID' as const;
 
 export const reservationAccount =
   (memberId: number, data: ReservationAccountType) =>
@@ -197,6 +209,16 @@ export const setCard = (card: CardType) => ({
   payload: card,
 });
 
+export const setPlaceId = (placeId: PlaceType) => ({
+  type: SET_PLACE_ID,
+  payload: placeId,
+});
+
+export const setRoomId = (roomId: RoomType) => ({
+  type: SET_ROOM_ID,
+  payload: roomId,
+});
+
 export const initialState = {
   loading: {
     RESERVATION_ACCOUNT: false,
@@ -310,6 +332,14 @@ const reservationReducer = handleActions(
     [SET_BANK]: (state, action) => ({
       ...state,
       bankNum: action.payload.bankNum,
+    }),
+    [SET_PLACE_ID]: (state, action) => ({
+      ...state,
+      placeId: action.payload.placeId,
+    }),
+    [SET_ROOM_ID]: (state, action) => ({
+      ...state,
+      roomId: action.payload.roomId,
     }),
   },
   initialState,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/components/reservation/reservationTemplate.scss';
 import { RootState } from '../../store/modules';
 import { isShowError } from '../../components/common/ToastBox';
@@ -15,6 +16,7 @@ interface ReservationTemplateProps {
 }
 
 const ReservationTemplate = ({ children }: ReservationTemplateProps) => {
+  const navigate = useNavigate();
   const { agreement, payment, paymentType } = useSelector(
     (state: RootState) => state.reservation,
   );
@@ -56,7 +58,7 @@ const ReservationTemplate = ({ children }: ReservationTemplateProps) => {
   const handleClickPayPassword = () => {
     openModal(PaymentModal, {
       onSubmit: async () => {
-        // 결제
+        navigate('/main');
       },
     });
   };
