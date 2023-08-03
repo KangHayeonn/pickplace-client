@@ -87,7 +87,7 @@ const Admin = {
   },
   async v1GetReservationDetail(reservationId: number) {
     try {
-      const url = `${prefix}/reservations/${reservationId}`;
+      const url = `${prefix}/reservations/${reservationId}?memberId=${getUserId()}`;
       const result = await instanceWithToken.get(url);
       return result;
     } catch (err) {
