@@ -46,10 +46,6 @@ export type adminReservationDetail = {
     placeCategory: string;
   };
 };
-export type reservationBtnsProps = {
-  reservationStatus: string;
-  onClickAcceptBtn: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
 
 export type adminPlaceProps = {
   placeName: string;

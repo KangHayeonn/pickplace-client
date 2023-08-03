@@ -11,6 +11,7 @@ export const markerHtml = (name: string, category: string, tag: string[]) => {
                     width : 100px;
                     border-radius : 10px;
                     padding : 12px 0;
+                    margin : -50px;
                     border:1px solid lightgray;
                 "
             >

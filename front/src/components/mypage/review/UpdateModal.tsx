@@ -54,9 +54,9 @@ const UpdateModal = ({
 
   const onUpdateBtnClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (starRate == 0) {
-      window.alert('별점을 입력해주세요.');
+      isShowError('별점을 입력해주세요.');
     } else if (reviewContent == '') {
-      window.alert('리뷰 내용을 입력해주세요');
+      isShowError('리뷰 내용을 입력해주세요');
     } else {
       const data = {
         reviewId: reviewId,

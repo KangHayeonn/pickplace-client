@@ -105,15 +105,11 @@ const CreatePlace = () => {
       setNewRoomInfo(defaultNewRoomForm);
     }
   };
-  // const onCancleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   if (window.confirm('정말로 작성을 취소하시겠습니까?')) {
-  //     navigate('/mypage');
-  //   }
-  // };
+
   const onCreateBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirmToPost(newPlaceInfo)) {
       if (newRoomList.length == 0) {
-        window.alert('방을 한 개 이상 추가해주세요');
+        isShowError('방을 한 개 이상 추가해주세요');
       } else {
         const rooms = [];
         for (let i = 0; i < newRoomList.length; i++) {
