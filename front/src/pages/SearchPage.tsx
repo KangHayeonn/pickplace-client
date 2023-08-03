@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/modules';
 import { AnyAction } from 'redux';
@@ -21,7 +20,6 @@ import SearchFilter from '../components/search/SearchFilter';
 import SearchResult from '../components/search/SearchResult';
 import MapModal from '../components/map/MapModal';
 
-import { categoryNameList } from '../utils/mock/categoryList';
 import { markerListType } from '../components/map/types';
 import '../styles/components/search/search.scss';
 import { format } from 'date-fns';
@@ -31,7 +29,6 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
     useDispatch();
-  const { state } = useLocation();
 
   const [onMapOpen, setOnMapOpen] = useState(false);
   const [markerList, setMarkerList] = useState<markerListType[]>([]);
@@ -172,12 +169,9 @@ const SearchPage = () => {
   };
   const checkOptionFormIsEmpty = () => {
     if (
-      optionForm.category == state.category
-        ? state.category
-        : categoryNameList[0] &&
-          optionForm.userCnt == 1 &&
-          optionForm.tagList.length == 0 &&
-          searchForm.distance == 5
+      optionForm.userCnt == 1 &&
+      optionForm.tagList.length == 0 &&
+      searchForm.distance == 5
     )
       return true;
     return false;

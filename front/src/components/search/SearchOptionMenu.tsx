@@ -55,7 +55,7 @@ const SearchOptionMenu = ({
       <div className="personnel-container">
         <h3 className="personnel-header">인원</h3>
         <div className="counter">
-          <NumberForm min={0} onChangeNum={onChangeNum} />
+          <NumberForm min={1} onChangeNum={onChangeNum} />
         </div>
       </div>
       <DistanceInput onChangeUserRangeInput={onChangeUserRangeInput} />
