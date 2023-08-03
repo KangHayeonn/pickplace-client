@@ -3,25 +3,34 @@ import { searchHeaderProps } from './types';
 import '../../styles/components/search/searchHeader.scss';
 import SearchForm from '../common/SearchForm';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/modules';
+import {
+  setStartDate,
+  setEndDate,
+  setAddress,
+} from '../../store/modules/searchForm';
+import { searchFormProps } from '../../store/modules/searchForm';
+import { optionFormProps } from '../../store/modules/optionForm';
 
-const SearchHeader = ({
-  startDate,
-  endDate,
-  category,
-  address,
-  x,
-  y,
-  onChangeAddress,
-  onChangeStartDate,
-  onChangeEndDate,
-  onSearchBtnClick,
-}: searchHeaderProps) => {
-  const [searchKeyword, setSearchKeyword] = useState<string>(address);
+const SearchHeader = ({ onSearchBtnClick }: searchHeaderProps) => {
+  const dispatch = useDispatch();
+
+  const searchForm: searchFormProps = useSelector(
+    (state: RootState) => state.searchForm,
+  );
+  const optionForm: optionFormProps = useSelector(
+    (state: RootState) => state.optionForm,
+  );
+
+  const [searchKeyword, setSearchKeyword] = useState<string>(
+    searchForm.address,
+  );
   const [searchPreviewList, setSearchPreviewList] = useState([
     {
-      address_name: address,
-      x: x.toString(),
-      y: y.toString(),
+      address_name: searchForm.address,
+      x: searchForm.x.toString(),
+      y: searchForm.y.toString(),
     },
   ]);
 
@@ -47,16 +56,30 @@ const SearchHeader = ({
   }, [searchKeyword]);
 
   const onClickAddress = (address: string, x: string, y: string) => {
-    onChangeAddress(address, x, y);
+    dispatch(setAddress(address, parseFloat(x), parseFloat(y)));
     setSearchKeyword(address);
   };
   const onKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.currentTarget.value);
   };
+  const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const date = e.currentTarget.value;
+    if (searchForm.endDate < date) {
+      dispatch(setEndDate(date));
+    }
+    dispatch(setStartDate(date));
+  };
+  const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const date = e.currentTarget.value;
+    if (searchForm.startDate > date) {
+      dispatch(setStartDate(date));
+    }
+    dispatch(setEndDate(date));
+  };
   return (
     <div className="searchHeader-container">
       <div className="searchHeader-wrapper">
-        <h1>{category}</h1>
+        <h1>{optionForm.category}</h1>
         <div className="searchHeader-inputs__container">
           <div className="searchHeader-searchForm__container">
             <SearchForm
@@ -67,20 +90,19 @@ const SearchHeader = ({
               searchPreviewList={searchPreviewList}
             />
           </div>
-
           <div className="searchHeader-dateInput__container">
             <input
               className="searchHeader-startDate"
               type="date"
               onChange={onChangeStartDate}
-              value={startDate}
+              value={searchForm.startDate}
             />
             <span>→</span>
             <input
               className="searchHeader-endDate"
               type="date"
               onChange={onChangeEndDate}
-              value={endDate}
+              value={searchForm.endDate}
             />
             <button onClick={onSearchBtnClick}>검색</button>
           </div>

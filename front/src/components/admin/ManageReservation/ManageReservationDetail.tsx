@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import DetailContent from '../../mypage/reservation/DetailContent';
-import ReservationBtns from '../ReservationBtns';
 import '../../../styles/components/admin/manageReservation/manageReservationDetail.scss';
-import '../../../styles/components/admin/reservationBtn.scss';
 import leftArrow from '../../../assets/images/arrow-left.svg';
 import Admin from '../../../api/admin';
 import { adminReservationDetail } from '../types';
@@ -83,10 +81,6 @@ const ManageReservationDetail = () => {
       });
   };
 
-  const onClickAcceptBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('예약수락');
-  };
-
   return (
     <div className="manageReservation-detail">
       <div className="manageReservation-detail__header">
@@ -112,12 +106,6 @@ const ManageReservationDetail = () => {
           <h2 className="manageReservation-detail__placeName">
             {adminReservationDetail.place.placeName}
           </h2>
-          <ReservationBtns
-            reservationStatus={
-              adminReservationDetail.reservation.reservationStatus
-            }
-            onClickAcceptBtn={onClickAcceptBtn}
-          />
         </div>
       </div>
       {detailContentProps && <DetailContent reservation={detailContentProps} />}
