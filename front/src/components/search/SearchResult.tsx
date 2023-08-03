@@ -2,19 +2,21 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useIntersectionObserver from './useIntersectionObserver';
 import useViewportObserver from './useViewportObserver';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../../store/modules';
+import { searchDetail } from '../../store/modules/searchDetail';
+import { searchResultListProps } from '../../store/modules/searchResult';
+import { SearchDetailType } from '../../api/search/types';
+
+import { GetCategoryImage } from '../common/GetCategoryImage';
+import format from 'date-fns/format';
 import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
-import { GetCategoryImage } from '../common/GetCategoryImage';
 
-import format from 'date-fns/format';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/modules';
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { searchDetail } from '../../store/modules/searchDetail';
-import { SearchDetailType } from '../../api/search/types';
-import { searchResultListProps } from '../../store/modules/searchResult';
 const SearchResult = ({
   checkOptionFormIsEmpty,
   checkSearchFormIsEmpty,
@@ -41,26 +43,19 @@ const SearchResult = ({
   > = useDispatch();
 
   const fetchMoreItems = async () => {
+    const data = {
+      searchForm,
+      optionForm,
+      pagination: { newPageNum: pageNum + 1 },
+    };
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({
-          searchForm,
-          optionForm,
-          pagination: { newPageNum: pageNum + 1 },
-        });
+        getCategoryData(data);
       } else {
-        getSearchData({
-          searchForm,
-          optionForm,
-          pagination: { newPageNum: pageNum + 1 },
-        });
+        getSearchData(data);
       }
     } else {
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: pageNum + 1 },
-      });
+      getSearchDataWithOptions(data);
     }
   };
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {

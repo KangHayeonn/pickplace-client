@@ -41,9 +41,17 @@ const SearchPage = () => {
   const searchResult = useSelector(
     (state: RootState) => state.searchResultReducer,
   );
-
+  const pageNum = useSelector(
+    (state: RootState) => state.searchApiReducer.pageNum,
+  );
   useEffect(() => {
-    getCategoryData({ searchForm, optionForm, pagination: undefined });
+    getCategoryData({
+      searchForm,
+      optionForm,
+      pagination: {
+        newPageNum: pageNum,
+      },
+    });
   }, []);
 
   const getCategoryData = async (item: searchProps) => {
@@ -52,16 +60,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item?.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
           } else {
-            if (item?.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item?.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item?.pagination?.newPageNum));
         }
         return;
       })
@@ -75,17 +79,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item?.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
-            dispatch(setPageNum(0));
           } else {
-            if (item?.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item?.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item?.pagination?.newPageNum));
         }
         return;
       })
@@ -99,17 +98,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
-            dispatch(setPageNum(0));
           } else {
-            if (item.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item.pagination?.newPageNum));
         }
         return;
       })

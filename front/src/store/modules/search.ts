@@ -31,12 +31,10 @@ const initialState = {
 export interface searchProps {
   searchForm: searchFormProps;
   optionForm: optionFormProps;
-  pagination:
-    | {
-        newPageNum?: number | undefined;
-        searchType?: string | undefined;
-      }
-    | undefined;
+  pagination: {
+    newPageNum: number;
+    searchType?: string | undefined;
+  };
 }
 
 const getDataForm = (item: searchProps) => {
@@ -50,9 +48,7 @@ const getDataForm = (item: searchProps) => {
       : item.searchForm.searchType,
     pageProps: {
       countPerPage: countPerPage,
-      pageNum: pagination?.newPageNum
-        ? pagination.newPageNum
-        : initialState.pageNum,
+      pageNum: pagination.newPageNum,
     },
     category: item.optionForm.category,
     startDate: item.searchForm.startDate.replaceAll('-', '.'),
@@ -146,7 +142,7 @@ const searchApiReducer = handleActions(
         GET_CATEGORY_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,
@@ -169,7 +165,7 @@ const searchApiReducer = handleActions(
         GET_BASIC_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,
@@ -192,7 +188,7 @@ const searchApiReducer = handleActions(
         GET_DETAIL_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,
