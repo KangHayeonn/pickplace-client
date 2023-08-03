@@ -24,12 +24,17 @@ const ManageReservation = () => {
   return (
     <div className="manageReservation">
       {adminReservationList && adminReservationList.length > 0 ? (
-        adminReservationList.map((item, key) => (
+        adminReservationList.map((total, key) => (
           <div key={key} className="manageReservation-place__container">
-            <h3 className="manageReservation-placeName">{item.placeName}</h3>
+            <h3 className="manageReservation-placeName">{total.placeName}</h3>
             <div className="manageReservation-place__reservations">
-              {item.reservations.map((item, key) => (
-                <ReservedCard key={key} adminReservationProps={item} />
+              {total.reservations.map((item, key) => (
+                <ReservedCard
+                  key={key}
+                  adminReservationProps={item}
+                  placeCategory={total.placeCategory}
+                  placeName={total.placeName}
+                />
               ))}
             </div>
           </div>

@@ -8,10 +8,13 @@ import User from '../../../api/mypage';
 import { reservationDetailProps, detailProps } from './types';
 import ConfirmModal from '../ConfirmModal';
 const ReservationDetail = () => {
-  const { state } = useLocation();
+  // const { state } = useLocation();
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [reservationDetail, setReservationDetail] =
     useState<reservationDetailProps>();
+
+  const urlParams = new URL(location.href).pathname.split('/');
+  const reservationId = parseInt(urlParams[urlParams.length - 1]);
 
   const [detailContentProps, setDetailContentProps] = useState<detailProps>();
   useEffect(() => {
@@ -19,7 +22,7 @@ const ReservationDetail = () => {
   }, []);
 
   const getUserReservationDetail = () => {
-    User.v1GetUserReservationDetail(state.id)
+    User.v1GetUserReservationDetail(reservationId)
       .then((res) => {
         setReservationDetail(res.data.data.reservation[0]);
         setDetailContentProps({
@@ -70,7 +73,7 @@ const ReservationDetail = () => {
         <CreateModal
           setConfirmModalOpen={setConfirmModalOpen}
           setCreateModalOpen={setCreateModalOpen}
-          reservationId={state.id}
+          reservationId={reservationId}
         />
       )}
       {reservationDetail && (

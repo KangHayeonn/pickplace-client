@@ -10,8 +10,10 @@ import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import { detailProps } from '../../../components/mypage/reservation/types';
 
 const ManageReservationDetail = () => {
-  const { state } = useLocation();
   const navigate = useNavigate();
+
+  const urlParams = new URL(location.href).pathname.split('/');
+  const reservationId = parseInt(urlParams[urlParams.length - 1]);
   const [adminReservationDetail, setAdminReservationDetail] =
     useState<adminReservationDetail>({
       member: {
@@ -40,18 +42,8 @@ const ManageReservationDetail = () => {
   const [detailContentProps, setDetailContentProps] = useState<detailProps>();
 
   const onClickBack = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const state = {
-      placeId: adminReservationDetail.place.placeId,
-      placeName: adminReservationDetail.place.placeName,
-      placeAddress: adminReservationDetail.place.placeAddress,
-      placePhone: adminReservationDetail.place.placePhone,
-      placeCategory: adminReservationDetail.place.placeCategory,
-    };
     navigate(
       `/mypage/managePlace/detail/${adminReservationDetail.place.placeId}`,
-      {
-        state: state,
-      },
     );
   };
 
@@ -60,7 +52,7 @@ const ManageReservationDetail = () => {
   }, []);
 
   const getAdminReservationDetail = () => {
-    Admin.v1GetReservationDetail(state.reservationId)
+    Admin.v1GetReservationDetail(reservationId)
       .then((res) => {
         setAdminReservationDetail(res.data.data);
         setDetailContentProps({

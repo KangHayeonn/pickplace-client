@@ -1,5 +1,7 @@
 export type reservedCardProps = {
   adminReservationProps: reservedRoom;
+  placeName: string;
+  placeCategory: string;
 };
 
 export type reservedRoom = {
@@ -17,6 +19,7 @@ export type reservedRoom = {
 
 export type adminReservation = {
   placeName: string;
+  placeCategory: string;
   reservations: reservedRoom[];
 };
 
