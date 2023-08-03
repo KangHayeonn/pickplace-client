@@ -13,7 +13,7 @@ import {
   toStringByFormattingTime,
 } from '../utils/dataFormat';
 // api
-import { SearchDetailType } from '@/api/search/types';
+import { SearchDetailType } from '../api/search/types';
 // redux
 import { RootState } from '../store/modules';
 import { getPlaceReview, searchDetail } from '../store/modules/searchDetail';
