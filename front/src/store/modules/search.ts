@@ -31,32 +31,37 @@ const initialState = {
 export interface searchProps {
   searchForm: searchFormProps;
   optionForm: optionFormProps;
-  pagination:
-    | {
-        newPageNum?: number | undefined;
-        searchType?: string | undefined;
-      }
-    | undefined;
+  pagination: {
+    newPageNum: number;
+    searchType?: string | undefined;
+  };
 }
+
+const getDataForm = (item: searchProps) => {
+  const pagination = item.pagination;
+  return {
+    address: item.searchForm.address,
+    x: item.searchForm.x,
+    y: item.searchForm.y,
+    searchType: pagination?.searchType
+      ? pagination.searchType
+      : item.searchForm.searchType,
+    pageProps: {
+      countPerPage: countPerPage,
+      pageNum: pagination.newPageNum,
+    },
+    category: item.optionForm.category,
+    startDate: item.searchForm.startDate.replaceAll('-', '.'),
+    endDate: item.searchForm.endDate.replaceAll('-', '.'),
+    distance: item.searchForm.distance,
+    userCnt: item.optionForm.userCnt,
+    tagList: item.optionForm.tagList,
+  };
+};
 
 export const getCategoryResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_CATEGORY_RESULT });
     try {
       const res = await Api.getCategoryData(data);
@@ -75,25 +80,7 @@ export const getCategoryResults =
   };
 export const getBasicResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      startDate: item.searchForm.startDate.replaceAll('-', '.'),
-      endDate: item.searchForm.endDate.replaceAll('-', '.'),
-      distance: item.searchForm.distance,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_BASIC_RESULT });
     try {
       const res = await Api.getSearchData(data);
@@ -112,27 +99,7 @@ export const getBasicResults =
   };
 export const getDetailResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      startDate: item.searchForm.startDate.replaceAll('-', '.'),
-      endDate: item.searchForm.endDate.replaceAll('-', '.'),
-      distance: item.searchForm.distance,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-      userCnt: item.optionForm.userCnt,
-      tagList: item.optionForm.tagList,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_DETAIL_RESULT });
     try {
       const res = await Api.getSearchDataWithOptions(data);
@@ -175,7 +142,7 @@ const searchApiReducer = handleActions(
         GET_CATEGORY_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,
@@ -198,7 +165,7 @@ const searchApiReducer = handleActions(
         GET_BASIC_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,
@@ -221,7 +188,7 @@ const searchApiReducer = handleActions(
         GET_DETAIL_RESULT: false, // 요청 완료
       },
       hasNext: action.payload.hasNext,
-      pageNum: action.payload.pageNum,
+      pageNum: state.pageNum,
     }),
     [GET_RESULT_ERROR]: (state) => ({
       ...state,

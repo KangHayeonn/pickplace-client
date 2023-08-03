@@ -16,12 +16,7 @@ const MainPage = () => {
   const onClickCategoryBtn = (item: string) => {
     dispatch(resetSearchForm());
     dispatch(resetOptionForm(item));
-    const state = {
-      category: item,
-    };
-    navigate('/search', {
-      state: state,
-    });
+    navigate('/search');
   };
 
   return (
