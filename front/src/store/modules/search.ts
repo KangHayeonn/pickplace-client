@@ -39,24 +39,33 @@ export interface searchProps {
     | undefined;
 }
 
+const getDataForm = (item: searchProps) => {
+  const pagination = item.pagination;
+  return {
+    address: item.searchForm.address,
+    x: item.searchForm.x,
+    y: item.searchForm.y,
+    searchType: pagination?.searchType
+      ? pagination.searchType
+      : item.searchForm.searchType,
+    pageProps: {
+      countPerPage: countPerPage,
+      pageNum: pagination?.newPageNum
+        ? pagination.newPageNum
+        : initialState.pageNum,
+    },
+    category: item.optionForm.category,
+    startDate: item.searchForm.startDate.replaceAll('-', '.'),
+    endDate: item.searchForm.endDate.replaceAll('-', '.'),
+    distance: item.searchForm.distance,
+    userCnt: item.optionForm.userCnt,
+    tagList: item.optionForm.tagList,
+  };
+};
+
 export const getCategoryResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_CATEGORY_RESULT });
     try {
       const res = await Api.getCategoryData(data);
@@ -75,25 +84,7 @@ export const getCategoryResults =
   };
 export const getBasicResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      startDate: item.searchForm.startDate.replaceAll('-', '.'),
-      endDate: item.searchForm.endDate.replaceAll('-', '.'),
-      distance: item.searchForm.distance,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_BASIC_RESULT });
     try {
       const res = await Api.getSearchData(data);
@@ -112,27 +103,7 @@ export const getBasicResults =
   };
 export const getDetailResults =
   (item: searchProps) => async (dispatch: Dispatch) => {
-    const pagination = item.pagination;
-    const data = {
-      address: item.searchForm.address,
-      x: item.searchForm.x,
-      y: item.searchForm.y,
-      startDate: item.searchForm.startDate.replaceAll('-', '.'),
-      endDate: item.searchForm.endDate.replaceAll('-', '.'),
-      distance: item.searchForm.distance,
-      searchType: pagination?.searchType
-        ? pagination.searchType
-        : item.searchForm.searchType,
-      pageProps: {
-        countPerPage: countPerPage,
-        pageNum: pagination?.newPageNum
-          ? pagination.newPageNum
-          : initialState.pageNum,
-      },
-      category: item.optionForm.category,
-      userCnt: item.optionForm.userCnt,
-      tagList: item.optionForm.tagList,
-    };
+    const data = getDataForm(item);
     dispatch({ type: GET_DETAIL_RESULT });
     try {
       const res = await Api.getSearchDataWithOptions(data);
