@@ -9,12 +9,14 @@ import SelectBox from '../../../components/common/SelectBox';
 import {
   toStringByFormatting,
   toStringByFormattingTime,
+  getDateFormat,
 } from '../../../utils/dataFormat';
 // api
 import { SearchDetailType } from '../../../api/search/types';
 // redux
 import { RootState } from '../../../store/modules';
 import { searchDetail } from '../../../store/modules/searchDetail';
+import { setReservationInfo } from '../../../store/modules/reservation';
 
 const dataTimeList = ['1시간', '2시간', '3시간'];
 
@@ -29,6 +31,7 @@ const SearchDetailReservation = () => {
   const [perTime, setPerTime] = useState<string>('1시간');
   const dispatch: ThunkDispatch<SearchDetailType, void, AnyAction> =
     useDispatch();
+  const dispatchReservation = useDispatch();
 
   const selectTime = (time: Date | null) => {
     setTime(time);
@@ -54,6 +57,15 @@ const SearchDetailReservation = () => {
           endDate: toStringByFormatting(dateRange[1]),
         };
         await dispatch(searchDetail(placeId, data));
+
+        dispatchReservation(
+          setReservationInfo({
+            reservationDate: {
+              checkInTime: `${getDateFormat(dateRange[0])} 15:00`,
+              checkOutTime: `${getDateFormat(dateRange[1])} 10:00`,
+            },
+          }),
+        );
       }
     } else {
       if (startDate && time) {
@@ -71,6 +83,15 @@ const SearchDetailReservation = () => {
           endTime: toStringByFormattingTime(newTime),
         };
         await dispatch(searchDetail(placeId, data));
+
+        dispatchReservation(
+          setReservationInfo({
+            reservationDate: {
+              checkInTime: `${getDateFormat(startDate)} ${data.startTime}`,
+              checkOutTime: `${getDateFormat(startDate)} ${data.endTime}`,
+            },
+          }),
+        );
       }
     }
   };

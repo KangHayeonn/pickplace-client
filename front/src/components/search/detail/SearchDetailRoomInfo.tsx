@@ -17,6 +17,10 @@ interface SearchDetailRoomInfoProps {
 const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
   const category = useSelector((state: RootState) => state.optionForm.category);
 
+  const onClickReservation = () => {
+    // TODO : 예약하기 페이지 이동 및 예약 페이지 접근
+  };
+
   return (
     <>
       {roomItem ? (
@@ -43,6 +47,7 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
                 <button
                   type="button"
                   className="search-detail-room__content--btn__reservation"
+                  onClick={() => onClickReservation()}
                 >
                   예약하기
                 </button>

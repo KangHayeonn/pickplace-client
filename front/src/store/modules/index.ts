@@ -7,6 +7,7 @@ import searchForm from './searchForm';
 import optionForm from './optionForm';
 import searchResultReducer from './searchResult';
 import searchApiReducer from './search';
+import reservationReducer from './reservation';
 
 const rootReducer = combineReducers({
   sample,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   optionForm,
   searchResultReducer,
   searchApiReducer,
+  reservationReducer,
 });
 
 // root reducer

@@ -205,7 +205,9 @@ const reservationReducer = handleActions(
     }),
     [SET_RESERVATION_DATE]: (state, action) => ({
       ...state,
-      reservationDate: action.payload.reservationDate,
+      reservationDate: {
+        ...action.payload.reservationDate,
+      },
     }),
   },
   initialState,

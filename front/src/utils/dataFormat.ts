@@ -24,3 +24,15 @@ export const toStringByFormattingTime = (date: Date, format = ':') => {
     return [hour, minute].join(format);
   }
 };
+
+export const getDateFormat = (date: Date) => {
+  const newDate = new Date(date);
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth();
+  const day = newDate.getDate();
+
+  const newMonth = month + 1 < 10 ? `0${month + 1}` : `${month + 1}`;
+  const newDay = day < 10 ? `0${day}` : `${day}`;
+
+  return `${year}년 ${newMonth}월 ${newDay}일`;
+};
