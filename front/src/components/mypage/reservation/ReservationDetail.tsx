@@ -7,14 +7,14 @@ import CreateModal from '../review/CreateModal';
 import User from '../../../api/mypage';
 import { reservationDetailProps, detailProps } from './types';
 import ConfirmModal from '../ConfirmModal';
+import { useParams } from 'react-router-dom';
+
 const ReservationDetail = () => {
-  // const { state } = useLocation();
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [reservationDetail, setReservationDetail] =
     useState<reservationDetailProps>();
 
-  const urlParams = new URL(location.href).pathname.split('/');
-  const reservationId = parseInt(urlParams[urlParams.length - 1]);
+  const { reservationId } = useParams();
 
   const [detailContentProps, setDetailContentProps] = useState<detailProps>();
   useEffect(() => {
@@ -22,25 +22,27 @@ const ReservationDetail = () => {
   }, []);
 
   const getUserReservationDetail = () => {
-    User.v1GetUserReservationDetail(reservationId)
-      .then((res) => {
-        setReservationDetail(res.data.data.reservation[0]);
-        setDetailContentProps({
-          address: res.data.data.reservation[0].placeAddress.address,
-          placePhone: res.data.data.reservation[0].placePhone,
-          reservationId: res.data.data.reservation[0].reservationId,
-          reservationDate: res.data.data.reservation[0].reservationDate,
-          startDate: res.data.data.reservation[0].startDate,
-          startTime: res.data.data.reservation[0].startTime,
-          endDate: res.data.data.reservation[0].endDate,
-          endTime: res.data.data.reservation[0].endTime,
-          nickName: res.data.data.reservation[0].nickname,
-          personnel: res.data.data.reservation[0].personnel,
+    if (reservationId !== undefined) {
+      User.v1GetUserReservationDetail(parseInt(reservationId))
+        .then((res) => {
+          setReservationDetail(res.data.data.reservation[0]);
+          setDetailContentProps({
+            address: res.data.data.reservation[0].placeAddress.address,
+            placePhone: res.data.data.reservation[0].placePhone,
+            reservationId: res.data.data.reservation[0].reservationId,
+            reservationDate: res.data.data.reservation[0].reservationDate,
+            startDate: res.data.data.reservation[0].startDate,
+            startTime: res.data.data.reservation[0].startTime,
+            endDate: res.data.data.reservation[0].endDate,
+            endTime: res.data.data.reservation[0].endTime,
+            nickName: res.data.data.reservation[0].nickname,
+            personnel: res.data.data.reservation[0].personnel,
+          });
+        })
+        .catch((err) => {
+          return Promise.reject(err);
         });
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+    }
   };
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
@@ -69,11 +71,11 @@ const ReservationDetail = () => {
         />
       )}
 
-      {createModalOpen && (
+      {createModalOpen && reservationId && (
         <CreateModal
           setConfirmModalOpen={setConfirmModalOpen}
           setCreateModalOpen={setCreateModalOpen}
-          reservationId={reservationId}
+          reservationId={parseInt(reservationId)}
         />
       )}
       {reservationDetail && (

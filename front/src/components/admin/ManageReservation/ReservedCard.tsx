@@ -49,6 +49,9 @@ const ReservedCard = ({
               adminReservationProps.checkOutTime
             }
           />
+          <div className="reservedCard-reservationId">
+            예약번호 : {adminReservationProps.reservationId}
+          </div>
         </div>
       </div>
     </div>
