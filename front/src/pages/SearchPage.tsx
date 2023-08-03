@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/modules';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-
-import SearchHeader from '../components/search/SearchHeader';
-import SearchOptionMenu from '../components/search/SearchOptionMenu';
-import SearchFilter from '../components/search/SearchFilter';
-import SearchResult from '../components/search/SearchResult';
-import MapModal from '../components/map/MapModal';
-
-import { categoryNameList } from '../utils/mock/categoryList';
-import { markerListType } from '../components/map/types';
-import '../styles/components/search/search.scss';
 import { setSearchType } from '../store/modules/searchForm';
 import { setSearchResult } from '../store/modules/searchResult';
 import {
@@ -26,9 +14,21 @@ import {
 } from '../store/modules/search';
 import { searchProps } from '../store/modules/search';
 
+import SearchHeader from '../components/search/SearchHeader';
+import SearchOptionMenu from '../components/search/SearchOptionMenu';
+import SearchFilter from '../components/search/SearchFilter';
+import SearchResult from '../components/search/SearchResult';
+import MapModal from '../components/map/MapModal';
+
+import { markerListType } from '../components/map/types';
+import '../styles/components/search/search.scss';
+import { format } from 'date-fns';
+import { isShowError } from '../components/common/ToastBox';
+
 const SearchPage = () => {
   const dispatch = useDispatch();
-  const { state } = useLocation();
+  const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
+    useDispatch();
 
   const [onMapOpen, setOnMapOpen] = useState(false);
   const [markerList, setMarkerList] = useState<markerListType[]>([]);
@@ -38,11 +38,17 @@ const SearchPage = () => {
   const searchResult = useSelector(
     (state: RootState) => state.searchResultReducer,
   );
-  const dispatchSearch: ThunkDispatch<searchProps, void, AnyAction> =
-    useDispatch();
-
+  const pageNum = useSelector(
+    (state: RootState) => state.searchApiReducer.pageNum,
+  );
   useEffect(() => {
-    getCategoryData({ searchForm, optionForm, pagination: undefined });
+    getCategoryData({
+      searchForm,
+      optionForm,
+      pagination: {
+        newPageNum: pageNum,
+      },
+    });
   }, []);
 
   const getCategoryData = async (item: searchProps) => {
@@ -51,16 +57,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item?.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
           } else {
-            if (item?.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item?.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item?.pagination?.newPageNum));
         }
         return;
       })
@@ -74,17 +76,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item?.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
-            dispatch(setPageNum(0));
           } else {
-            if (item?.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item?.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item?.pagination?.newPageNum));
         }
         return;
       })
@@ -98,17 +95,12 @@ const SearchPage = () => {
         if (res) {
           const result = res.placeList;
           dispatch(setHasNext(res.hasNext));
-          if (item?.pagination?.newPageNum === undefined) {
+          if (item.pagination?.newPageNum == 0) {
             dispatch(setSearchResult(result));
-            dispatch(setPageNum(0));
           } else {
-            if (item.pagination?.newPageNum == 0) {
-              dispatch(setSearchResult(result));
-            } else {
-              dispatch(setSearchResult([...searchResult, ...result]));
-            }
-            dispatch(setPageNum(item.pagination?.newPageNum));
+            dispatch(setSearchResult([...searchResult, ...result]));
           }
+          dispatch(setPageNum(item.pagination?.newPageNum));
         }
         return;
       })
@@ -142,32 +134,26 @@ const SearchPage = () => {
     setMarkerList(newMarkerList);
   };
   const onClickFilterButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchType(e.currentTarget.value));
+    const value = e.currentTarget.value;
+    const data = {
+      searchForm,
+      optionForm,
+      pagination: { searchType: value, newPageNum: 0 },
+    };
+    dispatch(setSearchType(value));
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({
-          searchForm,
-          optionForm,
-          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-        });
+        getCategoryData(data);
       } else {
-        getSearchData({
-          searchForm,
-          optionForm,
-          pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-        });
+        getSearchData(data);
       }
     } else {
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { searchType: e.currentTarget.value, newPageNum: 0 },
-      });
+      getSearchDataWithOptions(data);
     }
   };
   const checkAddressExist = () => {
     if (searchForm.address == '') {
-      window.alert('주소를 입력해주세요');
+      isShowError('주소를 입력해주세요');
       return false;
     }
     return true;
@@ -183,31 +169,19 @@ const SearchPage = () => {
   };
   const checkOptionFormIsEmpty = () => {
     if (
-      optionForm.category == state.category
-        ? state.category
-        : categoryNameList[0] &&
-          optionForm.userCnt == 1 &&
-          optionForm.tagList.length == 0 &&
-          searchForm.distance == 5
+      optionForm.userCnt == 1 &&
+      optionForm.tagList.length == 0 &&
+      searchForm.distance == 5
     )
       return true;
     return false;
   };
   const onSearchBtnClick = () => {
-    checkOptionFormIsEmpty() &&
-      checkAddressExist() &&
-      getSearchData({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: 0 },
-      });
-    !checkOptionFormIsEmpty() &&
-      checkAddressExist() &&
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: 0 },
-      });
+    if (checkAddressExist()) {
+      const data = { searchForm, optionForm, pagination: { newPageNum: 0 } };
+      checkOptionFormIsEmpty() && getSearchData(data);
+      !checkOptionFormIsEmpty() && getSearchDataWithOptions(data);
+    }
   };
   const onSearchWithOptionBtnClick = () => {
     checkAddressExist() &&

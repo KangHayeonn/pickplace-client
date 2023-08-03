@@ -16,7 +16,7 @@
         text-align: left;
         
         .managePlace-detail__img--container{
-            @include background-default-small();
+            @include background-default();
             min-width: 220px;
             width: 30%;
             height : 100%;

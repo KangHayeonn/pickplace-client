@@ -26,6 +26,10 @@ const SearchForm = ({
   const searchWrap = useRef<HTMLInputElement>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (search == '') setIsFocus(true);
+  }, [search]);
+
   const onFocusSearch = () => {
     setIsFocus(true);
   };
@@ -67,12 +71,12 @@ const SearchForm = ({
             {...props}
           />
         </div>
-        {isFocus ? (
+        {isFocus && (
           <SearchFormPreview
             searchList={searchPreviewList}
             onClickAddressInLi={onClickAddressInLi}
           />
-        ) : null}
+        )}
       </div>
     </section>
   );

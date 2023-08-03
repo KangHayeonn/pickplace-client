@@ -32,18 +32,26 @@
 
     .reservedCard-header{
         cursor: pointer;  
-        padding : 30px 30px 10px 40px;
+        display: flex;
+        
+        .reservedCard__img--container{
+            @include background-default();
+            width: 200px;
+            height: 160px;
+        }
+
+    }
+    .reservedCard-content{
+        padding : 30px;
+        cursor: pointer;  
+        font-size: 16px;
         .reservedCard-placeName{
             font-weight: 800;
             @include line-clamp-ellipsis1();
+            margin-bottom :10px;
         }
-    }
-    .reservedCard-content{
-        cursor: pointer;  
-        padding : 10px 40px;
-        font-size: 16px;
         .checkin,.checkout{
-            margin : 3px 0;
+            margin : 5px 0;
             display: inline-block;
             width : 70px;
         }

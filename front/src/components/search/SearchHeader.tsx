@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { searchHeaderProps } from './types';
+import Calendar from '../common/Calendar';
 import '../../styles/components/search/searchHeader.scss';
 import SearchForm from '../common/SearchForm';
 import axios from 'axios';
@@ -10,6 +11,7 @@ import {
   setEndDate,
   setAddress,
 } from '../../store/modules/searchForm';
+import format from 'date-fns/format';
 import { searchFormProps } from '../../store/modules/searchForm';
 import { optionFormProps } from '../../store/modules/optionForm';
 
@@ -62,19 +64,13 @@ const SearchHeader = ({ onSearchBtnClick }: searchHeaderProps) => {
   const onKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.currentTarget.value);
   };
-  const onChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const date = e.currentTarget.value;
-    if (searchForm.endDate < date) {
-      dispatch(setEndDate(date));
+  const selectDateRange = (dateRange: Array<Date | null>) => {
+    if (dateRange[0] !== null) {
+      dispatch(setStartDate(format(new Date(dateRange[0]), 'yyyy-MM-dd')));
     }
-    dispatch(setStartDate(date));
-  };
-  const onChangeEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const date = e.currentTarget.value;
-    if (searchForm.startDate > date) {
-      dispatch(setStartDate(date));
+    if (dateRange[1] !== null) {
+      dispatch(setEndDate(format(new Date(dateRange[1]), 'yyyy-MM-dd')));
     }
-    dispatch(setEndDate(date));
   };
   return (
     <div className="searchHeader-container">
@@ -91,19 +87,7 @@ const SearchHeader = ({ onSearchBtnClick }: searchHeaderProps) => {
             />
           </div>
           <div className="searchHeader-dateInput__container">
-            <input
-              className="searchHeader-startDate"
-              type="date"
-              onChange={onChangeStartDate}
-              value={searchForm.startDate}
-            />
-            <span>→</span>
-            <input
-              className="searchHeader-endDate"
-              type="date"
-              onChange={onChangeEndDate}
-              value={searchForm.endDate}
-            />
+            <Calendar calendarType="range" selectDateRange={selectDateRange} />
             <button onClick={onSearchBtnClick}>검색</button>
           </div>
         </div>

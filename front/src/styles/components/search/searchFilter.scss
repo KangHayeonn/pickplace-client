@@ -6,6 +6,7 @@
     @include text-body2();
     display: flex;
     justify-content: center;
+    min-width : 400px;
 
     .search-tabBtns__mapBtn{
         margin-left : 1.5vw;
