@@ -33,14 +33,11 @@ const SamplePage = () => {
   const [message, setMessage] = useState<string>('');
   const [isShowToast, setIsShowToast] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
-  // const [count, setCount] = useState(0);
-
   const [date, setDate] = useState<Date | null>(null);
   const [dateRange, setDateRange] = useState<Date | null>(null);
 
   const onIncrease = () => {
     dispatch(increase());
-    // setCount(count+1);
   };
 
   const onClickEvent = () => {
@@ -125,63 +122,11 @@ const SamplePage = () => {
     });
   };
 
-  // 예약 결제 관련 테스트
-  // 은행 별 가상 계좌 받아오기
-  const getBankNumber = (bankName: string) => {
-    Api.v1GetBankNumber(bankName).then((res) => {
-      console.log(
-        '@@ 은행별 가상 계좌 받아오기 : ' + JSON.stringify(res.data.data),
-      );
-    });
-  };
-
-  // 예약페이지 접근
-  const getReservation = (memberId: number, roomId: number) => {
-    // memberId: 1, roomId: 12 (o), 1(x) -> 내부분
-    Api.v1GetReservation(1, 123).then((res) => {
-      console.log('@@예약페이지 접근 :' + JSON.stringify(res));
-    });
-  };
-
-  // 카드 결제 검증
-  const cardValidation = () => {
-    Api.v1CardValidation(1, { cardNum: '1234432112344321', cvc: '123' }).then(
-      (res) => {
-        console.log('@@ 카드 결제 검증 : ' + JSON.stringify(res.data));
-      },
-    );
-  };
-
-  // 카드 결제 및 예약
-  const cardReservation = () => {
-    Api.v1ReservationCard(1, {
-      roomId: 1,
-      checkInTime: '2023년 08월 03일 15:00',
-      checkOutTime: '2023년 08월 04일 10:00',
-      cardNum: '1234432112344321',
-      cvc: '123',
-      cardPassword: 'pickplace1!',
-    });
-  };
-
-  // 계좌이체 및 예약
-  const accountReservation = () => {
-    Api.v1ReservationAccount(1, {
-      roomId: 1,
-      checkInTime: '2023년 08월 03일 15:00',
-      checkOutTime: '2023년 08월 04일 10:00',
-      bankName: '국민은행',
-      bankNum: '1020315-12108542',
-      accountPassword: 'pickplace1!',
-    });
-  };
-
   const [qrUrl, setQRUrl] = useState<string>('');
   // QR 코드 이미지 응답
   const qrImageRequest = () => {
     Api.v1GetQRCodeImage(1, { height: 300, width: 300, roomPrice: 50000 }).then(
       (res) => {
-        console.log('@@QR 코드 이미지 응답 : ' + res.data.data);
         setQRUrl(`data:image/png;base64,${res.data.data.qrImage}`);
       },
     );
@@ -192,8 +137,6 @@ const SamplePage = () => {
     Api.v1QRCodeValidation(
       '02d3bd33-02df-4156-b811-ccc0be188d30',
       'pickplace1!',
-    ).then((res) =>
-      console.log('@@ qr 비밀번호 인증 : ' + JSON.stringify(res.data.data)),
     );
   };
 
@@ -208,12 +151,12 @@ const SamplePage = () => {
   };
 
   const onClickReservation = () => {
-    getReservation(1, 1);
+    qrReservation();
   };
 
   return (
     <div>
-      {/*<h1>Sample Page</h1>
+      <h1>Sample Page</h1>
       <h2>{count}</h2>
       <button onClick={onIncrease}>증가</button>
       <CheckBox text="숙소 이용 및 취소/환불 규정 동의 (필수)" />
@@ -251,7 +194,7 @@ const SamplePage = () => {
       <Calendar calendarType="time" />
       <Calendar calendarType="date" />
       <Calendar calendarType="range" />
-      <SelectBox />*/}
+      <SelectBox />
       <h3>예약 & 결제 테스트</h3>
       <button onClick={onClickReservation}>api 호출</button>
       <div
