@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import '../../../styles/components/search/detail/searchDetailList.scss';
 import '../../../styles/components/search/detail/searchDetailRoomInfo.scss';
+import { RootState } from '../../../store/modules';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
 interface SearchDetailRoomInfoProps {
   roomItem?: {
@@ -12,11 +15,21 @@ interface SearchDetailRoomInfoProps {
 }
 
 const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
+  const category = useSelector((state: RootState) => state.optionForm.category);
+
   return (
     <>
       {roomItem ? (
         <li className="search-list__container--item">
-          <div className="search-detail-room__image">image</div>
+          <div
+            className="search-detail-room__image"
+            style={{
+              background: `url(${GetCategoryImage(category)}) no-repeat`,
+              backgroundSize: 'cover',
+            }}
+          >
+            image
+          </div>
           <div className="search-detail-room__content">
             <div className="search-detail-room__content--title">
               {roomItem?.roomName} (최대 8인)

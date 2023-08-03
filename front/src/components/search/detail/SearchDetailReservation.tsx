@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import '../../../styles/components/search/detail/searchDetailReservation.scss';
 import Calendar from '../../../components/common/Calendar';
 import SelectBox from '../../../components/common/SelectBox';
-
-type CategoryType =
-  | '호텔/리조트'
-  | '펜션'
-  | '게스트하우스'
-  | '스터디룸'
-  | '파티룸';
+import { RootState } from '../../../store/modules';
 
 const dataTimeList = ['1시간', '2시간', '3시간'];
 
 const SearchDetailReservation = () => {
-  const category: CategoryType = '스터디룸';
+  const category = useSelector((state: RootState) => state.optionForm.category);
   const [isPeriod, setIsPeriod] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState<Date | null>(null);

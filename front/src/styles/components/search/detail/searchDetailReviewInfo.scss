@@ -10,6 +10,7 @@
         gap: 0.5rem;
         width: 68rem;
         color: $color-primary;
+        cursor: pointer;
 
         &--rating{
             @include text-h6();

@@ -1,7 +1,7 @@
 import studyRoomImg from '../../assets/images/place-default-small.svg';
 import guestHouseImg from '../../assets/images/place-guestHouse-img.svg';
 import pensionImg from '../../assets/images/place-pension-img.svg';
-import partyRoomImg from '../../assets/images/place-partyRoom-img.svg';
+import partyRoomImg from '../../assets/images/place-partyRoom-img.png';
 import hotelImg from '../../assets/images/place-hotel-img.svg';
 
 export const GetCategoryImage = (category: string) => {
