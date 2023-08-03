@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import TextButton from '../../../components/common/TextButton';
 import '../../../styles/components/reservation/modal/reservationInfoModal.scss';
+import { RootState } from '../../../store/modules';
 
 interface ReservationInfoModalProps {
   onClose: () => void;
@@ -12,6 +14,10 @@ const ReservationInfoModal = ({
   onClose,
   handleSubmit,
 }: ReservationInfoModalProps) => {
+  const { place, reservationDate } = useSelector(
+    (state: RootState) => state.reservation,
+  );
+
   const onClickEvent = () => {
     handleSubmit();
   };
@@ -23,20 +29,22 @@ const ReservationInfoModal = ({
     <ModalForm title="예약내역 확인" onClickEvent={onClickClose}>
       <div className="reservation-info-modal-form">
         <div className="reservation-info-modal-form__top">
-          <div className="reservation-info-modal-form__title">유니언 호텔</div>
+          <div className="reservation-info-modal-form__title">
+            {place.placeName}
+          </div>
           <div className="reservation-info-modal-form__title-sub">
-            [스탠다드 퀸]
+            {place.roomName}
           </div>
           <div className="reservation-info-modal-form__date">
             <div className="reservation-info-modal__title">체크인</div>
             <div className="reservation-info-modal__text">
-              06월 11일(일) 15:00
+              {reservationDate.checkInTime}
             </div>
           </div>
           <div className="reservation-info-modal-form__date">
             <div className="reservation-info-modal__title">체크아웃</div>
             <div className="reservation-info-modal__text">
-              06월 12일(월) 11:00
+              {reservationDate.checkOutTime}
             </div>
           </div>
           <div className="reservation-info-modal-form__description">

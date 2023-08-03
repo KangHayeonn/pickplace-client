@@ -14,6 +14,22 @@ interface reservationDateType {
   };
 }
 
+interface agreementType {
+  agreement: Array<boolean>;
+}
+
+interface paymentType {
+  paymentType: string;
+}
+
+interface qrPaymentCodeType {
+  qrPaymentCode: string;
+}
+
+interface paymentAccountType {
+  paymentAccountType: string;
+}
+
 // Action Type 정의
 export const RESERVATION_ACCOUNT = 'reservation/RESERVATION_ACCOUNT' as const;
 export const RESERVATION_ACCOUNT_SUCCESS =
@@ -40,6 +56,14 @@ export const GET_RESERVATION_INFO_ERROR =
   'reservation/GET_RESERVATION_INFO_ERROR' as const;
 
 export const SET_RESERVATION_DATE = 'reservation/SET_RESERVATION_DATE' as const;
+
+export const SET_AGREEMENT = 'reservation/SET_AGREEMENT' as const;
+
+export const SET_PAYMENT_TYPE = 'reservation/SET_PAYMENT_TYPE' as const;
+
+export const SET_QRCODE = 'reservation/SET_QRCODE' as const;
+
+export const SET_ACCOUNT = 'reservation/SET_ACCOUNT' as const;
 
 export const reservationAccount =
   (memberId: number, data: ReservationAccountType) =>
@@ -111,7 +135,7 @@ export const getReservationInfo =
       const response = await ReservationApi.v1GetReservation(memberId, roomId);
       dispatch({
         type: GET_RESERVATION_INFO_SUCCESS,
-        payload: response,
+        payload: response.data.data,
       });
       return response.data.data;
     } catch (e) {
@@ -126,6 +150,26 @@ export const getReservationInfo =
 export const setReservationDate = (reservationDate: reservationDateType) => ({
   type: SET_RESERVATION_DATE,
   payload: reservationDate,
+});
+
+export const setAgreement = (agreement: agreementType) => ({
+  type: SET_AGREEMENT,
+  payload: agreement,
+});
+
+export const setPaymentType = (paymentType: paymentType) => ({
+  type: SET_PAYMENT_TYPE,
+  payload: paymentType,
+});
+
+export const setQRCode = (qrPaymentCode: qrPaymentCodeType) => ({
+  type: SET_QRCODE,
+  payload: qrPaymentCode,
+});
+
+export const setAccount = (paymentAccountType: paymentAccountType) => ({
+  type: SET_ACCOUNT,
+  payload: paymentAccountType,
 });
 
 export const initialState = {
@@ -154,6 +198,10 @@ export const initialState = {
     checkInTime: '2023년 08월 03일 15:00',
     checkOutTime: '2023년 08월 04일 10:00',
   },
+  agreement: [false, false, false, false],
+  paymentType: '',
+  qrPaymentCode: '',
+  paymentAccountType: '',
 };
 
 const reservationReducer = handleActions(
@@ -208,6 +256,22 @@ const reservationReducer = handleActions(
       reservationDate: {
         ...action.payload.reservationDate,
       },
+    }),
+    [SET_AGREEMENT]: (state, action) => ({
+      ...state,
+      agreement: action.payload.agreement,
+    }),
+    [SET_PAYMENT_TYPE]: (state, action) => ({
+      ...state,
+      paymentType: action.payload.paymentType,
+    }),
+    [SET_QRCODE]: (state, action) => ({
+      ...state,
+      qrPaymentCode: action.payload.qrPaymentCode,
+    }),
+    [SET_ACCOUNT]: (state, action) => ({
+      ...state,
+      paymentAccountType: action.payload.paymentAccountType,
     }),
   },
   initialState,

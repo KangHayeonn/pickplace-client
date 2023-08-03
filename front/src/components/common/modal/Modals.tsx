@@ -15,6 +15,7 @@ const Modals = () => {
 
         const onClose = () => {
           close(Component);
+          document.body.style.overflow = 'unset';
         };
 
         const handleSubmit = async () => {

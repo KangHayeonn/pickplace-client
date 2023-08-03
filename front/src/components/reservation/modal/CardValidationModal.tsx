@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import TextButton from '../../../components/common/TextButton';
 import '../../../styles/components/reservation/modal/cardValidationModal.scss';
+import { RootState } from '../../../store/modules';
 
 interface CardValidationModalProps {
   onClose: () => void;
@@ -12,6 +14,8 @@ const CardValidationModal = ({
   onClose,
   handleSubmit,
 }: CardValidationModalProps) => {
+  const { payment } = useSelector((state: RootState) => state.reservation);
+
   const onClickEvent = () => {
     handleSubmit();
   };
@@ -26,7 +30,9 @@ const CardValidationModal = ({
           <div className="card-validation-modal-form__top--title">
             (주) 픽플레이스컴퍼니
           </div>
-          <div className="card-validation-modal-form__top--text">99,000원</div>
+          <div className="card-validation-modal-form__top--text">
+            {payment.roomPrice.toLocaleString()}원
+          </div>
         </div>
         <div className="card-validation-modal-form__content">
           <div className="card-validation-modal-form__content--text">

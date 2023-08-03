@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../../styles/components/reservation/reservationTemplate.scss';
 import '../../styles/components/reservation/paymentInfo.scss';
 import arrowDownIcon from '../../assets/images/arrowDown.svg';
 import arrowUpIcon from '../../assets/images/arrowUp.svg';
+import { RootState } from '../../store/modules';
 
 const PaymentInfo = () => {
+  const { payment } = useSelector((state: RootState) => state.reservation);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
@@ -27,7 +30,9 @@ const PaymentInfo = () => {
           <div className="payment__info-detail--box">
             <div className="payment__info-detail--box__item">
               <span className="title">주문 금액</span>
-              <span className="amount">104,000원</span>
+              <span className="amount">
+                {(payment.roomPrice + 5000).toLocaleString()}원
+              </span>
             </div>
             <div className="payment__info-detail--box__item">
               <span className="title">할인/부가결제</span>
@@ -38,7 +43,7 @@ const PaymentInfo = () => {
       </div>
       <div className="payment__info-total">
         <span className="title">총 결제금액</span>
-        <span className="amount">99,000원</span>
+        <span className="amount">{payment.roomPrice.toLocaleString()}원</span>
       </div>
     </div>
   );
