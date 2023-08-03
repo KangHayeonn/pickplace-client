@@ -138,7 +138,7 @@ const SamplePage = () => {
   // 예약페이지 접근
   const getReservation = (memberId: number, roomId: number) => {
     // memberId: 1, roomId: 12 (o), 1(x) -> 내부분
-    Api.v1GetReservation(1, 1).then((res) => {
+    Api.v1GetReservation(1, 123).then((res) => {
       console.log('@@예약페이지 접근 :' + JSON.stringify(res));
     });
   };
@@ -208,8 +208,7 @@ const SamplePage = () => {
   };
 
   const onClickReservation = () => {
-    // cardReservation();
-    cardValidation();
+    getReservation(1, 1);
   };
 
   return (
