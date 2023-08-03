@@ -43,7 +43,9 @@ const SearchDetailInfo = () => {
         </div>
         <div className="search-detail-info__content--item">
           <div className="search-detail-info__title">연락처</div>
-          <div className="search-detail-info__number">02-0000-0000</div>
+          <div className="search-detail-info__number">
+            {searchDetail.placeNumber}
+          </div>
         </div>
       </div>
       <div className="search-detail-info__map">

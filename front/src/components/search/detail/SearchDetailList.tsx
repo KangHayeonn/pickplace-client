@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import '../../../styles/components/search/detail/searchDetailList.scss';
 import SearchDetailRoomInfo from '../../../components/search/detail/SearchDetailRoomInfo';
 import SearchDetailReviewInfo from '../../../components/search/detail/SearchDetailReviewInfo';
-// import { searchDetailList, searchReviewList } from '../../../utils/mock/search';
 import { RootState } from '../../../store/modules';
 
 interface SearchDetailListProps {

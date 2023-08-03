@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { useLocation, useParams } from 'react-router-dom';
@@ -13,32 +13,30 @@ import {
   toStringByFormattingTime,
 } from '../utils/dataFormat';
 // api
-import { SearchDetailType } from '@/api/search/types';
+import { SearchDetailType } from '../api/search/types';
 // redux
+import { RootState } from '../store/modules';
 import { getPlaceReview, searchDetail } from '../store/modules/searchDetail';
-
-type CategoryType =
-  | '호텔/리조트'
-  | '펜션'
-  | '게스트하우스'
-  | '스터디룸'
-  | '파티룸';
 
 const SearchDetailPage = () => {
   const location = useLocation();
   const currPage = location.pathname.split('/').at(-1);
   const { searchId } = useParams();
   const placeId = Number(searchId);
+  const category = useSelector((state: RootState) => state.optionForm.category);
   const dispatch: ThunkDispatch<SearchDetailType, void, AnyAction> =
     useDispatch();
-  const category: CategoryType = '스터디룸';
 
   const getPlaceDetail = async () => {
     const now = new Date();
+    const tomorrow = new Date(now);
+
     if (['호텔/리조트', '펜션', '게스트하우스'].includes(category)) {
       const data = {
         startDate: toStringByFormatting(now),
-        endDate: toStringByFormatting(new Date(now.getDate() + 1)),
+        endDate: toStringByFormatting(
+          new Date(tomorrow.setDate(now.getDate() + 1)),
+        ),
       };
       await dispatch(searchDetail(placeId, data));
     } else {
@@ -46,7 +44,7 @@ const SearchDetailPage = () => {
         startDate: toStringByFormatting(now),
         endDate: toStringByFormatting(now),
         startTime: toStringByFormattingTime(now),
-        endTime: toStringByFormattingTime(new Date(now.getHours() + 1)),
+        endTime: '23:00',
       };
       await dispatch(searchDetail(placeId, data));
     }

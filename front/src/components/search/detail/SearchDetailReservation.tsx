@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import { AnyAction } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { useParams } from 'react-router-dom';
 import '../../../styles/components/search/detail/searchDetailReservation.scss';
 import Calendar from '../../../components/common/Calendar';
 import SelectBox from '../../../components/common/SelectBox';
-
-type CategoryType =
-  | '호텔/리조트'
-  | '펜션'
-  | '게스트하우스'
-  | '스터디룸'
-  | '파티룸';
+import {
+  toStringByFormatting,
+  toStringByFormattingTime,
+  getDateFormat,
+} from '../../../utils/dataFormat';
+// api
+import { SearchDetailType } from '../../../api/search/types';
+// redux
+import { RootState } from '../../../store/modules';
+import { searchDetail } from '../../../store/modules/searchDetail';
+import { setReservationDate } from '../../../store/modules/reservation';
 
 const dataTimeList = ['1시간', '2시간', '3시간'];
 
 const SearchDetailReservation = () => {
-  const category: CategoryType = '스터디룸';
+  const { searchId } = useParams();
+  const placeId = Number(searchId);
+  const category = useSelector((state: RootState) => state.optionForm.category);
   const [isPeriod, setIsPeriod] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState<Date | null>(null);
   const [dateRange, setDateRange] = useState<Array<Date | null>>([null, null]);
+  const [perTime, setPerTime] = useState<string>('1시간');
+  const dispatch: ThunkDispatch<SearchDetailType, void, AnyAction> =
+    useDispatch();
+  const dispatchReservation = useDispatch();
 
   const selectTime = (time: Date | null) => {
     setTime(time);
@@ -31,6 +45,57 @@ const SearchDetailReservation = () => {
     setDateRange(dateRange);
   };
 
+  const onChangePerTime = (newTime: string) => {
+    setPerTime(newTime);
+  };
+
+  const getPlaceDetail = async () => {
+    if (['호텔/리조트', '펜션', '게스트하우스'].includes(category)) {
+      if (dateRange[0] !== null && dateRange[1] !== null) {
+        const data = {
+          startDate: toStringByFormatting(dateRange[0]),
+          endDate: toStringByFormatting(dateRange[1]),
+        };
+        await dispatch(searchDetail(placeId, data));
+
+        dispatchReservation(
+          setReservationDate({
+            reservationDate: {
+              checkInTime: `${getDateFormat(dateRange[0])} 15:00`,
+              checkOutTime: `${getDateFormat(dateRange[1])} 10:00`,
+            },
+          }),
+        );
+      }
+    } else {
+      if (startDate && time) {
+        const tempTime = new Date(time);
+        const newTime = new Date(
+          tempTime.setHours(
+            time.getHours() + Number(perTime.replace('시간', '')),
+          ),
+        );
+
+        const data = {
+          startDate: toStringByFormatting(startDate),
+          endDate: toStringByFormatting(startDate),
+          startTime: toStringByFormattingTime(time),
+          endTime: toStringByFormattingTime(newTime),
+        };
+        await dispatch(searchDetail(placeId, data));
+
+        dispatchReservation(
+          setReservationDate({
+            reservationDate: {
+              checkInTime: `${getDateFormat(startDate)} ${data.startTime}`,
+              checkOutTime: `${getDateFormat(startDate)} ${data.endTime}`,
+            },
+          }),
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     if (['호텔/리조트', '펜션', '게스트하우스'].includes(category)) {
       setIsPeriod(true);
@@ -40,14 +105,8 @@ const SearchDetailReservation = () => {
   }, []);
 
   useEffect(() => {
-    if (startDate && time) {
-      // api logic
-    }
-
-    if (dateRange[1] !== null) {
-      // api logic
-    }
-  }, [startDate, time, dateRange]);
+    getPlaceDetail();
+  }, [startDate, time, dateRange, perTime]);
 
   return (
     <div className="search-detail-reservation">
@@ -69,7 +128,11 @@ const SearchDetailReservation = () => {
               <Calendar calendarType="time" selectTime={selectTime} />
             </span>
             <span className="search-detail-reservation__info">
-              <SelectBox defaultText="1시간" selectBoxList={dataTimeList} />
+              <SelectBox
+                defaultText="1시간"
+                selectBoxList={dataTimeList}
+                onChangeCategory={onChangePerTime}
+              />
             </span>
           </div>
         </>

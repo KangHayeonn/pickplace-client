@@ -6,6 +6,7 @@ import arrowLeftIcon from '../../../assets/images/arrow-left.svg';
 import starIcon from '../../../assets/images/star-full.svg';
 import Api from '../../../api/search';
 import { RootState } from '../../../store/modules';
+import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 
 const SearchDetailTitle = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const SearchDetailTitle = () => {
   const searchDetail = useSelector(
     (state: RootState) => state.searchDetail.place,
   );
+  const category = useSelector((state: RootState) => state.optionForm.category);
 
   const goSearchPage = () => {
     navigate('/search');
@@ -42,7 +44,13 @@ const SearchDetailTitle = () => {
 
   return (
     <div className="search-detail-top">
-      <div className="search-detail-top__image">
+      <div
+        className="search-detail-top__image"
+        style={{
+          background: `url(${GetCategoryImage(category)}) no-repeat`,
+          backgroundSize: 'cover',
+        }}
+      >
         <img
           src={arrowLeftIcon}
           width={20}
