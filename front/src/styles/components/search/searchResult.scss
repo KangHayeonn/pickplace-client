@@ -3,15 +3,14 @@
 @import "../../base/variable.scss";
 
 .searchResult-container{           
-    overflow-y: auto;
+    @include overflow-y-scroll();
     margin : 10px 0;
     padding : 0 10px;
     height : 490px;
-    min-width : 400px;
+    width : 500px;
 
     .searchResult-card__component{
         text-align: left;
-        max-width : 700px;
         position : relative;
         color : white;
         height : 150px;
