@@ -147,8 +147,6 @@ const SearchPage = () => {
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
         getCategoryData(data);
-      } else {
-        getSearchData(data);
       }
     } else {
       getSearchDataWithOptions(data);
@@ -182,8 +180,7 @@ const SearchPage = () => {
   const onSearchBtnClick = () => {
     if (checkAddressExist()) {
       const data = { searchForm, optionForm, pagination: { newPageNum: 0 } };
-      checkOptionFormIsEmpty() && getSearchData(data);
-      !checkOptionFormIsEmpty() && getSearchDataWithOptions(data);
+      getSearchDataWithOptions(data);
     }
   };
   const onSearchWithOptionBtnClick = () => {

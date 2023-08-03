@@ -51,8 +51,6 @@ const SearchResult = ({
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
         getCategoryData(data);
-      } else {
-        getSearchData(data);
       }
     } else {
       getSearchDataWithOptions(data);
