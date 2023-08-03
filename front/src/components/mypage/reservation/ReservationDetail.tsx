@@ -5,59 +5,89 @@ import DetailContent from './DetailContent';
 import '../../../styles/components/mypage/reservation/reservationDetail.scss';
 import CreateModal from '../review/CreateModal';
 import User from '../../../api/mypage';
-import { reservationDetailProps } from './types';
+import { reservationDetailProps, detailProps } from './types';
+import ConfirmModal from '../ConfirmModal';
+import { useParams } from 'react-router-dom';
 
 const ReservationDetail = () => {
-  const { state } = useLocation();
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [reservationDetail, setReservationDetail] =
     useState<reservationDetailProps>();
 
+  const { reservationId } = useParams();
+
+  const [detailContentProps, setDetailContentProps] = useState<detailProps>();
   useEffect(() => {
     getUserReservationDetail();
   }, []);
 
   const getUserReservationDetail = () => {
-    User.v1GetUserReservationDetail(state.id)
-      .then((res) => {
-        setReservationDetail(res.data.data.reservation[0]);
-      })
-      .catch((err) => {
-        return Promise.reject(err);
-      });
+    if (reservationId !== undefined) {
+      User.v1GetUserReservationDetail(parseInt(reservationId))
+        .then((res) => {
+          setReservationDetail(res.data.data.reservation[0]);
+          setDetailContentProps({
+            address: res.data.data.reservation[0].placeAddress.address,
+            placePhone: res.data.data.reservation[0].placePhone,
+            reservationId: res.data.data.reservation[0].reservationId,
+            reservationDate: res.data.data.reservation[0].reservationDate,
+            startDate: res.data.data.reservation[0].startDate,
+            startTime: res.data.data.reservation[0].startTime,
+            endDate: res.data.data.reservation[0].endDate,
+            endTime: res.data.data.reservation[0].endTime,
+            nickName: res.data.data.reservation[0].nickname,
+            personnel: res.data.data.reservation[0].personnel,
+          });
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    }
+  };
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  const onClickClose = () => {
+    document.body.style.overflow = 'unset';
+    setCreateModalOpen(false);
+  };
+
+  const onCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
+
+  const onOpenCreateModal = (e: React.MouseEvent<HTMLSpanElement>) => {
+    document.body.style.overflow = 'hidden';
+    setCreateModalOpen(true);
   };
 
   return (
     <div className="reservation-detail">
-      {createModalOpen && (
+      {confirmModalOpen && (
+        <ConfirmModal
+          onClose={onClickClose}
+          onCloseConfirmModal={onCloseConfirmModal}
+          title="리뷰 생성 취소"
+          content="취소 시에 내용이 저장되지 않습니다. 정말 취소하시겠습니까?"
+        />
+      )}
+
+      {createModalOpen && reservationId && (
         <CreateModal
+          setConfirmModalOpen={setConfirmModalOpen}
           setCreateModalOpen={setCreateModalOpen}
-          reservationId={state.id}
+          reservationId={parseInt(reservationId)}
         />
       )}
       {reservationDetail && (
         <DetailHeader
+          category={reservationDetail.category}
           placeName={reservationDetail.placeName}
           placeRating={reservationDetail.placeRating}
           ReviewExistence={reservationDetail.reviewExistence}
-          setCreateModalOpen={setCreateModalOpen}
+          onOpenCreateModal={onOpenCreateModal}
         />
       )}
-      {reservationDetail && (
-        <DetailContent
-          address={reservationDetail.placeAddress.address}
-          placePhone={reservationDetail.placePhone}
-          reservationId={reservationDetail.reservationId}
-          reservationDate={reservationDetail.reservationDate}
-          startDate={reservationDetail.startDate}
-          startTime={reservationDetail.startTime}
-          endDate={reservationDetail.endDate}
-          endTime={reservationDetail.endTime}
-          nickName={reservationDetail.nickname}
-          personnel={reservationDetail.personnel}
-          roomPrice={reservationDetail.roomPrice}
-        />
-      )}
+      {detailContentProps && <DetailContent reservation={detailContentProps} />}
     </div>
   );
 };

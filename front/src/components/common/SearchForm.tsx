@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SearchFormPreview from './SearchFormPreview';
 import '../../styles/components/common/searchForm.scss';
-import searchIcon from '../../assets/images/searchIcon.svg';
 
 interface SearchProps {
   placeholder?: string | undefined;
@@ -26,6 +25,10 @@ const SearchForm = ({
   const searchInput = useRef<HTMLInputElement>(null);
   const searchWrap = useRef<HTMLInputElement>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (search == '') setIsFocus(true);
+  }, [search]);
 
   const onFocusSearch = () => {
     setIsFocus(true);
@@ -67,14 +70,13 @@ const SearchForm = ({
             onFocus={onFocusSearch}
             {...props}
           />
-          <img src={searchIcon} width={16} height={16} alt="Search Icon" />
         </div>
-        {isFocus ? (
+        {isFocus && (
           <SearchFormPreview
             searchList={searchPreviewList}
             onClickAddressInLi={onClickAddressInLi}
           />
-        ) : null}
+        )}
       </div>
     </section>
   );

@@ -5,19 +5,7 @@ import ShowCardInfo from '../ShowCardInfo';
 import { detailContentProps } from './types';
 import '../../../styles/components/mypage/reservation/detailContent.scss';
 
-const DetailContent = ({
-  address,
-  placePhone,
-  reservationId,
-  reservationDate,
-  startDate,
-  startTime,
-  endDate,
-  endTime,
-  nickName,
-  personnel,
-  roomPrice,
-}: detailContentProps) => {
+const DetailContent = ({ reservation }: detailContentProps) => {
   return (
     <>
       <DetailCard>
@@ -25,52 +13,54 @@ const DetailContent = ({
           parentClassname={'detail-address__container'}
           childClassname={'detail-address'}
           title={'주소'}
-          content={address}
+          content={reservation.address}
         />
         <ShowCardInfo
           parentClassname={'detail-phone__container'}
           childClassname={'detail-phone'}
           title={'연락처'}
-          content={placePhone}
+          content={reservation.placePhone}
         />
       </DetailCard>
       <DetailCard title={'예약 정보'}>
         <ShowCardInfo
           parentClassname={'detail-reservationInfo'}
           childClassname={'detail-reservationId'}
-          title={'예약 번호 : ' + reservationId}
-          content={'예약 일시 : ' + reservationDate.replace('T', ' ')}
+          title={'예약 번호 : ' + reservation.reservationId}
+          content={
+            '예약 일시 : ' + reservation.reservationDate.replace('T', ' ')
+          }
         />
         <ShowCardInfo
           childClassname={'detail-checkin'}
           title={'체크인'}
-          content={startDate + ' ' + startTime}
+          content={reservation.startDate + ' ' + reservation.startTime}
         />
         <ShowCardInfo
           childClassname={'detail-checkout'}
           title={'체크아웃'}
-          content={endDate + ' ' + endTime}
+          content={reservation.endDate + ' ' + reservation.endTime}
         />
       </DetailCard>
       <DetailCard title={'고객 정보'}>
         <ShowUserInfo
           childClassname={'detail-nickName'}
           title={'예약자'}
-          content={nickName}
+          content={reservation.nickName}
         />
         <hr />
         <ShowUserInfo
           childClassname={'detail-personnel'}
           title={'총 예약 인원'}
-          content={personnel}
+          content={reservation.personnel}
         />
       </DetailCard>
-      {roomPrice && (
+      {reservation.roomPrice && (
         <DetailCard title={'결제 정보'}>
           <ShowUserInfo
             childClassname={'detail-roomPrice'}
             title={'총 결제 금액'}
-            content={roomPrice}
+            content={reservation.roomPrice}
           />
         </DetailCard>
       )}

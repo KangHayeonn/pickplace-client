@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import '../../../styles/components/search/detail/searchDetailInfo.scss';
 import mapIcon from '../../../assets/images/map.svg';
 import mapHoverIcon from '../../../assets/images/map-white.svg';
 import MapModal from '../../map/MapModal';
-import { markerData } from '../../../utils/mock/markerList';
+import { RootState } from '../../../store/modules';
 
 const SearchDetailInfo = () => {
+  const searchDetail = useSelector(
+    (state: RootState) => state.searchDetail.place,
+  );
   const [openMap, setOpenMap] = useState<boolean>(false);
+  const markerList = [
+    {
+      lng: searchDetail.placeAddress.longitude,
+      lat: searchDetail.placeAddress.latitude,
+      name: searchDetail.placeName,
+      id: searchDetail.placeId,
+      category: searchDetail.category,
+      tag: searchDetail.tags,
+    },
+  ];
 
   const onOpenModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'hidden';
@@ -24,12 +38,14 @@ const SearchDetailInfo = () => {
         <div className="search-detail-info__content--item">
           <div className="search-detail-info__title">주소</div>
           <div className="search-detail-info__address">
-            서울특별시 중구 345-34
+            {searchDetail.placeAddress.address}
           </div>
         </div>
         <div className="search-detail-info__content--item">
           <div className="search-detail-info__title">연락처</div>
-          <div className="search-detail-info__number">02-0000-0000</div>
+          <div className="search-detail-info__number">
+            {searchDetail.placeNumber}
+          </div>
         </div>
       </div>
       <div className="search-detail-info__map">
@@ -52,7 +68,7 @@ const SearchDetailInfo = () => {
         </button>
       </div>
       {openMap && (
-        <MapModal onCloseModal={onCloseModal} mapList={markerData}></MapModal>
+        <MapModal onCloseModal={onCloseModal} mapList={markerList}></MapModal>
       )}
     </div>
   );

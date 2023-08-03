@@ -38,3 +38,10 @@ export type getSearchDataWithOptionsProps = {
   userCnt: number;
   tagList: Array<string>;
 };
+
+export interface SearchDetailType {
+  startDate: string | undefined;
+  startTime?: string | undefined;
+  endDate: string | undefined;
+  endTime?: string | undefined;
+}

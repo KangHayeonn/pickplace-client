@@ -11,7 +11,7 @@ interface ModalFormProps {
 
 const ModalForm = ({ title, onClickEvent, children }: ModalFormProps) => {
   return (
-    <div className="modal-container">
+    <div className="review-modal-container">
       <div className="modal-form">
         <div className="modal-form__title mypage-modalForm">
           <h3 className="modal-form__title--logo mypage-modalForm__title">

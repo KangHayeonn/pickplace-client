@@ -1,0 +1,82 @@
+@import "../../../base/variable.scss";
+
+.account-modal-form {
+    
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: $color-secondary;
+        margin: -35px 10px 0px 10px;
+        padding: 10px 20px;
+        border-radius: 10px;
+
+        &--title {
+            @include text-body3();
+            color: $color-text-darkgray;
+        }
+
+        &--text {
+            @include text-h6();
+            margin-top: 5px;
+            font-weight: 600;
+        }
+    }
+
+    &__content {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 30px 20px;
+
+        &--text {
+            @include text-body1();
+            color: $color-gray;
+        }
+    }
+
+    &__bank {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 1rem;
+
+        &--box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            border: 1px solid $color-lightgray;
+            border-radius: 10px;
+
+            img {
+                height: 60px;
+                width: 60px;
+            }
+
+            &.checked {
+                border: 5px solid $color-gray;
+            }
+        }
+
+        &--text {
+            @include text-body1();
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+
+        &--btn {
+            width: 145px;
+        }
+    }
+}

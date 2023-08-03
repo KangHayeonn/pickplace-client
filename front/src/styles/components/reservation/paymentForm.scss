@@ -29,6 +29,10 @@
                 top: -10px;
                 left: 15px;
             }
+
+            &.checked {
+                border: 3px solid $color-gray;
+            }
         }
     }
 

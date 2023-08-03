@@ -1,5 +1,5 @@
 import { instanceWithToken } from '../../api';
-import { getAccessToken, getUserId } from '../../utils/tokenControl';
+import { getUserId } from '../../utils/tokenControl';
 const prefix = '/api/v1/members';
 const prefixReservation = '/api/v1/reservation';
 

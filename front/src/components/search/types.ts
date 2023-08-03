@@ -1,21 +1,11 @@
+import { searchProps } from '@/store/modules/search';
+
 export type searchHeaderProps = {
-  startDate: string;
-  endDate: string;
-  category: string;
-  address: string;
-  x: number;
-  y: number;
-  onChangeAddress: (address: string, x: string, y: string) => void;
-  onChangeStartDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeEndDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchBtnClick: () => void;
 };
 
 export interface optionFormProps {
-  category: {
-    name: string;
-    id: number;
-  };
+  category: string;
   userCnt: number;
   tagList: Array<string>;
 }
@@ -30,21 +20,12 @@ export interface searchFormProps {
 }
 
 export type searchOptionMenuProps = {
-  optionForm: optionFormProps;
-  setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
-  searchForm: searchFormProps;
-  setSearchForm: React.Dispatch<React.SetStateAction<searchFormProps>>;
   onSearchWithOptionBtnClick: () => void;
 };
 
 export type categorySelectorProps = {
   categoryName: string;
   onChangeCategory: (category: string) => void;
-};
-
-export type personnelCounterProps = {
-  optionForm: optionFormProps;
-  setOptionForm: React.Dispatch<React.SetStateAction<optionFormProps>>;
 };
 
 export type tagSelectorProps = {
@@ -61,35 +42,10 @@ export type searchFilterProps = {
   onClickFilterButton: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export interface searchResultListProps {
-  placeId: number;
-  placeName: string;
-  placeAddress: {
-    address: string;
-    latitude: number;
-    longitude: number;
-  };
-  placeRating: number;
-  placeReviewCnt: number;
-  category: string;
-  tags: string[];
-}
-
 export type searchResultProps = {
-  searchResult: searchResultListProps[];
-  pageNum: number;
-  hasNext: boolean;
   checkOptionFormIsEmpty: () => boolean;
   checkSearchFormIsEmpty: () => boolean;
-
-  getSearchData: (item?: { newPageNum?: number; searchType?: string }) => void;
-  getSearchDataWithOptions: (item: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => void;
-
-  getCategoryData: (item?: {
-    newPageNum?: number;
-    searchType?: string;
-  }) => void;
+  getSearchData: (item: searchProps) => Promise<void>;
+  getSearchDataWithOptions: (item: searchProps) => Promise<void>;
+  getCategoryData: (item: searchProps) => Promise<void>;
 };

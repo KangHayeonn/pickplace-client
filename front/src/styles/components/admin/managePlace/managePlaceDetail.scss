@@ -1,11 +1,8 @@
 @import "../../../base/variable.scss";
 
 .managePlace-detail{
-    width : 60%;
-    min-width: 550px;
-    min-height: 90vh;
+    width : 700px;
     margin : 40px auto;
-
     .managePlace-detail__header{
         background-color: white;
         box-shadow: $shadow-dropdown;    
@@ -14,13 +11,11 @@
         margin : 10px 0;
         height: 150px;
         text-align: left;
-        
         .managePlace-detail__img--container{
-            @include background-default-small();
+            @include background-default();
             min-width: 220px;
             width: 30%;
             height : 100%;
-            
             .managePlace-detail__back--btn{
                 cursor: pointer;
                 background-color: rgba(0,0,0,0);

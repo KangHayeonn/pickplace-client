@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
+import { isShowError } from '../../../components/common/ToastBox';
 import StarRate from '../../../components/common/StarRate';
+
 import CheckIcon from '../../../assets/images/check.svg';
-import { reservationDetail } from '../../../utils/mock/reservationDetail';
-import '../../../styles/components/mypage/review/reviewModal.scss';
 import Review from '../../../api/review';
-import { CreateModalProps } from '../types';
 import User from '../../../api/mypage';
+import '../../../styles/components/mypage/review/reviewModal.scss';
+import { CreateModalProps } from '../types';
 
 export type resevationInfoProps = {
   placeName: string;
   address: string;
   reservationDate: string;
+  placeCategory: string;
 };
 const CreateModal = ({
   reservationId,
   setCreateModalOpen,
+  setConfirmModalOpen,
 }: CreateModalProps) => {
   const [reviewContent, setReviewContent] = useState('');
   const [resevationInfo, setReservationInfo] = useState<resevationInfoProps>({
     placeName: '',
     address: '',
     reservationDate: '',
+    placeCategory: '',
   });
   const [starRate, setStarRate] = useState(0);
 
@@ -40,6 +44,7 @@ const CreateModal = ({
             'T',
             ' ',
           ),
+          placeCategory: res.data.data.reservation[0].category,
         });
       })
       .catch((err) => {
@@ -50,23 +55,14 @@ const CreateModal = ({
     if (reviewContent.length <= 500)
       setReviewContent(e.currentTarget.value.substring(0, 500));
   };
-  const onClickClose = () => {
-    if (
-      window.confirm(
-        '취소 시 내용이 저장되지 않습니다. 작성을 취소하시겠습니까?',
-      )
-    ) {
-      setCreateModalOpen(false);
-    }
-  };
   const onClickStar = (rate: number) => {
     setStarRate(rate);
   };
   const onCreateBtnClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (starRate == 0) {
-      window.alert('별점을 입력해주세요.');
+      isShowError('별점을 입력해주세요.');
     } else if (reviewContent == '') {
-      window.alert('리뷰 내용을 입력해주세요');
+      isShowError('리뷰 내용을 입력해주세요');
     } else {
       const data = {
         reservationId: reservationId,
@@ -75,6 +71,7 @@ const CreateModal = ({
       };
       Review.v1CreateReview(data)
         .then((res) => {
+          isShowError('리뷰 추가 완료');
           setCreateModalOpen(false);
           document.body.style.overflow = 'unset';
         })
@@ -85,9 +82,13 @@ const CreateModal = ({
   };
 
   return (
-    <ModalForm title={resevationInfo.placeName} onClickEvent={onClickClose}>
+    <ModalForm
+      title={resevationInfo.placeName}
+      onClickEvent={() => setConfirmModalOpen(true)}
+    >
       <div className="ReviewModal-container">
         <ReviewModalHeader
+          category={resevationInfo.placeCategory}
           placeAddress={resevationInfo.address}
           reservationDate={resevationInfo.reservationDate}
         />

@@ -11,7 +11,7 @@
         margin : 0 auto;
         padding : 20px 0;
         h1{
-            margin : 10px 0 0 0 ;
+            margin-top : 10px ;
             text-align : left        
         }
         .searchHeader-inputs__container{
@@ -19,48 +19,20 @@
             flex-wrap: wrap;
             align-items : center;
             margin : 20px 0 10px;
+            width: 700px;
 
             .searchHeader-searchForm__container{
-                margin-right : 20px;                    
+                margin : 0 10px 10px 0;                  
                 width : 280px;
             }
             .searchHeader-dateInput__container{
-                text-align: left;
-                
-                input{
-                    margin : 10px 0 0 0;
-                    padding : 10px;
-                    border-radius: 20px;
-
+                display: flex;
+                align-items: center;
+                .searchHeader-search__btn{
                     position: relative;
-                    background: url(../../../assets/images/calendar.png) no-repeat white;
-                    background-position: 15px center;
-                    background-size :14px;
-                    text-indent: 13px;
-                    width: 150px;
-                    text-align: center;
-                }
-
-                input[type="date"]::-webkit-calendar-picker-indicator {
-                    display: block;
-                    cursor: pointer;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    width: auto;
-                    height: auto;
-                    color: transparent;
-                    background: transparent;
-                }                    
-                span{
-                    margin : 0 5px;
-                }
-                button{
-                    margin : 0 5px;
-                    height: 35px;
-                    width : 50px;
+                    margin-left : 40px;
+                    height: 40px;
+                    width : 55px;
                     @include button-white();                
                     &:hover {
                         @include button-hover-gray();

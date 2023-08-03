@@ -3,6 +3,7 @@ import ModalForm from './ModalForm';
 import ReviewModalHeader from './ReviewModalHeader';
 import CheckIcon from '../../../assets/images/check.svg';
 import StarRate from '../../../components/common/StarRate';
+import { isShowError } from '../../../components/common/ToastBox';
 import Review from '../../../api/review';
 import '../../../styles/components/mypage/review/reviewModal.scss';
 import { UpdateModalProps, reviewDetailProps } from '../types';
@@ -11,6 +12,7 @@ const UpdateModal = ({
   reviewId,
   setUpdateModalOpen,
   getUserReviews,
+  setConfirmModalOpen,
 }: UpdateModalProps) => {
   const [reviewDetail, setReviewDetail] = useState<reviewDetailProps>({
     reviewId: 0,
@@ -21,6 +23,7 @@ const UpdateModal = ({
     memberName: '',
     placeAddress: '',
     placeName: '',
+    placeCategory: '',
   });
   const [reviewContent, setReviewContent] = useState<string>('');
   const [starRate, setStarRate] = useState<number>(0);
@@ -48,21 +51,12 @@ const UpdateModal = ({
     if (reviewContent.length <= 500)
       setReviewContent(e.currentTarget.value.substring(0, 500));
   };
-  const onClickClose = () => {
-    if (
-      window.confirm(
-        '취소 시 내용이 저장되지 않습니다. 작성을 취소하시겠습니까?',
-      )
-    ) {
-      setUpdateModalOpen(false);
-      document.body.style.overflow = 'unset';
-    }
-  };
+
   const onUpdateBtnClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (starRate == 0) {
-      window.alert('별점을 입력해주세요.');
+      isShowError('별점을 입력해주세요.');
     } else if (reviewContent == '') {
-      window.alert('리뷰 내용을 입력해주세요');
+      isShowError('리뷰 내용을 입력해주세요');
     } else {
       const data = {
         reviewId: reviewId,
@@ -73,6 +67,7 @@ const UpdateModal = ({
       };
       Review.v1UpdateReview(data)
         .then((res) => {
+          isShowError('리뷰 수정 완료');
           getUserReviews();
           setUpdateModalOpen(false);
           document.body.style.overflow = 'unset';
@@ -84,9 +79,13 @@ const UpdateModal = ({
   };
 
   return (
-    <ModalForm title={reviewDetail.placeName} onClickEvent={onClickClose}>
+    <ModalForm
+      title={reviewDetail.placeName}
+      onClickEvent={() => setConfirmModalOpen(true)}
+    >
       <div className="ReviewModal-container">
         <ReviewModalHeader
+          category={reviewDetail.placeCategory}
           memberName={reviewDetail.memberName}
           reviewDate={reviewDetail.reviewDate}
           placeAddress={reviewDetail.placeAddress}
