@@ -123,7 +123,7 @@ export const getReservationInfo =
     }
   };
 
-export const setReservationInfo = (reservationDate: reservationDateType) => ({
+export const setReservationDate = (reservationDate: reservationDateType) => ({
   type: SET_RESERVATION_DATE,
   payload: reservationDate,
 });

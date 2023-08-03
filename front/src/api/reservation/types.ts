@@ -33,3 +33,8 @@ export interface QRImageRequestType {
   roomPrice: number;
   width: number;
 }
+
+export interface ReservationInfoType {
+  memberId: number;
+  roomId: number;
+}

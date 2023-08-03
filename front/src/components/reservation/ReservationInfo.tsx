@@ -1,8 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import '../../styles/components/reservation/reservationTemplate.scss';
 import '../../styles/components/reservation/reservationInfo.scss';
+import { RootState } from '../../store/modules';
 
 const ReservationInfo = () => {
+  const { place, payment, member } = useSelector(
+    (state: RootState) => state.reservation,
+  );
+
   return (
     <div className="reservation__item">
       <div className="reservation__item--title">

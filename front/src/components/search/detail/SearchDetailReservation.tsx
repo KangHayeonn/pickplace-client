@@ -16,7 +16,7 @@ import { SearchDetailType } from '../../../api/search/types';
 // redux
 import { RootState } from '../../../store/modules';
 import { searchDetail } from '../../../store/modules/searchDetail';
-import { setReservationInfo } from '../../../store/modules/reservation';
+import { setReservationDate } from '../../../store/modules/reservation';
 
 const dataTimeList = ['1시간', '2시간', '3시간'];
 
@@ -59,7 +59,7 @@ const SearchDetailReservation = () => {
         await dispatch(searchDetail(placeId, data));
 
         dispatchReservation(
-          setReservationInfo({
+          setReservationDate({
             reservationDate: {
               checkInTime: `${getDateFormat(dateRange[0])} 15:00`,
               checkOutTime: `${getDateFormat(dateRange[1])} 10:00`,
@@ -85,7 +85,7 @@ const SearchDetailReservation = () => {
         await dispatch(searchDetail(placeId, data));
 
         dispatchReservation(
-          setReservationInfo({
+          setReservationDate({
             reservationDate: {
               checkInTime: `${getDateFormat(startDate)} ${data.startTime}`,
               checkOutTime: `${getDateFormat(startDate)} ${data.endTime}`,
