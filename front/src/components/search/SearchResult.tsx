@@ -3,12 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import useIntersectionObserver from './useIntersectionObserver';
 import useViewportObserver from './useViewportObserver';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../../store/modules';
+import { searchDetail } from '../../store/modules/searchDetail';
+import { searchResultListProps } from '../../store/modules/searchResult';
+import { SearchDetailType } from '../../api/search/types';
+
+import { GetCategoryImage } from '../common/GetCategoryImage';
+import format from 'date-fns/format';
 import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
-import { GetCategoryImage } from '../common/GetCategoryImage';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/modules';
 
 const SearchResult = ({
   checkOptionFormIsEmpty,
@@ -29,27 +36,26 @@ const SearchResult = ({
   const pageNum = useSelector(
     (state: RootState) => state.searchApiReducer.pageNum,
   );
+  const dispatchSearchDetail: ThunkDispatch<
+    { placeId: number; data: SearchDetailType },
+    void,
+    AnyAction
+  > = useDispatch();
+
   const fetchMoreItems = async () => {
+    const data = {
+      searchForm,
+      optionForm,
+      pagination: { newPageNum: pageNum + 1 },
+    };
     if (checkOptionFormIsEmpty()) {
       if (checkSearchFormIsEmpty()) {
-        getCategoryData({
-          searchForm,
-          optionForm,
-          pagination: { newPageNum: pageNum + 1 },
-        });
+        getCategoryData(data);
       } else {
-        getSearchData({
-          searchForm,
-          optionForm,
-          pagination: { newPageNum: pageNum + 1 },
-        });
+        getSearchData(data);
       }
     } else {
-      getSearchDataWithOptions({
-        searchForm,
-        optionForm,
-        pagination: { newPageNum: pageNum + 1 },
-      });
+      getSearchDataWithOptions(data);
     }
   };
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -64,9 +70,16 @@ const SearchResult = ({
   };
   const { setShownCard } = useViewportObserver({ onIntersectViewport });
 
-  const onResultCardClick = (placeId: number) => {
+  const onResultCardClick = (item: searchResultListProps) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
-      navigate(`/search/${placeId}/detail`);
+      const data = {
+        startDate: format(new Date(), 'yyyy-MM-dd'),
+        endDate: format(new Date(), 'yyyy-MM-dd'),
+        startTime: '15:00',
+        endTime: '22:00',
+      };
+      dispatchSearchDetail(searchDetail(item.placeId, data));
+      navigate(`/search/${item.placeId}/detail`);
     };
   };
 
@@ -85,7 +98,7 @@ const SearchResult = ({
             data-lng={item.placeAddress.longitude}
             data-category={item.category}
             data-tag={item.tags}
-            onClick={onResultCardClick(item.placeId)}
+            onClick={onResultCardClick(item)}
           >
             <img
               className="searchResult-img"
