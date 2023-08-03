@@ -15,6 +15,16 @@ import RadioGroup from '../components/common/RadioGroupContext';
 import RadioButton from '../components/common/RadioButton';
 import Calendar from '../components/common/Calendar';
 import SelectBox from '../components/common/SelectBox';
+// api
+import Api from '../api/reservation';
+// modal
+import useModals from '../components/common/modal/UseModals';
+import ReservationInfoModal from '../components/reservation/modal/ReservationInfoModal';
+import ReservationResultModal from '../components/reservation/modal/ReservationResultModal';
+import QRCodeModal from '../components/reservation/modal/QRCodeModal';
+import PaymentModal from '../components/reservation/modal/PaymentModal';
+import CardValidationModal from '../components/reservation/modal/CardValidationModal';
+import AccountModal from '../components/reservation/modal/AccountModal';
 
 const SamplePage = () => {
   const navigate = useNavigate();
@@ -60,9 +70,151 @@ const SamplePage = () => {
     setValue(e.currentTarget.value);
   };
 
+  const { openModal } = useModals();
+
+  const handleClick = () => {
+    openModal(ReservationInfoModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+        handleClick2();
+      },
+    });
+  };
+
+  const handleClick2 = () => {
+    openModal(ReservationResultModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+        handleClick3();
+      },
+    });
+  };
+
+  const handleClick3 = () => {
+    openModal(QRCodeModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+        handleClick4();
+      },
+    });
+  };
+
+  const handleClick4 = () => {
+    openModal(PaymentModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+        handleClick5();
+      },
+    });
+  };
+
+  const handleClick5 = () => {
+    openModal(CardValidationModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+        handleClick6();
+      },
+    });
+  };
+
+  const handleClick6 = () => {
+    openModal(AccountModal, {
+      onSubmit: async () => {
+        // TODO : API Logic
+      },
+    });
+  };
+
+  // 예약 결제 관련 테스트
+  // 은행 별 가상 계좌 받아오기
+  const getBankNumber = (bankName: string) => {
+    Api.v1GetBankNumber(bankName).then((res) => {
+      console.log(
+        '@@ 은행별 가상 계좌 받아오기 : ' + JSON.stringify(res.data.data),
+      );
+    });
+  };
+
+  // 예약페이지 접근
+  const getReservation = (memberId: number, roomId: number) => {
+    // memberId: 1, roomId: 12 (o), 1(x) -> 내부분
+    Api.v1GetReservation(1, 1).then((res) => {
+      console.log('@@예약페이지 접근 :' + JSON.stringify(res));
+    });
+  };
+
+  // 카드 결제 검증
+  const cardValidation = () => {
+    Api.v1CardValidation(1, { cardNum: '1234432112344321', cvc: '123' }).then(
+      (res) => {
+        console.log('@@ 카드 결제 검증 : ' + JSON.stringify(res.data));
+      },
+    );
+  };
+
+  // 카드 결제 및 예약
+  const cardReservation = () => {
+    Api.v1ReservationCard(1, {
+      roomId: 1,
+      checkInTime: '2023년 08월 03일 15:00',
+      checkOutTime: '2023년 08월 04일 10:00',
+      cardNum: '1234432112344321',
+      cvc: '123',
+      cardPassword: 'pickplace1!',
+    });
+  };
+
+  // 계좌이체 및 예약
+  const accountReservation = () => {
+    Api.v1ReservationAccount(1, {
+      roomId: 1,
+      checkInTime: '2023년 08월 03일 15:00',
+      checkOutTime: '2023년 08월 04일 10:00',
+      bankName: '국민은행',
+      bankNum: '1020315-12108542',
+      accountPassword: 'pickplace1!',
+    });
+  };
+
+  const [qrUrl, setQRUrl] = useState<string>('');
+  // QR 코드 이미지 응답
+  const qrImageRequest = () => {
+    Api.v1GetQRCodeImage(1, { height: 300, width: 300, roomPrice: 50000 }).then(
+      (res) => {
+        console.log('@@QR 코드 이미지 응답 : ' + res.data.data);
+        setQRUrl(`data:image/png;base64,${res.data.data.qrImage}`);
+      },
+    );
+  };
+
+  // QR 코드 비밀번호 인증
+  const qrPasswordValidation = () => {
+    Api.v1QRCodeValidation(
+      '02d3bd33-02df-4156-b811-ccc0be188d30',
+      'pickplace1!',
+    ).then((res) =>
+      console.log('@@ qr 비밀번호 인증 : ' + JSON.stringify(res.data.data)),
+    );
+  };
+
+  // QR 결제 & 예약
+  const qrReservation = () => {
+    Api.v1ReservationQRCode(1, {
+      roomId: 19,
+      checkInTime: '2023년 08월 03일 15:00',
+      checkOutTime: '2023년 08월 04일 10:00',
+      qrPaymentCode: '02d3bd33-02df-4156-b811-ccc0be188d30',
+    });
+  };
+
+  const onClickReservation = () => {
+    // cardReservation();
+    cardValidation();
+  };
+
   return (
     <div>
-      <h1>Sample Page</h1>
+      {/*<h1>Sample Page</h1>
       <h2>{count}</h2>
       <button onClick={onIncrease}>증가</button>
       <CheckBox text="숙소 이용 및 취소/환불 규정 동의 (필수)" />
@@ -100,7 +252,20 @@ const SamplePage = () => {
       <Calendar calendarType="time" />
       <Calendar calendarType="date" />
       <Calendar calendarType="range" />
-      <SelectBox />
+      <SelectBox />*/}
+      <h3>예약 & 결제 테스트</h3>
+      <button onClick={onClickReservation}>api 호출</button>
+      <div
+        style={{
+          width: '300px',
+          height: '300px',
+          border: '1px solid #000',
+          margin: '10rem',
+        }}
+      >
+        <img src={qrUrl} alt="" />
+      </div>
+      <button onClick={handleClick}>모달 열기</button>
     </div>
   );
 };

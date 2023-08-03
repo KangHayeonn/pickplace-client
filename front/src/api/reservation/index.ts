@@ -1,53 +1,12 @@
 import { instanceWithToken } from '../../api';
 const prefix = '/api/v1/reservation';
-
-interface ReservationAccountType {
-  accountPassword: string;
-  bankName: string;
-  bankNum: string;
-  checkInTime: string;
-  checkOutTime: string;
-  endDate: string;
-  endTime: string;
-  roomId: number;
-  startDate: string;
-  startTime: string;
-}
-
-interface ReservationCardType {
-  cardNum: string;
-  cardPassword: string;
-  checkInTime: string;
-  checkOutTime: string;
-  cvc: string;
-  endDate: string;
-  endTime: string;
-  roomId: number;
-  startDate: string;
-  startTime: string;
-}
-
-interface CardValidationType {
-  cardNum: string;
-  cvc: string;
-}
-
-interface ReservationQRCodeType {
-  checkInTime: string;
-  checkOutTime: string;
-  endDate: string;
-  endTime: string;
-  qrPaymentCode: string;
-  roomId: number;
-  startDate: string;
-  startTime: string;
-}
-
-interface QRImageRequestType {
-  height: number;
-  roomPrice: number;
-  width: number;
-}
+import {
+  ReservationAccountType,
+  ReservationCardType,
+  ReservationQRCodeType,
+  CardValidationType,
+  QRImageRequestType,
+} from './types';
 
 const Reservation = {
   // 예약페이지 접근
@@ -65,9 +24,9 @@ const Reservation = {
     }
   },
   // 계좌이체 및 예약
-  async v1ReservationAccount(data: ReservationAccountType) {
+  async v1ReservationAccount(memberId: number, data: ReservationAccountType) {
     try {
-      const url = `${prefix}/account`;
+      const url = `${prefix}/account?memberId=${memberId}`;
       const result = await instanceWithToken.post(url, data);
       return result;
     } catch (err) {
@@ -85,9 +44,9 @@ const Reservation = {
     }
   },
   // 카드 결제 및 예약
-  async v1ReservationCard(data: ReservationCardType) {
+  async v1ReservationCard(memberId: number, data: ReservationCardType) {
     try {
-      const url = `${prefix}/card`;
+      const url = `${prefix}/card?memberId=${memberId}`;
       const result = await instanceWithToken.post(url, data);
       return result;
     } catch (err) {
@@ -95,9 +54,9 @@ const Reservation = {
     }
   },
   // 카드 결제 검증
-  async v1CardValidation(data: CardValidationType) {
+  async v1CardValidation(memberId: number, data: CardValidationType) {
     try {
-      const url = `${prefix}/card/validation`;
+      const url = `${prefix}/card/validation?memberId=${memberId}`;
       const result = await instanceWithToken.post(url, data);
       return result;
     } catch (err) {
@@ -105,9 +64,9 @@ const Reservation = {
     }
   },
   // QR 결제
-  async v1ReservationQRCode(data: ReservationQRCodeType) {
+  async v1ReservationQRCode(memberId: number, data: ReservationQRCodeType) {
     try {
-      const url = `${prefix}/qrcode`;
+      const url = `${prefix}/qrcode?memberId=${memberId}`;
       const result = await instanceWithToken.post(url, data);
       return result;
     } catch (err) {
@@ -147,3 +106,5 @@ const Reservation = {
     }
   },
 };
+
+export default Reservation;

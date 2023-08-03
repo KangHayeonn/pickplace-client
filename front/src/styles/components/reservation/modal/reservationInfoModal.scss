@@ -1,0 +1,67 @@
+@import "../../../base/variable.scss";
+
+.reservation-info-modal-form {
+    
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 40px;
+    }
+
+    &__title {
+        @include text-subtitle1();
+        font-size: 1.15rem;
+
+        &-sub {
+            @include text-subtitle2();
+            margin-bottom: 20px;
+        }
+    }
+
+    &__date {
+        display: flex;
+        width: 20rem;
+        margin-bottom: 5px;
+    }
+
+    &__description {
+        @include text-body3();
+        margin: 40px 0 30px;
+        text-align:left;
+    }
+
+    &__highlight {
+        color: $color-error;
+    }
+
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+
+        &--btn {
+            width: 145px;
+
+            &:first-child {
+                margin-right: 50px;
+            }
+        }
+    }
+}
+
+.reservation-info-modal {
+
+    &__title {
+        @include text-body2();
+        display: flex;
+        color: $color-text-gray;
+        width: 5rem;
+    }
+
+    &__text {
+        @include text-body2();
+        font-weight: 600;
+    }
+}

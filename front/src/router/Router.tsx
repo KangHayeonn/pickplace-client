@@ -17,6 +17,8 @@ import ManagePlaceDetail from '../components/admin/ManagePlace/ManagePlaceDetail
 import ReservationPage from '../pages/ReservationPage';
 import CreatePlace from '../components/admin/ManagePlace/CreatePlace/CreatePlace';
 import UpdatePlace from '../components/admin/ManagePlace/UpdatePlace';
+// qr test
+import QRPasswordPage from '../pages/QRPasswordPage';
 
 // const MainPage = lazy(() => import("../pages/MainPage"));
 // const SignupPage = lazy(() => import("../pages/SignupPage"));
@@ -66,6 +68,7 @@ const Router = () => {
             path="/mypage/managePlace/updatePlace/:placeId"
             element={<UpdatePlace />}
           />
+          <Route path="/qrcode/password" element={<QRPasswordPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
