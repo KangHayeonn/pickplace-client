@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../components/mypage/Header';
 import Reservation from '../components/mypage/reservation/Reservation';
 import UserInfo from '../components/mypage/userInfo/UserInfo';
@@ -6,12 +6,18 @@ import ManagePlace from '../components/admin/ManagePlace/ManagePlace';
 import ManageReservation from '../components/admin/ManageReservation/ManageReservation';
 import MyReview from '../components/mypage/review/MyReview';
 import '../styles/components/mypage/mypage.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/modules';
+import { setRadioState } from '../store/modules/radio';
 
 const MyPage = () => {
-  const [clickedMenu, setClickedMenu] = useState(0);
+  const dispatch = useDispatch();
 
+  const clickedMenu = useSelector(
+    (state: RootState) => state.radioReducer.clickedBtn,
+  );
   const onClickHeaderButton = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setClickedMenu(parseInt(e.currentTarget.value));
+    dispatch(setRadioState(parseInt(e.currentTarget.value)));
   };
 
   return (
