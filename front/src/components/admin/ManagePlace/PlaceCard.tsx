@@ -6,16 +6,7 @@ import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 const PlaceCard = ({ adminPlace }: placeCardProps) => {
   const navigate = useNavigate();
   const onClickPlaceCard = (e: React.MouseEvent<HTMLDivElement>) => {
-    const state = {
-      placeId: adminPlace.placeId,
-      placeName: adminPlace.placeName,
-      placeAddress: adminPlace.placeAddress,
-      placePhone: adminPlace.placePhone,
-      placeCategory: adminPlace.placeCategory,
-    };
-    navigate(`/mypage/managePlace/detail/${adminPlace.placeId}`, {
-      state: state,
-    });
+    navigate(`/mypage/managePlace/detail/${adminPlace.placeId}`);
   };
   return (
     <div

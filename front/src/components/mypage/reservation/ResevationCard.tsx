@@ -12,12 +12,7 @@ const ResevationCard = ({ reservationProps }: cardProps) => {
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
   const onClickResevationCard = (e: React.MouseEvent<HTMLDivElement>) => {
-    const state = {
-      id: reservationProps.reservationId,
-    };
-    navigate(`/mypage/reservationDetail/${reservationProps.reservationId}`, {
-      state: state,
-    });
+    navigate(`/mypage/reservationDetail/${reservationProps.reservationId}`);
   };
   const onClickCreateReview = (e: React.MouseEvent<HTMLButtonElement>) => {
     document.body.style.overflow = 'hidden';
