@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { setInterceptors } from './common/interceptors';
+import { setCommonInterceptors } from './common/commonInterceptors';
 
 const createInstance = () => {
-  return axios.create({
+  const instance = axios.create({
     baseURL: process.env.REACT_APP_BASE_URL,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
   });
+  return setCommonInterceptors(instance);
 };
 
 const createInstanceWithAuth = () => {

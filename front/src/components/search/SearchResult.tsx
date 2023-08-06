@@ -3,16 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import useIntersectionObserver from './useIntersectionObserver';
 import useViewportObserver from './useViewportObserver';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/modules';
-import { searchDetail } from '../../store/modules/searchDetail';
 import { searchResultListProps } from '../../store/modules/searchResult';
-import { SearchDetailType } from '../../api/search/types';
 
 import { GetCategoryImage } from '../common/GetCategoryImage';
-import format from 'date-fns/format';
 import { searchResultProps } from './types';
 import starIcon from '../../assets/images/star-full.svg';
 import '../../styles/components/search/searchResult.scss';
@@ -21,7 +16,6 @@ const SearchResult = ({
   checkOptionFormIsEmpty,
   checkSearchFormIsEmpty,
   getCategoryData,
-  getSearchData,
   getSearchDataWithOptions,
 }: searchResultProps) => {
   const navigate = useNavigate();
@@ -36,11 +30,6 @@ const SearchResult = ({
   const pageNum = useSelector(
     (state: RootState) => state.searchApiReducer.pageNum,
   );
-  const dispatchSearchDetail: ThunkDispatch<
-    { placeId: number; data: SearchDetailType },
-    void,
-    AnyAction
-  > = useDispatch();
 
   const fetchMoreItems = async () => {
     const data = {
@@ -70,13 +59,6 @@ const SearchResult = ({
 
   const onResultCardClick = (item: searchResultListProps) => {
     return (e: React.MouseEvent<HTMLDivElement>) => {
-      const data = {
-        startDate: format(new Date(), 'yyyy-MM-dd'),
-        endDate: format(new Date(), 'yyyy-MM-dd'),
-        startTime: '15:00',
-        endTime: '22:00',
-      };
-      dispatchSearchDetail(searchDetail(item.placeId, data));
       navigate(`/search/${item.placeId}/detail`);
     };
   };
