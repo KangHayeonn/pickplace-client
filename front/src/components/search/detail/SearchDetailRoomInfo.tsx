@@ -11,6 +11,7 @@ import { ReservationInfoType } from '../../../api/reservation/types';
 import { getUserId } from '../../../utils/tokenControl';
 import { getReservationInfo } from '../../../store/modules/reservation';
 import { setPlaceId, setRoomId } from '../../../store/modules/reservation';
+import { isShowError } from '../../../components/common/ToastBox';
 
 interface SearchDetailRoomInfoProps {
   roomItem?: {
@@ -26,11 +27,21 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
   const navigate = useNavigate();
   const { searchId } = useParams();
   const category = useSelector((state: RootState) => state.optionForm.category);
+  const reservationDate = useSelector(
+    (state: RootState) => state.reservation.reservationDate,
+  );
   const dispatch: ThunkDispatch<ReservationInfoType, void, AnyAction> =
     useDispatch();
   const userId = typeof window !== 'undefined' && getUserId();
 
   const onClickReservation = async () => {
+    if (
+      reservationDate.checkInTime === '' ||
+      reservationDate.checkOutTime === ''
+    ) {
+      isShowError('예약 일자를 확인해주세요.');
+      return;
+    }
     if (roomItem) {
       await dispatch(getReservationInfo(Number(userId), roomItem?.roomId));
       dispatch(

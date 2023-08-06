@@ -34,6 +34,7 @@ const PaymentModal = ({ onClose, handleSubmit }: PaymentModalProps) => {
       }).then((res) => {
         if (res.data.code === 200) {
           isShowError('결제가 완료되었습니다.');
+          handleSubmit();
         }
       });
     } else if (paymentType === '간편 계좌 이체') {
@@ -47,11 +48,10 @@ const PaymentModal = ({ onClose, handleSubmit }: PaymentModalProps) => {
       }).then((res) => {
         if (res.data.code === 200) {
           isShowError('결제가 완료되었습니다.');
+          handleSubmit();
         }
       });
     }
-
-    handleSubmit();
   };
   const onClickClose = () => {
     onClose();

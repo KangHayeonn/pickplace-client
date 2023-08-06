@@ -5,6 +5,7 @@ import TextButton from '../../../components/common/TextButton';
 import '../../../styles/components/reservation/modal/cardValidationModal.scss';
 import { RootState } from '../../../store/modules';
 import { setCard } from '../../../store/modules/reservation';
+import { isShowError } from '../../../components/common/ToastBox';
 
 interface CardValidationModalProps {
   onClose: () => void;
@@ -42,8 +43,14 @@ const CardValidationModal = ({
   };
 
   const onClickEvent = () => {
-    dispatch(setCard({ card: cardType }));
-    handleSubmit();
+    if (cardType.cardNum === '') {
+      isShowError('카드 번호를 입력해주세요.');
+    } else if (cardType.cvc === '') {
+      isShowError('cvc 번호를 입력해주세요.');
+    } else {
+      dispatch(setCard({ card: cardType }));
+      handleSubmit();
+    }
   };
 
   const onClickClose = () => {

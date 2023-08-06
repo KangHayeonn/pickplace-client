@@ -112,7 +112,7 @@ const UpdatePlace = () => {
       };
       Admin.v1UpdatePlace(data)
         .then((res) => {
-          isShowError('공간 수정 완료');
+          if (res.data.code === 200) isShowError('공간 수정 완료');
 
           const newState = {
             placeId: state.placeId,

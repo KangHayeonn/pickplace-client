@@ -8,7 +8,7 @@ import { GetCategoryImage } from '../../../components/common/GetCategoryImage';
 import Api from '../../../api/review';
 
 interface SearchReviewDetailProps {
-  reviewId?: number;
+  id?: number;
   onClose: () => void;
 }
 
@@ -24,10 +24,7 @@ interface ReviewDetailProps {
   reviewContent: string;
 }
 
-const SearchReviewDetailModal = ({
-  reviewId,
-  onClose,
-}: SearchReviewDetailProps) => {
+const SearchReviewDetailModal = ({ id, onClose }: SearchReviewDetailProps) => {
   const [reviewDetail, setReviewDetail] = useState<ReviewDetailProps>({
     reviewId: 7,
     placeName: '글래드 여의도',
@@ -45,14 +42,14 @@ const SearchReviewDetailModal = ({
   };
 
   useEffect(() => {
-    if (reviewId) {
-      Api.v1GetReviewDetail(reviewId).then((res) => {
+    if (id) {
+      Api.v1GetReviewDetail(id).then((res) => {
         if (res.data.code === 200) {
           setReviewDetail(res.data.data);
         }
       });
     }
-  }, [reviewId]);
+  }, [id]);
 
   return (
     <>

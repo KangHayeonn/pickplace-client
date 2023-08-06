@@ -17,6 +17,7 @@ import { SearchDetailType } from '../api/search/types';
 // redux
 import { RootState } from '../store/modules';
 import { getPlaceReview, searchDetail } from '../store/modules/searchDetail';
+import { setReservationDate } from '../store/modules/reservation';
 
 const SearchDetailPage = () => {
   const location = useLocation();
@@ -52,6 +53,14 @@ const SearchDetailPage = () => {
 
   const getPlaceReviewList = async () => {
     await dispatch(getPlaceReview(placeId));
+    dispatch(
+      setReservationDate({
+        reservationDate: {
+          checkInTime: '',
+          checkOutTime: '',
+        },
+      }),
+    );
   };
 
   useEffect(() => {

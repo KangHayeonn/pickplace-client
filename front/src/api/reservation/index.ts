@@ -1,4 +1,4 @@
-import { instanceWithToken } from '../../api';
+import { instance, instanceWithToken } from '../../api';
 const prefix = '/api/v1/reservation';
 import {
   ReservationAccountType,
@@ -37,7 +37,7 @@ const Reservation = {
   async v1GetBankNumber(bankName: string) {
     try {
       const url = `${prefix}/account/number`;
-      const result = await instanceWithToken.post(url, { bankName });
+      const result = await instance.post(url, { bankName });
       return result;
     } catch (err) {
       return Promise.reject(err);
@@ -77,7 +77,7 @@ const Reservation = {
   async v1GetQRCodeInfo(code: string) {
     try {
       const url = `${prefix}/qrcode/${code}`;
-      const result = await instanceWithToken.get(url);
+      const result = await instance.get(url);
       return result;
     } catch (err) {
       return Promise.reject(err);
@@ -87,7 +87,7 @@ const Reservation = {
   async v1QRCodeValidation(code: string, password: string) {
     try {
       const url = `${prefix}/qrcode/${code}`;
-      const result = await instanceWithToken.post(url, {
+      const result = await instance.post(url, {
         qrPassword: password,
       });
       return result;
