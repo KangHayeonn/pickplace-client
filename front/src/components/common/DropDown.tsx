@@ -37,11 +37,14 @@ const DropDown = ({
 
   useEffect(() => {
     document.addEventListener('click', clickWrap);
+    return () => {
+      document.removeEventListener('click', clickWrap);
+    };
   }, []);
 
   return (
     <div className="dropdown" ref={menuWrap}>
-      <button className="dropdown__btn">
+      <button type="button" className="dropdown__btn">
         {title}
         <img
           src={`${!isOpen ? arrowDownIcon : arrowUpIcon}`}
