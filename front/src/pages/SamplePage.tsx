@@ -20,11 +20,6 @@ import Api from '../api/reservation';
 // modal
 import useModals from '../components/common/modal/UseModals';
 import ReservationInfoModal from '../components/reservation/modal/ReservationInfoModal';
-import ReservationResultModal from '../components/reservation/modal/ReservationResultModal';
-import QRCodeModal from '../components/reservation/modal/QRCodeModal';
-import PaymentModal from '../components/reservation/modal/PaymentModal';
-import CardValidationModal from '../components/reservation/modal/CardValidationModal';
-import AccountModal from '../components/reservation/modal/AccountModal';
 
 const SamplePage = () => {
   const navigate = useNavigate();
@@ -33,8 +28,6 @@ const SamplePage = () => {
   const [message, setMessage] = useState<string>('');
   const [isShowToast, setIsShowToast] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
-  const [date, setDate] = useState<Date | null>(null);
-  const [dateRange, setDateRange] = useState<Date | null>(null);
 
   const onIncrease = () => {
     dispatch(increase());
@@ -73,51 +66,6 @@ const SamplePage = () => {
     openModal(ReservationInfoModal, {
       onSubmit: async () => {
         // TODO : API Logic
-        handleClick2();
-      },
-    });
-  };
-
-  const handleClick2 = () => {
-    openModal(ReservationResultModal, {
-      onSubmit: async () => {
-        // TODO : API Logic
-        handleClick3();
-      },
-    });
-  };
-
-  const handleClick3 = () => {
-    openModal(QRCodeModal, {
-      onSubmit: async () => {
-        // TODO : API Logic
-        handleClick4();
-      },
-    });
-  };
-
-  const handleClick4 = () => {
-    openModal(PaymentModal, {
-      onSubmit: async () => {
-        // TODO : API Logic
-        handleClick5();
-      },
-    });
-  };
-
-  const handleClick5 = () => {
-    openModal(CardValidationModal, {
-      onSubmit: async () => {
-        // TODO : API Logic
-        handleClick6();
-      },
-    });
-  };
-
-  const handleClick6 = () => {
-    openModal(AccountModal, {
-      onSubmit: async () => {
-        // TODO : API Logic
       },
     });
   };
@@ -129,14 +77,6 @@ const SamplePage = () => {
       (res) => {
         setQRUrl(`data:image/png;base64,${res.data.data.qrImage}`);
       },
-    );
-  };
-
-  // QR 코드 비밀번호 인증
-  const qrPasswordValidation = () => {
-    Api.v1QRCodeValidation(
-      '02d3bd33-02df-4156-b811-ccc0be188d30',
-      'pickplace1!',
     );
   };
 
