@@ -10,6 +10,7 @@ import CardValidationModal from './modal/CardValidationModal';
 import AccountModal from './modal/AccountModal';
 import QRCodeModal from './modal/QRCodeModal';
 import PaymentModal from './modal/PaymentModal';
+import ReservationResultModal from './modal/ReservationResultModal';
 
 interface ReservationTemplateProps {
   children?: React.ReactNode;
@@ -48,7 +49,7 @@ const ReservationTemplate = ({ children }: ReservationTemplateProps) => {
     } else {
       openModal(QRCodeModal, {
         onSubmit: async () => {
-          handleClickPayPassword();
+          handleClickReservationSuccess();
         },
       });
     }
@@ -57,6 +58,15 @@ const ReservationTemplate = ({ children }: ReservationTemplateProps) => {
   // 결제 비밀번호
   const handleClickPayPassword = () => {
     openModal(PaymentModal, {
+      onSubmit: async () => {
+        handleClickReservationSuccess();
+      },
+    });
+  };
+
+  // 결제 완료 페이지
+  const handleClickReservationSuccess = () => {
+    openModal(ReservationResultModal, {
       onSubmit: async () => {
         navigate('/main');
       },

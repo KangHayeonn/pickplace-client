@@ -15,9 +15,8 @@ interface QRCodeModalProps {
 
 const QRCodeModal = ({ onClose, handleSubmit }: QRCodeModalProps) => {
   const dispatch = useDispatch();
-  const { payment, paymentType } = useSelector(
-    (state: RootState) => state.reservation,
-  );
+  const { payment, paymentType, roomId, reservationDate, qrPaymentCode } =
+    useSelector((state: RootState) => state.reservation);
   const [qrCodeUrl, setQRCodeUrl] = useState<string>('');
   const userId = typeof window !== 'undefined' && getUserId();
 
@@ -29,7 +28,16 @@ const QRCodeModal = ({ onClose, handleSubmit }: QRCodeModalProps) => {
       : 'naver';
 
   const onClickEvent = () => {
-    handleSubmit();
+    Api.v1ReservationQRCode(Number(userId), {
+      roomId: roomId,
+      checkInTime: reservationDate.checkInTime,
+      checkOutTime: reservationDate.checkOutTime,
+      qrPaymentCode: qrPaymentCode,
+    }).then((res) => {
+      if (res.data.code === 200) {
+        handleSubmit();
+      }
+    });
   };
 
   const onClickClose = () => {

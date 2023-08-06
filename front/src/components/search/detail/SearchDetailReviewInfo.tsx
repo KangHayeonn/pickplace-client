@@ -25,6 +25,7 @@ const SearchDetailReviewInfo = ({
       onSubmit: async () => {
         // close modal
       },
+      id: reviewItem?.reviewId,
     });
   };
 

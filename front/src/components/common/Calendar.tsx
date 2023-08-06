@@ -18,7 +18,7 @@ const Calendar = ({
   selectDate,
   selectDateRange,
 }: CalendarProps) => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const [time, setTime] = useState<Date | null>(null);
   const [dateRange, setDateRange] = useState<Array<Date | null>>([null, null]);
   const [startDateRange, endDateRange] = dateRange;
@@ -47,7 +47,7 @@ const Calendar = ({
           selected={time}
           showTimeSelect
           showTimeSelectOnly
-          timeIntervals={30}
+          timeIntervals={60}
           timeCaption="Time"
           minTime={setHours(setMinutes(new Date(), 0), 15)}
           maxTime={setHours(setMinutes(new Date(), 0), 23)}

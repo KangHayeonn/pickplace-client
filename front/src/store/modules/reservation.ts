@@ -242,8 +242,8 @@ export const initialState = {
   placeId: 27,
   roomId: 123,
   reservationDate: {
-    checkInTime: '2023년 08월 03일 15:00',
-    checkOutTime: '2023년 08월 04일 10:00',
+    checkInTime: '',
+    checkOutTime: '',
   },
   agreement: [false, false, false, false],
   paymentType: '',

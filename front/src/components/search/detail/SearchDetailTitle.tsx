@@ -47,7 +47,8 @@ const SearchDetailTitle = () => {
       <div
         className="search-detail-top__image"
         style={{
-          background: `url(${GetCategoryImage(category)}) no-repeat`,
+          backgroundImage: `url(${GetCategoryImage(category)})`,
+          backgroundPosition: 'center',
           backgroundSize: 'cover',
         }}
       >
