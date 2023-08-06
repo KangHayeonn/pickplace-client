@@ -70,6 +70,59 @@ const Auth = {
       return Promise.reject(err);
     }
   },
+  // 이메일 인증
+  async v1EmailValidation(mail: string) {
+    try {
+      const url = `${prefix}/email`;
+      const result = await instance.post(url, {
+        email: mail,
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+  // 비밀번호 찾기/변경 메일 발송
+  async v1EmailPwdValidation(mail: string) {
+    try {
+      const url = `${prefix}/pwd`;
+      const result = await instance.post(url, {
+        email: mail,
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+  // 비밀번호 변경
+  async v1UpdatePassword(memberId: number, password: string) {
+    try {
+      const url = `${prefix}/pwd`;
+      const result = await instance.put(url, {
+        data: {
+          memberId,
+          password,
+        },
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+  // 회원 탈퇴
+  async v1DeleteMember(memberId: number) {
+    try {
+      const url = `${prefix}`;
+      const result = await instance.delete(url, {
+        data: {
+          memberId,
+        },
+      });
+      return result;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
 };
 
 export default Auth;
