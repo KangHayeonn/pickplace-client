@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import TextButton from '../components/common/TextButton';
@@ -10,11 +10,10 @@ import { isShowError } from '../components/common/ToastBox';
 const QRPasswordPage = () => {
   const location = useLocation();
   const code = location.search.split('=')[1];
-  const { payment, paymentType } = useSelector(
-    (state: RootState) => state.reservation,
-  );
+  const { paymentType } = useSelector((state: RootState) => state.reservation);
   const [password, setPassword] = useState<string>('');
   const [isCheck, setIsCheck] = useState<boolean>(false);
+  const [payment, setPayment] = useState<number>(50000);
 
   const onClickEvent = () => {
     Api.v1QRCodeValidation(code, password).then((res) => {
@@ -29,6 +28,15 @@ const QRPasswordPage = () => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    Api.v1GetQRCodeInfo(code).then((res) => {
+      if (res.data.code === 200) {
+        const { roomPrice } = res.data.data;
+        setPayment(roomPrice);
+      }
+    });
+  }, []);
+
   return (
     <div className="qr-password-container">
       <div className="qr-password-form">
@@ -42,7 +50,7 @@ const QRPasswordPage = () => {
                 (주) 픽플레이스컴퍼니
               </div>
               <div className="qr-password-form__top--text">
-                {payment.roomPrice.toLocaleString()}원
+                {payment.toLocaleString()}원
               </div>
             </div>
             {!isCheck ? (
