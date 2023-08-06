@@ -19,10 +19,7 @@ import CreatePlace from '../components/admin/ManagePlace/CreatePlace/CreatePlace
 import UpdatePlace from '../components/admin/ManagePlace/UpdatePlace';
 // qr test
 import QRPasswordPage from '../pages/QRPasswordPage';
-
-// const MainPage = lazy(() => import("../pages/MainPage"));
-// const SignupPage = lazy(() => import("../pages/SignupPage"));
-// const LoginPage = lazy(() => import("../pages/LoginPage"));
+import PrivateRoute from './PrivateRoute';
 
 const Router = () => {
   return (
@@ -44,29 +41,63 @@ const Router = () => {
             path="/search/:searchId/review"
             element={<SearchDetailPage />}
           />
-          <Route path="/reservation" element={<ReservationPage />} />
+          <Route
+            path="/reservation"
+            element={
+              <PrivateRoute>
+                <ReservationPage />
+              </PrivateRoute>
+            }
+          />
           <Route path="/pwd" element={<PasswordPage />} />
           <Route path="/mail" element={<MailPage />} />
-          <Route path="/mypage" element={<MyPage />} />
+          <Route
+            path="/mypage"
+            element={
+              <PrivateRoute>
+                <MyPage />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="mypage/reservationDetail/:reservationId"
-            element={<ReservationDetail />}
+            element={
+              <PrivateRoute>
+                <ReservationDetail />
+              </PrivateRoute>
+            }
           />
           <Route
             path="mypage/manageReservation/detail/:reservationId"
-            element={<ManageReservationDetail />}
+            element={
+              <PrivateRoute>
+                <ManageReservationDetail />
+              </PrivateRoute>
+            }
           />
           <Route
             path="mypage/managePlace/detail/:placeId"
-            element={<ManagePlaceDetail />}
+            element={
+              <PrivateRoute>
+                <ManagePlaceDetail />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/mypage/managePlace/createPlace"
-            element={<CreatePlace />}
+            element={
+              <PrivateRoute>
+                <CreatePlace />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/mypage/managePlace/updatePlace/:placeId"
-            element={<UpdatePlace />}
+            element={
+              <PrivateRoute>
+                <UpdatePlace />
+              </PrivateRoute>
+            }
           />
           <Route path="/qrcode/password" element={<QRPasswordPage />} />
         </Route>

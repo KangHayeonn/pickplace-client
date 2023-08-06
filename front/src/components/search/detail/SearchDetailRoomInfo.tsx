@@ -30,6 +30,7 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
   const reservationDate = useSelector(
     (state: RootState) => state.reservation.reservationDate,
   );
+  const { isLogin } = useSelector((state: RootState) => state.auth);
   const dispatch: ThunkDispatch<ReservationInfoType, void, AnyAction> =
     useDispatch();
   const userId = typeof window !== 'undefined' && getUserId();
@@ -40,6 +41,10 @@ const SearchDetailRoomInfo = ({ roomItem }: SearchDetailRoomInfoProps) => {
       reservationDate.checkOutTime === ''
     ) {
       isShowError('예약 일자를 확인해주세요.');
+      return;
+    }
+    if (!isLogin) {
+      isShowError('로그인 후 이용 가능합니다.');
       return;
     }
     if (roomItem) {
