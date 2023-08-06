@@ -112,7 +112,7 @@ const Auth = {
   // 회원 탈퇴
   async v1DeleteMember(memberId: number) {
     try {
-      const url = `${prefix}/`;
+      const url = `${prefix}`;
       const result = await instanceWithToken.delete(url, {
         data: {
           memberId,

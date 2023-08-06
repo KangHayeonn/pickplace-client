@@ -6,6 +6,8 @@ import '../../../styles/components/reservation/modal/cardValidationModal.scss';
 import { RootState } from '../../../store/modules';
 import { setCard } from '../../../store/modules/reservation';
 import { isShowError } from '../../../components/common/ToastBox';
+import Api from '../../../api/reservation';
+import { getUserId } from '../../../utils/tokenControl';
 
 interface CardValidationModalProps {
   onClose: () => void;
@@ -22,6 +24,7 @@ const CardValidationModal = ({
   handleSubmit,
 }: CardValidationModalProps) => {
   const dispatch = useDispatch();
+  const userId = typeof window !== 'undefined' && getUserId();
   const { payment } = useSelector((state: RootState) => state.reservation);
   const [cardType, setCardType] = useState<CardType>({
     cardNum: '',
@@ -42,15 +45,13 @@ const CardValidationModal = ({
     });
   };
 
-  const onClickEvent = () => {
-    if (cardType.cardNum === '') {
-      isShowError('카드 번호를 입력해주세요.');
-    } else if (cardType.cvc === '') {
-      isShowError('cvc 번호를 입력해주세요.');
-    } else {
-      dispatch(setCard({ card: cardType }));
-      handleSubmit();
-    }
+  const onClickEvent = async () => {
+    await Api.v1CardValidation(Number(userId), cardType).then((res) => {
+      if (res.data.code === 200) {
+        dispatch(setCard({ card: cardType }));
+        handleSubmit();
+      }
+    });
   };
 
   const onClickClose = () => {
