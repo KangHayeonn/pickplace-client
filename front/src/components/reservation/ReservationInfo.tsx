@@ -16,7 +16,9 @@ const ReservationInfo = () => {
       </div>
       <div className="reservation__info--form">
         <div className="reservation__info--form__title">{place.placeName}</div>
-        <div className="reservation__info--form__detail">{place.roomName}</div>
+        <div className="reservation__info--form__detail">
+          [{place.roomName}]
+        </div>
         <div>
           <span className="reservation__info--form__detail--title">인원</span>
           <span>최대 {place.roomMaxNum}인</span>

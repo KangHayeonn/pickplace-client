@@ -33,7 +33,7 @@ const ReservationInfoModal = ({
             {place.placeName}
           </div>
           <div className="reservation-info-modal-form__title-sub">
-            {place.roomName}
+            [{place.roomName}]
           </div>
           <div className="reservation-info-modal-form__date">
             <div className="reservation-info-modal__title">체크인</div>

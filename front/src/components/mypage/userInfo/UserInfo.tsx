@@ -3,17 +3,38 @@ import UpdateUserInfo from './UpdateUserInfo';
 import ShowUserInfo from '../ShowUserInfo';
 import '../../../styles/components/mypage/userInfo/userInfo.scss';
 import User from '../../../api/mypage';
+import useModals from '../../../components/common/modal/UseModals';
+import ConfirmModal from '../../../components/common/modal/ConfirmModal';
+import Api from '../../../api/auth';
+import { getUserId, clearToken } from '../../../utils/tokenControl';
+import { isShowError } from '../../../components/common/ToastBox';
+
 const UserInfo = () => {
+  const userId = typeof window !== 'undefined' && getUserId();
   const [userInfo, setUserInfo] = useState({
     email: '',
     phone: '',
     nickname: '',
   });
-
   const [newNickname, setNewNickname] = useState('');
   const [newPhone, setNewPhone] = useState('');
   const [updateNickname, setUpdateNickname] = useState(false);
   const [updatePhone, setUpdatePhone] = useState(false);
+  const { openModal } = useModals();
+
+  const handlerMemberDelete = () => {
+    openModal(ConfirmModal, {
+      onSubmit: async () => {
+        await Api.v1DeleteMember(Number(userId)).then((res) => {
+          if (res.data.code === 200) {
+            isShowError('회원 탈퇴가 완료되었습니다.');
+            clearToken();
+            window.location.replace('/main');
+          }
+        });
+      },
+    });
+  };
 
   useEffect(() => {
     getUserInfo();
@@ -118,7 +139,7 @@ const UserInfo = () => {
       </div>
       <div className="userInfo-btn__container">
         <button>비밀번호변경</button>
-        <button>회원탈퇴</button>
+        <button onClick={handlerMemberDelete}>회원탈퇴</button>
       </div>
     </div>
   );

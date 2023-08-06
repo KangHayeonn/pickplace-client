@@ -48,7 +48,7 @@ const Review = {
       return Promise.reject(err);
     }
   },
-  async v1DetleteReview(reviewId: number) {
+  async v1DeleteReview(reviewId: number) {
     try {
       const url = `${prefix}/${reviewId}?memberId=${getUserId()}`;
       const result = await instanceWithToken.delete(url);

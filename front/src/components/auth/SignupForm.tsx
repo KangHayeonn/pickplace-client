@@ -35,6 +35,10 @@ const SignupForm = () => {
   });
   const [password, setPassword] = useState<string>('');
   const [emailCheck, setEmailCheck] = useState<string>('before'); // before, success, fail
+  const [emailSend, setEmailSend] = useState<boolean>(false);
+  const [emailCodeCheck, setEmailCodeCheck] = useState<string>('before');
+  const [emailCode, setEmailCode] = useState<string>('');
+  const [code, setCode] = useState<string>('');
 
   const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignupInfo({
@@ -48,6 +52,40 @@ const SignupForm = () => {
       errorMessage: '',
       isError: false,
     });
+    setEmailSend(false);
+  };
+
+  const sendEmailCode = () => {
+    setEmailSend(true);
+    Api.v1EmailValidation(signupInfo.email).then((res) => {
+      if (res.data.code === 200) {
+        const { code } = res.data.data;
+        setCode(code);
+      }
+    });
+  };
+
+  const handleEmailCodeCheck = () => {
+    if (code === emailCode) {
+      setEmailCodeCheck('success');
+    } else {
+      setEmailCodeCheck('fail');
+      setError({
+        ...error,
+        subErrorMessage: '잘못된 인증 코드입니다',
+      });
+    }
+  };
+
+  const changeEmailCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailCode(e.target.value);
+    setError({
+      ...error,
+      subErrorMessage: '',
+      errorMessage: '',
+      isError: false,
+    });
+    setEmailCodeCheck('before');
   };
 
   const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,6 +197,10 @@ const SignupForm = () => {
       handleError('이메일 중복체크를 해주세요', true);
       return;
     }
+    if (emailCodeCheck !== 'success') {
+      handleError('이메일 인증을 해주세요', true);
+      return;
+    }
     if (signupInfo.password !== password) {
       handleError('비밀번호를 확인해주세요', true);
       return;
@@ -200,6 +242,32 @@ const SignupForm = () => {
     ),
   };
 
+  const emailCodeCheckBtn: { [key: string]: JSX.Element } = {
+    before: (
+      <TextButton type={'button'} text="확인" onClick={handleEmailCodeCheck} />
+    ),
+    success: (
+      <span className="email-check__btn">
+        <img
+          src={emailSuccessIcon}
+          width={20}
+          height={20}
+          alt="Email Check Success Icon"
+        />
+      </span>
+    ),
+    fail: (
+      <span className="email-check__btn">
+        <img
+          src={emailFailIcon}
+          width={18}
+          height={18}
+          alt="Email Check Fail Icon"
+        />
+      </span>
+    ),
+  };
+
   return (
     <form className="signup-form" onSubmit={signup}>
       <div className="signup-form__field">
@@ -216,11 +284,39 @@ const SignupForm = () => {
           <span className="error">{error.subErrorMessage}</span>
         )}
       </div>
+      {emailCheck === 'success' && (
+        <>
+          {!emailSend ? (
+            <div className="signup-form__field">
+              <TextButton
+                type={'button'}
+                text="인증 코드 발송"
+                onClick={sendEmailCode}
+              />
+            </div>
+          ) : (
+            <div className="signup-form__field">
+              <label htmlFor="emailCode">이메일 인증</label>
+              <div className="email-check">
+                <TextField
+                  id="emailCode"
+                  placeholder="인증 코드를 입력해주세요."
+                  onChangeText={changeEmailCode}
+                />
+                {emailCodeCheckBtn[emailCodeCheck]}
+              </div>
+              {emailCodeCheck === 'fail' && (
+                <span className="error">{error.subErrorMessage}</span>
+              )}
+            </div>
+          )}
+        </>
+      )}
       <div className="signup-form__field">
         <label htmlFor="password">비밀번호</label>
         <TextField
           id="password"
-          placeholder="비밀번호를 입력해주세요"
+          placeholder="비밀번호를 입력해주세요."
           inputType="pw"
           textType="password"
           onChangeText={changePassword}
@@ -233,7 +329,7 @@ const SignupForm = () => {
         <label htmlFor="confirmPassword">비밀번호 확인</label>
         <TextField
           id="confirmPassword"
-          placeholder="비밀번호를 입력해주세요"
+          placeholder="비밀번호를 입력해주세요."
           inputType="pw"
           textType="password"
           onChangeText={changeConfirmPassword}

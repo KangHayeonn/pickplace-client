@@ -36,7 +36,7 @@ const MyReview = () => {
     };
   };
   const onDeleteReview = (reviewId: number) => {
-    Review.v1DetleteReview(reviewId)
+    Review.v1DeleteReview(reviewId)
       .then((res) => {
         isShowError('리뷰 삭제 완료');
         getUserReviews();

@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ModalForm from '../../../components/common/modal/ModalForm';
 import TextButton from '../../../components/common/TextButton';
 import '../../../styles/components/reservation/modal/reservationResultModal.scss';
+import { RootState } from '../../../store/modules';
 
 interface ReservationResultModalProps {
   onClose: () => void;
@@ -12,6 +14,9 @@ const ReservationResultModal = ({
   onClose,
   handleSubmit,
 }: ReservationResultModalProps) => {
+  const { payment, place, reservationDate, paymentType } = useSelector(
+    (state: RootState) => state.reservation,
+  );
   const onClickEvent = () => {
     handleSubmit();
   };
@@ -20,14 +25,14 @@ const ReservationResultModal = ({
   };
 
   return (
-    <ModalForm title="네이버페이 결제" onClickEvent={onClickClose}>
+    <ModalForm title={`${paymentType} 결제`} onClickEvent={onClickClose}>
       <div className="reservation-result-modal-form">
         <div className="reservation-result-modal-form__top">
           <div className="reservation-result-modal-form__top--title">
             (주) 픽플레이스컴퍼니
           </div>
           <div className="reservation-result-modal-form__top--text">
-            99,000원
+            {payment.roomPrice.toLocaleString()}원
           </div>
         </div>
         <div className="reservation-result-modal-form__text">
@@ -35,21 +40,21 @@ const ReservationResultModal = ({
         </div>
         <div className="reservation-result-modal-form__detail">
           <div className="reservation-result-modal-form__title">
-            유니언 호텔
+            {place.placeName}
           </div>
           <div className="reservation-result-modal-form__title-sub">
-            [스탠다드 퀸]
+            [{place.roomName}]
           </div>
           <div className="reservation-result-modal-form__date">
             <div className="reservation-result-modal__title">체크인</div>
             <div className="reservation-result-modal__text">
-              06월 11일(일) 15:00
+              {reservationDate.checkInTime}
             </div>
           </div>
           <div className="reservation-result-modal-form__date">
             <div className="reservation-result-modal__title">체크아웃</div>
             <div className="reservation-result-modal__text">
-              06월 12일(월) 11:00
+              {reservationDate.checkOutTime}
             </div>
           </div>
         </div>
