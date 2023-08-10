@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UpdateUserInfo from './UpdateUserInfo';
 import ShowUserInfo from '../ShowUserInfo';
 import '../../../styles/components/mypage/userInfo/userInfo.scss';
@@ -10,6 +11,7 @@ import { getUserId, clearToken } from '../../../utils/tokenControl';
 import { isShowError } from '../../../components/common/ToastBox';
 
 const UserInfo = () => {
+  const navigate = useNavigate();
   const userId = typeof window !== 'undefined' && getUserId();
   const [userInfo, setUserInfo] = useState({
     email: '',
@@ -138,7 +140,7 @@ const UserInfo = () => {
         )}
       </div>
       <div className="userInfo-btn__container">
-        <button>비밀번호변경</button>
+        <button onClick={() => navigate('/pwd')}>비밀번호 변경</button>
         <button onClick={handlerMemberDelete}>회원탈퇴</button>
       </div>
     </div>
