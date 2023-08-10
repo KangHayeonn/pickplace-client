@@ -95,14 +95,12 @@ const Auth = {
     }
   },
   // 비밀번호 변경
-  async v1UpdatePassword(memberId: number, password: string) {
+  async v1UpdatePassword(email: string, password: string) {
     try {
       const url = `${prefix}/pwd`;
       const result = await instance.put(url, {
-        data: {
-          memberId,
-          password,
-        },
+        email,
+        password,
       });
       return result;
     } catch (err) {
