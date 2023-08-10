@@ -20,6 +20,7 @@ const ReservationInfoModal = ({
 
   const onClickEvent = () => {
     handleSubmit();
+    onClickClose();
   };
   const onClickClose = () => {
     onClose();
